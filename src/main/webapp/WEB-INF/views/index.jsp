@@ -24,22 +24,18 @@
 @font-face { font-family: 'S-CoreDream-2ExtraLight'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-2ExtraLight.woff') format('woff'); font-weight: normal; font-style: normal; }
 @font-face { font-family: 'KBIZHanmaumGothic'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KBIZHanmaumGothic.woff') format('woff'); font-weight: normal; font-style: normal; }
 .header {
-    position: fixed;
-    top: 0;
+	/*커밋-push test 5*/
     background-color: #fff;
     border-bottom: 1px solid #e5e5e5;
-    z-index: 999;
-    width : 100%;
-}
-.carousel {
-	margin-top : 100px;
-}
-nav, figure, footer, header {
-    display: block;
 }
 
-figure {
-    margin: 0;
+.carousel {
+   margin-top : 100px;
+}
+
+
+nav, figure, footer, header {
+    display: block;
 }
 
 .header #logo {
@@ -69,8 +65,8 @@ figure {
 
 }
 
-.header .top-navbar {
-    line-height: 50px;
+.top-navbar, .main-navbar {
+    height: 50px;
     border-bottom: 1px solid #e5e5e5;
     margin: 0;
 }
@@ -101,7 +97,7 @@ figure {
     float: left;
 }
 .header .link-box li a, .header .search-box a {
-	font-family: 'Eoe_Zno_L';
+   font-family: 'Eoe_Zno_L';
     display: inline-block;
     color: #000;
     font-size: 13px;
@@ -112,7 +108,7 @@ figure {
 }
 
 .header .main-navbar ul {
-	font-family: 'Eoe_Zno_L';
+   font-family: 'Eoe_Zno_L';
     margin: 0 2% 0 3%;
     width: 93%;
     display: -webkit-flex;
@@ -195,14 +191,14 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .banner a {
-	display: block;
+   display: block;
     background-color: rgba(0,0,0,.5);
     width: 100%;
     height: 100%;
 }
 
 .banner img {
-	z-index: 1;
+   z-index: 1;
     display: block;
     height: 100%;
     width: 100%;
@@ -210,8 +206,8 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .centered {
-	z-index: 2;
-	font-family: 'S-CoreDream-2ExtraLight';
+   z-index: 2;
+   font-family: 'S-CoreDream-2ExtraLight';
     font-weight: bold;
     border-radius: 5px;
     position: absolute;
@@ -229,92 +225,101 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .banner:hover img {
-	z-index: -1;
-	position: relative;
+   z-index: -1;
+   position: relative;
 }
 /************************************/
 .container-fluid {
-	padding: 0;
+   padding: 0;
 }
 
-/*##################################*/
-@media screen and (max-width: 768px) {
-	.container {
-		max-width: 1000px;
-	}
-	
-	.header #logo img {
-    width: 200px;
-    height: auto;
-    margin-left: 0;
-	}
-	.menu-toggle {
-		display: block;
-		width: 40px;
-		height: 70px;
-		margin: 5px;
-		float: right;
-		cursor: pointer;
-		text-align: center;
-		font-size: 30px;
-		
-	}
-	.menu-toggle:before {
-		content: '\f0c9';
-		font-family: fontAwesome;
-		line-height:20px;
-	}
-	
-	nav {
-		display:none!important;
-	}
-	
-	nav.active {
-		display: block!important;
-		width:100%;
-		margin-left: 0!important;
-    	margin-right: 0!important;
-	}
-	
-	nav.active .top-navbar {
-		border-top: 1px solid #e5e5e5;
-		margin-right: 10px;
-		width: 100%;
-	}
-	
-	.form-control, .custom-select {
-		margin:0;
-	}
-	
-	.input-grp {
-		width: 100%;
-		margin: 10px 10px;
-	}
-	
+@media screen and (max-width: 767px) {
+   .container {
+      max-width: 1000px;
+   }
+   
+    .carousel1 {
+      margin-top : 200px;
+   }
+   
+   .header #logo img {
+       width: 200px;
+       height: auto;
+       margin-left: 0;
+   }
+   
+   .menu-toggle {
+      display: block;
+      width: 40px;
+      height: 70px;
+      margin: 5px;
+      float: right;
+      cursor: pointer;
+      text-align: center;
+      font-size: 30px;
+      
+   }
+   .menu-toggle:before {
+      content: '\f0c9';
+      font-family: fontAwesome;
+      line-height:20px;
+   }
+   
+   nav {
+      display:none!important;
+   }
+   
+   nav.active {
+      display: block!important;
+      width:100%;
+      margin-left: 0!important;
+       margin-right: 0!important;
+   }
+   
+   nav.active .top-navbar {
+      border-top: 1px solid #e5e5e5;
+      margin-right: 10px;
+      width: 100%;
+   }
+   
+   .carousel-caption p {
+		font-size: 25px;
+		width: 400px;
+   }
+   
+   .form-control, .custom-select {
+      margin:0;
+   }
+   
+   .input-grp {
+      width: 100%;
+      margin: 10px 10px;
+   }
+   
 }
 
 @media screen and (min-width: 768px) and (max-width: 1200px) {
-	.input-grp {
-		margin: 20px 20px;
-		width: 25%;
-	}
+   .input-grp {
+      margin: 20px 20px;
+      width: 25%;
+   }
 }
 
 footer {
-	 height:300px;
-	 width:100%;
+    height:300px;
+    width:100%;
 }
 
 /*##################################*/
 </style>
 </head>
 <body>
-<header id="header" class="header">
+<header id="header" class="header fixed-top">
   <div class="container">
     <div class="row">
-      <figure id="logo" class="col-md-6">
+      <figure id="logo" class="col-md-6 m-0">
         <a href="#">
-        	<img src="img/logo.jpg" id="logoimg" alt="stay with me">
+           <img src="img/logo.jpg" id="logoimg" alt="stay with me">
         </a>
         <div class="menu-toggle"></div>
       </figure>
@@ -322,18 +327,18 @@ footer {
       <nav class="navbar col-md-6" id="top-nav-bar">
         <div class="top-navbar row">
           <div class="search-box">
-          	<a href="#">지역별 숙소찾기</a>
+             <a href="#">지역별 숙소찾기</a>
           </div>
           <div class="link-box">
             <ul class="list-unstyled">
-              	<li class="qna-btn-li"><a href="#">Q&A</a></li>
-            	<li class="cs-btn-li"><a href="#">고객센터</a></li>
+                 <li class="qna-btn-li"><a href="#">Q&A</a></li>
+               <li class="cs-btn-li"><a href="#">고객센터</a></li>
             </ul>
           </div>
           <div class="link-box">
             <ul class="list-unstyled">
-              	<li class="login-btn-li"><a href="#">로그인</a></li>
-            	<li class="signup-btn-li"><a href="#">회원가입</a></li>
+                 <li class="login-btn-li"><a href="#">로그인</a></li>
+               <li class="signup-btn-li"><a href="#">회원가입</a></li>
             </ul>
           </div>
         </div>
@@ -352,91 +357,91 @@ footer {
 </header>
 <!-- Carousel -->
 <div class="container-fluid carousel">
-	<div id="myCarousel" class="carousel slide" data-ride="carousel">
-		<!-- Indicators(사진 순서 표시하는 작은 막대기들) -->
-		<ul class="carousel-indicators">
-			<li data-target="#myCarousel" data-slide-to="0" class="active bg-light"></li>
-			<li data-target="#myCarousel" data-slide-to="1" class="bg-light"></li>
-			<li data-target="#myCarousel" data-slide-to="2" class="bg-light"></li>
-			<li data-target="#myCarousel" data-slide-to="3" class="bg-light"></li>
-		</ul>
-		<!-- 실제 내용(사진+설명) -->
-		<div class="carousel-inner">
-			<div class="carousel-item active">
-				<img style="height:500px; width:100%; margin:0;" src="img/1.jpg" alt="seoul" class="d-block mx-auto">
-				<div class="carousel-caption">
-					<p>여행과 장소의 변화는<br/>
-					우리 마음에 활력을 선사한다<br/>
-					<span style="font-size:15px;">세네카</span></p>
-				</div>
-			</div>
-			<div class="carousel-item">
-				<img style="height:500px; width:100%; margin:0;" src="img/2.jpg" alt="LA" class="d-block mx-auto">
-				<div class="carousel-caption">
-					<p>바보는 방황하고,<br/>
-					현명한 사람은 여행한다.<br/>
-					<span style="font-size:15px;">토마스 풀러</span></p>
-				</div>
-			</div>
-			<div class="carousel-item">
-				<img style="height:500px; width:100%; margin:0;" src="img/3.jpg" alt="3" class="d-block mx-auto">
-				<div class="carousel-caption">
-					<p>낯선 땅이란 없다.<br/>
-					단지 여행자가 낯설 뿐이다.<br/>
-					<span style="font-size:15px;">로버트 루이스 스티븐슨</span></p>
-				</div>
-			</div>
-			<div class="carousel-item">
-				<img style="height:500px; width:100%; margin:0;" src="img/4.jpg" alt="4" class="d-block mx-auto">
-				<div class="carousel-caption">
-					<p>희망차게 여행하는 것이<br/>
-					목적지에 도착하는 것보다 좋다.<br/>
-				<span style="font-size:15px;">로버트 루이스</span></p>
-			</div><!-- carousel-item(4개) --> 
-		  </div><!-- carousel-item(2개) -->
+   <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators(사진 순서 표시하는 작은 막대기들) -->
+      <ul class="carousel-indicators">
+         <li data-target="#myCarousel" data-slide-to="0" class="active bg-light"></li>
+         <li data-target="#myCarousel" data-slide-to="1" class="bg-light"></li>
+         <li data-target="#myCarousel" data-slide-to="2" class="bg-light"></li>
+         <li data-target="#myCarousel" data-slide-to="3" class="bg-light"></li>
+      </ul>
+      <!-- 실제 내용(사진+설명) -->
+      <div class="carousel-inner">
+         <div class="carousel-item active">
+            <img style="height:500px; width:100%; margin:0;" src="img/1.jpg" alt="seoul" class="d-block mx-auto">
+            <div class="carousel-caption">
+               <p>여행과 장소의 변화는<br/>
+               우리 마음에 활력을 선사한다<br/>
+               <span style="font-size:15px;">세네카</span></p>
+            </div>
+         </div>
+         <div class="carousel-item">
+            <img style="height:500px; width:100%; margin:0;" src="img/2.jpg" alt="LA" class="d-block mx-auto">
+            <div class="carousel-caption">
+               <p>바보는 방황하고,<br/>
+               현명한 사람은 여행한다.<br/>
+               <span style="font-size:15px;">토마스 풀러</span></p>
+            </div>
+         </div>
+         <div class="carousel-item">
+            <img style="height:500px; width:100%; margin:0;" src="img/3.jpg" alt="3" class="d-block mx-auto">
+            <div class="carousel-caption">
+               <p>낯선 땅이란 없다.<br/>
+               단지 여행자가 낯설 뿐이다.<br/>
+               <span style="font-size:15px;">로버트 루이스 스티븐슨</span></p>
+            </div>
+         </div>
+         <div class="carousel-item">
+            <img style="height:500px; width:100%; margin:0;" src="img/4.jpg" alt="4" class="d-block mx-auto">
+            <div class="carousel-caption">
+               <p>희망차게 여행하는 것이<br/>
+               목적지에 도착하는 것보다 좋다.<br/>
+            <span style="font-size:15px;">로버트 루이스</span></p>
+         </div><!-- carousel-item(4개) --> 
+        </div><!-- carousel-item(2개) -->
        </div> <!-- carousel-inner(1개) -->
-	 </div> <!-- carousel (1개) -->
+    </div> <!-- carousel (1개) -->
 </div> <!-- container -->
 
 <!-- Booking Form -->
 <div class="container-fluid bg-dark">
-	<form>
-		<div class="booking-form container input-group">
-			<div class="input-grp">
-				<select class="custom-select" name="Area">
-						<option value="#">&nbsp;&nbsp;지역&nbsp;&nbsp;</option>
-						<option value="1">&nbsp;&nbsp;강원&nbsp;&nbsp;</option>
-					   	<option value="2">&nbsp;&nbsp;경기&nbsp;&nbsp;</option>
-					   	<option value="3">&nbsp;&nbsp;경남&nbsp;&nbsp;</option>
-					    <option value="4">&nbsp;&nbsp;경북&nbsp;&nbsp;</option>
-					    <option value="5">&nbsp;&nbsp;대구&nbsp;&nbsp;</option>
-					   	<option value="6">&nbsp;&nbsp;부산&nbsp;&nbsp;</option>
-					   	<option value="7">&nbsp;&nbsp;서울&nbsp;&nbsp;</option>
-					    <option value="8">&nbsp;&nbsp;인천&nbsp;&nbsp;</option>
-					    <option value="8">&nbsp;&nbsp;전남&nbsp;&nbsp;</option>
-					    <option value="8">&nbsp;&nbsp;전북&nbsp;&nbsp;</option>
-					    <option value="8">&nbsp;&nbsp;제주&nbsp;&nbsp;</option>
-					    <option value="8">&nbsp;&nbsp;충남&nbsp;&nbsp;</option>
-					    <option value="8">&nbsp;&nbsp;충북&nbsp;&nbsp;</option>
-				</select>
-			</div>
-			<div class="input-grp">
-				<input type="text" id="CheckIn" class="form-control select-date" value="Check In">
-			</div>
-			<div class="input-grp">
-				<input type="text" id="CheckOut"class="form-control select-date" value="Check Out">
-			</div>
-			<div class="input-grp">
-	            <input type="number"  class="form-control" placeholder="Adult">
-	        </div>
-	        <div class="input-grp">
-	            <input type="number"  class="form-control" placeholder="Child">
-	        </div>
-			<div class="input-grp">
-	            <input type="submit"  class="form-control" value="제출">
-	        </div>
-		</div>
-	</form>
+   <form>
+      <div class="booking-form container input-group">
+         <div class="input-grp">
+            <select class="custom-select" name="Area">
+             <option value="#">&nbsp;&nbsp;지역&nbsp;&nbsp;</option>
+	<option value="1">&nbsp;&nbsp;강원&nbsp;&nbsp;</option>
+	<option value="2">&nbsp;&nbsp;경기&nbsp;&nbsp;</option>
+	<option value="3">&nbsp;&nbsp;경남&nbsp;&nbsp;</option>
+	<option value="4">&nbsp;&nbsp;경북&nbsp;&nbsp;</option>
+	<option value="5">&nbsp;&nbsp;대구&nbsp;&nbsp;</option>
+	<option value="6">&nbsp;&nbsp;부산&nbsp;&nbsp;</option>
+	<option value="7">&nbsp;&nbsp;서울&nbsp;&nbsp;</option>
+	<option value="8">&nbsp;&nbsp;인천&nbsp;&nbsp;</option>
+	<option value="8">&nbsp;&nbsp;전남&nbsp;&nbsp;</option>
+	<option value="8">&nbsp;&nbsp;전북&nbsp;&nbsp;</option>
+	<option value="8">&nbsp;&nbsp;제주&nbsp;&nbsp;</option>
+	<option value="8">&nbsp;&nbsp;충남&nbsp;&nbsp;</option>
+	<option value="8">&nbsp;&nbsp;충북&nbsp;&nbsp;</option>
+            </select>
+         </div>
+         <div class="input-grp">
+            <input type="text" id="CheckIn" class="form-control select-date" value="Check In">
+         </div>
+         <div class="input-grp">
+            <input type="text" id="CheckOut"class="form-control select-date" value="Check Out">
+         </div>
+         <div class="input-grp">
+               <input type="number"  class="form-control" placeholder="Adult">
+           </div>
+           <div class="input-grp">
+               <input type="number"  class="form-control" placeholder="Child">
+           </div>
+         <div class="input-grp">
+               <input type="submit"  class="form-control" value="제출">
+           </div>
+      </div>
+   </form>
 </div>
 <!-- 사진 카드 -->
 <div class="container mt-3 mb-3">
@@ -552,16 +557,17 @@ footer {
 
 <script>
 $("#CheckIn").datepicker({
-	autoclose : true
+   autoclose : true
 });
 $("#CheckOut").datepicker({
-	autoclose : true
+   autoclose : true
 });
 
 $(document).ready(function() {
-	$(".menu-toggle").click(function() {
-		$("nav").toggleClass("active")
-	});
+   $(".menu-toggle").click(function() {
+      $("nav").toggleClass("active")
+      $(".carousel").toggleClass("carousel1")
+   });
 });
 </script>
 </body>
