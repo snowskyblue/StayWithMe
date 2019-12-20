@@ -271,6 +271,10 @@ input[type="number"]::-webkit-inner-spin-button {
 	<option value="8">&nbsp;&nbsp;제주&nbsp;&nbsp;</option>
 	<option value="8">&nbsp;&nbsp;충남&nbsp;&nbsp;</option>
 	<option value="8">&nbsp;&nbsp;충북&nbsp;&nbsp;</option>
+	<option value="8">&nbsp;&nbsp;대전&nbsp;&nbsp;</option>
+	<option value="8">&nbsp;&nbsp;세종&nbsp;&nbsp;</option>
+	<option value="8">&nbsp;&nbsp;울산&nbsp;&nbsp;</option>
+	<option value="8">&nbsp;&nbsp;광주&nbsp;&nbsp;</option>
             </select>
          </div>
          <div class="input-grp">
@@ -378,8 +382,26 @@ input[type="number"]::-webkit-inner-spin-button {
       </div>
       <div class="col-lg-4 col-md-6 col-sm-6 banner">
          <a href="#">
-            <div class="centered">#</div>
-            <img alt="#" src="img/shap1.jpg">
+            <div class="centered">대전</div>
+            <img alt="#" src="img/daejeon.jpg">
+         </a>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-6 banner">
+         <a href="#">
+            <div class="centered">세종</div>
+            <img alt="#" src="img/sejong.jpg">
+         </a>
+      </div>
+       <div class="col-lg-4 col-md-6 col-sm-6 banner">
+         <a href="#">
+            <div class="centered">울산</div>
+            <img alt="Busan" src="img/ulsan.jpg">
+         </a>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-6 banner">
+         <a href="#">
+            <div class="centered">광주</div>
+            <img alt="#" src="img/gwangju.jpg">
          </a>
       </div>
       <div class="col-lg-4 col-md-6 col-sm-6 banner">
