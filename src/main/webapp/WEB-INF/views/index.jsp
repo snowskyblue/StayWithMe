@@ -6,7 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
-<html>
+<html lang = "ko">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,118 +18,11 @@
 <!-- datepicker -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet"/>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link href = "style/common.css" rel = "stylesheet" type = "text/css"/>
 <title>Insert title here</title>
 <style>
-@font-face { font-family: 'Eoe_Zno_L'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/Eoe_Zno_L.woff') format('woff'); font-weight: normal; font-style: normal; }
-@font-face { font-family: 'S-CoreDream-2ExtraLight'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-2ExtraLight.woff') format('woff'); font-weight: normal; font-style: normal; }
-@font-face { font-family: 'KBIZHanmaumGothic'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KBIZHanmaumGothic.woff') format('woff'); font-weight: normal; font-style: normal; }
-.header {
-	/*커밋-push test 5*/
-    background-color: #fff;
-    border-bottom: 1px solid #e5e5e5;
-}
-
 .carousel {
    margin-top : 100px;
-}
-
-
-nav, figure, footer, header {
-    display: block;
-}
-
-.header #logo {
-    position: relative;
-    line-height: 100px;
-}
-
-.header #logo img {
-    transition: all .2s ease-in-out;
-    width: 300px;
-    height: auto;
-}
-
-.header .navbar {
-    border-left: 1px solid #e5e5e5;
-    border-right: 1px solid #e5e5e5;
-    border-top: 0;
-    border-bottom: 0;
-    margin-bottom: 0;
-    border-radius: 0;
-    display: block;
-    padding: 0;
-    margin-left: -15px;
-    margin-right: 15px;
-    position: relative;
-    min-height: 50px;
-
-}
-
-.top-navbar, .main-navbar {
-    height: 50px;
-    border-bottom: 1px solid #e5e5e5;
-    margin: 0;
-}
-.header .search-box {
-    width: 40%;
-}
-.header .link-box, .header .search-box {
-    float: left;
-    text-align: center;
-}
-
-.header .link-box {
-    width: 30%;
-    border-left: 1px solid #e5e5e5;
-}
-.header .link-box ul {
-    margin: 0 2% 0 3%;
-    width: 93%;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-justify-content: space-around;
-    -ms-flex-pack: distribute;
-    justify-content: space-around;
-}
-
-.header .link-box li {
-    float: left;
-}
-.header .link-box li a, .header .search-box a {
-   font-family: 'Eoe_Zno_L';
-    display: inline-block;
-    color: #000;
-    font-size: 13px;
-    height: 50px;
-    line-height: 50px;
-    text-decoration: none;
-    font-weight: 700;
-}
-
-.header .main-navbar ul {
-   font-family: 'Eoe_Zno_L';
-    margin: 0 2% 0 3%;
-    width: 93%;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-justify-content: space-around;
-    -ms-flex-pack: distribute;
-    justify-content: space-around;
-}
-
-.header .main-navbar li {
-    float: left;
-}
-.header .main-navbar li a {
-    display: inline-block;
-    color: #000;
-    font-size: 13px;
-    height: 50px;
-    line-height: 50px;
-    text-decoration: none;
-    font-weight: 700;
 }
 
 .carousel-caption p {
@@ -242,46 +135,6 @@ input[type="number"]::-webkit-inner-spin-button {
       margin-top : 200px;
    }
    
-   .header #logo img {
-       width: 200px;
-       height: auto;
-       margin-left: 0;
-   }
-   
-   .menu-toggle {
-      display: block;
-      width: 40px;
-      height: 70px;
-      margin: 5px;
-      float: right;
-      cursor: pointer;
-      text-align: center;
-      font-size: 30px;
-      
-   }
-   .menu-toggle:before {
-      content: '\f0c9';
-      font-family: fontAwesome;
-      line-height:20px;
-   }
-   
-   nav {
-      display:none!important;
-   }
-   
-   nav.active {
-      display: block!important;
-      width:100%;
-      margin-left: 0!important;
-       margin-right: 0!important;
-   }
-   
-   nav.active .top-navbar {
-      border-top: 1px solid #e5e5e5;
-      margin-right: 10px;
-      width: 100%;
-   }
-   
    .carousel-caption p {
 		font-size: 25px;
 		width: 400px;
@@ -303,11 +156,6 @@ input[type="number"]::-webkit-inner-spin-button {
       margin: 20px 20px;
       width: 25%;
    }
-}
-
-footer {
-    height:300px;
-    width:100%;
 }
 
 /*##################################*/
