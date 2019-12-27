@@ -185,7 +185,7 @@ input[type="number"]::-webkit-inner-spin-button {
           </div>
           <div class="link-box">
             <ul class="list-unstyled">
-                 <li class="login-btn-li"><a href="#">로그인</a></li>
+                 <li class="login-btn-li"><a href="login">로그인</a></li>
                <li class="signup-btn-li"><a href="#">회원가입</a></li>
             </ul>
           </div>
