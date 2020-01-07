@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import com.jsk.stay.dto.MemberDto;
 import com.jsk.stay.util.Constant;
 
-public class MDao implements IDao {
+public class LoginDao implements IDao {
 	
 	JdbcTemplate template;
 	
@@ -21,7 +21,7 @@ public class MDao implements IDao {
 	private SqlSession sqlSession; //MYBatis를 사용하기 위해 변수를 만들어줌
 	
 	
-	public MDao() {
+	public LoginDao() {
 		Constant.template = this.template;
 	}
 

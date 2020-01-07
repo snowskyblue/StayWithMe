@@ -2,7 +2,7 @@ package com.jsk.stay.dto;
 
 import java.security.Timestamp;
 
-import com.jsk.stay.dao.MDao;
+import com.jsk.stay.dao.LoginDao;
 import com.jsk.stay.util.Constant;
 
 public class MemberDto {

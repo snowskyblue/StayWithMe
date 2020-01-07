@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.jsk.stay.dao.MDao;
+import com.jsk.stay.dao.LoginDao;
 import com.jsk.stay.dto.MemberDto;
 import com.jsk.stay.util.Constant;
 
@@ -19,7 +19,7 @@ public class CustomUserDetailsService implements UserDetailsService{
 	
 	@Override //security에서 호출하는 메서드
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		MDao dao = Constant.dao;
+		LoginDao dao = Constant.dao;
 		MemberDto dto = dao.login(username);
 		
 		System.out.println("dto" + dto);
