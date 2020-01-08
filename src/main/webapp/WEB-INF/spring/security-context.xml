@@ -31,6 +31,8 @@
 		<intercept-url pattern="/style/**" access="permitAll" />
 		<intercept-url pattern="/js/**" access="permitAll" />
 		<intercept-url pattern="/img/**" access="permitAll" />
+		<intercept-url pattern="/write/**" access="permitAll" />
+		<intercept-url pattern="/addAcm/**" access="permitAll" />
 		<intercept-url pattern="/login_duplicate" access="permitAll" />
 		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
 		

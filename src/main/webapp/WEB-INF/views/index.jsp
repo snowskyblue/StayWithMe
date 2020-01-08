@@ -197,7 +197,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 					<ul class="list-unstyled">
 						<li class="wish-btn-li"><a href="#">위시리스트</a></li>
 						<li class="confirm-btn-li"><a href="#">예약확인</a></li>
-						<li class="host-btn-li"><a href="#">호스트</a></li>
+						<li class="host-btn-li"><a href="#" id="host">호스트</a></li>
 						<li class="message-btn-li"><a href="#">쪽지</a></li>
 						<li class="notice-btn-li"><a href="#">공지사항</a></li>
 					</ul>
@@ -479,6 +479,11 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 				location.href = "logout";
 			}
 		});
+		
+		$("#host").click(function(){
+			$(".main").load("addAcm")
+		});
+		
 	});
 </script>
 </body>
