@@ -481,8 +481,5 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 		});
 	});
 </script>
-<script>
-<sec:authentication property=""/>
-</script>
 </body>
 </html>
