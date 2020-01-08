@@ -50,7 +50,7 @@
 	<div class="container">
 		<div class="row">
 			<figure id="logo" class="col-md-6 m-0">
-				<a href="#"> <img src="img/logo.jpg" id="logoimg"
+				<a href="index"> <img src="img/logo.jpg" id="logoimg"
 					alt="stay with me">
 				</a>
 				<div class="menu-toggle"></div>
@@ -125,9 +125,6 @@
 		<c:when test="${not empty log}">
 			
 		</c:when>
-		<c:when test="${not empty msg}">
-			alert("로그아웃되었습니다.");
-		</c:when>
 		<c:otherwise>
 			alert("로그인을 실패하셨습니다.");
 		</c:otherwise>
@@ -160,12 +157,12 @@
 	});
 </script>
 <script>
-	$(document).ready(function() {
-		$(".menu-toggle").click(function() {
-			$("nav").toggleClass("active");
-			$(".main").toggleClass("main1");
-		});
+$(document).ready(function() {
+	$(".menu-toggle").click(function() {
+		$("nav").toggleClass("active");
+		$(".main").toggleClass("main1");
 	});
+});
 </script>
 
 </body>

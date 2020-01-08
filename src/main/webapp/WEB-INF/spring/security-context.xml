@@ -26,6 +26,7 @@
 		<intercept-url pattern="/login" access="permitAll" />
 		<intercept-url pattern="/join_view" access="permitAll" />
 		<intercept-url pattern="/join" access="permitAll" />
+		<intercept-url pattern="/index" access="permitAll" />
 		<intercept-url pattern="/html/**" access="permitAll" />
 		<intercept-url pattern="/style/**" access="permitAll" />
 		<intercept-url pattern="/js/**" access="permitAll" />
@@ -45,7 +46,7 @@
 		<logout invalidate-session="true" logout-url="/logout"   logout-success-url="/login?logout=1" /> 
 		-->
 		<logout invalidate-session="true" delete-cookies="JSESSIONID,SPRING_SECURITY_REMEMBER_ME_COOKIE" 
-			logout-url="/logout" logout-success-url="/login?logout" />
+			logout-url="/logout" logout-success-url="/index?logout=1" />
 		<remember-me key="wmoskey" token-validity-seconds="2419200"/> <!-- 4 주 -->
 			   
 		<csrf/>

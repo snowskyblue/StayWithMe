@@ -5,6 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -168,7 +169,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 	<div class="container">
 		<div class="row">
 			<figure id="logo" class="col-md-6 m-0">
-				<a href="#" id="home"> <img src="img/logo.jpg" id="logoimg"
+				<a href="index" id="home"> <img src="img/logo.jpg" id="logoimg"
 					alt="stay with me">
 				</a>
 				<div class="menu-toggle"></div>
@@ -429,7 +430,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 	</div>
 </div>
 <footer class="bg-dark">
-
+	
 </footer>
 
 
@@ -456,6 +457,9 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 		$("#login").text("로그아웃");
 		$("#signin").html("<i class='far fa-user'></i>");
 		</c:when>
+		<c:when test="${not empty msg}">
+		alert("로그아웃되었습니다.");
+		</c:when>
 		<c:otherwise>
 
 		</c:otherwise>
@@ -463,10 +467,6 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 		$(".menu-toggle").click(function() {
 			$("nav").toggleClass("active")
 			$(".main").toggleClass("main1")
-		});
-		$("#home").click(function() {
-			event.preventDefault();
-
 		});
 	});
 </script>
@@ -481,17 +481,8 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 		});
 	});
 </script>
-<!-- 
 <script>
-$(document).ready(function(){
-	$("#home").click(function(){
-		event.preventDefault();
-		$.ajax({
-			
-		});
-	});
-});
+<sec:authentication property=""/>
 </script>
- -->
 </body>
 </html>
