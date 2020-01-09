@@ -26,12 +26,6 @@
 <link href="style/common.css" rel="stylesheet" type="text/css" />
 <title>login</title>
 <style>
-* {
-	font-family: 'Eoe_Zno_L';
-}
-label, .btn {
-	font-weight: bold;
-}
 .form-control {
 	border: none;
 	border-radius: 0;
