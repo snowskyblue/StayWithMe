@@ -196,7 +196,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 						<li class="wish-btn-li"><a href="#">위시리스트</a></li>
 						<li class="confirm-btn-li"><a href="#">예약확인</a></li>
 						<li class="host-btn-li"><a href="#" id="host">호스트</a></li>
-						<li class="message-btn-li"><a href="#">이벤트</a></li>
+						<li class="event-btn-li"><a href="#">이벤트</a></li>
 						<li class="notice-btn-li"><a href="#">공지사항</a></li>
 					</ul>
 				</div>

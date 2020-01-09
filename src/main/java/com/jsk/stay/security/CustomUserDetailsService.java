@@ -30,7 +30,7 @@ public class CustomUserDetailsService implements UserDetailsService{
 		String pw = dto.getMb_pwd();
 		System.out.println("pw : " + pw);
 		Collection<SimpleGrantedAuthority> roles = new ArrayList<SimpleGrantedAuthority>();
-		roles.add(new SimpleGrantedAuthority("ROLE_USER")); //변경
+		roles.add(new SimpleGrantedAuthority(dto.getMb_grade())); //변경
 		UserDetails user = new User(username, pw , roles);
 
 		return user;
