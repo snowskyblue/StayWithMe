@@ -12,8 +12,6 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- csrf정보  -->
-<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
 <!--bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <!--font-awesome -->
@@ -198,7 +196,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 						<li class="wish-btn-li"><a href="#">위시리스트</a></li>
 						<li class="confirm-btn-li"><a href="#">예약확인</a></li>
 						<li class="host-btn-li"><a href="#" id="host">호스트</a></li>
-						<li class="message-btn-li"><a href="#">쪽지</a></li>
+						<li class="message-btn-li"><a href="#">이벤트</a></li>
 						<li class="notice-btn-li"><a href="#">공지사항</a></li>
 					</ul>
 				</div>
@@ -453,10 +451,6 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 
 	$(document).ready(function() {
 		<c:choose>
-		<c:when test="${not empty success}">
-		$("#login").text("로그아웃");
-		$("#signin").html("<i class='far fa-user'></i>");
-		</c:when>
 		<c:when test="${not empty msg}">
 		alert("로그아웃되었습니다.");
 		</c:when>
@@ -481,10 +475,22 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 		});
 		
 		$("#host").click(function(){
-			$(".main").load("addAcm")
+			$(".main").load("addAcm");
 		});
 		
 	});
+</script>
+<script>
+	var user ="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}";
+	sessionStorage.setItem("user", user);
+</script>
+<script>
+$(document).ready(function(){
+	if(sessionStorage.getItem("user") != ""){
+		$("#login").text("로그아웃");
+		$("#signin").html("<i class='far fa-user'></i>");
+	}
+});
 </script>
 </body>
 </html>

@@ -26,12 +26,14 @@
 <body>
 
 <!-- 로그아웃 하는 폼(자동실행) -->
+
 <div class="logout" style="display: none;">
 	<form action="logout" method="post" id="logout">
 		<input type="submit" class="btn btn-success" value="Logout" /> 
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	</form>
 </div>
+
 
 <!--jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -43,6 +45,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
 <script>
 $(document).ready(function(){
+	sessionStorage.remove;
 	$("#logout").submit();
 });
 </script>

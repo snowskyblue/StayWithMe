@@ -23,23 +23,23 @@
         	
     	<intercept-url pattern="/" access="permitAll" />
     	<intercept-url pattern="/resources/**" access="permitAll" />
-		<intercept-url pattern="/login" access="permitAll" />
 		<intercept-url pattern="/join_view" access="permitAll" />
 		<intercept-url pattern="/join" access="permitAll" />
 		<intercept-url pattern="/index" access="permitAll" />
+		<intercept-url pattern="/addAcm" access="permitAll" />
 		<intercept-url pattern="/html/**" access="permitAll" />
 		<intercept-url pattern="/style/**" access="permitAll" />
 		<intercept-url pattern="/js/**" access="permitAll" />
 		<intercept-url pattern="/img/**" access="permitAll" />
-		<intercept-url pattern="/write/**" access="permitAll" />
-		<intercept-url pattern="/addAcm/**" access="permitAll" />
+		<intercept-url pattern="/write" access="permitAll" />
+		<intercept-url pattern="/login" access="permitAll" />
 		<intercept-url pattern="/login_duplicate" access="permitAll" />
-		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/**" access="hasRole('guest')" />
 		
 		<form-login login-page="/login" 
 					username-parameter="mb_id" 
 					password-parameter="mb_pwd"															
-					default-target-url="/index?success=1"
+					default-target-url="/index"
 					authentication-failure-url="/login?error=1"
 					always-use-default-target='true'
 					/>		
@@ -51,7 +51,7 @@
 			logout-url="/logout" logout-success-url="/index?logout=1" />
 		<remember-me key="wmoskey" token-validity-seconds="2419200"/> <!-- 4 주 -->
 			   
-		<csrf/>
+		<csrf disabled = "true"/>
 		
 	</http>
 	

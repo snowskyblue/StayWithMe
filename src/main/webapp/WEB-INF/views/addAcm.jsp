@@ -5,24 +5,25 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
+ -->
 <!--bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <!--font-awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+<!-- datepicker -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <!-- multi date picker 추가 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.min.css">
-
+<link href="style/common.css" rel="stylesheet" type="text/css"/>
 <title>Insert title here</title>
 <style>
 
@@ -106,7 +107,7 @@
 	<div class="pt-5" style="max-width:900px;"> <!-- pt 네비바에서 숙소 등록을 시작합니다 사이 -->
 		<h3 class="font-weight-bold">숙소 등록을 시작합니다</h3>
 		<div class="mt-5 mb-5"> <!-- mt 숙소등록을 시작합니다 - 숙소유형을 선택해주세요 사이 -->
-			<form method="POST" action ="write" enctype="multipart/form-data">
+			<form method="POST" action ="write" enctype="multipart/form-data"> 
 				<div class="form-group d-flex justify-content-between">
 					<label class="text-muted mb-3" for="acm_type">숙소 유형을 선택해 주세요</label>
 					<div>

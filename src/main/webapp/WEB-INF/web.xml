@@ -46,17 +46,7 @@
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-	
-	<!-- Ajax Access-Control-Allow-Origin Apache Tomcat  문제 해결 방법 -->	 
-	<filter>
-	  	<filter-name>CorsFilter</filter-name>
-	 	<filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
-	</filter>
-    <filter-mapping>
-	  	<filter-name>CorsFilter</filter-name>
-	  	<url-pattern>/*</url-pattern>
-    </filter-mapping>
+	</filter-mapping>	
     
     <!-- Security filter 추가 -->
     <filter>
@@ -68,6 +58,15 @@
     	<url-pattern>/*</url-pattern> 
     </filter-mapping>
 
+     <!-- Ajax Access-Control-Allow-Origin Apache Tomcat  문제 해결 방법 -->	 
+	<filter>
+	  	<filter-name>CorsFilter</filter-name>
+	 	<filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+	</filter>
+    <filter-mapping>
+	  	<filter-name>CorsFilter</filter-name>
+	  	<url-pattern>/*</url-pattern>
+    </filter-mapping>
 
     <security-constraint>
        <web-resource-collection>

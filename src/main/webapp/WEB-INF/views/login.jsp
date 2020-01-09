@@ -10,7 +10,9 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ -->
 <!-- csrf정보  -->
 <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
 <!-- 기본값으로 Header가 존재 (X-CSRF-TOKEN) default값 -->
@@ -78,8 +80,8 @@
 					<ul class="list-unstyled">
 						<li class="wish-btn-li"><a href="#">위시리스트</a></li>
 						<li class="confirm-btn-li"><a href="#">예약확인</a></li>
-						<li class="host-btn-li"><a href="#">호스트</a></li>
-						<li class="message-btn-li"><a href="#">쪽지</a></li>
+						<li class="host-btn-li"><a href="#" id="host">호스트</a></li>
+						<li class="message-btn-li"><a href="#">이벤트</a></li>
 						<li class="notice-btn-li"><a href="#">공지사항</a></li>
 					</ul>
 				</div>
@@ -87,29 +89,30 @@
 		</div>
 	</div>
 </header>
+
 <div class="main">
-	<div
-		class="d-flex flex-wrap align-content-center justify-content-center"
-		style="min-height: 500px;">
-		<form method="POST" action="login"
-			style="width: 20%; min-width: 250px;" id="form">
+	<div class="d-flex flex-wrap align-content-center justify-content-center" style="min-height: 500px;">
+		<form method="POST" action="login" style="width: 20%; min-width: 250px;" id="form">
 			<!-- frontController로 안감 -->
-			<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}" /> <label style="font-size: 15px;">아이디
-			</label> <input type="text" class="form-control" name="mb_id"> <br />
-			<label style="font-size: 15px;">비밀번호 </label> <input type="password"
-				class="form-control" name="mb_pwd">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+			<label style="font-size: 15px;">아이디</label> 
+			<input type="text" class="form-control" name="mb_id"> <br />
+			<label style="font-size: 15px;">비밀번호 </label> 
+			<input type="password" class="form-control" name="mb_pwd">
 			<div class="d-flex justify-content-between">
 				<a href="#" style="font-size: 10px; color: red;">아이디/비밀번호 찾기</a>
 			</div>
-			<br /> <input class="btn w-100" style="margin-bottom: 10px"
-				type="submit" value="로 그 인" id="login" /> <br /> <input
-				class="btn w-100" type="button" value="회원가입" id="singup" />
+			<br/> 
+			<input class="btn w-100" style="margin-bottom: 10px" type="submit" value="로 그 인" id="login" /> <br /> 
+			<input class="btn w-100" type="button" value="회원가입" id="singup" />
 		</form>
 	</div>
 </div>
 
-<footer class="bg-dark"> </footer>
+<footer class="bg-dark"> 
+
+</footer>
+
 <!--jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!--popper -->
