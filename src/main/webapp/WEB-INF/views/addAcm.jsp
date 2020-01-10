@@ -26,14 +26,17 @@
 <link href="style/common.css" rel="stylesheet" type="text/css"/>
 <title>Insert title here</title>
 <style>
-
+option {
+   background : #ffffff; /*흰색*/
+   font-size:14px;
+}
 .form-check-label { 
   display: block;
   position: relative;
   padding-left: 35px;
   margin-bottom: 12px;
   cursor: pointer;
-  font-size: 22px;
+  /* font-size: 18px;*/
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -104,10 +107,10 @@
 <body>
 
 <div class="container" style = "min-height : 500px;">
-	<div class="pt-5" style="max-width:900px;"> <!-- pt 네비바에서 숙소 등록을 시작합니다 사이 -->
+	<div class="row d-flex justify-content-center pt-5" style="max-width:1200px;"> <!-- pt 네비바에서 숙소 등록을 시작합니다 사이 -->
 		<h3 class="font-weight-bold">숙소 등록을 시작합니다</h3>
-		<div class="mt-5 mb-5"> <!-- mt 숙소등록을 시작합니다 - 숙소유형을 선택해주세요 사이 -->
-			<form method="POST" action ="write" enctype="multipart/form-data"> 
+		<div class="col-10 col-sm-10 mt-5 mb-5"> <!-- mt 숙소등록을 시작합니다 - 숙소유형을 선택해주세요 사이 -->
+			<form method="POST" action ="write" enctype="multipart/form-data">
 				<div class="form-group d-flex justify-content-between">
 					<label class="text-muted mb-3" for="acm_type">숙소 유형을 선택해 주세요</label>
 					<div>
@@ -129,17 +132,17 @@
 				<div>
 					<div class="text-muted mb-3" >게스트가 묵을 공간의 종류를 선택해 주세요</div>
 					<div>
-						<div class="mb-3">
-							<input type="radio" name="acm_room_type" value="wholeH">집 전체<br/>
-							<div class="text-muted" >게스트가 숙소 전체를 다른 사람과 공유하지 않고 단독으로 이용합니다. 일반적으로 침실, 욕실, 부엌이 포함됩니다.</div>
+						<div class="mb-3 custom-control custom-radio">
+							<input type="radio" class="custom-control-input" id="acm_room_type1" name="acm_room_type" value="wholeH" checked>집 전체<br/>
+							<label class="text-muted custom-control-label" for="acm_room_type1">게스트가 숙소 전체를 다른 사람과 공유하지 않고 단독으로 이용합니다. 일반적으로 침실, 욕실, 부엌이 포함됩니다.</label>
 						</div>
-						<div class="mb-3">
-							<input type="radio" name="acm_room_type" value="exclusiveR">개인실<br/>
-							<div class="text-muted" >게스트에게 개인 침실이 제공됩니다. 침실 이외의 공간은 공용일 수 있습니다.</div>
+						<div class="mb-3 custom-control custom-radio">
+							<input type="radio" class="custom-control-input" id="acm_room_type2"  name="acm_room_type" value="exclusiveR">개인실<br/>
+							<label class="text-muted custom-control-label" for="acm_room_type2">게스트에게 개인 침실이 제공됩니다. 침실 이외의 공간은 공용일 수 있습니다.</label>
 						</div>
-						<div>
-							<input type="radio" name="acm_room_type" value="shareR">다인실<br/>
-							<div class="text-muted">게스트는 개인 공간 없이, 다른 사람과 함께 쓰는 침실이나 공용 공간에서 숙박합니다.</div>
+						<div class="mb-3 custom-control custom-radio">
+							<input type="radio" class="custom-control-input" id="acm_room_type3"   name="acm_room_type" value="shareR">다인실<br/>
+							<label class="text-muted custom-control-label" for="acm_room_type3">게스트는 개인 공간 없이, 다른 사람과 함께 쓰는 침실이나 공용 공간에서 숙박합니다.</label>
 						</div>
 					</div>
 				</div>
@@ -248,31 +251,35 @@
 					</div>
 				</div>
 				<!-- *********************** acm_rule *********** -->
-				<div class="mt-5 mb-5" >
-					<label class="form-check-label"> 유아(2세 미만) 숙박에 적합함
-					  <input type="checkbox" name="infant" value="infant">
-					  <span class="checkmark"></span>
-					</label>
-					<label class="form-check-label"> 어린이(2~12세) 숙박에 적합함
-					  <input type="checkbox" name="child" value="child">
-					  <span class="checkmark"></span>
-					</label>
-					<label class="form-check-label"> 반려동물 동반에 적합함
-					  <input type="checkbox" name="pet" value="pet">
-					  <span class="checkmark"></span>
-					</label>
-					<label class="form-check-label"> 흡연 가능
-					  <input type="checkbox" name="smoking" value="smoking">
-					  <span class="checkmark"></span>
-					</label>
-					<label class="form-check-label"> 행사나 파티 허용
-					  <input type="checkbox" name="party" value="party1">
-					  <span class="checkmark"></span>
-					</label>
-					<label class="form-check-label"> 상업적 이용 가능
-					  <input type="checkbox" name="commercial" value="commercial">
-					  <span class="checkmark"></span>
-					</label>
+				<div class="row mt-5 mb-5" >
+					<div class="col-sm-6">
+						<label class="form-check-label"> 유아(2세 미만) 숙박에 적합함
+						  <input type="checkbox" name="infant" value="infant">
+						  <span class="checkmark"></span>
+						</label>
+						<label class="form-check-label"> 어린이(2~12세) 숙박에 적합함
+						  <input type="checkbox" name="child" value="child">
+						  <span class="checkmark"></span>
+						</label>
+						<label class="form-check-label"> 반려동물 동반에 적합함
+						  <input type="checkbox" name="pet" value="pet">
+						  <span class="checkmark"></span>
+						</label>
+					</div>
+					<div class="col-sm-6">
+						<label class="form-check-label"> 흡연 가능
+						  <input type="checkbox" name="smoking" value="smoking">
+						  <span class="checkmark"></span>
+						</label>
+						<label class="form-check-label"> 행사나 파티 허용
+						  <input type="checkbox" name="party" value="party1">
+						  <span class="checkmark"></span>
+						</label>
+						<label class="form-check-label"> 상업적 이용 가능
+						  <input type="checkbox" name="commercial" value="commercial">
+						  <span class="checkmark"></span>
+						</label>
+					</div>
 				</div>
 				
 				
@@ -319,8 +326,268 @@
 				<div class="row form-group">
 					<label class="text-muted mb-3 col-sm-2" for="acm_img">숙소 사진</label>
 					<div class="col-sm-10">
-						<input class="form-control" id="acm_img" type="file" name="acm_img" multiple />
+						<input id="acm_img" type="file" name="acm_img" multiple />
 					</div>
+				</div>
+				
+				<!-- 참고용(삭제예정)
+				<div class="row form-group">
+					<label class="text-muted mb-3 col-sm-2" for="acm_img">숙소 사진</label>
+					<div class="custom-file col-sm-10 mb-3">
+						<input class="custom-file-input" id="acm_img" type="file" name="acm_img" multiple />
+						<label class="custom-file-label" for="acm_img">숙소사진을 올려주세요</label>
+					</div>
+				</div>
+				
+				 -->
+				
+				<!-- 편의시설 amenity -->
+				<div>
+					<div class="d-inline">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="wifi1" value="F"  name="ame_wifi"  checked>
+							<label class="custom-control-label" for="wifi1"></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="wifi2" value="T"  name="ame_wifi">
+							<label class="custom-control-label" for="wifi2"></label>
+						</div>
+					</div>
+					<div class="d-inline">무선인터넷</div>
+				</div>
+				<div>
+					<div class="d-inline">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="tv1" value="F"  name="ame_tv" checked>
+							<label class="custom-control-label" for="tv1"></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="tv2" value="T"   name="ame_tv">
+							<label class="custom-control-label" for="tv2"></label>
+						</div>
+					</div>
+					<div class="d-inline">TV</div>
+				</div>
+				<div>
+					<div class="d-inline">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="kitchen1" value="F"  name="ame_kitchen" checked>
+							<label class="custom-control-label" for="kitchen1"></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="kitchen2" value="T"   name="ame_kitchen">
+							<label class="custom-control-label" for="kitchen2"></label>
+						</div>
+					</div>
+					<div class="d-inline">주방</div>
+				</div>
+				<div>
+					<div class="d-inline">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="aircon1" value="F"  name="ame_aircon" checked>
+							<label class="custom-control-label" for="aircon1"></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="aircon2"  value="T"  name="ame_aircon">
+							<label class="custom-control-label" for="aircon2"></label>
+						</div>
+					</div>
+					<div class="d-inline">에어컨</div>
+				</div>
+				<div>
+					<div class="d-inline">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="lock1" value="F"  name="ame_room_lock" checked>
+							<label class="custom-control-label" for="lock1"></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="lock2" value="T"   name="ame_room_lock">
+							<label class="custom-control-label" for="lock2"></label>
+						</div>
+					</div>
+					<div class="d-inline">방 잠금장치</div>
+				</div>
+				<div>
+					<div class="d-inline">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="towel1" value="F"  name="ame_towel" checked>
+							<label class="custom-control-label" for="towel1"></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="towel2"  value="T"  name="ame_towel">
+							<label class="custom-control-label" for="towel2"></label>
+						</div>
+					</div>
+					<div class="d-inline">수건</div>
+				</div>
+				<div>
+					<div class="d-inline">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="washer1" value="F"  name="ame_washer" checked>
+							<label class="custom-control-label" for="washer1"></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="washer2" value="T"   name="ame_washer">
+							<label class="custom-control-label" for="washer2"></label>
+						</div>
+					</div>
+					<div class="d-inline">세탁기</div>
+				</div>
+				<div>
+					<div class="d-inline">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="dryer1" value="F"  name="ame_dryer" checked>
+							<label class="custom-control-label" for="dryer1"></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="dryer2" value="T"   name="ame_dryer">
+							<label class="custom-control-label" for="dryer2"></label>
+						</div>
+					</div>
+					<div class="d-inline">건조기</div>
+				</div>
+				<div>
+					<div class="d-inline">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="shower1" value="F"  name="ame_shower" checked>
+							<label class="custom-control-label" for="shower1"></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="shower2"  value="T"  name="ame_shower">
+							<label class="custom-control-label" for="shower2"></label>
+						</div>
+					</div>
+					<div class="d-inline">샤워시설</div>
+				</div>
+				<div>
+					<div class="d-inline">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="hair_dryer1" value="F"  name="ame_hair_dryer" checked>
+							<label class="custom-control-label" for="hair_dryer1"></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="hair_dryer2"  value="T"  name="ame_hair_dryer">
+							<label class="custom-control-label" for="hair_dryer2"></label>
+						</div>
+					</div>
+					<div class="d-inline">헤어드라이기</div>
+				</div>
+				<div>
+					<div class="d-inline">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="fan1" value="F"  name="ame_fan" checked>
+							<label class="custom-control-label" for="fan1"></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="fan2"  value="T"  name="ame_fan">
+							<label class="custom-control-label" for="fan2"></label>
+						</div>
+					</div>
+					<div class="d-inline">선풍기</div>
+				</div>
+				<div>
+					<div class="d-inline">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="extinguisher1" value="F"  name="ame_extinguisher" checked>
+							<label class="custom-control-label" for="extinguisher1"></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="extinguisher2"  value="T"  name="ame_extinguisher">
+							<label class="custom-control-label" for="extinguisher2"></label>
+						</div>
+					</div>
+					<div class="d-inline">소화기</div>
+				</div>
+				<div>
+					<div class="d-inline">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="balcony1" value="F"  name="ame_balcony" checked>
+							<label class="custom-control-label" for="balcony1"></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="balcony2"  value="T"  name="ame_balcony">
+							<label class="custom-control-label" for="balcony2"></label>
+						</div>
+					</div>
+					<div class="d-inline">발코니</div>
+				</div>
+				<div>
+					<div class="d-inline">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="garden1" value="F"  name="ame_garden" checked>
+							<label class="custom-control-label" for="garden1"></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="garden2"  value="T"  name="ame_garden">
+							<label class="custom-control-label" for="garden2"></label>
+						</div>
+					</div>
+					<div class="d-inline">마당</div>
+				</div>
+				<div>
+					<div class="d-inline">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="heater1" value="F"  name="ame_heater" checked>
+							<label class="custom-control-label" for="heater1"></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="heater2"  value="T"  name="ame_heater">
+							<label class="custom-control-label" for="heater2"></label>
+						</div>
+					</div>
+					<div class="d-inline">난방기구</div>
+				</div>
+				<div>
+					<div class="d-inline">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="infodesk1" value="F"  name="ame_infodesk" checked>
+							<label class="custom-control-label" for="infodesk1"></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="infodesk2"  value="T"  name="ame_infodesk">
+							<label class="custom-control-label" for="infodesk2"></label>
+						</div>
+					</div>
+					<div class="d-inline">인포메이션 데스크</div>
+				</div>
+				<div>
+					<div class="d-inline">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="breakfast1" value="F"  name="ame_breakfast" checked>
+							<label class="custom-control-label" for="breakfast1"></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="breakfast2"  value="T"  name="ame_breakfast">
+							<label class="custom-control-label" for="breakfast2"></label>
+						</div>
+					</div>
+					<div class="d-inline">아침</div>
+				</div>
+				<div>
+					<div class="d-inline">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="bbq1" value="F"  name="ame_bbq" checked>
+							<label class="custom-control-label" for="bbq1"></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="bbq2"  value="T"  name="ame_bbq">
+							<label class="custom-control-label" for="bbq2"></label>
+						</div>
+					</div>
+					<div class="d-inline">BBQ 시설</div>
+				</div>
+				<div>
+					<div class="d-inline">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="park1" value="F" name="ame_park" checked>
+							<label class="custom-control-label" for="park1"></label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" class="custom-control-input" id="park2"  value="T"  name="ame_park">
+							<label class="custom-control-label" for="park2"></label>
+						</div>
+					</div>
+					<div class="d-inline">주차</div>
 				</div>
 				
 			    <div class="d-flex justify-content-end">

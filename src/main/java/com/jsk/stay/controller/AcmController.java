@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,11 +25,19 @@ public class AcmController {
 	
 	AcmCommand command = null;
 	private JdbcTemplate template;
+	/*transaction*/
+	private PlatformTransactionManager transactionManager;
 	
 	@Autowired
 	public void setTemplate(JdbcTemplate template) {
 		this.template = template;
 		Constant.template = this.template;
+	}
+	
+	@Autowired
+	public void setTransactionManager(PlatformTransactionManager transactionManager) {
+		this.transactionManager = transactionManager;
+		Constant.transactionManager = this.transactionManager;
 	}
 	
 	@RequestMapping("/addAcm")
