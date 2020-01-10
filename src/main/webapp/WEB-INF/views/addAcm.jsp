@@ -24,10 +24,14 @@
 
 <title>Insert title here</title>
 <style>
+@font-face { font-family: 'Eoe_Zno_L'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/Eoe_Zno_L.woff') format('woff'); font-weight: normal; font-style: normal; }
+@font-face { font-family: 'S-CoreDream-2ExtraLight'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-2ExtraLight.woff') format('woff'); font-weight: normal; font-style: normal; }
+@font-face { font-family: 'KBIZHanmaumGothic'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KBIZHanmaumGothic.woff') format('woff'); font-weight: normal; font-style: normal; }
 
-option {
-   background : #ffffff; /*흰색*/
-   font-size:14px;
+
+#border {
+	border: 3px solid #000000;
+	/*border-collapse: collapse;*/
 }
 .form-check-label { 
   display: block;
@@ -100,21 +104,31 @@ option {
 	margin-bottom: 25px;
 }
 
-/*세번째*/
-.form-control {
-      margin:0 ;
-      margin-bottom: 25px;
+
+#acm_time .form-control, #acm_address .form-control {
+	border: none;
+	border-radius: 0;
+	border-bottom: 2px solid grey;
+	margin: 0px;
+    margin-bottom: 25px;
    }
+}
+body {
+	font-family: 'S-CoreDream-2ExtraLight';
+	font-weight: bold;
+}
 
 </style>
 </head>
 <body>
 <jsp:include page="common/header.jsp" flush="true"/>
 
+<div style="height:150px;"></div>
 <div class="container" style = "min-height : 500px;">
-	<div class="row d-flex justify-content-center pt-5" style="max-width:1200px;"> <!-- pt 네비바에서 숙소 등록을 시작합니다 사이 -->
-		<h3 class="font-weight-bold">숙소 등록을 시작합니다</h3>
-		<div class="col-10 col-sm-10 mt-5 mb-5"> <!-- mt 숙소등록을 시작합니다 - 숙소유형을 선택해주세요 사이 -->
+	<h3>숙소등록</h3>
+	<div id="border"></div>
+	<div class="row d-flex justify-content-center pt-5" style="max-width:1200px;">
+		<div class="col-10 col-sm-10 mt-5 mb-3"> <!-- mt 숙소등록을 시작합니다 - 숙소유형을 선택해주세요 사이 -->
 			<form method="POST" action ="write" enctype="multipart/form-data">
 				<div class="form-group d-flex justify-content-between">
 					<label class="text-muted mb-3" for="acm_type">숙소 유형을 선택해 주세요</label>
@@ -214,16 +228,24 @@ option {
 				<hr/>
 				
 				<!-- 3번째 -->
-				<div class="mb-5"> <!-- form안에서 이전,다음버튼과 컨텐츠과의 거리 -->
+				<div class="mb-5" id="acm_address"> <!-- form안에서 이전,다음버튼과 컨텐츠과의 거리 -->
 					<div class="row d-flex justify-content-start">
-						<input class="form-control col-sm-3" type="text" name="postcode"  id="postcode" placeholder="우편번호">
+						<div class="col-sm-3">
+							<input class="form-control" type="text" name="postcode"  id="postcode" placeholder="우편번호">
+						</div>
+					</div>
+					<div class="row d-flex justify-content-between">
+						<div class="col-sm-6">
+							<input class="form-control" type="text" name="address"  id="address" placeholder="주소 찾기를 클릭해 주소를 검색해주세요"><br>
+						</div>
+						<div class="col-sm-6">
+							<input class="form-control" type="text" name="extraAddress"  id="extraAddress" placeholder="참고주소">
+						</div>
 					</div>
 					<div class="row">
-						<input class="form-control col-sm-6" type="text" name="address"  id="address" placeholder="주소 찾기를 클릭해 주소를 검색해주세요"><br>
-						<input class="form-control col-sm-6" type="text" name="extraAddress"  id="extraAddress" placeholder="참고주소">
-					</div>
-					<div class="row">
-						<input class="form-control col-sm-9" type="text" name="detailAddress"  id="detailAddress" placeholder="상세주소를 입력해주세요">
+						<div class="col-sm-9">
+							<input class="form-control" type="text" name="detailAddress"  id="detailAddress" placeholder="상세주소를 입력해주세요">
+						</div>
 						<div class="col-sm-3 d-flex justify-content-end">
 							<input class="form-control w-75 bg-dark text-light" type="button" onclick="daumPostcode()" value="주소찾기">
 						</div>
@@ -237,7 +259,7 @@ option {
 				
 				
 				<!-- 5번째 -->
-				<div class="row"> <!-- acm_checkin_time, acm_checkout_time -->
+				<div class="row" id="acm_time"> <!-- acm_checkin_time, acm_checkout_time -->
 					<div class="col-sm-6">
 						<div class="form-group">
 		  				<label for="acm_checkin_time" class="col-form-label">체크인 시간</label>
@@ -625,7 +647,7 @@ option {
             startDate: new Date(),
             multidate: true,
             format: "dd/mm/yyyy",
-            daysOfWeekHighlighted: "5,6",
+            daysOfWeekHighlighted: "6,0",
             datesDisabled: ['07/01/2020'],
             language: 'en'
         });
