@@ -10,9 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<!-- 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
- -->
 <!--bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <!--font-awesome -->
@@ -98,11 +96,16 @@ option {
   transform: rotate(45deg);
 }
 
+#acm_rule .form-check-label {
+	margin-bottom: 25px;
+}
+
 /*세번째*/
 .form-control {
       margin:0 ;
       margin-bottom: 25px;
    }
+
 </style>
 </head>
 <body>
@@ -253,7 +256,7 @@ option {
 					</div>
 				</div>
 				<!-- *********************** acm_rule *********** -->
-				<div class="row mt-5 mb-5" >
+				<div class="row mt-5 mb-5" id="acm_rule">
 					<div class="col-sm-6">
 						<label class="form-check-label"> 유아(2세 미만) 숙박에 적합함
 						  <input type="checkbox" name="infant" value="infant">
