@@ -425,6 +425,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 <script>
 	$(document).ready(function() {
 		$("#nav-login").click(function() {
+			event.preventDefault();
 			if ($("#nav-login").text() == "로그인") {
 				location.href = "login?log=start";
 			} else {
