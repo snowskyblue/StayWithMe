@@ -20,14 +20,15 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet" />
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-<link href="style/common.css" rel="stylesheet" type="text/css">
+
 <title>Insert title here</title>
+<style>
 <style>
 .main {
 	margin-top: 100px;
 }
 
-.carousel-caption p {
+.carousel-item .carousel-caption p {
 	font-family: 'S-CoreDream-2ExtraLight';
 	font-size: 30px;
 	font-style: italic;
@@ -50,7 +51,7 @@
 	margin: 30px 10px;
 }
 
-.form-control {
+.input-grp .form-control {
 	font-size: 12px;
 	background: transparent;
 	border-radius: 0;
@@ -60,7 +61,7 @@
 	height: 33px;
 }
 
-.custom-select {
+.input-grp .custom-select {
 	background: black;
 	color: #fff;
 	font-size: 12px;
@@ -128,7 +129,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 	position: relative;
 }
 /************************************/
-.container-fluid {
+.main .container-fluid {
 	padding: 0;
 }
 
@@ -143,17 +144,17 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 		font-size: 25px;
 		width: 400px;
 	}
-	.form-control, .custom-select {
+	.input-grp .form-control, .input-grp .custom-select {
 		margin: 0;
 	}
-	.input-grp {
+	.booking-form .input-grp {
 		width: 100%;
 		margin: 10px 10px;
 	}
 }
 
 @media screen and (min-width: 768px) and (max-width: 1200px) {
-	.input-grp {
+	.booking-form .input-grp {
 		margin: 20px 20px;
 		width: 25%;
 	}
@@ -163,47 +164,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 </style>
 </head>
 <body>
-<header id="header" class="header fixed-top">
-	<div class="container">
-		<div class="row">
-			<figure id="logo" class="col-md-6 m-0">
-				<a href="index" id="home"> <img src="img/logo.jpg" id="logoimg"
-					alt="stay with me">
-				</a>
-				<div class="menu-toggle"></div>
-			</figure>
-
-			<nav class="navbar col-md-6" id="top-nav-bar">
-				<div class="top-navbar row">
-					<div class="search-box">
-						<a href="#">지역별 숙소찾기</a>
-					</div>
-					<div class="link-box">
-						<ul class="list-unstyled">
-							<li class="qna-btn-li"><a href="#">Q&A</a></li>
-							<li class="cs-btn-li"><a href="#">고객센터</a></li>
-						</ul>
-					</div>
-					<div class="link-box">
-						<ul class="list-unstyled">
-							<li class="login-btn-li"><a href="#" id="login">로그인</a></li>
-							<li class="signup-btn-li"><a href="#" id = "signin">회원가입</a></li>
-						</ul>
-					</div>
-				</div>
-				<div id="main-nav-bar" class="main-navbar row">
-					<ul class="list-unstyled">
-						<li class="wish-btn-li"><a href="#">위시리스트</a></li>
-						<li class="confirm-btn-li"><a href="#">예약확인</a></li>
-						<li class="host-btn-li"><a href="#" id="host">호스트</a></li>
-						<li class="event-btn-li"><a href="#">이벤트</a></li>
-						<li class="notice-btn-li"><a href="#">공지사항</a></li>
-					</ul>
-				</div>
-			</nav>
-		</div>
-	</div>
-</header>
+<jsp:include page="common/header.jsp" flush="true"/>
 <div class="main">
 	<!-- Carousel -->
 	<div class="container-fluid carousel">
@@ -427,10 +388,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 		</div>
 	</div>
 </div>
-<footer class="bg-dark">
-	
-</footer>
-
+<jsp:include page="common/footer.jsp" flush="true"/>
 
 <!--jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -466,16 +424,12 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 </script>
 <script>
 	$(document).ready(function() {
-		$("#login").click(function() {
-			if ($("#login").text() == "로그인") {
+		$("#nav-login").click(function() {
+			if ($("#nav-login").text() == "로그인") {
 				location.href = "login?log=start";
 			} else {
 				location.href = "logout";
 			}
-		});
-		
-		$("#host").click(function(){
-			$(".main").load("addAcm");
 		});
 		
 	});
@@ -487,8 +441,8 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 <script>
 $(document).ready(function(){
 	if(sessionStorage.getItem("user") != ""){
-		$("#login").text("로그아웃");
-		$("#signin").html("<i class='far fa-user'></i>");
+		$("#nav-login").text("로그아웃");
+		$("#nav-memberjoin").html("<i class='far fa-user'></i>");
 	}
 });
 </script>

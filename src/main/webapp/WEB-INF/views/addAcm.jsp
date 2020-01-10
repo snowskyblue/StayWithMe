@@ -23,9 +23,10 @@
 <!-- multi date picker 추가 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.min.css">
-<link href="style/common.css" rel="stylesheet" type="text/css"/>
+
 <title>Insert title here</title>
 <style>
+
 option {
    background : #ffffff; /*흰색*/
    font-size:14px;
@@ -105,6 +106,7 @@ option {
 </style>
 </head>
 <body>
+<jsp:include page="common/header.jsp" flush="true"/>
 
 <div class="container" style = "min-height : 500px;">
 	<div class="row d-flex justify-content-center pt-5" style="max-width:1200px;"> <!-- pt 네비바에서 숙소 등록을 시작합니다 사이 -->
@@ -598,7 +600,7 @@ option {
 		</div>
 	</div>
 </div>
-
+<jsp:include page="common/footer.jsp" flush="true"/>
 
 <!--jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

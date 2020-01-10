@@ -26,7 +26,13 @@
 <link href="style/common.css" rel="stylesheet" type="text/css" />
 <title>login</title>
 <style>
-.form-control {
+
+label, #form .btn {
+	font-weight: bold;
+	font-family: 'S-CoreDream-2ExtraLight';
+}
+
+#form .form-control {
 	border: none;
 	border-radius: 0;
 	border-bottom: 1px solid grey;
@@ -48,47 +54,7 @@
 </style>
 </head>
 <body>
-<header id="header" class="header fixed-top">
-	<div class="container">
-		<div class="row">
-			<figure id="logo" class="col-md-6 m-0">
-				<a href="index"> <img src="img/logo.jpg" id="logoimg"
-					alt="stay with me">
-				</a>
-				<div class="menu-toggle"></div>
-			</figure>
-
-			<nav class="navbar col-md-6" id="top-nav-bar">
-				<div class="top-navbar row">
-					<div class="search-box">
-						<a href="#">지역별 숙소찾기</a>
-					</div>
-					<div class="link-box">
-						<ul class="list-unstyled">
-							<li class="qna-btn-li"><a href="#">Q&A</a></li>
-							<li class="cs-btn-li"><a href="#">고객센터</a></li>
-						</ul>
-					</div>
-					<div class="link-box">
-						<ul class="list-unstyled">
-							<li class="login-btn-li"><a href="#">로그인</a></li>
-							<li class="signup-btn-li"><a href="#">회원가입</a></li>
-						</ul>
-					</div>
-				</div>
-				<div id="main-nav-bar" class="main-navbar row">
-					<ul class="list-unstyled">
-						<li class="wish-btn-li"><a href="#">위시리스트</a></li>
-						<li class="confirm-btn-li"><a href="#">예약확인</a></li>
-						<li class="host-btn-li"><a href="#" id="host">호스트</a></li>
-						<li class="event-btn-li"><a href="#">이벤트</a></li>
-						<li class="notice-btn-li"><a href="#">공지사항</a></li>
-					</ul>
-				</div>
-			</nav>
-		</div>
-	</div>
-</header>
+<jsp:include page="common/header.jsp" flush="true"/>
 
 <div class="main">
 	<div class="d-flex flex-wrap align-content-center justify-content-center" style="min-height: 500px;">
@@ -109,10 +75,7 @@
 	</div>
 </div>
 
-<footer class="bg-dark"> 
-
-</footer>
-
+<jsp:include page="common/footer.jsp" flush="true"/>
 <!--jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!--popper -->

@@ -23,7 +23,7 @@
         	
     	<intercept-url pattern="/" access="permitAll" />
     	<intercept-url pattern="/resources/**" access="permitAll" />
-		<intercept-url pattern="/join_view" access="permitAll" />
+		<intercept-url pattern="/memberjoin" access="permitAll" />
 		<intercept-url pattern="/join" access="permitAll" />
 		<intercept-url pattern="/index" access="permitAll" />
 		<intercept-url pattern="/addAcm" access="permitAll" />

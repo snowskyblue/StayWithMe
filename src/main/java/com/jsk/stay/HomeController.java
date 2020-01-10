@@ -36,5 +36,9 @@ public class HomeController {
 
 		return "index";
 	}
+	@RequestMapping("/memberjoin")
+	public String memberjoin() {
+		return "memberjoin";
+	}
 
 }
