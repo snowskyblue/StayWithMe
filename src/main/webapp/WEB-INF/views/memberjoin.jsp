@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <!--font-awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<!-- iCheck(라디오버튼) -->
+<!-- iCheck(라디오버튼)-->
 <link rel="stylesheet" href="icheck-1.x/skins/flat/flat.css">
 
 <title>Insert title here</title>
@@ -23,7 +23,6 @@
 @font-face { font-family: 'Eoe_Zno_L'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/Eoe_Zno_L.woff') format('woff'); font-weight: normal; font-style: normal; }
 @font-face { font-family: 'S-CoreDream-2ExtraLight'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-2ExtraLight.woff') format('woff'); font-weight: normal; font-style: normal; }
 @font-face { font-family: 'KBIZHanmaumGothic'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KBIZHanmaumGothic.woff') format('woff'); font-weight: normal; font-style: normal; }
-
 
 #join-header {
 	padding-top: 150px;
@@ -55,6 +54,7 @@
 	font-family: 'S-CoreDream-2ExtraLight';
 	font-weight: bold;
 }
+
 </style>
 </head>
 <body>
@@ -123,11 +123,10 @@
 			</div>
 			
 			<div class="form-group text-center">
-				<button id="submitBtn" class="btn btn-dark form-control" style="border: none;">회원가입</button>
+				<button type="submit" id="submitBtn" class="btn btn-dark form-control" style="border: none;">회원가입</button>
 			</div>
 		</form>
 	</div>
-	
 </div>
 <jsp:include page="common/footer.jsp" flush="true"/>
 
@@ -137,7 +136,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <!--javascript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<!-- iCheck(라디오 버튼) -->
+<!--  iCheck(라디오 버튼)  -->
 <script src="icheck-1.x/icheck.min.js"></script>
 <script>
 

@@ -1,6 +1,6 @@
 package com.jsk.stay.dto;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 import com.jsk.stay.dao.LoginDao;
 import com.jsk.stay.util.Constant;
@@ -10,14 +10,15 @@ public class MemberDto {
 	private String mb_pwd;
 	private String mb_name;
 	private String mb_birthdate;
-	private boolean mb_sex;
-	private String mb_phone;
+	private char mb_sex;
 	private String mb_email;
+	private String mb_phone;
 	private Timestamp mb_join_date;
 	private Timestamp mb_delete_date;
 	private String mb_temppwd;
 	private String mb_profile;
 	private String mb_grade;
+	
 	public String getMb_id() {
 		return mb_id;
 	}
@@ -42,10 +43,10 @@ public class MemberDto {
 	public void setMb_birthdate(String mb_birthdate) {
 		this.mb_birthdate = mb_birthdate;
 	}
-	public boolean isMb_sex() {
+	public char isMb_sex() {
 		return mb_sex;
 	}
-	public void setMb_sex(boolean mb_sex) {
+	public void setMb_sex(char mb_sex) {
 		this.mb_sex = mb_sex;
 	}
 	public String getMb_phone() {
@@ -90,7 +91,7 @@ public class MemberDto {
 	public void setMb_grade(String mb_grade) {
 		this.mb_grade = mb_grade;
 	}
-	public MemberDto(String mb_id, String mb_pwd, String mb_name, String mb_birthdate, boolean mb_sex, String mb_phone,
+	public MemberDto(String mb_id, String mb_pwd, String mb_name, String mb_birthdate, char mb_sex, String mb_phone,
 			String mb_email, Timestamp mb_join_date, Timestamp mb_delete_date, String mb_temppwd, String mb_profile,
 			String mb_grade) {
 		super();

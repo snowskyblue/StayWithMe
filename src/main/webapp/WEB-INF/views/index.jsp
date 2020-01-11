@@ -423,29 +423,14 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 	});
 </script>
 <script>
-	$(document).ready(function() {
-		$("#nav-login").click(function() {
-			event.preventDefault();
-			if ($("#nav-login").text() == "로그인") {
-				location.href = "login?log=start";
-			} else {
-				location.href = "logout";
-			}
-		});
-		
-	});
+
 </script>
 <script>
 	var user ="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}";
 	sessionStorage.setItem("user", user);
 </script>
 <script>
-$(document).ready(function(){
-	if(sessionStorage.getItem("user") != ""){
-		$("#nav-login").text("로그아웃");
-		$("#nav-memberjoin").html("<i class='far fa-user'></i>");
-	}
-});
+
 </script>
 </body>
 </html>

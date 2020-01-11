@@ -20,6 +20,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet" />
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+
 <title>Insert title here</title>
 <style>
 @font-face { font-family: 'Eoe_Zno_L'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/Eoe_Zno_L.woff') format('woff'); font-weight: normal; font-style: normal; }
@@ -107,7 +108,7 @@ nav, figure, footer, header {
 }
 
 .header .main-navbar ul {
-   font-family: 'Eoe_Zno_L';
+
     margin: 0 2% 0 3%;
     width: 93%;
     display: -webkit-flex;
@@ -122,6 +123,7 @@ nav, figure, footer, header {
     float: left;
 }
 .header .main-navbar li a {
+	font-family: 'Eoe_Zno_L';
     display: inline-block;
     color: #000;
     font-size: 13px;
@@ -184,6 +186,10 @@ nav, figure, footer, header {
    }*/
 }
 
+* {
+	font-family: 'S-CoreDream-2ExtraLight';
+}
+
 </style>
 </head>
 <body>
@@ -237,6 +243,7 @@ nav, figure, footer, header {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <!--javascript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 <script>
 function toggle() {
 	var x = document.getElementById("top-nav-bar");
@@ -249,7 +256,24 @@ function toggle() {
 		x.style.display = "block";
 	}
 }
+$(document).ready(function() {
+	$("#nav-login").click(function() {
+		event.preventDefault();
+		if ($("#nav-login").text() == "로그인") {
+			location.href = "login?log=start";
+		} else {
+			location.href = "logout";
+		}
+	});
+	
+});
 
+$(document).ready(function(){
+	if(sessionStorage.getItem("user") != ""){
+		$("#nav-login").text("로그아웃");
+		$("#nav-memberjoin").html("<i class='far fa-user'></i>");
+	}
+});
 </script>
 </body>
 </html>
