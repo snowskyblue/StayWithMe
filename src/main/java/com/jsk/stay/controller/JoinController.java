@@ -57,7 +57,7 @@ public class JoinController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("idCheck")
+	@RequestMapping("/idCheck")
 	public String idCheckPro(HttpServletRequest request) throws Exception {
 		String mb_id = request.getParameter("mb_id");
 		System.out.println("mb_id : " + mb_id);
@@ -68,7 +68,7 @@ public class JoinController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("phoneCheck")
+	@RequestMapping("/phoneCheck")
 	public String phoneCheckPro(HttpServletRequest request) throws Exception {
 		String mb_phone = request.getParameter("mb_phone");
 		System.out.println("mb_phone2 : " + mb_phone);

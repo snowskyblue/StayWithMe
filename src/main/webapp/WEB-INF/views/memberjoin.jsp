@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <!--font-awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<!-- iCheck(라디오버튼)-->
+<!-- iCheck(라디오버튼) -->
 <link rel="stylesheet" href="icheck-1.x/skins/flat/flat.css">
 
 <title>Insert title here</title>
@@ -136,7 +136,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <!--javascript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<!--  iCheck(라디오 버튼)  -->
+<!-- iCheck(라디오 버튼) -->
 <script src="icheck-1.x/icheck.min.js"></script>
 <script>
 
@@ -197,6 +197,11 @@ $(document).ready(function() {
 		sms();	
 	});
 	
+	$("#mb_sex1").select(function() {
+		$("#sex_check").text("");
+	});
+	
+
 	//문자 인증
 	
 	$("#certificate").on("click", function() {
@@ -294,22 +299,22 @@ function idCheck() {
 				if(data == 1) {
 					$("#id_check").text("중복된 아이디 입니다.");
 					$("#id_check").css("color", "red");
-					$("#submitBtn").attr("type", "button");
+					//$("#submitBtn").attr("type", "button");
 					result = data;
 					
 				} else if(data == 0) {
 					$("#id_check").text("사용가능한 아이디 입니다.");
 					$("#id_check").css("color", "blue");
-					$("#submitBtn").attr("type", "submit");
+					//$("#submitBtn").attr("type", "submit");
 					result = data;
 				}
 			}
 		});
 		
-		/*if(result == 1)
+		if(result == 1)
 			return false;
 		else
-			return true;*/
+			return true;
 	}
 }
 
@@ -451,23 +456,23 @@ function phoneCheck() {
 				if(data == 1) {
 					$("#phone_check").text("이미 등록된 전화번호 입니다.");
 					$("#phone_check").css("color", "red");
-					$("#submitBtn").attr("type", "button");
+					//$("#submitBtn").attr("type", "button");
 					result = data;
 					
 				} else if(data == 0) {
 					$("#phone_check").text("인증번호를 발송했습니다.");
 					$("#phone_check").css("color", "blue");
-					$("#submitBtn").attr("type", "submit");
+					//$("#submitBtn").attr("type", "submit");
 					result = data;
 				}
 				return result;
 			}
 		});
 		
-		/*if(result == 1)
+		if(result == 1)
 			return false;
 		else
-			return true;*/
+			return true;
 	}
 }
 
