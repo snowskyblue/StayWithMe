@@ -28,44 +28,69 @@
 	padding-top: 150px;
 }
 
+.form-group label, .container h3 {
+	font-family: 'S-CoreDream-2ExtraLight';
+	font-weight: bold;
+}
+
 #border {
 	border: 3px solid #000000;
 	/*border-collapse: collapse;*/
 }
 
+.mx-auto {
+	width: 450px;
+}
+
+.mx-auto h2 {
+	background-color: #343a40;
+	color: white;
+	padding: 5px;
+}
+
 .mx-auto .form {
 	margin-top: 100px;
 	margin-bottom: 200px;
-
+	/*border: 1px solid gray;
+	padding: 30px;*/
 }
 
 .mx-auto .form .form-group {
 	margin-top: 50px;
 }
 
-.mx-auto .form .form-group .form-control {
+.mx-auto .form .form-group .form-control, .form-control-inline {
 	border: none;
 	border-radius: 0;
 	border-bottom: 2px solid grey;
 	margin: 0px;
 }
 
-.form-group label, .container h3 {
-	font-family: 'S-CoreDream-2ExtraLight';
-	font-weight: bold;
-}
 
+@media screen and (max-width: 576px) {
+	.mx-auto {
+		width: 300px;
+	}
+	
+	.mx-auto h2 {
+		font-size: 20px;
+	}
+}
 </style>
 </head>
 <body>
-<jsp:include page="common/header.jsp" flush="true"/>
+<jsp:include page="common/header.jsp" flush="false"/>
 
 <div class="container" id="join-header">
-	<h3>회원가입</h3>
-	<div id="border"></div>
+
+		<h3>회원가입</h3>
+		<div id="border"></div>
+
 	
-	<div class="col-md-6 mx-auto">
+	<div class="mx-auto">
+
 		<form action="memberjoinpro" method="post" class="form" id="joinForm" name="member">
+			<h2 class="text-center">회원정보를 입력해 주세요.</h2>
 			<div class="form-group">
 				<label for="id">아이디</label>
 				<input type="text" class="form-control" id="mb_id" name="mb_id" maxlength="20" placeholder="ID">
@@ -111,13 +136,13 @@
 			
 			<div class="form-group">
 				<label for="mb_phone">휴대폰 번호("-"없이 번호만 입력해주세요)</label><br/>
-				<input type="tel" class="form-control" id="mb_phone" name="mb_phone" placeholder="Phone Number" style="width:88%; display:inline;">
-				<button type="button" id="certificate" class="btn btn-dark">인증</button>
+					<input type="tel" class="form-control-inline col-9 col-sm-10" id="mb_phone" name="mb_phone" placeholder="Phone Number">
+					<button type="button" id="certificate" class="btn btn-dark">인증</button>
 				<div class="check_font" id="phone_check"></div>
 			</div>
 			
 			<div class="form-group">
-				<input type="text" class="form-control" id="mb_sms" name="mb_sms" maxlength="6" placeholder="인증 번호 입력" style="width:88%; display:inline;">
+				<input type="text" class="form-control-inline col-9 col-sm-10" id="mb_sms" name="mb_sms" maxlength="6" placeholder="인증 번호 입력">
 				<button type="button" id="checkCertificate" class="btn btn-dark">확인</button>
 				<div class="check_font" id="phone_check2"></div>
 			</div>
@@ -128,7 +153,7 @@
 		</form>
 	</div>
 </div>
-<jsp:include page="common/footer.jsp" flush="true"/>
+<jsp:include page="common/footer.jsp" flush="false"/>
 
 <!--jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -193,17 +218,13 @@ $(document).ready(function() {
 		phoneCheck();
 	});
 	
+	//문자인증 입력여부 검사
 	$("#checkCertificate").click(function() {
 		sms();	
 	});
-	
-	$("#mb_sex1").select(function() {
-		$("#sex_check").text("");
-	});
-	
+		
 
 	//문자 인증
-	
 	$("#certificate").on("click", function() {
 		if($("#mb_phone").val()!="" && phoneJ.test($("#mb_phone").val()) == true && result == 0) {
 			$.ajax({
@@ -251,16 +272,14 @@ $(document).ready(function() {
 		phone();
 		sms();
 		
-		console.log(sexC);
-		
-		if(idC ==false || pwdC == false || pwd2C == false || nameC == false || birthC == false || sexC == false || emailC == false || phoneC == false || smsC == false)
+		if(idC == false || pwdC == false || pwd2C == false || nameC == false || birthC == false || sexC == false || emailC == false || phoneC == false || smsC == false)
 			return false;
 		else
 			return true;
+		
 	});
-	
-	
 });
+
 
 //아이디 유효성
 function id() {
@@ -398,7 +417,7 @@ function sex() {
 		$("#sex_check").css("color", "red");
 		sexC = false;
 	}
-	else if(($("#mb_sex1").is(":checked")) || ($("#mb_sex2").is(":checked"))) {
+	else {
 		$("#sex_check").text("");
 
 		sexC = true;

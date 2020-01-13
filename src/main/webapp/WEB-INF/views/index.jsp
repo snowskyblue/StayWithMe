@@ -140,7 +140,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 	.main1 {
 		margin-top: 200px;
 	}
-	.carousel-caption p {
+	.carousel-item .carousel-caption p {
 		font-size: 25px;
 		width: 400px;
 	}
@@ -164,7 +164,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 </style>
 </head>
 <body>
-<jsp:include page="common/header.jsp" flush="true"/>
+<jsp:include page="common/header.jsp" flush="false"/>
 <div class="main">
 	<!-- Carousel -->
 	<div class="container-fluid carousel">
@@ -388,7 +388,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 		</div>
 	</div>
 </div>
-<jsp:include page="common/footer.jsp" flush="true"/>
+<jsp:include page="common/footer.jsp" flush="false"/>
 
 <!--jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
