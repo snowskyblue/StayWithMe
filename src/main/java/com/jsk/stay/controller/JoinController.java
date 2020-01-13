@@ -45,7 +45,7 @@ public class JoinController {
 	public String memberJoinPro(MemberDto dto) throws Exception {
  		System.out.println("joinController");
  		joinCommand.memberJoinProcess(dto);
-		return "login";
+		return "login?log=start";
 	}
 
 	@ResponseBody //return값을 넘겨주기 위함   
