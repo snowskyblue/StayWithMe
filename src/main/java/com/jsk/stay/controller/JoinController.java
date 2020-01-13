@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,6 +33,9 @@ public class JoinController {
 	@Autowired
 	JoinCommand joinCommand;
 	
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
+	
 	@RequestMapping("/memberjoin")
 	public String memberjoin() {
 		return "memberjoin";
@@ -39,8 +43,9 @@ public class JoinController {
 	
 	@RequestMapping("/memberjoinpro")
 	public String memberJoinPro(MemberDto dto) throws Exception {
+ 		System.out.println("joinController");
  		joinCommand.memberJoinProcess(dto);
-		return "memberJoinComplete";
+		return "login";
 	}
 
 	@ResponseBody //return값을 넘겨주기 위함   

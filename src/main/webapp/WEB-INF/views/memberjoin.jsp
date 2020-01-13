@@ -11,8 +11,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- csrf정보  -->
-<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+
 <!--bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <!--font-awesome -->
@@ -20,7 +19,7 @@
 <!-- iCheck(라디오버튼) -->
 <link rel="stylesheet" href="icheck-1.x/skins/flat/flat.css">
 
-<title>Insert title here</title>
+<title>회원가입</title>
 <style>
 @font-face { font-family: 'Eoe_Zno_L'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/Eoe_Zno_L.woff') format('woff'); font-weight: normal; font-style: normal; }
 @font-face { font-family: 'S-CoreDream-2ExtraLight'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-2ExtraLight.woff') format('woff'); font-weight: normal; font-style: normal; }
@@ -93,6 +92,7 @@
 
 		<form action="memberjoinpro" method="post" class="form" id="joinForm" name="member">
 			<h2 class="text-center">회원정보를 입력해 주세요.</h2>
+ 
 			<div class="form-group">
 				<label for="id">아이디</label>
 				<input type="text" class="form-control" id="mb_id" name="mb_id" maxlength="20" placeholder="ID">

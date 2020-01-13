@@ -1,6 +1,7 @@
 package com.jsk.stay.command;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.jsk.stay.dao.JoinDao;
@@ -13,9 +14,18 @@ public class JoinCommandImp implements JoinCommand {
 	@Autowired
 	private JoinDao joinDao;
 	
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
+	
 	@Override
 	public void memberJoinProcess(MemberDto dto) throws Exception {
+		String mb_pwd1 = dto.getMb_pwd();
+		System.out.println("origin: " + mb_pwd1);
+		String mb_pwd = passwordEncoder.encode(mb_pwd1);
+		System.out.println("Encoder: " + mb_pwd);
+		dto.setMb_pwd(mb_pwd);
 		joinDao.memberJoinMethod(dto);
+
 	}
 	
 	@Override
