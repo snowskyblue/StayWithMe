@@ -92,7 +92,7 @@
 
 		<form action="memberjoinpro" method="post" class="form" id="joinForm" name="member">
 			<h2 class="text-center">회원정보를 입력해 주세요.</h2>
- 
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			<div class="form-group">
 				<label for="id">아이디</label>
 				<input type="text" class="form-control" id="mb_id" name="mb_id" maxlength="20" placeholder="ID">
