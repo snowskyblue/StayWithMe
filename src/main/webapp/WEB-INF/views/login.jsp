@@ -34,8 +34,11 @@ label, #form .btn {
 #form .form-control {
 	border: none;
 	border-radius: 0;
-	border-bottom: 1px solid grey;
+	border-bottom: 2px solid grey;
 	margin: 0px;
+}
+#form {
+	width: 400px;
 }
 
 #login, #singup {
@@ -50,31 +53,38 @@ label, #form .btn {
 .main1 {
 	margin-top: 200px;
 }
+@media screen and (max-width: 576px) {
+	#form {
+		width: 300px;
+		font-size: 20px;
+	}
+}
+
 </style>
 </head>
 <body>
-<jsp:include page="common/header.jsp" flush="true"/>
+<jsp:include page="common/header.jsp" flush="false"/>
 
 <div class="main">
 	<div class="d-flex flex-wrap align-content-center justify-content-center" style="min-height: 500px;">
-		<form method="POST" action="login" style="width: 20%; min-width: 250px;" id="form">
+		<form method="POST" action="login" id="form">
 			<!-- frontController로 안감 -->
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
 			<label style="font-size: 15px;">아이디</label> 
-			<input type="text" class="form-control" name="mb_id"> <br />
+			<input type="text" class="form-control" name="mb_id" placeholder="ID"> <br />
 			<label style="font-size: 15px;">비밀번호 </label> 
-			<input type="password" class="form-control" name="mb_pwd">
+			<input type="password" class="form-control" name="mb_pwd" placeholder="PASSWORD">
 			<div class="d-flex justify-content-between">
 				<a href="#" style="font-size: 10px; color: red;">아이디/비밀번호 찾기</a>
 			</div>
 			<br/> 
-			<input class="btn w-100" style="margin-bottom: 10px" type="submit" value="로 그 인" id="login" /> <br /> 
-			<input class="btn w-100" type="button" value="회원가입" id="singup" />
+			<input class="btn btn-dark w-100 form-control" style="margin-bottom: 10px; border : none;" type="submit" value="로 그 인" id="login"/> <br /> 
+			<input class="btn btn-dark w-100 form-control" type="button" value="회원가입" id="signin" style = "border : none;"/>
 		</form>
 	</div>
 </div>
 
-<jsp:include page="common/footer.jsp" flush="true"/>
+<jsp:include page="common/footer.jsp" flush="false"/>
 <!--jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!--popper -->
@@ -129,6 +139,12 @@ $(document).ready(function() {
 	});
 });
 </script>
-
+<script>
+$(document).ready(function(){
+	$("#signin").click(function(){
+		location.href = "memberjoin";
+	});
+});
+</script>
 </body>
 </html>
