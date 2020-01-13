@@ -21,6 +21,8 @@
 <!-- multi date picker 추가 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.min.css">
+<!-- iCheck(라디오버튼) -->
+<link rel="stylesheet" href="icheck-1.x/skins/flat/flat.css">
 
 <title>Insert title here</title>
 <style>
@@ -113,7 +115,8 @@
     margin-bottom: 25px;
    }
 }
-body {
+
+.form-group label, .container h3 {
 	font-family: 'S-CoreDream-2ExtraLight';
 	font-weight: bold;
 }
@@ -121,7 +124,7 @@ body {
 </style>
 </head>
 <body>
-<jsp:include page="common/header.jsp" flush="true"/>
+<jsp:include page="common/header.jsp" flush="false"/>
 
 <div style="height:150px;"></div>
 <div class="container" style = "min-height : 500px;">
@@ -130,9 +133,9 @@ body {
 	<div class="row d-flex justify-content-center pt-5" style="max-width:1200px;">
 		<div class="col-10 col-sm-10 mt-5 mb-3"> <!-- mt 숙소등록을 시작합니다 - 숙소유형을 선택해주세요 사이 -->
 			<form method="POST" action ="write" enctype="multipart/form-data">
-				<div class="form-group d-flex justify-content-between">
-					<label class="text-muted mb-3" for="acm_type">숙소 유형을 선택해 주세요</label>
-					<div>
+				<div class="row">
+				
+					<div class="col-sm-3">
 						<!-- 111111111111111  name="acm_type"    1111111111111111111111111 -->
 						<select class="form-control" name="acm_type" id="acm_type" >
 							<option selected value="apt">아파트</option>
@@ -144,28 +147,32 @@ body {
 							<option value="temple">템플스테이</option>
 				 		</select>
 			 		</div>
-				</div>
-				<hr/>
+				
 				
 				<!-- 222222222222222222  name=acm_room_type 2222222222222222222222222-->
-				<div>
-					<div class="text-muted mb-3" >게스트가 묵을 공간의 종류를 선택해 주세요</div>
+				<div class="room_type col-sm-9">
 					<div>
-						<div class="mb-3 custom-control custom-radio">
-							<input type="radio" class="custom-control-input" id="acm_room_type1" name="acm_room_type" value="wholeH" checked>집 전체<br/>
-							<label class="text-muted custom-control-label" for="acm_room_type1">게스트가 숙소 전체를 다른 사람과 공유하지 않고 단독으로 이용합니다. 일반적으로 침실, 욕실, 부엌이 포함됩니다.</label>
+						<div class="mb-3">
+							<input type="radio" id="acm_room_type1" name="acm_room_type" value="wholeH" checked> 집 전체<br/>
+							<div style="margin-left:20px;">
+								<label  for="acm_room_type1">게스트가 숙소 전체를 다른 사람과 공유하지 않고 단독으로 이용합니다. 일반적으로 침실, 욕실, 부엌이 포함됩니다.</label>
+							</div>
 						</div>
-						<div class="mb-3 custom-control custom-radio">
-							<input type="radio" class="custom-control-input" id="acm_room_type2"  name="acm_room_type" value="exclusiveR">개인실<br/>
-							<label class="text-muted custom-control-label" for="acm_room_type2">게스트에게 개인 침실이 제공됩니다. 침실 이외의 공간은 공용일 수 있습니다.</label>
+						<div class="mb-3">
+							<input type="radio" id="acm_room_type2"  name="acm_room_type" value="exclusiveR">개인실<br/>
+							<div style="margin-left:20px;">
+								<label  for="acm_room_type2">게스트에게 개인 침실이 제공됩니다. 침실 이외의 공간은 공용일 수 있습니다.</label>
+							</div>
 						</div>
-						<div class="mb-3 custom-control custom-radio">
-							<input type="radio" class="custom-control-input" id="acm_room_type3"   name="acm_room_type" value="shareR">다인실<br/>
-							<label class="text-muted custom-control-label" for="acm_room_type3">게스트는 개인 공간 없이, 다른 사람과 함께 쓰는 침실이나 공용 공간에서 숙박합니다.</label>
+						<div class="mb-3">
+							<input type="radio" id="acm_room_type3"   name="acm_room_type" value="shareR">다인실<br/>
+							<div style="margin-left:20px;">
+								<label  for="acm_room_type3">게스트는 개인 공간 없이, 다른 사람과 함께 쓰는 침실이나 공용 공간에서 숙박합니다.</label>
+							</div>
 						</div>
 					</div>
 				</div>
-				<hr/>
+				</div>
 				
 				<!-- 3333333333333333333333 name="bed" name="floor"  33333333333333333333333 -->
 				
@@ -186,52 +193,52 @@ body {
 					    </div>
 					</div>
 				</div>
-			    <hr/>
+			    
 			    
 			    <!-- 세컨드 -->
 			    <!-- ********************** name="acm_guest_num" ********************* -->
 				<div class="row">
-					<div class="text-muted col-sm-8">최대 숙박 가능 인원은 몇 명인가요?</div>
+					<div class="col-sm-8">최대 숙박 가능 인원은 몇 명인가요?</div>
 					<div class="col-sm-4">
 						<input type="number" id="acm_guest_num" name="acm_guest_num" value="1" min="1" max="500" step="1"/>
 					</div>
 				</div>
-				<hr/>
+				
 				
 				<!-- *************************** name="acm_room_num"  ****************-->
 				<div class="row">
-					<div class="text-muted col-sm-8">게스트가 사용할 방의 개수는 몇 개인가요?</div>
+					<div class="col-sm-8">게스트가 사용할 방의 개수는 몇 개인가요?</div>
 					<div class="col-sm-4">
 						<input type="number" id="acm_room_num" name="acm_room_num" value="1" min="1" max="100" step="1"/>
 					</div>
 				</div>
-				<hr/>
+				
 				
 				<!-- **************************  name= "acm_bath_num" ************* -->
 				<div class="row">
-					<div class="text-muted col-sm-8">게스트가 사용할 수 있는 화장실은 몇 개인가요?</div>
+					<div class="col-sm-8">게스트가 사용할 수 있는 화장실은 몇 개인가요?</div>
 					<div class="col-sm-4">
 						<input type="number" id="acm_bath_num" name= "acm_bath_num" value="1" min="1" max="100" step="1"/>
 					</div>
 				</div>
-				<hr/>
+				
 				
 				<!-- ****************************** name="acm_area" **************-->
 				<div class="row">
-					<div class="text-muted col-sm-8">게스트가 사용할 전체 공간의 대략적인 평수를 입력해주세요 (단위 : m²) </div>
+					<div class="col-sm-8">게스트가 사용할 전체 공간의 대략적인 평수를 입력해주세요 (단위 : m²) </div>
 					<div class=" col-sm-4">
 						<input type="number" id="acm_area" name= "acm_area" value="1" min="1" max="100" step="1"/>
 						<!-- <input type="number" name="acm_area" value="4.5" data-decimals="1" min="0" max="9" step="0.1" /><!-- data-suffix="m²" --> 
 						
 					</div>
 				</div>
-				<hr/>
+				
 				
 				<!-- 3번째 -->
 				<div class="mb-5" id="acm_address"> <!-- form안에서 이전,다음버튼과 컨텐츠과의 거리 -->
 					<div class="row d-flex justify-content-start">
 						<div class="col-sm-3">
-							<input class="form-control" type="text" name="postcode"  id="postcode" placeholder="우편번호">
+							<input class="form-control" type="text" name="postcode"  id="postcode" placeholder="우편번호" value="00000">
 						</div>
 					</div>
 					<div class="row d-flex justify-content-between">
@@ -314,17 +321,17 @@ body {
 				
 				<!-- *****************   name="acm_charge" --------------- -->
 				<div class="row">
-					<div class="text-muted col-sm-8">설정하고 싶은 하루 숙박료를 입력해주세요 (단위 : 원)</div>
+					<div class="col-sm-8">설정하고 싶은 하루 숙박료를 입력해주세요 (단위 : 원)</div>
 					<div class="col-sm-4">
 						<input type="number" name="acm_charge" value="50000" min="1000" max="5000000" step="1000"/>
 					</div>
 				</div>
-				<hr/>
+				
 				
 				<!-- ***************** acm_availdate ***********-->
 				<div class="input-group date form-group d-flex justify-content-between" id="datepicker">
 					<div>
-						<label class="mb-3	text-muted" for="acm_availdate">예약 가능한 날짜를 선택해주세요</label>
+						<label class="mb-3" for="acm_availdate">예약 가능한 날짜를 선택해주세요</label>
 					</div>
 					<div>
 				    	<input type="hidden" id="acm_availdate" name="acm_availdate" placeholder="Select days" required />
@@ -336,7 +343,7 @@ body {
 				<!-- 4번째 -->
 				<!-- ***********  name="acm_title" *************** -->
 				<div class="row form-group">
-					<label class="text-muted mb-3 col-sm-2" for="acm_title">이름 지정</label>
+					<label class="mb-3 col-sm-2" for="acm_title">이름 지정</label>
 					<div class="col-sm-10">
 						<input class="form-control" id="acm_title" name="acm_title" placeholder="숙소의 특징과 장점을 강조하는 제목을 정해 게스트의 관심을 끌어보세요." type="text" value="">
 					</div>
@@ -344,14 +351,14 @@ body {
 				
 				<!-- ************ name="acm_info"***************** -->
 				<div class="row form-group">
-					<label class="text-muted mb-3 col-sm-2" for="acm_info">숙소 소개</label>
+					<label class="mb-3 col-sm-2" for="acm_info">숙소 소개</label>
 					<div class="col-sm-10">
 						<textarea class="form-control" rows="10" name="acm_info" placeholder="숙소에 대해 간략히 설명해주세요. 숙소와 주변 지역에 대한 정보에서 시작해 게스트와 어떻게 소통하고 싶은지 등의 내용을 적어주세요."></textarea>
 					</div>
 				</div>
 				
 				<div class="row form-group">
-					<label class="text-muted mb-3 col-sm-2" for="acm_img">숙소 사진</label>
+					<label class="mb-3 col-sm-2" for="acm_img">숙소 사진</label>
 					<div class="col-sm-10">
 						<input id="acm_img" type="file" name="acm_img" multiple />
 					</div>
@@ -369,252 +376,140 @@ body {
 				 -->
 				
 				<!-- 편의시설 amenity -->
-				<div>
-					<div class="d-inline">
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="wifi1" value="F"  name="ame_wifi"  checked>
-							<label class="custom-control-label" for="wifi1"></label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="wifi2" value="T"  name="ame_wifi">
-							<label class="custom-control-label" for="wifi2"></label>
-						</div>
+				<div class="amenity">
+					<div class="form-check-inline">
+				    	<label class="form-check-label" for="wifi2">
+				    		<input type="hidden" value="0" id="wifi1" name="ame_wifi" />
+							<input type="checkbox" class="form-check-input" id="wifi2">무선인터넷
+							<span class="checkmark"></span>
+						</label>
 					</div>
-					<div class="d-inline">무선인터넷</div>
-				</div>
-				<div>
-					<div class="d-inline">
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="tv1" value="F"  name="ame_tv" checked>
-							<label class="custom-control-label" for="tv1"></label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="tv2" value="T"   name="ame_tv">
-							<label class="custom-control-label" for="tv2"></label>
-						</div>
+					<div class="form-check-inline">
+				    	<label class="form-check-label" for="tv2">
+				    		<input type="hidden" value="0" id="tv1" name="ame_tv" />
+							<input type="checkbox" class="form-check-input" id="tv2">TV
+							<span class="checkmark"></span>
+						</label>
 					</div>
-					<div class="d-inline">TV</div>
-				</div>
-				<div>
-					<div class="d-inline">
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="kitchen1" value="F"  name="ame_kitchen" checked>
-							<label class="custom-control-label" for="kitchen1"></label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="kitchen2" value="T"   name="ame_kitchen">
-							<label class="custom-control-label" for="kitchen2"></label>
-						</div>
+					<div class="form-check-inline">
+				    	<label class="form-check-label" for="kitchen2">
+				    		<input type="hidden" value="0" id="kitchen1" name="ame_kitchen" />
+							<input type="checkbox" class="form-check-input" id="kitchen2">주방
+							<span class="checkmark"></span>
+						</label>
 					</div>
-					<div class="d-inline">주방</div>
-				</div>
-				<div>
-					<div class="d-inline">
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="aircon1" value="F"  name="ame_aircon" checked>
-							<label class="custom-control-label" for="aircon1"></label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="aircon2"  value="T"  name="ame_aircon">
-							<label class="custom-control-label" for="aircon2"></label>
-						</div>
+					<div class="form-check-inline">
+				    	<label class="form-check-label" for="aircon2">
+				    		<input type="hidden" value="0" id="aircon1" name="ame_aircon" />
+							<input type="checkbox" class="form-check-input" id="aircon2">에어컨
+							<span class="checkmark"></span>
+						</label>
 					</div>
-					<div class="d-inline">에어컨</div>
-				</div>
-				<div>
-					<div class="d-inline">
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="lock1" value="F"  name="ame_room_lock" checked>
-							<label class="custom-control-label" for="lock1"></label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="lock2" value="T"   name="ame_room_lock">
-							<label class="custom-control-label" for="lock2"></label>
-						</div>
+					<div class="form-check-inline">
+				    	<label class="form-check-label" for="lock2">
+				    		<input type="hidden" value="0" id="lock1" name="ame_room_lock" />
+							<input type="checkbox" class="form-check-input" id="lock2">방 잠금장치
+							<span class="checkmark"></span>
+						</label>
 					</div>
-					<div class="d-inline">방 잠금장치</div>
-				</div>
-				<div>
-					<div class="d-inline">
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="towel1" value="F"  name="ame_towel" checked>
-							<label class="custom-control-label" for="towel1"></label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="towel2"  value="T"  name="ame_towel">
-							<label class="custom-control-label" for="towel2"></label>
-						</div>
+					<div class="form-check-inline">
+				    	<label class="form-check-label" for="towel2">
+				    		<input type="hidden" value="0" id="towel1" name="ame_towel" />
+							<input type="checkbox" class="form-check-input" id="towel2">수건
+							<span class="checkmark"></span>
+						</label>
 					</div>
-					<div class="d-inline">수건</div>
-				</div>
-				<div>
-					<div class="d-inline">
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="washer1" value="F"  name="ame_washer" checked>
-							<label class="custom-control-label" for="washer1"></label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="washer2" value="T"   name="ame_washer">
-							<label class="custom-control-label" for="washer2"></label>
-						</div>
+					<div class="form-check-inline">
+				    	<label class="form-check-label" for="washer2">
+				    		<input type="hidden" value="0" id="washer1" name="ame_washer" />
+							<input type="checkbox" class="form-check-input" id="washer2">세탁기
+							<span class="checkmark"></span>
+						</label>
 					</div>
-					<div class="d-inline">세탁기</div>
-				</div>
-				<div>
-					<div class="d-inline">
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="dryer1" value="F"  name="ame_dryer" checked>
-							<label class="custom-control-label" for="dryer1"></label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="dryer2" value="T"   name="ame_dryer">
-							<label class="custom-control-label" for="dryer2"></label>
-						</div>
+					<div class="form-check-inline">
+				    	<label class="form-check-label" for="dryer2">
+				    		<input type="hidden" value="0" id="dryer1" name="ame_dryer" />
+							<input type="checkbox" class="form-check-input" id="dryer2">건조기
+							<span class="checkmark"></span>
+						</label>
 					</div>
-					<div class="d-inline">건조기</div>
-				</div>
-				<div>
-					<div class="d-inline">
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="shower1" value="F"  name="ame_shower" checked>
-							<label class="custom-control-label" for="shower1"></label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="shower2"  value="T"  name="ame_shower">
-							<label class="custom-control-label" for="shower2"></label>
-						</div>
+					<div class="form-check-inline">
+				    	<label class="form-check-label" for="shower2">
+				    		<input type="hidden" value="0" id="shower1" name="ame_shower" />
+							<input type="checkbox" class="form-check-input" id="shower2">샤워시설
+							<span class="checkmark"></span>
+						</label>
 					</div>
-					<div class="d-inline">샤워시설</div>
-				</div>
-				<div>
-					<div class="d-inline">
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="hair_dryer1" value="F"  name="ame_hair_dryer" checked>
-							<label class="custom-control-label" for="hair_dryer1"></label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="hair_dryer2"  value="T"  name="ame_hair_dryer">
-							<label class="custom-control-label" for="hair_dryer2"></label>
-						</div>
+					<div class="form-check-inline">
+				    	<label class="form-check-label" for="hair_dryer2">
+				    		<input type="hidden" value="0" id="hair_dryer1" name="ame_hair_dryer" />
+							<input type="checkbox" class="form-check-input" id="hair_dryer2">헤어드라이기
+							<span class="checkmark"></span>
+						</label>
 					</div>
-					<div class="d-inline">헤어드라이기</div>
-				</div>
-				<div>
-					<div class="d-inline">
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="fan1" value="F"  name="ame_fan" checked>
-							<label class="custom-control-label" for="fan1"></label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="fan2"  value="T"  name="ame_fan">
-							<label class="custom-control-label" for="fan2"></label>
-						</div>
+					<div class="form-check-inline">
+				    	<label class="form-check-label" for="fan2">
+				    		<input type="hidden" value="0" id="fan1" name="ame_fan" />
+							<input type="checkbox" class="form-check-input" id="fan2">선풍기
+							<span class="checkmark"></span>
+						</label>
 					</div>
-					<div class="d-inline">선풍기</div>
-				</div>
-				<div>
-					<div class="d-inline">
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="extinguisher1" value="F"  name="ame_extinguisher" checked>
-							<label class="custom-control-label" for="extinguisher1"></label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="extinguisher2"  value="T"  name="ame_extinguisher">
-							<label class="custom-control-label" for="extinguisher2"></label>
-						</div>
+					<div class="form-check-inline">
+				    	<label class="form-check-label" for="extinguisher2">
+				    		<input type="hidden" value="0" id="extinguisher1" name="ame_extinguisher" />
+							<input type="checkbox" class="form-check-input" id="extinguisher2">소화기
+							<span class="checkmark"></span>
+						</label>
 					</div>
-					<div class="d-inline">소화기</div>
-				</div>
-				<div>
-					<div class="d-inline">
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="balcony1" value="F"  name="ame_balcony" checked>
-							<label class="custom-control-label" for="balcony1"></label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="balcony2"  value="T"  name="ame_balcony">
-							<label class="custom-control-label" for="balcony2"></label>
-						</div>
+					<div class="form-check-inline">
+				    	<label class="form-check-label" for="balcony2">
+				    		<input type="hidden" value="0" id="balcony1" name="ame_balcony" />
+							<input type="checkbox" class="form-check-input" id="balcony2">발코니
+							<span class="checkmark"></span>
+						</label>
 					</div>
-					<div class="d-inline">발코니</div>
-				</div>
-				<div>
-					<div class="d-inline">
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="garden1" value="F"  name="ame_garden" checked>
-							<label class="custom-control-label" for="garden1"></label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="garden2"  value="T"  name="ame_garden">
-							<label class="custom-control-label" for="garden2"></label>
-						</div>
+					<div class="form-check-inline">
+				    	<label class="form-check-label" for="garden2">
+				    		<input type="hidden" value="0" id="garden1" name="ame_garden" />
+							<input type="checkbox" class="form-check-input" id="garden2">마당
+							<span class="checkmark"></span>
+						</label>
 					</div>
-					<div class="d-inline">마당</div>
-				</div>
-				<div>
-					<div class="d-inline">
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="heater1" value="F"  name="ame_heater" checked>
-							<label class="custom-control-label" for="heater1"></label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="heater2"  value="T"  name="ame_heater">
-							<label class="custom-control-label" for="heater2"></label>
-						</div>
+					<div class="form-check-inline">
+				    	<label class="form-check-label" for="heater2">
+				    		<input type="hidden" value="0" id="heater1" name="ame_heater" />
+							<input type="checkbox" class="form-check-input" id="heater2">난방기구
+							<span class="checkmark"></span>
+						</label>
 					</div>
-					<div class="d-inline">난방기구</div>
-				</div>
-				<div>
-					<div class="d-inline">
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="infodesk1" value="F"  name="ame_infodesk" checked>
-							<label class="custom-control-label" for="infodesk1"></label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="infodesk2"  value="T"  name="ame_infodesk">
-							<label class="custom-control-label" for="infodesk2"></label>
-						</div>
+					<div class="form-check-inline">
+				    	<label class="form-check-label" for="infodesk2">
+				    		<input type="hidden" value="0" id="infodesk1" name="ame_infodesk" />
+							<input type="checkbox" class="form-check-input" id="infodesk2">인포메이션 데스크
+							<span class="checkmark"></span>
+						</label>
 					</div>
-					<div class="d-inline">인포메이션 데스크</div>
-				</div>
-				<div>
-					<div class="d-inline">
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="breakfast1" value="F"  name="ame_breakfast" checked>
-							<label class="custom-control-label" for="breakfast1"></label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="breakfast2"  value="T"  name="ame_breakfast">
-							<label class="custom-control-label" for="breakfast2"></label>
-						</div>
+					<div class="form-check-inline">
+				    	<label class="form-check-label" for="breakfast2">
+				    		<input type="hidden" value="0" id="breakfast1" name="ame_breakfast" />
+							<input type="checkbox" class="form-check-input" id="breakfast2">아침식사 제공
+							<span class="checkmark"></span>
+						</label>
 					</div>
-					<div class="d-inline">아침</div>
-				</div>
-				<div>
-					<div class="d-inline">
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="bbq1" value="F"  name="ame_bbq" checked>
-							<label class="custom-control-label" for="bbq1"></label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="bbq2"  value="T"  name="ame_bbq">
-							<label class="custom-control-label" for="bbq2"></label>
-						</div>
+					<div class="form-check-inline">
+				    	<label class="form-check-label" for="bbq2">
+				    		<input type="hidden" value="0" id="bbq1" name="ame_bbq" />
+							<input type="checkbox" class="form-check-input" id="bbq2">BBQ 시설
+							<span class="checkmark"></span>
+						</label>
 					</div>
-					<div class="d-inline">BBQ 시설</div>
-				</div>
-				<div>
-					<div class="d-inline">
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="park1" value="F" name="ame_park" checked>
-							<label class="custom-control-label" for="park1"></label>
-						</div>
-						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" class="custom-control-input" id="park2"  value="T"  name="ame_park">
-							<label class="custom-control-label" for="park2"></label>
-						</div>
+					<div class="form-check-inline">
+				    	<label class="form-check-label" for="park2">
+				    		<input type="hidden" value="0" id="park1" name="ame_park" />
+							<input type="checkbox" class="form-check-input" id="park2">주차공간
+							<span class="checkmark"></span>
+						</label>
 					</div>
-					<div class="d-inline">주차</div>
 				</div>
 				
 			    <div class="d-flex justify-content-end">
@@ -625,7 +520,7 @@ body {
 		</div>
 	</div>
 </div>
-<jsp:include page="common/footer.jsp" flush="true"/>
+<jsp:include page="common/footer.jsp" flush="false"/>
 
 <!--jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -638,6 +533,8 @@ body {
 
 
 <script src="js/bootstrap-input-spinner.js"></script>
+<!-- iCheck(라디오 버튼) -->
+<script src="icheck-1.x/icheck.min.js"></script>
 
 <script>
     $("input[type='number']").inputSpinner();
@@ -652,9 +549,31 @@ body {
             language: 'en'
         });
     });
+    
+    /*amenity checkbox to radio*/
+    $('.amenity input[type=checkbox]').on("change",function(){
+        var target = $(this).parent().find('input[type=hidden]').val();
+        if(target == 0)
+        {
+            target = 1;
+        }
+        else
+        {
+            target = 0;
+        }
+        $(this).parent().find('input[type=hidden]').val(target);
+    });
+    
+    /*iCheck(라디오버튼)*/
+    $(".room_type input").iCheck({
+		checkboxClass: "icheckbox_flat",
+		radioClass: "iradio_flat"
+	});
 </script>
 
+<!-- 다음 주소 검색 api -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 <script>
     function daumPostcode() {
         new daum.Postcode({
