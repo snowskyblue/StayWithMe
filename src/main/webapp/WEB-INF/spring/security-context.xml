@@ -74,11 +74,13 @@
  	<beans:bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/>
  	--> 
     
-   <authentication-manager>   		
-	    <authentication-provider user-service-ref="customUserDetailsService"/>	   
-  </authentication-manager>	
+	<authentication-manager>   		
+	    <authentication-provider user-service-ref="customUserDetailsService">
+			<password-encoder ref="passwordEncoder"/> <!-- 패스워드 암호화 -->
+		</authentication-provider>	   
+	</authentication-manager>	
     
     <beans:bean id="customUserDetailsService" class="com.jsk.stay.security.CustomUserDetailsService" />  
-    		
+	<beans:bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>    		
     
 </beans:beans>

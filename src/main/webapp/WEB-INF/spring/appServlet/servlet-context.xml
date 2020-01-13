@@ -73,6 +73,9 @@
 		<beans:property name="transactionManager" ref="transactionManager"></beans:property>
 	</beans:bean>
 	
+	<!-- password 암호화 -->
+	<beans:bean name="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>	
+	
 	<context:component-scan base-package="com.jsk.stay" />
 	
 	
