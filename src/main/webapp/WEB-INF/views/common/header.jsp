@@ -58,8 +58,6 @@ nav, figure, footer, header {
     border-radius: 0;
     display: block;
     padding: 0;
-    margin-left: -15px;
-    margin-right: 15px;
     position: relative;
     min-height: 50px;
 
@@ -271,8 +269,23 @@ $(document).ready(function() {
 $(document).ready(function(){
 	if(sessionStorage.getItem("user") != ""){
 		$("#nav-login").text("로그아웃");
-		$("#nav-memberjoin").html("<i class='far fa-user'></i>");
+		$("#nav-memberjoin").html("<i class='fas fa-user-circle'></i>");
+		$("#nav-memberjoin").css({
+			"font-size" : "20px"
+		});
 	}
+});
+</script>
+<script>
+$(document).ready(function(){
+	$("#nav-memberjoin").click(function(){
+		event.preventDefault();
+		if($("#nav-memberjoin").text() == "회원가입") {
+			location.href = "memberjoin";
+		}else{
+			location.href = "myPageProfile";
+		}
+	});
 });
 </script>
 </body>
