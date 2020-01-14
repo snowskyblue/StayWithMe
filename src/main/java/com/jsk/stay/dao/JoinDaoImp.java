@@ -18,8 +18,10 @@ public class JoinDaoImp implements JoinDao {
 	}
 
 	@Override
-	public void memberJoinMethod(MemberDto dto) throws Exception {
+	public String memberJoinMethod(MemberDto dto) throws Exception {
 		sqlSession.insert("member.join", dto);
+		String success = "success";
+		return success;
 	}
 	
 	@Override

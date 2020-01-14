@@ -25,6 +25,10 @@
 @font-face { font-family: 'S-CoreDream-2ExtraLight'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-2ExtraLight.woff') format('woff'); font-weight: normal; font-style: normal; }
 @font-face { font-family: 'KBIZHanmaumGothic'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KBIZHanmaumGothic.woff') format('woff'); font-weight: normal; font-style: normal; }
 
+.main1 {
+	margin-top: 100px;
+}
+
 #join-header {
 	padding-top: 150px;
 }
@@ -67,7 +71,6 @@
 	margin: 0px;
 }
 
-
 @media screen and (max-width: 576px) {
 	.mx-auto {
 		width: 300px;
@@ -82,77 +85,76 @@
 <body>
 <jsp:include page="common/header.jsp" flush="false"/>
 
-<div class="container" id="join-header">
-
-		<h3>회원가입</h3>
-		<div id="border"></div>
-
-	
-	<div class="mx-auto">
-
-		<form action="memberjoinpro" method="post" class="form" id="joinForm" name="member">
-			<h2 class="text-center">회원정보를 입력해 주세요.</h2>
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-			<div class="form-group">
-				<label for="id">아이디</label>
-				<input type="text" class="form-control" id="mb_id" name="mb_id" maxlength="20" placeholder="ID">
-				<div class="check_font" id="id_check"></div>
-			</div>
+<div class="main">
+	<div class="container" id="join-header">
+			<h3>회원가입</h3>
+			<div id="border"></div>
 			
-			<div class="form-group">
-				<label for="pwd">비밀번호</label>
-				<input type="password" class="form-control" id="mb_pwd" name="mb_pwd" placeholder="PASSWORD" maxlength="20">
-				<div class="check_font" id="pwd_check"></div>
-			</div>
-			
-			<div class="form-group">
-				<label for="pwd2">비밀번호 확인</label>
-				<input type="password" class="form-control" id="mb_pwd2" name="mb_pwd2" placeholder="Confirm Password" maxlength="20">
-				<div class="check_font" id="pwd2_check"></div>
-			</div>
-			
-			<div class="form-group">
-				<label for="mb_name">이름</label>
-				<input type="text" class="form-control" id="mb_name" name="mb_name" placeholder="Name" maxlength="20">
-				<div class="check_font" id="name_check"></div>
-			</div>
-			
-			<div class="form-group">
-				<label for="mb_birthdate">생년월일</label>
-				<input type="tel" class="form-control" id="mb_birthdate" name="mb_birthdate" placeholder="ex)19990101" maxlength="8">
-				<div class="check_font" id="birth_check"></div>
-			</div>
-			
-			<div class="form-group text-center">
-				<label for="mb_sex">성별</label>
-				<input type="radio" id="mb_sex1" name="mb_sex" value="M">남
-				<input type="radio" id="mb_sex2" name="mb_sex" value="F">여
-				<div class="check_font" id="sex_check"></div>
-			</div>
-			
-			<div class="form-group">
-				<label for="mb_email">이메일 주소</label>
-				<input type="text" class="form-control" id="mb_email" name="mb_email" placeholder="E-mail" maxlength="50">
-				<div class="check_font" id="email_check"></div>
-			</div>
-			
-			<div class="form-group">
-				<label for="mb_phone">휴대폰 번호("-"없이 번호만 입력해주세요)</label><br/>
-					<input type="tel" class="form-control-inline col-9 col-sm-10" id="mb_phone" name="mb_phone" placeholder="Phone Number">
-					<button type="button" id="certificate" class="btn btn-dark">인증</button>
-				<div class="check_font" id="phone_check"></div>
-			</div>
-			
-			<div class="form-group">
-				<input type="text" class="form-control-inline col-9 col-sm-10" id="mb_sms" name="mb_sms" maxlength="6" placeholder="인증 번호 입력">
-				<button type="button" id="checkCertificate" class="btn btn-dark">확인</button>
-				<div class="check_font" id="phone_check2"></div>
-			</div>
-			
-			<div class="form-group text-center">
-				<button type="submit" id="submitBtn" class="btn btn-dark form-control" style="border: none;">회원가입</button>
-			</div>
-		</form>
+		<div class="mx-auto">
+			<form action="memberjoinpro" method="post" class="form" id="joinForm" name="member">
+				<h2 class="text-center">회원정보를 입력해 주세요.</h2>
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+				<div class="form-group">
+					<label for="id">아이디</label>
+					<input type="text" class="form-control" id="mb_id" name="mb_id" maxlength="20" placeholder="ID">
+					<div class="check_font" id="id_check"></div>
+				</div>
+				
+				<div class="form-group">
+					<label for="pwd">비밀번호</label>
+					<input type="password" class="form-control" id="mb_pwd" name="mb_pwd" placeholder="PASSWORD" maxlength="20">
+					<div class="check_font" id="pwd_check"></div>
+				</div>
+				
+				<div class="form-group">
+					<label for="pwd2">비밀번호 확인</label>
+					<input type="password" class="form-control" id="mb_pwd2" name="mb_pwd2" placeholder="Confirm Password" maxlength="20">
+					<div class="check_font" id="pwd2_check"></div>
+				</div>
+				
+				<div class="form-group">
+					<label for="mb_name">이름</label>
+					<input type="text" class="form-control" id="mb_name" name="mb_name" placeholder="Name" maxlength="20">
+					<div class="check_font" id="name_check"></div>
+				</div>
+				
+				<div class="form-group">
+					<label for="mb_birthdate">생년월일</label>
+					<input type="tel" class="form-control" id="mb_birthdate" name="mb_birthdate" placeholder="ex)19990101" maxlength="8">
+					<div class="check_font" id="birth_check"></div>
+				</div>
+				
+				<div class="form-group text-center">
+					<label for="mb_sex">성별</label>
+					<input type="radio" id="mb_sex1" name="mb_sex" value="M">남
+					<input type="radio" id="mb_sex2" name="mb_sex" value="F">여
+					<div class="check_font" id="sex_check"></div>
+				</div>
+				
+				<div class="form-group">
+					<label for="mb_email">이메일 주소</label>
+					<input type="text" class="form-control" id="mb_email" name="mb_email" placeholder="E-mail" maxlength="50">
+					<div class="check_font" id="email_check"></div>
+				</div>
+				
+				<div class="form-group">
+					<label for="mb_phone">휴대폰 번호("-"없이 번호만 입력해주세요)</label><br/>
+						<input type="tel" class="form-control-inline col-9 col-sm-10" id="mb_phone" name="mb_phone" placeholder="Phone Number">
+						<button type="button" id="certificate" class="btn btn-dark">인증</button>
+					<div class="check_font" id="phone_check"></div>
+				</div>
+				
+				<div class="form-group">
+					<input type="text" class="form-control-inline col-9 col-sm-10" id="mb_sms" name="mb_sms" maxlength="6" placeholder="인증 번호 입력">
+					<button type="button" id="checkCertificate" class="btn btn-dark">확인</button>
+					<div class="check_font" id="phone_check2"></div>
+				</div>
+				
+				<div class="form-group text-center">
+					<button type="submit" id="submitBtn" class="btn btn-dark form-control" style="border: none;">회원가입</button>
+				</div>
+			</form>
+		</div>
 	</div>
 </div>
 <jsp:include page="common/footer.jsp" flush="false"/>
@@ -178,6 +180,10 @@ var birthJ = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/
 var result = null;
 
 $(document).ready(function() {
+	$(".menu-toggle").click(function() {
+		$("nav").toggleClass("active");
+		$(".main").toggleClass("main1");
+	});
 	
 	$("input").iCheck({
 		checkboxClass: "icheckbox_flat",
@@ -274,10 +280,12 @@ $(document).ready(function() {
 		phone();
 		sms();
 		
-		if(idC == false || pwdC == false || pwd2C == false || nameC == false || birthC == false || sexC == false || emailC == false || phoneC == false || smsC == false)
+		if(idC == false || pwdC == false || pwd2C == false || nameC == false || birthC == false || sexC == false || emailC == false || phoneC == false || smsC == false) {
 			return false;
-		else
+		}
+		else {
 			return true;
+		}
 		
 	});
 });

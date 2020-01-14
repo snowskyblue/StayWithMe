@@ -18,13 +18,13 @@ public class JoinCommandImp implements JoinCommand {
 	BCryptPasswordEncoder passwordEncoder;
 	
 	@Override
-	public void memberJoinProcess(MemberDto dto) throws Exception {
+	public String memberJoinProcess(MemberDto dto) throws Exception {
 		String mb_pwd1 = dto.getMb_pwd();
 		System.out.println("origin: " + mb_pwd1);
 		String mb_pwd = passwordEncoder.encode(mb_pwd1);
 		System.out.println("Encoder: " + mb_pwd);
 		dto.setMb_pwd(mb_pwd);
-		joinDao.memberJoinMethod(dto);
+		return joinDao.memberJoinMethod(dto);
 
 	}
 	

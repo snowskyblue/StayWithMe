@@ -23,8 +23,11 @@
 
 <title>Insert title here</title>
 <style>
-<style>
-.main {
+#index_header {
+	padding-top: 100px;
+}
+
+.main1 {
 	margin-top: 100px;
 }
 
@@ -137,9 +140,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 	.container {
 		max-width: 1000px;
 	}
-	.main1 {
-		margin-top: 200px;
-	}
+
 	.carousel-item .carousel-caption p {
 		font-size: 25px;
 		width: 400px;
@@ -160,230 +161,273 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 	}
 }
 
+.modal-content .modal-header, .modal-content .modal-footer {
+	border: 0px;
+}
 /*##################################*/
 </style>
 </head>
 <body>
 <jsp:include page="common/header.jsp" flush="false"/>
-<div class="main">
-	<!-- Carousel -->
-	<div class="container-fluid carousel">
-		<div id="myCarousel" class="carousel slide" data-ride="carousel">
-			<!-- Indicators(사진 순서 표시하는 작은 막대기들) -->
-			<ul class="carousel-indicators">
-				<li data-target="#myCarousel" data-slide-to="0"
-					class="active bg-light"></li>
-				<li data-target="#myCarousel" data-slide-to="1" class="bg-light"></li>
-				<li data-target="#myCarousel" data-slide-to="2" class="bg-light"></li>
-				<li data-target="#myCarousel" data-slide-to="3" class="bg-light"></li>
-			</ul>
-			<!-- 실제 내용(사진+설명) -->
-			<div class="carousel-inner">
-				<div class="carousel-item active">
-					<img style="height: 500px; width: 100%; margin: 0;"
-						src="img/1.jpg" alt="seoul" class="d-block mx-auto">
-					<div class="carousel-caption">
-						<p>
-							여행과 장소의 변화는<br /> 우리 마음에 활력을 선사한다<br /> <span
-								style="font-size: 15px;">세네카</span>
-						</p>
+<div class="main" id="index_main">
+	<div id="index_header">
+		<!-- Carousel -->
+		<div class="container-fluid carousel">
+			<div id="myCarousel" class="carousel slide" data-ride="carousel">
+				<!-- Indicators(사진 순서 표시하는 작은 막대기들) -->
+				<ul class="carousel-indicators">
+					<li data-target="#myCarousel" data-slide-to="0"
+						class="active bg-light"></li>
+					<li data-target="#myCarousel" data-slide-to="1" class="bg-light"></li>
+					<li data-target="#myCarousel" data-slide-to="2" class="bg-light"></li>
+					<li data-target="#myCarousel" data-slide-to="3" class="bg-light"></li>
+				</ul>
+				<!-- 실제 내용(사진+설명) -->
+				<div class="carousel-inner">
+					<div class="carousel-item active">
+						<img style="height: 500px; width: 100%; margin: 0;"
+							src="img/1.jpg" alt="seoul" class="d-block mx-auto">
+						<div class="carousel-caption">
+							<p>
+								여행과 장소의 변화는<br /> 우리 마음에 활력을 선사한다<br /> <span
+									style="font-size: 15px;">세네카</span>
+							</p>
+						</div>
 					</div>
-				</div>
-				<div class="carousel-item">
-					<img style="height: 500px; width: 100%; margin: 0;"
-						src="img/2.jpg" alt="LA" class="d-block mx-auto">
-					<div class="carousel-caption">
-						<p>
-							바보는 방황하고,<br /> 현명한 사람은 여행한다.<br /> <span
-								style="font-size: 15px;">토마스 풀러</span>
-						</p>
+					<div class="carousel-item">
+						<img style="height: 500px; width: 100%; margin: 0;"
+							src="img/2.jpg" alt="LA" class="d-block mx-auto">
+						<div class="carousel-caption">
+							<p>
+								바보는 방황하고,<br /> 현명한 사람은 여행한다.<br /> <span
+									style="font-size: 15px;">토마스 풀러</span>
+							</p>
+						</div>
 					</div>
-				</div>
-				<div class="carousel-item">
-					<img style="height: 500px; width: 100%; margin: 0;"
-						src="img/3.jpg" alt="3" class="d-block mx-auto">
-					<div class="carousel-caption">
-						<p>
-							낯선 땅이란 없다.<br /> 단지 여행자가 낯설 뿐이다.<br /> <span
-								style="font-size: 15px;">로버트 루이스 스티븐슨</span>
-						</p>
+					<div class="carousel-item">
+						<img style="height: 500px; width: 100%; margin: 0;"
+							src="img/3.jpg" alt="3" class="d-block mx-auto">
+						<div class="carousel-caption">
+							<p>
+								낯선 땅이란 없다.<br /> 단지 여행자가 낯설 뿐이다.<br /> <span
+									style="font-size: 15px;">로버트 루이스 스티븐슨</span>
+							</p>
+						</div>
 					</div>
-				</div>
-				<div class="carousel-item">
-					<img style="height: 500px; width: 100%; margin: 0;"
-						src="img/4.jpg" alt="4" class="d-block mx-auto">
-					<div class="carousel-caption">
-						<p>
-							희망차게 여행하는 것이<br /> 목적지에 도착하는 것보다 좋다.<br /> <span
-								style="font-size: 15px;">로버트 루이스</span>
-						</p>
+					<div class="carousel-item">
+						<img style="height: 500px; width: 100%; margin: 0;"
+							src="img/4.jpg" alt="4" class="d-block mx-auto">
+						<div class="carousel-caption">
+							<p>
+								희망차게 여행하는 것이<br /> 목적지에 도착하는 것보다 좋다.<br /> <span
+									style="font-size: 15px;">로버트 루이스</span>
+							</p>
+						</div>
+						<!-- carousel-item(4개) -->
 					</div>
-					<!-- carousel-item(4개) -->
+					<!-- carousel-item(2개) -->
 				</div>
-				<!-- carousel-item(2개) -->
+				<!-- carousel-inner(1개) -->
 			</div>
-			<!-- carousel-inner(1개) -->
+			<!-- carousel (1개) -->
 		</div>
-		<!-- carousel (1개) -->
+		<!-- container -->
+	
+		<!-- Booking Form -->
+		<div class="container-fluid bg-dark">
+			<form>
+				<div class="booking-form container input-group">
+					<div class="input-grp">
+						<select class="custom-select" name="Area">
+							<option value="#">&nbsp;&nbsp;지역&nbsp;&nbsp;</option>
+							<option value="1">&nbsp;&nbsp;강원&nbsp;&nbsp;</option>
+							<option value="2">&nbsp;&nbsp;경기&nbsp;&nbsp;</option>
+							<option value="3">&nbsp;&nbsp;경남&nbsp;&nbsp;</option>
+							<option value="4">&nbsp;&nbsp;경북&nbsp;&nbsp;</option>
+							<option value="5">&nbsp;&nbsp;대구&nbsp;&nbsp;</option>
+							<option value="6">&nbsp;&nbsp;부산&nbsp;&nbsp;</option>
+							<option value="7">&nbsp;&nbsp;서울&nbsp;&nbsp;</option>
+							<option value="8">&nbsp;&nbsp;인천&nbsp;&nbsp;</option>
+							<option value="8">&nbsp;&nbsp;전남&nbsp;&nbsp;</option>
+							<option value="8">&nbsp;&nbsp;전북&nbsp;&nbsp;</option>
+							<option value="8">&nbsp;&nbsp;제주&nbsp;&nbsp;</option>
+							<option value="8">&nbsp;&nbsp;충남&nbsp;&nbsp;</option>
+							<option value="8">&nbsp;&nbsp;충북&nbsp;&nbsp;</option>
+							<option value="8">&nbsp;&nbsp;대전&nbsp;&nbsp;</option>
+							<option value="8">&nbsp;&nbsp;세종&nbsp;&nbsp;</option>
+							<option value="8">&nbsp;&nbsp;울산&nbsp;&nbsp;</option>
+							<option value="8">&nbsp;&nbsp;광주&nbsp;&nbsp;</option>
+						</select>
+					</div>
+					<div class="input-grp">
+						<input type="text" id="CheckIn" class="form-control select-date"
+							value="Check In">
+					</div>
+					<div class="input-grp">
+						<input type="text" id="CheckOut" class="form-control select-date"
+							value="Check Out">
+					</div>
+					<div class="input-grp">
+						<input type="number" class="form-control" placeholder="Adult">
+					</div>
+					<div class="input-grp">
+						<input type="number" class="form-control" placeholder="Child">
+					</div>
+					<div class="input-grp">
+						<input type="submit" class="form-control" value="제출">
+					</div>
+				</div>
+			</form>
+		</div>
+		<!-- 사진 카드 -->
+		<div class="container mt-3 mb-3">
+			<div class="row">
+				<div class="col-lg-4 col-md-6 col-sm-6 banner">
+					<a href="#">
+						<div class="centered">서울</div> <img alt="seoul"
+						src="img/seoul.jpg">
+					</a>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-6 banner">
+					<a href="#">
+						<div class="centered">제주</div> <img alt="jongno"
+						src="img/jeju.jpg">
+					</a>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-6 banner">
+					<a href="#">
+						<div class="centered">인천</div> <img alt="incheon"
+						src="img/incheon.jpg">
+					</a>
+				</div>
+	
+				<div class="col-lg-4 col-md-6 col-sm-6 banner">
+					<a href="#">
+						<div class="centered">대구</div> <img alt="daegu"
+						src="img/daegu.jpg">
+					</a>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-6 banner">
+					<a href="#">
+						<div class="centered">경기</div> <img alt="gyeonggi"
+						src="img/Gyeonggi.jpg">
+					</a>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-6 banner">
+					<a href="#">
+						<div class="centered">강원</div> <img alt="gangwon"
+						src="img/gangwon.jpg">
+					</a>
+				</div>
+	
+				<div class="col-lg-4 col-md-6 col-sm-6 banner">
+					<a href="#">
+						<div class="centered">경남</div> <img alt="gyeongnam"
+						src="img/Gyeongsangnam-do.jpg">
+					</a>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-6 banner">
+					<a href="#">
+						<div class="centered">경북</div> <img alt="gyeongbuk"
+						src="img/Gyeongbuk.jpg">
+					</a>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-6 banner">
+					<a href="#">
+						<div class="centered">충남</div> <img alt="chungnam"
+						src="img/chungnam.jpg">
+					</a>
+				</div>
+	
+				<div class="col-lg-4 col-md-6 col-sm-6 banner">
+					<a href="#">
+						<div class="centered">충북</div> <img alt="chungbuk"
+						src="img/chungbuk.jpg">
+					</a>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-6 banner">
+					<a href="#">
+						<div class="centered">전북</div> <img alt="jeonbuk"
+						src="img/jeonbuk.jpg">
+					</a>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-6 banner">
+					<a href="#">
+						<div class="centered">전남</div> <img alt="jeonnam"
+						src="img/jeonnam.jpg">
+					</a>
+				</div>
+	
+				<div class="col-lg-4 col-md-6 col-sm-6 banner">
+					<a href="#">
+						<div class="centered">부산</div> <img alt="Busan"
+						src="img/busan.jpg">
+					</a>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-6 banner">
+					<a href="#">
+						<div class="centered">대전</div> <img alt="#" src="img/daejeon.jpg">
+					</a>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-6 banner">
+					<a href="#">
+						<div class="centered">세종</div> <img alt="#" src="img/sejong.jpg">
+					</a>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-6 banner">
+					<a href="#">
+						<div class="centered">울산</div> <img alt="Busan"
+						src="img/ulsan.jpg">
+					</a>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-6 banner">
+					<a href="#">
+						<div class="centered">광주</div> <img alt="#" src="img/gwangju.jpg">
+					</a>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-6 banner">
+					<a href="#">
+						<div class="centered">#</div> <img alt="#" src="img/shap2.jpg">
+					</a>
+				</div>
+			</div>
+		</div>
 	</div>
-	<!-- container -->
-
-	<!-- Booking Form -->
-	<div class="container-fluid bg-dark">
-		<form>
-			<div class="booking-form container input-group">
-				<div class="input-grp">
-					<select class="custom-select" name="Area">
-						<option value="#">&nbsp;&nbsp;지역&nbsp;&nbsp;</option>
-						<option value="1">&nbsp;&nbsp;강원&nbsp;&nbsp;</option>
-						<option value="2">&nbsp;&nbsp;경기&nbsp;&nbsp;</option>
-						<option value="3">&nbsp;&nbsp;경남&nbsp;&nbsp;</option>
-						<option value="4">&nbsp;&nbsp;경북&nbsp;&nbsp;</option>
-						<option value="5">&nbsp;&nbsp;대구&nbsp;&nbsp;</option>
-						<option value="6">&nbsp;&nbsp;부산&nbsp;&nbsp;</option>
-						<option value="7">&nbsp;&nbsp;서울&nbsp;&nbsp;</option>
-						<option value="8">&nbsp;&nbsp;인천&nbsp;&nbsp;</option>
-						<option value="8">&nbsp;&nbsp;전남&nbsp;&nbsp;</option>
-						<option value="8">&nbsp;&nbsp;전북&nbsp;&nbsp;</option>
-						<option value="8">&nbsp;&nbsp;제주&nbsp;&nbsp;</option>
-						<option value="8">&nbsp;&nbsp;충남&nbsp;&nbsp;</option>
-						<option value="8">&nbsp;&nbsp;충북&nbsp;&nbsp;</option>
-						<option value="8">&nbsp;&nbsp;대전&nbsp;&nbsp;</option>
-						<option value="8">&nbsp;&nbsp;세종&nbsp;&nbsp;</option>
-						<option value="8">&nbsp;&nbsp;울산&nbsp;&nbsp;</option>
-						<option value="8">&nbsp;&nbsp;광주&nbsp;&nbsp;</option>
-					</select>
-				</div>
-				<div class="input-grp">
-					<input type="text" id="CheckIn" class="form-control select-date"
-						value="Check In">
-				</div>
-				<div class="input-grp">
-					<input type="text" id="CheckOut" class="form-control select-date"
-						value="Check Out">
-				</div>
-				<div class="input-grp">
-					<input type="number" class="form-control" placeholder="Adult">
-				</div>
-				<div class="input-grp">
-					<input type="number" class="form-control" placeholder="Child">
-				</div>
-				<div class="input-grp">
-					<input type="submit" class="form-control" value="제출">
-				</div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="joinModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<img src="img/logo.jpg">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
 			</div>
-		</form>
+			<div class="modal-body text-center" style="font-weight:bold;">
+				 회원가입이 성공적으로 이루어졌습니다.
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+			</div>
+		</div>
 	</div>
-	<!-- 사진 카드 -->
-	<div class="container mt-3 mb-3">
-		<div class="row">
-			<div class="col-lg-4 col-md-6 col-sm-6 banner">
-				<a href="#">
-					<div class="centered">서울</div> <img alt="seoul"
-					src="img/seoul.jpg">
-				</a>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<img src="img/logo.jpg">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
 			</div>
-			<div class="col-lg-4 col-md-6 col-sm-6 banner">
-				<a href="#">
-					<div class="centered">제주</div> <img alt="jongno"
-					src="img/jeju.jpg">
-				</a>
+			<div class="modal-body text-center" style="font-weight:bold;">
+				 로그아웃되었습니다.
 			</div>
-			<div class="col-lg-4 col-md-6 col-sm-6 banner">
-				<a href="#">
-					<div class="centered">인천</div> <img alt="incheon"
-					src="img/incheon.jpg">
-				</a>
-			</div>
-
-			<div class="col-lg-4 col-md-6 col-sm-6 banner">
-				<a href="#">
-					<div class="centered">대구</div> <img alt="daegu"
-					src="img/daegu.jpg">
-				</a>
-			</div>
-			<div class="col-lg-4 col-md-6 col-sm-6 banner">
-				<a href="#">
-					<div class="centered">경기</div> <img alt="gyeonggi"
-					src="img/Gyeonggi.jpg">
-				</a>
-			</div>
-			<div class="col-lg-4 col-md-6 col-sm-6 banner">
-				<a href="#">
-					<div class="centered">강원</div> <img alt="gangwon"
-					src="img/gangwon.jpg">
-				</a>
-			</div>
-
-			<div class="col-lg-4 col-md-6 col-sm-6 banner">
-				<a href="#">
-					<div class="centered">경남</div> <img alt="gyeongnam"
-					src="img/Gyeongsangnam-do.jpg">
-				</a>
-			</div>
-			<div class="col-lg-4 col-md-6 col-sm-6 banner">
-				<a href="#">
-					<div class="centered">경북</div> <img alt="gyeongbuk"
-					src="img/Gyeongbuk.jpg">
-				</a>
-			</div>
-			<div class="col-lg-4 col-md-6 col-sm-6 banner">
-				<a href="#">
-					<div class="centered">충남</div> <img alt="chungnam"
-					src="img/chungnam.jpg">
-				</a>
-			</div>
-
-			<div class="col-lg-4 col-md-6 col-sm-6 banner">
-				<a href="#">
-					<div class="centered">충북</div> <img alt="chungbuk"
-					src="img/chungbuk.jpg">
-				</a>
-			</div>
-			<div class="col-lg-4 col-md-6 col-sm-6 banner">
-				<a href="#">
-					<div class="centered">전북</div> <img alt="jeonbuk"
-					src="img/jeonbuk.jpg">
-				</a>
-			</div>
-			<div class="col-lg-4 col-md-6 col-sm-6 banner">
-				<a href="#">
-					<div class="centered">전남</div> <img alt="jeonnam"
-					src="img/jeonnam.jpg">
-				</a>
-			</div>
-
-			<div class="col-lg-4 col-md-6 col-sm-6 banner">
-				<a href="#">
-					<div class="centered">부산</div> <img alt="Busan"
-					src="img/busan.jpg">
-				</a>
-			</div>
-			<div class="col-lg-4 col-md-6 col-sm-6 banner">
-				<a href="#">
-					<div class="centered">대전</div> <img alt="#" src="img/daejeon.jpg">
-				</a>
-			</div>
-			<div class="col-lg-4 col-md-6 col-sm-6 banner">
-				<a href="#">
-					<div class="centered">세종</div> <img alt="#" src="img/sejong.jpg">
-				</a>
-			</div>
-			<div class="col-lg-4 col-md-6 col-sm-6 banner">
-				<a href="#">
-					<div class="centered">울산</div> <img alt="Busan"
-					src="img/ulsan.jpg">
-				</a>
-			</div>
-			<div class="col-lg-4 col-md-6 col-sm-6 banner">
-				<a href="#">
-					<div class="centered">광주</div> <img alt="#" src="img/gwangju.jpg">
-				</a>
-			</div>
-			<div class="col-lg-4 col-md-6 col-sm-6 banner">
-				<a href="#">
-					<div class="centered">#</div> <img alt="#" src="img/shap2.jpg">
-				</a>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
 			</div>
 		</div>
 	</div>
@@ -409,12 +453,14 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 
 	$(document).ready(function() {
 		<c:choose>
-		<c:when test="${not empty msg}">
-		alert("로그아웃되었습니다.");
-		</c:when>
-		<c:otherwise>
-
-		</c:otherwise>
+			<c:when test="${not empty msg}">
+			$("#logoutModal").modal("show");
+			</c:when>
+		</c:choose>
+		<c:choose>
+			<c:when test="${not empty success}">
+				$("#joinModal").modal("show");
+			</c:when>
 		</c:choose>
 		$(".menu-toggle").click(function() {
 			$("nav").toggleClass("active")

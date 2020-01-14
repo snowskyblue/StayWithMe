@@ -25,8 +25,19 @@
 
 <title>login</title>
 <style>
+.main1 {
+	margin-top: 100px;
+}
 
-label, #form .btn {
+#login-container {
+	padding-top: 150px;
+}
+#border {
+	border: 3px solid #000000;
+	/*border-collapse: collapse;*/
+}
+
+.container h3, label, #form .btn {
 	font-weight: bold;
 	font-family: 'S-CoreDream-2ExtraLight';
 }
@@ -39,48 +50,73 @@ label, #form .btn {
 }
 #form {
 	width: 400px;
+	margin-top: 80px;
+	margin-bottom: 150px;
 }
 
+#login {
+	margin-top: 20px;
+}
 #login, #singup {
 	border: 1px solid grey;
 	border-radius: 0.7;
 }
 
-.main {
-	margin-top: 100px;
-}
-
-.main1 {
-	margin-top: 200px;
-}
 @media screen and (max-width: 576px) {
 	#form {
 		width: 300px;
 		font-size: 20px;
 	}
 }
-
+.modal-content .modal-header, .modal-content .modal-footer {
+	border: 0px;
+}
 </style>
 </head>
 <body>
 <jsp:include page="common/header.jsp" flush="false"/>
 
 <div class="main">
-	<div class="d-flex flex-wrap align-content-center justify-content-center" style="min-height: 500px;">
-		<form method="POST" action="login" id="form">
-			<!-- frontController로 안감 -->
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
-			<label style="font-size: 15px;">아이디</label> 
-			<input type="text" class="form-control" name="mb_id" placeholder="ID"> <br />
-			<label style="font-size: 15px;">비밀번호 </label> 
-			<input type="password" class="form-control" name="mb_pwd" placeholder="PASSWORD">
-			<div class="d-flex justify-content-between">
-				<a href="#" style="font-size: 10px; color: red;">아이디/비밀번호 찾기</a>
+	<div class="container" id="login-container">
+		<h3>로그인</h3>
+		<div id="border"></div>
+		<div class="d-flex flex-wrap align-content-center justify-content-center" style="min-height: 500px;">
+			
+			<form method="POST" action="login" id="form">
+				<!-- frontController로 안감 -->
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+				<label style="font-size: 15px;">아이디</label> 
+				<input type="text" class="form-control" name="mb_id" placeholder="ID"> <br />
+				<label style="font-size: 15px;">비밀번호 </label> 
+				<input type="password" class="form-control" name="mb_pwd" placeholder="PASSWORD">
+				<div class="d-flex justify-content-between">
+					<a href="findIdPwd" style="font-size: 10px; color: red;">아이디/비밀번호 찾기</a>
+				</div>
+				<br/> 
+				<input class="btn btn-dark w-100 form-control" style="margin-bottom: 10px; border : none;" type="submit" value="로 그 인" id="login"/> <br /> 
+				<input class="btn btn-dark w-100 form-control" type="button" value="회원가입" id="signin" style = "border : none;"/>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="loginBtnModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<img src="img/logo.jpg">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
 			</div>
-			<br/> 
-			<input class="btn btn-dark w-100 form-control" style="margin-bottom: 10px; border : none;" type="submit" value="로 그 인" id="login"/> <br /> 
-			<input class="btn btn-dark w-100 form-control" type="button" value="회원가입" id="signin" style = "border : none;"/>
-		</form>
+			<div class="modal-body text-center" style="font-weight:bold;">
+				 로그인을 실패하셨습니다.
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -101,7 +137,7 @@ label, #form .btn {
 			
 		</c:when>
 		<c:otherwise>
-			alert("로그인을 실패하셨습니다.");
+			$("#loginBtnModal").modal("show");
 		</c:otherwise>
 		</c:choose>
 		/*
