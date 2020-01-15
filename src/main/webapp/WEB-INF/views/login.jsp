@@ -95,6 +95,10 @@
 				<br/> 
 				<input class="btn btn-dark w-100 form-control" style="margin-bottom: 10px; border : none;" type="submit" value="로 그 인" id="login"/> <br /> 
 				<input class="btn btn-dark w-100 form-control" type="button" value="회원가입" id="signin" style = "border : none;"/>
+				<br/><br />
+				<div id="naver_id_login">
+					<a href="${url}"><img src="img/naverid_login_button_short.png" style = "widht : 50px; height : 50px;"/></a>
+				</div>
 			</form>
 		</div>
 	</div>
