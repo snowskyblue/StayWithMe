@@ -40,8 +40,6 @@
 	border-top: 1px solid #343a40;
 	border-left: 1px solid #343a40;
 	border-right: 1px solid #343a40;
-	padding-top: 5px;
-    padding-bottom: 5px;
     background-color: #343a40;
     color: white;
     font-weight: bold;
@@ -49,10 +47,35 @@
 
 .findTab a {
 	display: block;
+	padding-top: 5px;
+    height: 35px;
+    width: 250px;
 }
 
 .tab-content {
-	padding-top: 50px;
+	padding-top: 30px;
+}
+
+.findForm {
+	width: 400px;
+}
+
+.findTab_info {
+	font-size:15px;
+	font-weight: bold;
+	padding: 20px;
+	padding-bottom: 50px;
+    margin-bottom: 50px;
+    border-bottom: 1px solid lightgrey;
+}
+
+.findTab_info i {
+	font-size: 40px;
+    margin-bottom: 10px;
+}
+
+#findId_name {
+	margin-bottom: 50px;
 }
 
 .form-group .form-control, .form-group .form-control-inline {
@@ -67,15 +90,35 @@
 	font-weight: bold;
 }
 
+.form_center {
+	padding-left: 35px;
+}
+
 @media screen and (max-width: 576px) {
 	.findTabMenu {
 		width: 300px;
 	}
+	
 	.findTab {
 		width: 150px;
 		cursor: pointer;
 	}
 	
+	.findTab_info {
+		font-size: 14px;
+	}
+	
+	.findTab a {
+		width: 150px;
+	}
+	
+	.findForm {
+		width: 300px;
+	}
+	
+	.form_center {
+		padding-left: 20px;
+	}
 }
 
 </style>
@@ -95,34 +138,60 @@
 			<!-- tab 메뉴 -->
 			<!-- tab 선택에 따른 내용 -->
 			<div class="tab-content">
-				<div id="findId" class="tab-pane active">
-					<form method="POST" action="findId" id="findIdForm">
+
+				<div id="findId" class="tab-pane active mx-auto">
+					<div class="findTab_info text-center">
+						<i class="fas fa-exclamation-circle"></i><br/>
+						회원정보에 등록된 전화번호와<br/>
+						입력한 전화번호가 같아야 인증번호를 받을 수 있습니다.
+					</div>
+					<form method="POST" action="findId" class="mx-auto findForm">
 						<div class="form-group">
 							<label for="findId_name">이름</label>
-							<input type="text" class="form-control" id="findId_name" name="mb_name" maxlength="20" placeholder="이름"> 
+							<input type="text" class="form-control mx-auto col-10" id="findId_name" name="mb_name" maxlength="20" placeholder="이름"> 
 						</div>
 						<div class="form-group">
 							<label for="findId_phone">휴대폰 번호</label><br/>
-								<input type="tel" class="form-control-inline col-8 col-sm-10" id="findId_phone" name="mb_phone" placeholder='"-"없이 번호만 입력'>
+							<div class="form_center">
+								<input type="tel" class="form-control-inline col-8 col-sm-8" id="findId_phone" name="mb_phone" placeholder='"-"없이 번호만 입력'>
 								<button type="button" id="certificate" class="btn btn-dark">인증</button>
-							<div class="check_font" id="phone_check"></div>
+								<div class="check_font" id="phone_check"></div>
+							</div>
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control-inline col-8 col-sm-10" id="findId_sms" name="mb_sms" maxlength="6" placeholder="인증 번호 입력">
-							<button type="button" id="checkCertificate" class="btn btn-dark">확인</button>
-							<div class="check_font" id="phone_check2"></div>
+							<div class="form_center">
+								<input type="text" class="form-control-inline col-8 col-sm-8" id="findId_sms" name="mb_sms" maxlength="6" placeholder="인증 번호 입력">
+								<button type="button" id="checkCertificate" class="btn btn-dark">확인</button>
+								<div class="check_font" id="phone_check2"></div>
+							</div>
 						</div><br/><br/>
 						<div class="form-group text-center">
-							<button type="submit" id="submitBtn" class="btn btn-dark form-control" style="border: none;">회원가입</button>
+							<button type="submit" id="submitBtn" class="btn btn-dark form-control" style="border: none;">아이디 찾기</button>
 						</div>
 					</form>
 				</div>
 				
 				<div id="findPwd" class="tab-pane">
-					<form method="POST" action="findPwd" id="findPwdForm">
+					<div class="findTab_info text-center">
+						<i class="fas fa-exclamation-circle"></i><br/>
+						회원정보에 등록된 이메일로<br/>
+						임시 비밀번호를 발송해 드립니다.
+					</div>
+					<form method="POST" action="findPwd" class="mx-auto findForm">
 						<div class="form-group">
-							<label for="findPwd_name">아이디</label>
-							<input type="text" class="form-control" id="findPwd_name" name="mb_name" maxlength="20"> 
+							<label for="findPwd_id">아이디</label><br/>
+							<div class="form_center">
+								<input type="text" class="form-control-inline col-8 col-sm-8" id="findPwd_id" name="mb_id" placeholder='아이디'>
+								<button type="button" id="certificate" class="btn btn-dark">확인</button>
+								<div class="check_font" id="id_check"></div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="findPwd_email">이메일</label>
+							<input type="text" class="form-control mx-auto col-10" id="findPwd_email" name="mb_email" maxlength="20" placeholder="이메일"> 
+						</div><br/><br/>
+						<div class="form-group text-center">
+							<button type="submit" id="submitBtn" class="btn btn-dark form-control" style="border: none;">임시 비밀번호 발송</button>
 						</div>
 					</form>
 				</div>
@@ -141,6 +210,9 @@
 <!-- iCheck(라디오 버튼) -->
 <script src="icheck-1.x/icheck.min.js"></script>
 <script>
+var emailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
+
 function findTab(elmnt, color) {
 	var i;
 	var findTab;
@@ -153,8 +225,8 @@ function findTab(elmnt, color) {
 	elmnt.style.backgroundColor = color;
 	elmnt.style.color = "black";
 }
+document.getElementById("defaultTab").click(); //active
 
-document.getElementById("defaultTab").click();
 </script>
 </body>
 </html>
