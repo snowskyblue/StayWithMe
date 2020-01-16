@@ -233,8 +233,6 @@ nav, figure, footer, header {
 		</div>
 	</div>
 </header>
-
-</div>
 <!--jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!--popper -->
@@ -283,7 +281,7 @@ $(document).ready(function(){
 		if($("#nav-memberjoin").text() == "회원가입") {
 			location.href = "memberjoin";
 		}else{
-			myPageProfile();
+			location.href = "myPageProfile";
 		}
 	});
 });

@@ -5,7 +5,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -99,6 +98,11 @@
 .form_center {
 	padding-left: 35px;
 }
+.myPageform {
+	width : 100%;
+	height : 280px;
+	border-bottom: 1px solid lightgrey;
+}
 
 @media screen and (max-width: 576px) {
 	.informationTabMenu {
@@ -125,11 +129,13 @@
 	.form_center {
 		padding-left: 20px;
 	}
+	
 }
 
 </style>
 </head>
 <body>
+<jsp:include page="common/header.jsp" flush = "flase"></jsp:include>
 <div class="main">
 	<div class="container" id="information-header">
 		<h3>마이페이지/프로필</h3>
@@ -145,10 +151,16 @@
 			<!-- tab 선택에 따른 내용 -->
 			<div class="tab-content">
 				<div id="myPage" class="tab-pane active mx-auto">
-					
+					<div class = "container">
+						<div class = "myPageform"></div>
+						<div class = "myPageform"></div>
+						<div class = "myPageform"></div>
+					</div>
 				</div>
 				<div id="profile" class="tab-pane">
-				
+					<div class = "container">
+						
+					</div>
 				</div>
 			</div>
 			<!-- tab 선택에 따른 내용 -->
@@ -156,7 +168,7 @@
 	</div>
 </div>
 
-
+<jsp:include page="common/footer.jsp" flush="false"/>
 <!--jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!--popper -->

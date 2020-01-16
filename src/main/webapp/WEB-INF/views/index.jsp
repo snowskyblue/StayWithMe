@@ -470,17 +470,5 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 	var user ="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}";
 	sessionStorage.setItem("user", user);
 </script>
-<script>
-function myPageProfile() {
-	$.ajax ({
-		data : "",
-		url : "myPageProfile",
-		dataType : "html",
-		success : function(data) {
-			$(".main").html(data);
-		}
-	});
-}
-</script>
 </body>
 </html>
