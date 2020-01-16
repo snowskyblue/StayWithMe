@@ -57,10 +57,9 @@ public class AcmDao {
 						final String acm_checkout_time, 
 						final String acm_img, 
 						final String acm_availdate, 
-						String ame_wifi, String ame_tv, String ame_kitchen, String ame_aircon, String ame_room_lock, String ame_towel, String ame_washer, String ame_dryer, String ame_shower, String ame_hair_dryer, String ame_fan, String ame_extinguisher, String ame_balcony, String ame_garden, String ame_heater, String ame_infodesk, String ame_breakfast, String ame_bbq, String ame_park
-						, String[] rules
+						String[] rules
+						,String[] amenities
 			) {
-		System.out.println("AcmDao 클래스에서 " + ame_wifi + ame_park);
 		//transaction 실행 방식
 		TransactionDefinition definition = new DefaultTransactionDefinition();
 		//transaction 상태
@@ -99,39 +98,6 @@ public class AcmDao {
 					return pstmt;
 				}
 			});
-
-			template.update(new PreparedStatementCreator() {
-				
-				@Override
-				public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
-					
-					System.out.println("dao클래스의 두번째 udate문 PP_SEQ.currval");
-					String query = "insert into amenity (acm_code, ame_wifi,  ame_tv,  ame_kitchen,  ame_aircon,  ame_room_lock,ame_towel,  ame_washer,  ame_dryer,  ame_shower,  ame_hair_dryer, ame_fan,  ame_extinguisher,  ame_balcony,  ame_garden,  ame_heater, ame_infodesk,ame_breakfast, ame_bbq, ame_park) "
-							+ "values (PP_SEQ.currval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-					PreparedStatement pstmt = con.prepareStatement(query);
-					pstmt.setString(1, ame_wifi);
-					pstmt.setString(2, ame_tv);
-					pstmt.setString(3, ame_kitchen );
-					pstmt.setString(4, ame_aircon);
-					pstmt.setString(5, ame_room_lock);
-					pstmt.setString(6, ame_towel);
-					pstmt.setString(7, ame_washer);
-					pstmt.setString(8, ame_dryer);
-					pstmt.setString(9, ame_shower);
-					pstmt.setString(10, ame_hair_dryer);
-					pstmt.setString(11, ame_fan);
-					pstmt.setString(12, ame_extinguisher);
-					pstmt.setString(13, ame_balcony);
-					pstmt.setString(14, ame_garden);
-					pstmt.setString(15, ame_heater);
-					pstmt.setString(16, ame_infodesk);
-					pstmt.setString(17, ame_breakfast);
-					pstmt.setString(18, ame_bbq);
-					pstmt.setString(19, ame_park);
-					
-					return pstmt;
-				}
-			});
 			
 			if(rules != null){
 				for(int i=0; i < rules.length; i++) {
@@ -144,6 +110,23 @@ public class AcmDao {
 									+ "values (PP_SEQ.currval,?)";
 							PreparedStatement pstmt = con.prepareStatement(query);
 							pstmt.setString(1, rules[x]);
+							return pstmt;
+						}
+					});
+				}
+			}
+			
+			if(amenities != null){
+				for(int i=0; i < amenities.length; i++) {
+					final int x = i;
+					template.update(new PreparedStatementCreator() {
+						@Override
+						public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+							System.out.println("dao클래스의 세번째 udate문 PP_SEQ.currval");
+							String query = "insert into ACM_SUB (acm_code, acm_amenity) "
+									+ "values (PP_SEQ.currval,?)";
+							PreparedStatement pstmt = con.prepareStatement(query);
+							pstmt.setString(1, amenities[x]);
 							return pstmt;
 						}
 					});

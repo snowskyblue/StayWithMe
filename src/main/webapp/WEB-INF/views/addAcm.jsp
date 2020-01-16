@@ -393,157 +393,96 @@
 						</div>
 					</div>
 					
-					<!-- 참고용(삭제예정)
-					<div class="row form-group">
-						<label class="text-muted mb-3 col-sm-2" for="acm_img">숙소 사진</label>
-						<div class="custom-file col-sm-10 mb-3">
-							<input class="custom-file-input" id="acm_img" type="file" name="acm_img" multiple />
-							<label class="custom-file-label" for="acm_img">숙소사진을 올려주세요</label>
+					<!-- 편의시설 amenity -->
+					<div class="row mt-5 mb-5" id="acm_rule">
+							<div class="col-sm-3">
+								<label class="form-check-label"> 무선인터넷
+								  <input type="checkbox" name="acm_amenity" value="wifi"> 
+								  <span class="checkmark"></span>
+								</label>
+								<label class="form-check-label"> TV
+								  <input type="checkbox" name="acm_amenity" value="tv">
+								  <span class="checkmark"></span>
+								</label>
+								<label class="form-check-label"> 주방
+								  <input type="checkbox" name="acm_amenity" value="kitchen">
+								  <span class="checkmark"></span>
+								</label>
+								<label class="form-check-label"> 식기 제공
+								  <input type="checkbox" name="acm_amenity" value="dish">
+								  <span class="checkmark"></span>
+								</label>
+								<label class="form-check-label"> 방 잠금장치
+								  <input type="checkbox" name="acm_amenity" value="lock">
+								  <span class="checkmark"></span>
+								</label>
+							</div>
+							<div class="col-sm-3">
+								<label class="form-check-label"> 수건
+								  <input type="checkbox" name="acm_amenity" value="towel">
+								  <span class="checkmark"></span>
+								</label>
+								<label class="form-check-label"> 세탁기
+								  <input type="checkbox" name="acm_amenity" value="washer">
+								  <span class="checkmark"></span>
+								</label>
+								<label class="form-check-label"> 건조기
+								  <input type="checkbox" name="acm_amenity" value="dryer">
+								  <span class="checkmark"></span>
+								</label>
+								<label class="form-check-label"> 샤워시설
+								  <input type="checkbox" name="acm_amenity" value="shower"> 
+								  <span class="checkmark"></span>
+								</label>
+								<label class="form-check-label"> 헤어드라이기
+								  <input type="checkbox" name="acm_amenity" value="hairdryer">
+								  <span class="checkmark"></span>
+								</label>
+							</div>
+							<div class="col-sm-3">
+								<label class="form-check-label"> 선풍기
+								  <input type="checkbox" name="acm_amenity" value="fan">
+								  <span class="checkmark"></span>
+								</label>
+								<label class="form-check-label"> 소화기
+								  <input type="checkbox" name="acm_amenity" value="extinguisher">
+								  <span class="checkmark"></span>
+								</label>
+								<label class="form-check-label"> 발코니
+								  <input type="checkbox" name="acm_amenity" value="balcony">
+								  <span class="checkmark"></span>
+								</label><label class="form-check-label"> 마당
+								  <input type="checkbox" name="acm_amenity" value="garden"> 
+								  <span class="checkmark"></span>
+								</label>
+								<label class="form-check-label"> 난방기구
+								  <input type="checkbox" name="acm_amenity" value="heater">
+								  <span class="checkmark"></span>
+								</label>
+							</div>
+							<div class="col-sm-3">
+								<label class="form-check-label"> 인포메이션 데스크
+								  <input type="checkbox" name="acm_amenity" value="infodesk">
+								  <span class="checkmark"></span>
+								</label>
+								<label class="form-check-label"> 아침식사 제공
+								  <input type="checkbox" name="acm_amenity" value="breakfast">
+								  <span class="checkmark"></span>
+								</label>
+								<label class="form-check-label"> BBQ 시설
+								  <input type="checkbox" name="acm_amenity" value="bbq">
+								  <span class="checkmark"></span>
+								</label><label class="form-check-label"> 주차공간
+								  <input type="checkbox" name="acm_amenity" value="park"> 
+								  <span class="checkmark"></span>
+								</label>
+								<label class="form-check-label"> 에어컨
+								  <input type="checkbox" name="acm_amenity" value="aircon">
+								  <span class="checkmark"></span>
+								</label>
+							</div>
 						</div>
 					</div>
-					
-					 -->
-					
-					<!-- 편의시설 amenity -->
-					<div class="row form-group" id="amenity">
-						<label class="mb-3 col-sm-2" for="amenity_list">편의시설</label>
-						<div class="col-sm-10 excpt" id="amenity_list">
-							<div class="col-sm-3 form-check-inline">
-						    	<label class="form-check-label excpt" for="wifi2">
-						    		<input type="hidden" value="0" id="wifi1" name="ame_wifi" />
-									<input type="checkbox" class="form-check-input" id="wifi2">무선인터넷
-									<span class="checkmark"></span>
-								</label>
-							</div>
-							<div class="col-sm-3 form-check-inline">
-						    	<label class="form-check-label" for="tv2">
-						    		<input type="hidden" value="0" id="tv1" name="ame_tv" />
-									<input type="checkbox" class="form-check-input" id="tv2">TV
-									<span class="checkmark"></span>
-								</label>
-							</div>
-							<div class="col-sm-3 form-check-inline">
-						    	<label class="form-check-label" for="kitchen2">
-						    		<input type="hidden" value="0" id="kitchen1" name="ame_kitchen" />
-									<input type="checkbox" class="form-check-input" id="kitchen2">주방
-									<span class="checkmark"></span>
-								</label>
-							</div>
-							<div class="col-sm-3 form-check-inline">
-						    	<label class="form-check-label" for="aircon2">
-						    		<input type="hidden" value="0" id="aircon1" name="ame_aircon" />
-									<input type="checkbox" class="form-check-input" id="aircon2">에어컨
-									<span class="checkmark"></span>
-								</label>
-							</div>
-							<div class="col-sm-3 form-check-inline">
-						    	<label class="form-check-label" for="lock2">
-						    		<input type="hidden" value="0" id="lock1" name="ame_room_lock" />
-									<input type="checkbox" class="form-check-input" id="lock2">방 잠금장치
-									<span class="checkmark"></span>
-								</label>
-							</div>
-							<div class="col-sm-3 form-check-inline">
-						    	<label class="form-check-label" for="towel2">
-						    		<input type="hidden" value="0" id="towel1" name="ame_towel" />
-									<input type="checkbox" class="form-check-input" id="towel2">수건
-									<span class="checkmark"></span>
-								</label>
-							</div>
-							<div class="col-sm-3 form-check-inline">
-						    	<label class="form-check-label" for="washer2">
-						    		<input type="hidden" value="0" id="washer1" name="ame_washer" />
-									<input type="checkbox" class="form-check-input" id="washer2">세탁기
-									<span class="checkmark"></span>
-								</label>
-							</div>
-							<div class="col-sm-3 form-check-inline">
-						    	<label class="form-check-label" for="dryer2">
-						    		<input type="hidden" value="0" id="dryer1" name="ame_dryer" />
-									<input type="checkbox" class="form-check-input" id="dryer2">건조기
-									<span class="checkmark"></span>
-								</label>
-							</div>
-							<div class="col-sm-3 form-check-inline">
-						    	<label class="form-check-label" for="shower2">
-						    		<input type="hidden" value="0" id="shower1" name="ame_shower" />
-									<input type="checkbox" class="form-check-input" id="shower2">샤워시설
-									<span class="checkmark"></span>
-								</label>
-							</div>
-							<div class="col-sm-3 form-check-inline">
-						    	<label class="form-check-label" for="hair_dryer2">
-						    		<input type="hidden" value="0" id="hair_dryer1" name="ame_hair_dryer" />
-									<input type="checkbox" class="form-check-input" id="hair_dryer2">헤어드라이기
-									<span class="checkmark"></span>
-								</label>
-							</div>
-							<div class="col-sm-3 form-check-inline">
-						    	<label class="form-check-label" for="fan2">
-						    		<input type="hidden" value="0" id="fan1" name="ame_fan" />
-									<input type="checkbox" class="form-check-input" id="fan2">선풍기
-									<span class="checkmark"></span>
-								</label>
-							</div>
-							<div class="col-sm-3 form-check-inline">
-						    	<label class="form-check-label" for="extinguisher2">
-						    		<input type="hidden" value="0" id="extinguisher1" name="ame_extinguisher" />
-									<input type="checkbox" class="form-check-input" id="extinguisher2">소화기
-									<span class="checkmark"></span>
-								</label>
-							</div>
-							<div class="col-sm-3 form-check-inline">
-						    	<label class="form-check-label" for="balcony2">
-						    		<input type="hidden" value="0" id="balcony1" name="ame_balcony" />
-									<input type="checkbox" class="form-check-input" id="balcony2">발코니
-									<span class="checkmark"></span>
-								</label>
-							</div>
-							<div class="col-sm-3 form-check-inline">
-						    	<label class="form-check-label" for="garden2">
-						    		<input type="hidden" value="0" id="garden1" name="ame_garden" />
-									<input type="checkbox" class="form-check-input" id="garden2">마당
-									<span class="checkmark"></span>
-								</label>
-							</div>
-							<div class="col-sm-3 form-check-inline">
-						    	<label class="form-check-label" for="heater2">
-						    		<input type="hidden" value="0" id="heater1" name="ame_heater" />
-									<input type="checkbox" class="form-check-input" id="heater2">난방기구
-									<span class="checkmark"></span>
-								</label>
-							</div>
-							<div class="col-sm-3 form-check-inline">
-						    	<label class="form-check-label" for="infodesk2">
-						    		<input type="hidden" value="0" id="infodesk1" name="ame_infodesk" />
-									<input type="checkbox" class="form-check-input" id="infodesk2">인포메이션 데스크
-									<span class="checkmark"></span>
-								</label>
-							</div>
-							<div class="col-sm-3 form-check-inline">
-						    	<label class="form-check-label" for="breakfast2">
-						    		<input type="hidden" value="0" id="breakfast1" name="ame_breakfast" />
-									<input type="checkbox" class="form-check-input" id="breakfast2">아침식사 제공
-									<span class="checkmark"></span>
-								</label>
-							</div>
-							<div class="col-sm-3 form-check-inline">
-						    	<label class="form-check-label" for="bbq2">
-						    		<input type="hidden" value="0" id="bbq1" name="ame_bbq" />
-									<input type="checkbox" class="form-check-input" id="bbq2">BBQ 시설
-									<span class="checkmark"></span>
-								</label>
-							</div>
-							<div class="col-sm-3 form-check-inline">
-						    	<label class="form-check-label" for="park2">
-						    		<input type="hidden" value="0" id="park1" name="ame_park" />
-									<input type="checkbox" class="form-check-input" id="park2">주차공간
-									<span class="checkmark"></span>
-								</label>
-							</div>
-						</div>
-					</div><!-- amenity -->
-				</div>
 				
 				<div class="row">
 					<div class="col-sm-7"></div>
