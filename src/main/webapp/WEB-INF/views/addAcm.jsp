@@ -307,29 +307,29 @@
 					<div class="row mt-5 mb-5" id="acm_rule">
 						<div class="col-sm-6">
 							<label class="form-check-label"> 유아(2세 미만) 숙박에 적합함
-							  <input type="checkbox" name="infant" value="infant">
+							  <input type="checkbox" name="acm_rule" value="infant">
 							  <span class="checkmark"></span>
 							</label>
 							<label class="form-check-label"> 어린이(2~12세) 숙박에 적합함
-							  <input type="checkbox" name="child" value="child">
+							  <input type="checkbox" name="acm_rule" value="child">
 							  <span class="checkmark"></span>
 							</label>
 							<label class="form-check-label"> 반려동물 동반에 적합함
-							  <input type="checkbox" name="pet" value="pet">
+							  <input type="checkbox" name="acm_rule" value="pet">
 							  <span class="checkmark"></span>
 							</label>
 						</div>
 						<div class="col-sm-6">
 							<label class="form-check-label"> 흡연 가능
-							  <input type="checkbox" name="smoking" value="smoking">
+							  <input type="checkbox" name="acm_rule" value="smoking">
 							  <span class="checkmark"></span>
 							</label>
 							<label class="form-check-label"> 행사나 파티 허용
-							  <input type="checkbox" name="party" value="party1">
+							  <input type="checkbox" name="acm_rule" value="party">
 							  <span class="checkmark"></span>
 							</label>
 							<label class="form-check-label"> 상업적 이용 가능
-							  <input type="checkbox" name="commercial" value="commercial">
+							  <input type="checkbox" name="acm_rule" value="commercial">
 							  <span class="checkmark"></span>
 							</label>
 						</div>

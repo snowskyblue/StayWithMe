@@ -50,7 +50,6 @@ public class AcmDao {
 						final int acm_charge,
 						final String acm_title,
 						final String acm_info,
-						final String acm_rule,
 						final String acm_address,
 						final String acm_add_detail,
 						final int acm_zip, 
@@ -59,6 +58,7 @@ public class AcmDao {
 						final String acm_img, 
 						final String acm_availdate, 
 						String ame_wifi, String ame_tv, String ame_kitchen, String ame_aircon, String ame_room_lock, String ame_towel, String ame_washer, String ame_dryer, String ame_shower, String ame_hair_dryer, String ame_fan, String ame_extinguisher, String ame_balcony, String ame_garden, String ame_heater, String ame_infodesk, String ame_breakfast, String ame_bbq, String ame_park
+						, String[] rules
 			) {
 		System.out.println("AcmDao 클래스에서 " + ame_wifi + ame_park);
 		//transaction 실행 방식
@@ -74,8 +74,8 @@ public class AcmDao {
 					System.out.println("dao클래스 PP_SEQ.nextval");
 					String query = "insert into accommodation ( acm_code, acm_type,"
 							+ "acm_room_type,acm_bedding,acm_guest_num,acm_room_num,"
-							+ "acm_bath_num,acm_area,acm_charge,acm_title,acm_info,acm_rule,acm_address,acm_add_detail,acm_zip,acm_checkin_time,acm_checkout_time,acm_img,acm_AVAILDATE) "
-							+ "values (PP_SEQ.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+							+ "acm_bath_num,acm_area,acm_charge,acm_title,acm_info,acm_address,acm_add_detail,acm_zip,acm_checkin_time,acm_checkout_time,acm_img,acm_AVAILDATE) "
+							+ "values (PP_SEQ.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 					PreparedStatement pstmt = con.prepareStatement(query);
 					pstmt.setString(1, acm_type);
 					pstmt.setString(2, acm_room_type);
@@ -87,14 +87,14 @@ public class AcmDao {
 					pstmt.setInt(8, acm_charge);
 					pstmt.setString(9, acm_title);
 					pstmt.setString(10, acm_info);
-					pstmt.setString(11, acm_rule);
-					pstmt.setString(12, acm_address);
-					pstmt.setString(13, acm_add_detail);
-					pstmt.setInt(14, acm_zip);
-					pstmt.setString(15, acm_checkin_time);
-					pstmt.setString(16, acm_checkout_time);
-					pstmt.setString(17, acm_img);
-					pstmt.setString(18, acm_availdate);
+					/*pstmt.setString(11, acm_rule);*/
+					pstmt.setString(11, acm_address);
+					pstmt.setString(12, acm_add_detail);
+					pstmt.setInt(13, acm_zip);
+					pstmt.setString(14, acm_checkin_time);
+					pstmt.setString(15, acm_checkout_time);
+					pstmt.setString(16, acm_img);
+					pstmt.setString(17, acm_availdate);
 					
 					return pstmt;
 				}
@@ -132,6 +132,36 @@ public class AcmDao {
 					return pstmt;
 				}
 			});
+			
+			if(rules != null){
+				for(int i=0; i < rules.length; i++) {
+					final int x = i;
+					template.update(new PreparedStatementCreator() {
+						@Override
+						public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+							System.out.println("dao클래스의 세번째 udate문 PP_SEQ.currval");
+							String query = "insert into ACM_SUB (acm_code, acm_rule) "
+									+ "values (PP_SEQ.currval,?)";
+							PreparedStatement pstmt = con.prepareStatement(query);
+							pstmt.setString(1, rules[x]);
+							return pstmt;
+						}
+					});
+				}
+			}
+			
+			
+			
+			/*template.update(psc);
+			 * String[] rules = request.getParameterValues("acm_rule");       
+
+        		if(rules != null){
+		        	for(int i=0; i < rules.length; i++)
+		        	String sql = "insert into test values" + "("+ rules[i] +")" ;
+		        	
+		        	}
+        }
+        */
 			
 			transactionManager.commit(status); //정상처리시(DB에 commit)
 		} catch(Exception e) {

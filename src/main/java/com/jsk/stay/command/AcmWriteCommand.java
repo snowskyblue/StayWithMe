@@ -30,6 +30,7 @@ public class AcmWriteCommand implements AcmCommand {
 		int acm_charge = Integer.parseInt(request.getParameter("acm_charge"));
 		String acm_title = request.getParameter("acm_title");
 		String acm_info = request.getParameter("acm_info");
+		/*
 		String infant = request.getParameter("infant");
 		String child = request.getParameter("child");
 		String pet = request.getParameter("pet");
@@ -37,7 +38,7 @@ public class AcmWriteCommand implements AcmCommand {
 		String party = request.getParameter("party");
 		String commercial = request.getParameter("commercial");
 
-		String acm_rule = infant + " " + child + " " + pet + " " + smoking + " " + party + " " + commercial;
+		String acm_rule = */
 		String address = request.getParameter("address");
 		String detailAddress = request.getParameter("detailAddress");
 		String extraAddress = request.getParameter("extraAddress");
@@ -71,6 +72,7 @@ public class AcmWriteCommand implements AcmCommand {
 		String ame_bbq            = request.getParameter("ame_bbq");
 		String ame_park           = request.getParameter("ame_park");
 		
+		String[] rules = request.getParameterValues("acm_rule");
 		
 		AcmDao dao = new AcmDao();
 		dao.write(
@@ -84,7 +86,6 @@ public class AcmWriteCommand implements AcmCommand {
 				acm_charge,
 				acm_title,
 				acm_info,
-				acm_rule,
 				acm_address,
 				acm_add_detail,
 				acm_zip,
@@ -96,6 +97,7 @@ public class AcmWriteCommand implements AcmCommand {
 				 ame_towel,  ame_washer,  ame_dryer,  ame_shower,  ame_hair_dryer,
 				 ame_fan,  ame_extinguisher,  ame_balcony,  ame_garden,  ame_heater,
 				 ame_infodesk,  ame_breakfast,  ame_bbq,  ame_park
+				 ,rules
 		);
 	}
 
