@@ -149,24 +149,25 @@
 						<div class="form-group">
 							<label for="findId_name">이름</label>
 							<input type="text" class="form-control mx-auto col-10" id="findId_name" name="mb_name" maxlength="20" placeholder="이름"> 
+							<div class="check_font" id="name_check"></div>
 						</div>
 						<div class="form-group">
 							<label for="findId_phone">휴대폰 번호</label><br/>
 							<div class="form_center">
 								<input type="tel" class="form-control-inline col-8 col-sm-8" id="findId_phone" name="mb_phone" placeholder='"-"없이 번호만 입력'>
-								<button type="button" id="certificate" class="btn btn-dark">인증</button>
+								<button type="button" onclick="phoneCertify()" id="phone_certify" class="btn btn-dark">인증</button>
 								<div class="check_font" id="phone_check"></div>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="form_center">
 								<input type="text" class="form-control-inline col-8 col-sm-8" id="findId_sms" name="mb_sms" maxlength="6" placeholder="인증 번호 입력">
-								<button type="button" id="checkCertificate" class="btn btn-dark">확인</button>
+								<button type="button" id="sms_confirm" class="btn btn-dark">확인</button>
 								<div class="check_font" id="phone_check2"></div>
 							</div>
 						</div><br/><br/>
 						<div class="form-group text-center">
-							<button type="submit" id="submitBtn" class="btn btn-dark form-control" style="border: none;">아이디 찾기</button>
+							<button type="submit" id="findId_submitBtn" class="btn btn-dark form-control" style="border: none;">아이디 찾기</button>
 						</div>
 					</form>
 				</div>
@@ -182,7 +183,7 @@
 							<label for="findPwd_id">아이디</label><br/>
 							<div class="form_center">
 								<input type="text" class="form-control-inline col-8 col-sm-8" id="findPwd_id" name="mb_id" placeholder='아이디'>
-								<button type="button" id="certificate" class="btn btn-dark">확인</button>
+								<button type="button" id="id_confirm" class="btn btn-dark">확인</button>
 								<div class="check_font" id="id_check"></div>
 							</div>
 						</div>
@@ -191,12 +192,31 @@
 							<input type="text" class="form-control mx-auto col-10" id="findPwd_email" name="mb_email" maxlength="20" placeholder="이메일"> 
 						</div><br/><br/>
 						<div class="form-group text-center">
-							<button type="submit" id="submitBtn" class="btn btn-dark form-control" style="border: none;">임시 비밀번호 발송</button>
+							<button type="submit" id="findPwd_submitBtn" class="btn btn-dark form-control" style="border: none;">임시 비밀번호 발송</button>
 						</div>
 					</form>
 				</div>
 			</div>
 			<!-- tab 선택에 따른 내용 -->
+		</div>
+	</div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="findModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<img src="img/logo.jpg">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div id="findModal_body"class="modal-body text-center" style="font-weight:bold;">
+				 
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+			</div>
 		</div>
 	</div>
 </div>
@@ -212,6 +232,8 @@
 <script>
 var emailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
+var foundId = null;
+
 
 function findTab(elmnt, color) {
 	var i;
@@ -227,6 +249,64 @@ function findTab(elmnt, color) {
 }
 document.getElementById("defaultTab").click(); //active
 
+function phoneCertify() {
+	var findModal_body = document.getElementById("findModal_body");
+	var findId_name = document.getElementById("findId_name");
+	var name_check = document.getElementById("name_check");
+	var findId_phone = document.getElementById("findId_phone");
+	
+	if(findId_name.value == "") {
+		$("#findModal").modal("show");
+		findModal_body.innerHTML = "이름을 입력하세요.";
+	}
+	
+	else if(findId_phone.value == "") {
+		$("#findModal").modal("show");
+		findModal_body.innerHTML = "전화번호를 입력하세요.";	
+	}
+	
+	else if(phoneJ.test(findId_phone.value) != true) {
+		$("#findModal").modal("show");
+		findModal_body.innerHTML = "전화번호 형식이 올바르지 않습니다.";	
+	}
+
+	else if(findId_name.value != "" && phoneJ.test(findId_phone.value) == true){
+		var mb_name = findId_name.value;
+		var mb_phone = findId_phone.value;
+		
+		$.ajax({
+			url: "findIdCheck",
+			data: {mb_name : mb_name, mb_phone : mb_phone},
+			type:"POST",
+			success: function(data) {
+				console.log(data);
+				if(data != "notFoundId") {
+					$("#findModal").modal("show");
+					findModal_body.innerHTML = "인증번호가 발송되었습니다.";
+					foundId = data;
+				}
+				else {
+					$("#findModal").modal("show");
+					findModal_body.innerHTML = "입력하신 정보가 회원정보와<br/>일치하지 않습니다.<br/> 다시 확인해주세요.";	
+					foundId = data;
+				}
+			}
+		});
+	}
+}
+
+$(document).ready(function() {
+	$("#sms_confirm").click(function() {
+		$.ajax ({
+			data : {foundId : foundId},
+			url : "findIdSuccess",
+			success : function(data) {
+				console.log(data);
+				$(".findTabMenu").html(data);
+			}
+		});
+	});
+});
 </script>
 </body>
 </html>
