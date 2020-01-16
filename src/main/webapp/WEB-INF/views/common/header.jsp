@@ -283,7 +283,7 @@ $(document).ready(function(){
 		if($("#nav-memberjoin").text() == "회원가입") {
 			location.href = "memberjoin";
 		}else{
-			location.href = "myPageProfile";
+			myPageProfile();
 		}
 	});
 });

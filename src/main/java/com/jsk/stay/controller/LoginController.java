@@ -2,6 +2,7 @@ package com.jsk.stay.controller;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,10 +55,6 @@ public class LoginController {
 		if (error != null) {
 			model.addObject("error", "Invalid username and password!");
 		}
-		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
-		System.out.println("네이버" + naverAuthUrl);
-		mo.addAttribute("url", naverAuthUrl);
-		
 		
 		model.setViewName("login");
 
@@ -83,7 +80,7 @@ public class LoginController {
 		return "logout";
 	}
 	
-	@RequestMapping(value = "/callback", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/socialPhone", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
 			throws IOException {
 		System.out.println("여기는  callback");
@@ -93,7 +90,19 @@ public class LoginController {
 	    apiResult = naverLoginBO.getUserProfile(oauthToken);
 		model.addAttribute("result", apiResult);
                 
-		return "naverSuccess";
+		return "index";
+	}
+	
+	@RequestMapping(value = "nlogin", method = { RequestMethod.GET, RequestMethod.POST })
+	public void nlogin(Model model, HttpSession session,HttpServletResponse response) throws IOException {
+		
+		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);	
+		//인증 URL을 생성
+		
+		System.out.println("네이버" + naverAuthUrl);
+		
+		// 생성한 인증 URL을 View로 전달
+		response.sendRedirect(naverAuthUrl);
 	}
 
 }

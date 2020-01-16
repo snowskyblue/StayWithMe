@@ -27,6 +27,8 @@
 		<intercept-url pattern="/memberjoinpro" access="permitAll" />
 		<intercept-url pattern="/idCheck" access="permitAll" />
 		<intercept-url pattern="/phoneCheck" access="permitAll" />
+		<intercept-url pattern="/nlogin" access="permitAll" />
+		<intercept-url pattern="/socialPhone" access="permitAll" />
 		<intercept-url pattern="/sendSms" access="permitAll" />
 		<intercept-url pattern="/findIdPwd" access="permitAll" />
 		<intercept-url pattern="/findIdSuccess" access="permitAll" />
