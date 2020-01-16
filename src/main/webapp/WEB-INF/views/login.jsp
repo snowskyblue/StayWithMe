@@ -37,18 +37,18 @@
 	/*border-collapse: collapse;*/
 }
 
-.container h3, label, #form .btn {
+.container h3, label, #loginForm .btn {
 	font-weight: bold;
 	font-family: 'S-CoreDream-2ExtraLight';
 }
 
-#form .form-control {
+#loginForm .form-control {
 	border: none;
 	border-radius: 0;
 	border-bottom: 2px solid grey;
 	margin: 0px;
 }
-#form {
+#loginForm {
 	width: 400px;
 	margin-top: 80px;
 	margin-bottom: 150px;
@@ -63,7 +63,7 @@
 }
 
 @media screen and (max-width: 576px) {
-	#form {
+	#loginForm {
 		width: 300px;
 		font-size: 20px;
 	}
@@ -82,7 +82,7 @@
 		<div id="border"></div>
 		<div class="d-flex flex-wrap align-content-center justify-content-center" style="min-height: 500px;">
 			
-			<form method="POST" action="login" id="form">
+			<form method="POST" action="login" id="loginForm">
 				<!-- frontController로 안감 -->
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
 				<label style="font-size: 15px;">아이디</label> 
@@ -90,11 +90,15 @@
 				<label style="font-size: 15px;">비밀번호 </label> 
 				<input type="password" class="form-control" name="mb_pwd" placeholder="PASSWORD">
 				<div class="d-flex justify-content-between">
-					<a href="findIdPwd" style="font-size: 10px; color: red;">아이디/비밀번호 찾기</a>
+					<a href="#" onclick="findIdPwd()" style="font-size: 10px; color: red;">아이디/비밀번호 찾기</a>
 				</div>
 				<br/> 
 				<input class="btn btn-dark w-100 form-control" style="margin-bottom: 10px; border : none;" type="submit" value="로 그 인" id="login"/> <br /> 
 				<input class="btn btn-dark w-100 form-control" type="button" value="회원가입" id="signin" style = "border : none;"/>
+				<br/><br />
+				<div id="naver_id_login">
+					<a href="${url}"><img src="img/naverid_login_button_short.png" style = "widht : 50px; height : 50px;"/></a>
+				</div>
 			</form>
 		</div>
 	</div>
@@ -181,6 +185,17 @@ $(document).ready(function(){
 		location.href = "memberjoin";
 	});
 });
+
+function findIdPwd() {
+	$.ajax ({
+		data : "",
+		url : "findIdPwd",
+		dataType : "html",
+		success : function(data) {
+			$(".main").html(data);
+		}
+	});
+}
 </script>
 </body>
 </html>

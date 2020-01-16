@@ -31,6 +31,7 @@ public class CustomUserDetailsService implements UserDetailsService{
 		System.out.println("pw : " + pw);
 		Collection<SimpleGrantedAuthority> roles = new ArrayList<SimpleGrantedAuthority>();
 		roles.add(new SimpleGrantedAuthority(dto.getMb_grade())); //º¯°æ
+		System.out.println("roles : " + roles);
 		UserDetails user = new User(username, pw , roles);
 
 		return user;

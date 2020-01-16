@@ -95,19 +95,19 @@
 				<h2 class="text-center">회원정보를 입력해 주세요.</h2>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				<div class="form-group">
-					<label for="id">아이디</label>
+					<label for="mb_id">아이디</label>
 					<input type="text" class="form-control" id="mb_id" name="mb_id" maxlength="20" placeholder="ID">
 					<div class="check_font" id="id_check"></div>
 				</div>
 				
 				<div class="form-group">
-					<label for="pwd">비밀번호</label>
+					<label for="mb_pwd">비밀번호</label>
 					<input type="password" class="form-control" id="mb_pwd" name="mb_pwd" placeholder="PASSWORD" maxlength="20">
 					<div class="check_font" id="pwd_check"></div>
 				</div>
 				
 				<div class="form-group">
-					<label for="pwd2">비밀번호 확인</label>
+					<label for="mb_pwd2">비밀번호 확인</label>
 					<input type="password" class="form-control" id="mb_pwd2" name="mb_pwd2" placeholder="Confirm Password" maxlength="20">
 					<div class="check_font" id="pwd2_check"></div>
 				</div>
@@ -120,7 +120,7 @@
 				
 				<div class="form-group">
 					<label for="mb_birthdate">생년월일</label>
-					<input type="tel" class="form-control" id="mb_birthdate" name="mb_birthdate" placeholder="ex)19990101" maxlength="8">
+					<input type="date" class="form-control" id="mb_birthdate" name="mb_birthdate" placeholder="ex)19990101" maxlength="8" min="1930-01-01" max="2001-01-01">
 					<div class="check_font" id="birth_check"></div>
 				</div>
 				
@@ -176,7 +176,7 @@ var pwdJ = /^[A-Za-z0-9]{4,20}$/;
 var nameJ = /^[가-힣]{2,20}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/;
 var emailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
-var birthJ = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
+var birthJ = /^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/;
 var result = null;
 
 $(document).ready(function() {
