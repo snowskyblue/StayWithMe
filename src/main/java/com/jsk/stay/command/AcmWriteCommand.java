@@ -22,9 +22,7 @@ public class AcmWriteCommand implements AcmCommand {
 		
 		String acm_type = request.getParameter("acm_type");
 		String acm_room_type = request.getParameter("acm_room_type");
-		String bed = request.getParameter("bed");
-		String floor = request.getParameter("floor");
-		String acm_bedding = bed + ", " +  floor;
+		String acm_bedding = request.getParameter("acm_bedding");
 		int acm_guest_num = Integer.parseInt(request.getParameter("acm_guest_num"));
 		int acm_room_num = Integer.parseInt(request.getParameter("acm_room_num"));
 		int acm_bath_num = Integer.parseInt(request.getParameter("acm_bath_num"));

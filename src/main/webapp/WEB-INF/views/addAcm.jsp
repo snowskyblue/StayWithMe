@@ -114,7 +114,7 @@
   transform: rotate(45deg);
 }
 
-#acm_rule .form-check-label, #amenity .form-check-label, .row, #bedding, #space_type {
+#acm_rule .form-check-label, #amenity .form-check-label, .row, #acm_bedding, #space_type {
 	margin-bottom: 25px;
 }
 
@@ -192,21 +192,17 @@
 					</div>
 					<!-- 3333333333333333333333 name="bed" name="floor"  33333333333333333333333 -->
 					
-					<div class="d-flex justify-content-between" id="bedding" style="height:38px;">
+					<div class="d-flex justify-content-between" id="acm_bedding" style="height:38px;">
 						<div>침실 타입</div>
 						<div>
-							<div class="form-check-inline">
-						    	<label class="form-check-label" for="check1">
-									<input type="checkbox" class="form-check-input" id="check1" name="bed" value="bed" checked>침대
-									<span class="checkmark"></span>
-								</label>
-						    </div>
-						    <div class="form-check-inline">
-						    	<label class="form-check-label" for="check2">
-						        	<input type="checkbox" class="form-check-input" id="check2" name="floor" value="floor">온돌
-						        	<span class="checkmark"></span>
-						    	</label>
-						    </div>
+							<div class="d-inline">
+								<input type="radio" id="bed" name="acm_bedding" value="bed" checked>
+								<label for="bed">침대</label>
+							</div>
+							<div class="d-inline">
+								<input type="radio" id="floor" name="acm_bedding" value="floor">
+								<label for="floor">온돌</label>
+							</div>
 						</div>
 					</div>
 				    
@@ -549,10 +545,12 @@
 					</div><!-- amenity -->
 				</div>
 				
-			    <div class="d-flex justify-content-end">
-					<button type="submit" class="btn btn-primary">숙소등록 하기</button>
+				<div class="row">
+					<div class="col-sm-7"></div>
+				    <div class="col-sm-3 d-flex justify-content-end">
+						<button type="submit" class="form-control bg-dark text-light">숙소등록 하기</button>
+					</div>
 				</div>
-				
 			</form>
 		</div>
 	</div>
@@ -609,6 +607,10 @@
     
     /*iCheck(라디오버튼)*/
     $(".room_type input").iCheck({
+		checkboxClass: "icheckbox_flat",
+		radioClass: "iradio_flat"
+	});
+    $("#acm_bedding input").iCheck({
 		checkboxClass: "icheckbox_flat",
 		radioClass: "iradio_flat"
 	});
