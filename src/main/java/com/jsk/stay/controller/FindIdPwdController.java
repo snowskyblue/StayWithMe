@@ -26,7 +26,10 @@ public class FindIdPwdController {
 	}
 
 	@RequestMapping("/findIdPwd")
-	public String findIdPwd() {
+	public String findIdPwd(HttpServletRequest request) {
+		//String foundId2 = request.getParameter("foundId");
+		//model.addAttribute("foundId2", foundId2);
+		//System.out.println("foundId2: " + foundId2);
 		return "findIdPwd";
 	}
 	

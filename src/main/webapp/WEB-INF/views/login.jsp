@@ -54,6 +54,25 @@
 	margin-bottom: 150px;
 }
 
+.justify-content-between {
+	color: #ff7272;
+}
+
+.justify-content-between a {
+	cursor: pointer;
+	font-size: 14px;
+    font-weight: bold;
+    
+}
+
+.justify-content-between a:hover {
+	text-decoration: underline!important;
+}
+
+#loginJoinBtn {
+	margin-top: 50px;
+}
+
 #login {
 	margin-top: 20px;
 }
@@ -85,16 +104,20 @@
 			<form method="POST" action="login" id="loginForm">
 				<!-- frontController로 안감 -->
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+				
 				<label style="font-size: 15px;">아이디</label> 
 				<input type="text" class="form-control" name="mb_id" placeholder="ID"> <br />
+				
 				<label style="font-size: 15px;">비밀번호 </label> 
 				<input type="password" class="form-control" name="mb_pwd" placeholder="PASSWORD">
+				
 				<div class="d-flex justify-content-between">
-					<a href="#" onclick="findIdPwd()" style="font-size: 10px; color: red;">아이디/비밀번호 찾기</a>
+					<a onclick="findIdPwd()">아이디/비밀번호 찾기</a>
 				</div>
-				<br/> 
-				<input class="btn btn-dark w-100 form-control" style="margin-bottom: 10px; border : none;" type="submit" value="로 그 인" id="login"/> <br/> 
-				<input class="btn btn-dark w-100 form-control" type="button" value="회원가입" id="signin" style = "border : none;"/>
+				<div id="loginJoinBtn">
+					<input class="btn btn-dark w-100 form-control" style="margin-bottom: 15px; border : none;" type="submit" value="로 그 인" id="login"/> <br/> 
+					<input class="btn btn-dark w-100 form-control" type="button" value="회원가입" id="signin" style = "border : none;"/>
+				</div>
 				<br/><br />
 				<div id="naver_id_login">
 					<a href="nlogin"><img src="img/naverid_login_button_short.png" style = "widht : 50px; height : 50px;"/></a>
@@ -123,7 +146,7 @@
 		</div>
 	</div>
 </div>
-
+<h3>${foundId2}</h3>
 <jsp:include page="common/footer.jsp" flush="false"/>
 <!--jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -196,6 +219,7 @@ function findIdPwd() {
 		}
 	});
 }
+
 </script>
 </body>
 </html>

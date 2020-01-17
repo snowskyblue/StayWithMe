@@ -132,8 +132,8 @@
 		<div class="findTabMenu mx-auto">
 			<!-- tab 메뉴 -->
 			<ul class="nav nav-tabs text-center">
-				<li class="findTab active" id="defaultTab" onclick='findTab(this, "white")'><a data-toggle="tab" data-target="#findId">ID 찾기</a>
-				<li class="findTab" onclick='findTab(this, "white")'><a data-toggle="tab" data-target="#findPwd">비밀번호 찾기</a>
+				<li class="findTab" id="defaultTab1" onclick='findTab(this, "white")'><a data-toggle="tab" data-target="#findId">ID 찾기</a>
+				<li class="findTab active" id="defaultTab2" onclick='findTab(this, "white")'><a id="def" data-toggle="tab" data-target="#findPwd">비밀번호 찾기</a>
 			</ul>
 			<!-- tab 메뉴 -->
 			<!-- tab 선택에 따른 내용 -->
@@ -145,7 +145,7 @@
 						회원정보에 등록된 전화번호와<br/>
 						입력한 전화번호가 같아야 인증번호를 받을 수 있습니다.
 					</div>
-					<form method="POST" action="findId" class="mx-auto findForm">
+					<form action="#" class="mx-auto findForm">
 						<div class="form-group">
 							<label for="findId_name">이름</label>
 							<input type="text" class="form-control mx-auto col-10" id="findId_name" name="mb_name" maxlength="20" placeholder="이름"> 
@@ -167,7 +167,7 @@
 							</div>
 						</div><br/><br/>
 						<div class="form-group text-center">
-							<button type="submit" id="findId_submitBtn" class="btn btn-dark form-control" style="border: none;">아이디 찾기</button>
+							<button type="button" id="findIdBtn" class="btn btn-dark form-control" style="border: none;">아이디 찾기</button>
 						</div>
 					</form>
 				</div>
@@ -178,7 +178,7 @@
 						회원정보에 등록된 이메일로<br/>
 						임시 비밀번호를 발송해 드립니다.
 					</div>
-					<form method="POST" action="findPwd" class="mx-auto findForm">
+					<form method="POST" action="#" class="mx-auto findForm">
 						<div class="form-group">
 							<label for="findPwd_id">아이디</label><br/>
 							<div class="form_center">
@@ -192,7 +192,7 @@
 							<input type="text" class="form-control mx-auto col-10" id="findPwd_email" name="mb_email" maxlength="20" placeholder="이메일"> 
 						</div><br/><br/>
 						<div class="form-group text-center">
-							<button type="submit" id="findPwd_submitBtn" class="btn btn-dark form-control" style="border: none;">임시 비밀번호 발송</button>
+							<button type="button" id="findPwdBtn" class="btn btn-dark form-control" style="border: none;">임시 비밀번호 발송</button>
 						</div>
 					</form>
 				</div>
@@ -238,7 +238,9 @@ var foundId = null;
 function findTab(elmnt, color) {
 	var i;
 	var findTab;
-	findTab = document.getElementsByClassName("findTab");
+	var findTab = document.getElementsByClassName("findTab");
+	
+	
 	for(i = 0 ; i < findTab.length ; i++) {
 		findTab[i].style.backgroundColor = "";
 		findTab[i].style.color = "white";
@@ -247,7 +249,36 @@ function findTab(elmnt, color) {
 	elmnt.style.backgroundColor = color;
 	elmnt.style.color = "black";
 }
-document.getElementById("defaultTab").click(); //active
+//document.getElementsById("defaultTab1").click();
+/* onclick='findTab(this, "white")'*/
+/*if($("#found").text() != null) {
+	$("#defaultTab2").trigger("click");
+}
+else {
+	$("#defaultTab1").trigger("click");
+}*/
+/*var found = document.getElementById("found");
+alert("found");
+if(found.innerHTML != null) {
+	document.getElementById("defaultTab1").click();
+}*/
+
+/*$(document).on("click", "#defaultTab1", function() {
+	$(this).css("background-color", "black");
+	$(this).css("color", "white");
+	$("#defaultTab2").css("background-color", "white");
+	$("#defaultTab2").css("color", "black");
+	if($("#found").text() != null) {
+		//alert($("#found").text());
+	}
+});
+$(document).on("click", "#defaultTab2", function() {
+	$(this).css("background-color", "black");
+	$(this).css("color", "white");
+	$("#defaultTab1").css("background-color", "white");
+	$("#defaultTab1").css("color", "black");
+});*/
+$("#defaultTab1").trigger("click");
 
 function phoneCertify() {
 	var findModal_body = document.getElementById("findModal_body");
@@ -295,16 +326,33 @@ function phoneCertify() {
 	}
 }
 
-$(document).ready(function() {
-	$("#sms_confirm").click(function() {
-		$.ajax ({
-			data : {foundId : foundId},
-			url : "findIdSuccess",
-			success : function(data) {
-				console.log(data);
-				$(".findTabMenu").html(data);
-			}
-		});
+/*$(document).ready(function() {
+	$("#findIdBtn").click(function() {
+		//event.preventDefault();
+		
+	});
+
+});*/
+
+$(document).on("click", "#findIdBtn", function() {
+	$.ajax ({
+		data : {foundId : foundId},
+		url : "findIdSuccess",
+		cache : false,
+		success : function(data) {
+			$(".findTabMenu").html(data);
+		}
+	});
+});
+
+$(document).on("click", "#findPwdBtn", function() {
+	$.ajax ({
+		data : "",
+		url : "findIdSuccess",
+		cache : false,
+		success : function(data) {
+			$(".findTabMenu").html(data);
+		}
 	});
 });
 </script>
