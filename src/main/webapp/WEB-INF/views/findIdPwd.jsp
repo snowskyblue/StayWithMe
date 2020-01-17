@@ -155,7 +155,7 @@
 							<label for="findId_phone">휴대폰 번호</label><br/>
 							<div class="form_center">
 								<input type="tel" class="form-control-inline col-8 col-sm-8" id="findId_phone" name="mb_phone" placeholder='"-"없이 번호만 입력'>
-								<button type="button" onclick="phoneCertify()" id="phone_certify" class="btn btn-dark">인증</button>
+								<button type="button" onclick="namePhoneCheck(); phoneCertify();" id="phone_certify" class="btn btn-dark">인증</button>
 								<div class="check_font" id="phone_check"></div>
 							</div>
 						</div>
@@ -183,7 +183,7 @@
 							<label for="findPwd_id">아이디</label><br/>
 							<div class="form_center">
 								<input type="text" class="form-control-inline col-8 col-sm-8" id="findPwd_id" name="mb_id" placeholder='아이디'>
-								<button type="button" id="id_confirm" class="btn btn-dark">확인</button>
+								<button type="button" id="id_confirm" onclick="idCheck()" class="btn btn-dark">확인</button>
 								<div class="check_font" id="id_check"></div>
 							</div>
 						</div>
@@ -192,7 +192,7 @@
 							<input type="text" class="form-control mx-auto col-10" id="findPwd_email" name="mb_email" maxlength="20" placeholder="이메일"> 
 						</div><br/><br/>
 						<div class="form-group text-center">
-							<button type="button" id="findPwdBtn" class="btn btn-dark form-control" style="border: none;">임시 비밀번호 발송</button>
+							<button type="button" id="findPwdBtn" onclick="emailCheck(); idCheck();" class="btn btn-dark form-control" style="border: none;">임시 비밀번호 발송</button>
 						</div>
 					</form>
 				</div>
@@ -231,10 +231,10 @@
 <script src="icheck-1.x/icheck.min.js"></script>
 <script>
 var emailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
+var phoneJ = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;
 var foundId = null;
 
-
+//탭메뉴 클릭시 탭배경과 텍스트의 색상 변경
 function findTab(elmnt, color) {
 	var i;
 	var findTab;
@@ -249,38 +249,10 @@ function findTab(elmnt, color) {
 	elmnt.style.backgroundColor = color;
 	elmnt.style.color = "black";
 }
-//document.getElementsById("defaultTab1").click();
-/* onclick='findTab(this, "white")'*/
-/*if($("#found").text() != null) {
-	$("#defaultTab2").trigger("click");
-}
-else {
-	$("#defaultTab1").trigger("click");
-}*/
-/*var found = document.getElementById("found");
-alert("found");
-if(found.innerHTML != null) {
-	document.getElementById("defaultTab1").click();
-}*/
+$("#defaultTab1").trigger("click"); //페이지에 들어갔을때 처음부터 클릭되게
 
-/*$(document).on("click", "#defaultTab1", function() {
-	$(this).css("background-color", "black");
-	$(this).css("color", "white");
-	$("#defaultTab2").css("background-color", "white");
-	$("#defaultTab2").css("color", "black");
-	if($("#found").text() != null) {
-		//alert($("#found").text());
-	}
-});
-$(document).on("click", "#defaultTab2", function() {
-	$(this).css("background-color", "black");
-	$(this).css("color", "white");
-	$("#defaultTab1").css("background-color", "white");
-	$("#defaultTab1").css("color", "black");
-});*/
-$("#defaultTab1").trigger("click");
-
-function phoneCertify() {
+//아이디찾기 이름&전화번호 유효성 검사
+function namePhoneCheck() {
 	var findModal_body = document.getElementById("findModal_body");
 	var findId_name = document.getElementById("findId_name");
 	var name_check = document.getElementById("name_check");
@@ -300,8 +272,11 @@ function phoneCertify() {
 		$("#findModal").modal("show");
 		findModal_body.innerHTML = "전화번호 형식이 올바르지 않습니다.";	
 	}
+}
 
-	else if(findId_name.value != "" && phoneJ.test(findId_phone.value) == true){
+//인증문자 발송
+function phoneCertify() {
+	if(findId_name.value != "" && phoneJ.test(findId_phone.value) == true){
 		var mb_name = findId_name.value;
 		var mb_phone = findId_phone.value;
 		
@@ -314,6 +289,7 @@ function phoneCertify() {
 				if(data != "notFoundId") {
 					$("#findModal").modal("show");
 					findModal_body.innerHTML = "인증번호가 발송되었습니다.";
+					sendSms();
 					foundId = data;
 				}
 				else {
@@ -321,40 +297,118 @@ function phoneCertify() {
 					findModal_body.innerHTML = "입력하신 정보가 회원정보와<br/>일치하지 않습니다.<br/> 다시 확인해주세요.";	
 					foundId = data;
 				}
+				return foundId;
 			}
 		});
+
 	}
 }
 
-/*$(document).ready(function() {
-	$("#findIdBtn").click(function() {
-		//event.preventDefault();
-		
+//문자 인증 일치확인
+function sendSms() {
+	$.ajax({
+		url: "sendSms",
+		data : {
+	    	   mb_phone : $("#findId_phone").val()
+	       },
+	       success : function(result){
+	    	   console.log(result);
+	    	   if(result != null) {
+	    		   $("#sms_confirm").on("click", function() {
+	    			 if(JSON.parse(result) == ($("#findId_sms").val())) {
+	    				 $("#phone_check2").text("인증되었습니다.");
+	    				 $("#phone_check2").css("color", "blue");
+	    			 }
+	    			 else {
+	    				 $("#phone_check2").text("인증실패. 다시 입력하세요.");
+	    				 $("#phone_check2").css("color", "red");
+	    			 }
+	    		  })
+	    	   }   
+	       }
 	});
+}
 
-});*/
-
+//아이디 찾기 버튼 누를 때 찾은 아이디값을 가지고 결과 페이지로 넘어감. ajax 사용 시 on이벤트로 하는게 좋음
 $(document).on("click", "#findIdBtn", function() {
-	$.ajax ({
-		data : {foundId : foundId},
-		url : "findIdSuccess",
-		cache : false,
-		success : function(data) {
-			$(".findTabMenu").html(data);
-		}
-	});
+	if($("#phone_check2").text() == "인증되었습니다.") {
+		$.ajax ({
+			data : {foundId : foundId},
+			url : "findIdSuccess",
+			success : function(data) {
+				$(".findTabMenu").html(data);
+			}
+		});
+	}
+	else if($("#findId_name").val() != "" && phoneJ.test($("#findId_phone").val()) == true) {
+		$("#findModal").modal("show");
+		findModal_body.innerHTML = "전화번호 인증 후 다시 시도해 주세요.";
+	}
+	else {
+		namePhoneCheck();
+	}
 });
 
-$(document).on("click", "#findPwdBtn", function() {
+//아이디 유효성
+function idCheck() {
+	var mb_id = $("#findPwd_id").val();
+	
+	if($("#findPwd_id").val() == "") {
+		$("#findModal").modal("show");
+		$("#findModal_body").text("아이디를 입력하세요.");
+	}
+	else {
+		$.ajax({
+			data : {mb_id : mb_id},
+			url : "findPwd_idCheck",
+			success : function(data) {
+				if(data != "notFoundId") {
+					$("#findModal").modal("show");
+					$("#findModal_body").text("아이디가 확인 되었습니다.");
+					foundEmail = data;
+					emailCheck();
+				}
+				else {
+					$("#findModal").modal("show");
+					$("#findModal_body").text("등록되지 않은 아이디입니다.");
+				}
+			}
+			
+		});	
+	}
+}
+
+//이메일 유효성
+function emailCheck() {
+	if($("#findPwd_email").val() == "") {
+		$("#findModal").modal("show");
+		$("#findModal_body").text("이메일을 입력해 주세요.");
+	}
+	else {
+		if($("#findPwd_email").val() == foundEmail) {
+			$("#findModal").modal("show");
+			$("#findModal_body").text("이메일을 발송했습니다.");
+		else {
+			$("#findModal").modal("show");
+			$("#findModal_body").text("이메일이 회원정보와 일치하지 않습니다.");
+		}
+	}
+}
+//임시 비밀번호 발송 버튼 누르면 이메일로 발송되었다는 모달창이 뜨고 close를 누르면 로그인페이지로 이동
+/*$(document).on("click", "#findPwdBtn", function() {
+	
 	$.ajax ({
 		data : "",
 		url : "findIdSuccess",
 		cache : false,
 		success : function(data) {
-			$(".findTabMenu").html(data);
+			$("#findModal").modal("show");
+			$("#findModal_body").text(data + "로 임시 비밀번호가 발송되었습니다.");
+			location.href="login?log=start";
 		}
 	});
 });
+*/
 </script>
 </body>
 </html>

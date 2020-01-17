@@ -10,4 +10,11 @@ public class FindIdPwdCommandImp implements FindIdPwdCommand {
 		System.out.println("FindIdPwdCommand");
 		return dao.findId_phoneCheck(mb_name, mb_phone);
 	}
+	
+	@Override
+	public String findPwd_idCheck(String mb_id) {
+		FindIdPwdDaoImp dao = new FindIdPwdDaoImp();
+		System.out.println("FindIdPwdCommand");
+		return dao.findPwd_idCheck(mb_id);
+	}
 }

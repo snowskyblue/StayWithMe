@@ -37,4 +37,18 @@ public class FindIdPwdDaoImp implements FindIdPwdDao {
 		}
 		
 	}
+	
+	@Override
+	public String findPwd_idCheck(String mb_id) {
+		System.out.println("FindIdPwdDaoImp");
+		try {
+			String query = "select mb_email from member where mb_id = ?";
+			String result = template.queryForObject(query, new Object[] {mb_id}, String.class);
+			System.out.println(result);
+			return result;
+		}
+		catch(EmptyResultDataAccessException e) {
+			return "notFoundId";
+		}
+	}
 }

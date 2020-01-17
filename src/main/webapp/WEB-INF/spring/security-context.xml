@@ -34,6 +34,7 @@
 		<intercept-url pattern="/findIdSuccess" access="permitAll" />
 		<intercept-url pattern="/findPwd" access="permitAll" />
 		<intercept-url pattern="/findIdCheck" access="permitAll" />
+		<intercept-url pattern="/findPwd_idCheck" access="permitAll" />
 		<intercept-url pattern="/index" access="permitAll" />
 		<intercept-url pattern="/addAcm" access="permitAll" />
 		<intercept-url pattern="/html/**" access="permitAll" />
