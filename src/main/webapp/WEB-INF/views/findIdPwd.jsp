@@ -192,7 +192,7 @@
 							<input type="text" class="form-control mx-auto col-10" id="findPwd_email" name="mb_email" maxlength="20" placeholder="이메일"> 
 						</div><br/><br/>
 						<div class="form-group text-center">
-							<button type="button" id="findPwdBtn" onclick="emailCheck(); idCheck();" class="btn btn-dark form-control" style="border: none;">임시 비밀번호 발송</button>
+							<button type="button" id="findPwdBtn" onclick="emailCheck();" class="btn btn-dark form-control" style="border: none;">임시 비밀번호 발송</button>
 						</div>
 					</form>
 				</div>
@@ -207,7 +207,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<img src="img/logo.jpg">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<button type="button" id="modalClose1" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
@@ -215,7 +215,7 @@
 				 
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+				<button type="button" id="modalClose2" class="btn btn-dark" data-dismiss="modal">Close</button>
 			</div>
 		</div>
 	</div>
@@ -233,6 +233,7 @@
 var emailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 var phoneJ = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;
 var foundId = null;
+var foundEmail = null;
 
 //탭메뉴 클릭시 탭배경과 텍스트의 색상 변경
 function findTab(elmnt, color) {
@@ -366,7 +367,7 @@ function idCheck() {
 					$("#findModal").modal("show");
 					$("#findModal_body").text("아이디가 확인 되었습니다.");
 					foundEmail = data;
-					emailCheck();
+
 				}
 				else {
 					$("#findModal").modal("show");
@@ -380,14 +381,42 @@ function idCheck() {
 
 //이메일 유효성
 function emailCheck() {
-	if($("#findPwd_email").val() == "") {
+	if($("#findPwd_id").val() == "") {
+		$("#findModal").modal("show");
+		$("#findModal_body").text("아이디를 입력하세요.");
+	}
+	else if($("#findPwd_email").val() == "") {
 		$("#findModal").modal("show");
 		$("#findModal_body").text("이메일을 입력해 주세요.");
 	}
 	else {
 		if($("#findPwd_email").val() == foundEmail) {
 			$("#findModal").modal("show");
-			$("#findModal_body").text("이메일을 발송했습니다.");
+			$("#findModal_body").html(foundEmail + "로 이메일을 발송했습니다.<br/>창을 닫으면 로그인 페이지로 이동합니다.");
+			$("#modalClose2").click(function() {
+				location.href="login?log=start";
+			});
+			$("#modalClose1").click(function() {
+				location.href="login?log=start";
+			});
+			
+			$.ajax({
+				url : "findPwd_sendEmail",
+				data : {mb_email : foundEmail, mb_id : $("#findPwd_id").val()},
+				success : function(data) {
+					console.log("data: " + data);
+					//location.href="login?log=start";
+					//$("#findModal").modal("show");
+					//$("#findModal_body").text(data + "로 임시 비밀번호가 발송되었습니다." + "<br/>" + "창을 닫으면 로그인페이지로 이동합니다.");
+					/*$("#modalClose2").click(function() {
+						location.href="login?log=start";
+					});
+					$("#modalClose1").click(function() {
+						location.href="login?log=start";
+					});*/
+				}
+			});
+		}
 		else {
 			$("#findModal").modal("show");
 			$("#findModal_body").text("이메일이 회원정보와 일치하지 않습니다.");

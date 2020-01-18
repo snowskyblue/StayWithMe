@@ -51,4 +51,10 @@ public class FindIdPwdDaoImp implements FindIdPwdDao {
 			return "notFoundId";
 		}
 	}
+	
+	@Override
+	public void findPwd_newPwd(String newPwd2, String mb_id) {
+		String query = "update member set mb_pwd = ? where mb_id = ?";
+		template.update(query, newPwd2, mb_id);
+	}
 }

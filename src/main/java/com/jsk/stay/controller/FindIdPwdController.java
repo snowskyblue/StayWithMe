@@ -1,9 +1,20 @@
 package com.jsk.stay.controller;
 
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,12 +24,16 @@ import com.jsk.stay.command.FindIdPwdCommand;
 import com.jsk.stay.command.FindIdPwdCommandImp;
 import com.jsk.stay.util.Constant;
 
+
 @Controller
 public class FindIdPwdController {
 	
 	private JdbcTemplate template;
 	
 	FindIdPwdCommandImp com;
+
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
 	
 	@Autowired
 	public void setTemplate(JdbcTemplate template) {
@@ -73,6 +88,84 @@ public class FindIdPwdController {
 		String result = com.findPwd_idCheck(mb_id);
 		
 		System.out.println(result);
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/findPwd_sendEmail")
+	public String findPwd_sendEmail(HttpServletRequest request) {
+		//수신 메일
+		String receiveEmail = request.getParameter("mb_email");
+		String mb_id = request.getParameter("mb_id");
+		System.out.println(receiveEmail + mb_id);
+		
+		char pwdCollection[] = new char[] {
+			'1','2','3','4','5','6','7','8','9','0',
+			'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+			'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
+			'!','@','#','$','%','^','&','*','(',')'
+		};
+		
+		String newPwd = "";
+		
+		for(int i = 0 ; i < 10 ; i++) {
+			int selectRandomPwd = (int)(Math.random() * (pwdCollection.length));
+			newPwd += pwdCollection[selectRandomPwd];
+		}
+		
+		System.out.println(newPwd);
+		
+		String newPwd2 = passwordEncoder.encode(newPwd);
+		System.out.println("EncoderPwd: " + newPwd2);
+		
+		com = new FindIdPwdCommandImp();
+		com.findPwd_newPwd(newPwd2, mb_id);
+		
+		//이메일 보내는 계정 정보
+		String user = "jsk.stay@gmail.com";
+		String password = "hankyung05";
+		
+		//SMTP 서버 정보 설정
+		Properties prop = new Properties();
+		prop.put("mail.smtp.host", "smtp.gmail.com");
+		prop.put("mail.smtp.port", 465);
+		prop.put("mail.smtp.auth", "true");
+		prop.put("mail.smtp.ssl.enable", "true");
+		prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+		
+		//Session 설정
+		Session session = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(user, password);
+			}
+		});
+		//session.setDebug(true); //디버그를 위함
+		
+		//이메일 보내기
+		try {
+			MimeMessage message = new MimeMessage(session);
+			message.setFrom(new InternetAddress("jsk.stay@gmail.com")); //발신자 이메일 세팅
+			
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiveEmail)); //수신자 이메일 세팅
+			
+			//이메일 제목&내용
+			message.setSubject("STAY WITH ME에서 요청하신 임시비밀번호를 알려드립니다.");
+			message.setContent(
+					"<div style='border:2px solid #e5e5e5; text-align:center; width:500px; margin:auto; font-family:fantasy;'><div style='border-bottom:2px solid #e5e5e5; padding-bottom:30px; padding-top:10px;'><img src=\"https://localhost:8443/stay/img/logo.jpg\">"
+					+ "<p style='font-size:20px;'>요청하신 임시 비밀번호는 아래와 같습니다.</p></div>"
+					+ "<div style='padding-top:20px;'>"
+					+ "<span style='font-size:25px; background-color:black;'>" + newPwd + "</span>"
+					+ "<p style='margin-top:20px; margin-bottom:25px;'>위 텍스트박스를 드래그 후 복사하여 사용하세요.<br/>임시 비밀번호를 통해 로그인 하신 후 반드시 비밀번호 재설정을 해주시길 바랍니다.</p></div></div>", "text/html; charset=utf-8");
+			Transport.send(message); //보내기
+		}
+		catch(AddressException e) {
+			e.printStackTrace();
+		}
+		catch(MessagingException e) {
+			e.printStackTrace();
+		}
+		
+		String result = receiveEmail;
 		return result;
 	}
 }
