@@ -2,13 +2,19 @@ package com.jsk.stay.controller;
 
 import java.util.Properties;
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.*;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
@@ -126,7 +132,9 @@ public class FindIdPwdController {
 		String password = "hankyung05";
 		
 		//SMTP 서버 정보 설정
-		Properties prop = new Properties();
+		//Properties prop = new Properties();
+		Properties prop = System.getProperties();
+		
 		prop.put("mail.smtp.host", "smtp.gmail.com");
 		prop.put("mail.smtp.port", 465);
 		prop.put("mail.smtp.auth", "true");
@@ -143,6 +151,7 @@ public class FindIdPwdController {
 		
 		//이메일 보내기
 		try {
+			//Transport transport = session.getTransport();
 			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("jsk.stay@gmail.com")); //발신자 이메일 세팅
 			
@@ -150,20 +159,41 @@ public class FindIdPwdController {
 			
 			//이메일 제목&내용
 			message.setSubject("STAY WITH ME에서 요청하신 임시비밀번호를 알려드립니다.");
-			message.setContent(
-					"<div style='border:2px solid #e5e5e5; text-align:center; width:500px; margin:auto; font-family:fantasy;'><div style='border-bottom:2px solid #e5e5e5; padding-bottom:30px; padding-top:10px;'><img src=\"https://localhost:8443/stay/img/logo.jpg\">"
-					+ "<p style='font-size:20px;'>요청하신 임시 비밀번호는 아래와 같습니다.</p></div>"
+			
+			Multipart multipart = new MimeMultipart();
+			
+			String htmlText = 					"<div style='border:2px solid #e5e5e5; text-align:center; width:500px; margin:auto; font-family:fantasy;'><div style='border-bottom:2px solid #e5e5e5; padding-bottom:30px; padding-top:10px;'><img src='cid:image_id'>"
+					+ "<p style='font-size:20px; margin-top:5px;'>요청하신 임시 비밀번호는 아래와 같습니다.</p></div>"
 					+ "<div style='padding-top:20px;'>"
 					+ "<span style='font-size:25px; background-color:black;'>" + newPwd + "</span>"
-					+ "<p style='margin-top:20px; margin-bottom:25px;'>위 텍스트박스를 드래그 후 복사하여 사용하세요.<br/>임시 비밀번호를 통해 로그인 하신 후 반드시 비밀번호 재설정을 해주시길 바랍니다.</p></div></div>", "text/html; charset=utf-8");
-			Transport.send(message); //보내기
+					+ "<p style='margin-top:20px; margin-bottom:25px;'>위 텍스트박스를 드래그 후 복사하여 사용하세요.<br/>임시 비밀번호를 통해 로그인 하신 후 반드시 비밀번호 재설정을 해주시길 바랍니다.</p></div></div>";
+			
+			BodyPart bodyPart = new MimeBodyPart();
+			bodyPart.setContent(htmlText, "text/html; charset=utf-8");
+			
+			multipart.addBodyPart(bodyPart);
+			
+			bodyPart = new MimeBodyPart();
+			String filename = "D:/img/logo.jpg";
+			DataSource fds = new FileDataSource(filename);
+			bodyPart.setDataHandler(new DataHandler(fds));
+			bodyPart.setFileName(filename);
+			bodyPart.setHeader("Content-ID", "image_id");
+			multipart.addBodyPart(bodyPart);
+			
+			message.setContent(multipart);
+			
+			Transport.send(message);
 		}
-		catch(AddressException e) {
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		/*catch(AddressException e) {
 			e.printStackTrace();
 		}
 		catch(MessagingException e) {
 			e.printStackTrace();
-		}
+		}*/
 		
 		String result = receiveEmail;
 		return result;

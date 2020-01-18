@@ -154,7 +154,7 @@
 						<div class="form-group">
 							<label for="findId_phone">휴대폰 번호</label><br/>
 							<div class="form_center">
-								<input type="tel" class="form-control-inline col-8 col-sm-8" id="findId_phone" name="mb_phone" placeholder='"-"없이 번호만 입력'>
+								<input type="tel" class="form-control-inline col-8 col-sm-8" id="findId_phone" name="mb_phone" maxlength="11" placeholder='"-"없이 번호만 입력'>
 								<button type="button" onclick="namePhoneCheck(); phoneCertify();" id="phone_certify" class="btn btn-dark">인증</button>
 								<div class="check_font" id="phone_check"></div>
 							</div>
@@ -182,14 +182,14 @@
 						<div class="form-group">
 							<label for="findPwd_id">아이디</label><br/>
 							<div class="form_center">
-								<input type="text" class="form-control-inline col-8 col-sm-8" id="findPwd_id" name="mb_id" placeholder='아이디'>
+								<input type="text" class="form-control-inline col-8 col-sm-8" id="findPwd_id" name="mb_id" maxlength="20" placeholder='아이디'>
 								<button type="button" id="id_confirm" onclick="idCheck()" class="btn btn-dark">확인</button>
 								<div class="check_font" id="id_check"></div>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="findPwd_email">이메일</label>
-							<input type="text" class="form-control mx-auto col-10" id="findPwd_email" name="mb_email" maxlength="20" placeholder="이메일"> 
+							<input type="text" class="form-control mx-auto col-10" id="findPwd_email" name="mb_email" maxlength="50" placeholder="이메일"> 
 						</div><br/><br/>
 						<div class="form-group text-center">
 							<button type="button" id="findPwdBtn" onclick="emailCheck();" class="btn btn-dark form-control" style="border: none;">임시 비밀번호 발송</button>

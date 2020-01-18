@@ -139,7 +139,7 @@
 				
 				<div class="form-group">
 					<label for="mb_phone">휴대폰 번호("-"없이 번호만 입력해주세요)</label><br/>
-						<input type="tel" class="form-control-inline col-9 col-sm-10" id="mb_phone" name="mb_phone" placeholder="Phone Number">
+						<input type="tel" class="form-control-inline col-9 col-sm-10" id="mb_phone" name="mb_phone" maxlength="11" placeholder="Phone Number">
 						<button type="button" id="certificate" class="btn btn-dark">인증</button>
 					<div class="check_font" id="phone_check"></div>
 				</div>
