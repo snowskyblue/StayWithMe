@@ -128,6 +128,20 @@
    }
 }
 
+/*사진 좌우로 글씨를 쓸수 있게 해줌 근디 없어도 되는거같은디......*/
+:root {
+	--ck-image-style-spacing: 1.5em;
+}
+
+.ck-content {
+	& .image-style-side	{
+		max-width: 50%;
+		float: right;
+		margin-left: var(--ck-image-style-spacing);
+	}	
+}
+/*사진 좌우로 글씨를 쓸수 있게 해줌*/
+
 </style>
 </head>
 <body>
@@ -364,6 +378,7 @@
 					<i class="glyphicon glyphicon-calendar"></i>  -->
 				</div>
 				
+				
 				<div class="row mb-5 mt-5">
 					<div class="col-sm-3 border2">숙소 소개</div> 
 				</div>
@@ -382,17 +397,13 @@
 					<div class="row form-group">
 						<label class="mb-3 col-sm-2" for="acm_info">숙소 소개</label>
 						<div class="col-sm-10">
-							<textarea class="form-control" rows="10" name="acm_info" placeholder="숙소에 대해 간략히 설명해주세요. 숙소와 주변 지역에 대한 정보에서 시작해 게스트와 어떻게 소통하고 싶은지 등의 내용을 적어주세요."></textarea>
+							<div id="toolbar-container" style="max-width:100%"></div>
+							<div id="editor"  style="max-width:100%;min-height:300px;border:1px solid grey;line-height:0.5rem"></div>
+							<textarea id="div1" name="te" style="width:50%;min-height:300px;border:1px solid grey;line-height:0.8rem;display:none">kook</textarea>
+							<div id="div2" class="ck-content" style="width:50%;min-height:300px;border:1px solid grey;">
 						</div>
 					</div>
-					
-					<div class="row form-group">
-						<label class="mb-3 col-sm-2" for="acm_img">숙소 사진</label>
-						<div class="col-sm-10">
-							<input id="acm_img" type="file" name="acm_img" multiple />
-						</div>
-					</div>
-					
+					 <!-- 숙소와 주변 지역에 대한 정보에서 시작해 게스트와 어떻게 소통하고 싶은지 등의 내용을 적어주세요. -->
 					<!-- 편의시설 amenity -->
 					<div class="row mt-5 mb-5" id="acm_rule">
 							<div class="col-sm-3">
@@ -507,6 +518,10 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
 
+<!-- ckEditor DecoupledEditor  -->
+<script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/decoupled-document/ckeditor.js"></script>
+<script src="https://ckeditor.com/apps/ckfinder/3.4.5/ckfinder.js"></script>
+
 
 <script src="js/bootstrap-input-spinner.js"></script>
 <!-- iCheck(라디오 버튼) -->
@@ -607,6 +622,34 @@
         }).open();
     }
 </script>
-
+<script type="module">
+DecoupledEditor
+    .create( document.querySelector('#editor'),{
+    	//removePlugins: ['ImageUpload'],
+    	language: 'ko',
+    	ckfinder: {
+	   		 uploadUrl: 'ckedit' //요청경로
+	   	},
+	   	toolbar: [ 'ckfinder', 'imageUpload', '|', 'heading', '|', 'bold', 'italic','link', 'bulletedList',
+	   		'numberedList', 'blockQuote', '|', 'undo','redo','Outdent','Indent','highlight', 'fontsize',
+	   		'fontfamily','insertTable','alignment']	
+    })
+   
+    .then(function(editor) {
+    	const toolbarContainer = document.querySelector( '#toolbar-container' );
+        toolbarContainer.appendChild( editor.ui.view.toolbar.element );
+    });
+  
+</script>
+<script>
+$("#editor").blur(function() {
+	var x = $("#editor").html();
+	alert(x);
+	$("#div1").text(x);
+	var y = $("#div1").text();
+	//$("#div2").html('<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1.0"></head><body>' + y + "</body></html>");
+	$("#div2").html(y);
+});
+</script>
 </body>
 </html>

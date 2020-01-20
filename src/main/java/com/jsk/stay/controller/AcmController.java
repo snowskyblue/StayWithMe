@@ -1,11 +1,14 @@
 package com.jsk.stay.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -19,10 +22,11 @@ import com.jsk.stay.command.AcmCommand;
 import com.jsk.stay.command.AcmWriteCommand;
 import com.jsk.stay.util.Constant;
 
+
 @Controller
-@MultipartConfig(maxFileSize=1024*1024*4,location="D:/upimage/") //다운로드
+@MultipartConfig(maxFileSize=1024*1024*4)
 public class AcmController {
-	
+	private int maxRequestSize = 1024 * 1024 * 50;
 	AcmCommand command = null;
 	private JdbcTemplate template;
 	/*transaction*/
@@ -44,7 +48,7 @@ public class AcmController {
 	public String addAcm() {
 		return "addAcm";
 	}
-	
+	/*
 	@RequestMapping("/write") //다중 파일 업로드 처리
 	public String write(MultipartHttpServletRequest mtfRequest, HttpServletRequest request, Model model) {
 		System.out.println("write()");
@@ -83,8 +87,8 @@ public class AcmController {
 		System.out.println("컨트롤러에서 커맨드클래스의 엑스큐트메서드 호출 완료");
 		return "index";
 		
-	}
-	/*@RequestMapping("/write")
+	}*/
+	@RequestMapping("/write")
 	public String write(HttpServletRequest request, Model model) {
 		System.out.println("write()");
 		
@@ -95,5 +99,45 @@ public class AcmController {
 		System.out.println("컨트롤러에서 커맨드클래스의 엑스큐트메서드 호출 완료");
 		return "index";
 		
-	}*/
+	}
+	
+	@RequestMapping("ckedit")
+	public void ckedit(MultipartHttpServletRequest request, HttpServletResponse response) throws IOException {
+		System.out.println("ckedit 들어옴");
+		String path = "/stay/editUpload";
+		String real_save_path = request.getServletContext().getRealPath(path);
+		System.out.println("real_save_path " + real_save_path);
+		MultipartFile mf = request.getFile("upload");
+		String originFileName = mf.getOriginalFilename();
+		System.out.println("originFileName " + originFileName);
+		long fileSize = mf.getSize(); 
+		System.out.println("originFileName : " + originFileName);
+		System.out.println("fileSize of the MultipartFile : " + fileSize);	
+		String safeFile ="D:/webSpring_workspace/stay/src/main/webapp/resources/editUpload/" + originFileName;
+		String safeFile1 ="D:/tomcat/apache-tomcat-8.5.47/wtpwebapps/stay/resources/editUpload/" + originFileName;		
+		System.out.println("safeFile : " + safeFile);
+		try {
+			mf.transferTo(new File(safeFile));
+			mf.transferTo(new File(safeFile1));
+		} catch (Exception e) {			
+			e.printStackTrace();
+		}
+		JSONObject outData = new JSONObject(); //json 객체 생성
+		outData.put("uploaded", true);
+		//요청 경로(Scheme : 프로토콜 http ServerName:localhost ServerPort:8181
+		outData.put("url", request.getScheme() + "://" + request.getServerName() + ":" + 
+				request.getServerPort() + path + "/" + originFileName); //"url"의 value값이 img태그의 src값??
+		
+		System.out.println(request.getScheme() + "://" + request.getServerName() + ":" + 
+				request.getServerPort() + path + "/" + originFileName);
+		//	http://localhost:8181/ck/editUpload/shap2.jpg
+		
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().print(outData.toString()); //데이터를 전송할때는 return말고 print씀//toString()생략가능
+		
+		/* 사진을 올리면 자동으로 html문서로 바꿔서 브라우져에 뿌려줌
+		 * <figure class="image ck-widget ck-widget_selected" contenteditable="false"><img src="http://localhost:8181/ck/editUpload/shap2.jpg"><figcaption class="ck-placeholder ck-editor__editable ck-editor__nested-editable ck-hidden" data-placeholder="Enter image caption" contenteditable="true"><br data-cke-filler="true"></figcaption></figure>
+		 * */
+	}
 }
