@@ -33,6 +33,9 @@
 .main1 {
 	margin-top: 100px;
 }
+#top-container {
+	padding-top: 150px;
+}
 
 .form-group label:not(.excpt), .container h3, .container div:not(.excpt){
 	font-family: 'S-CoreDream-2ExtraLight';
@@ -114,12 +117,12 @@
   transform: rotate(45deg);
 }
 
-#acm_rule .form-check-label, #amenity .form-check-label, .row, #acm_bedding, #space_type {
+#acm_rule .form-check-label, #amenity .form-check-label, #top-container .row, #acm_bedding, #space_type {
 	margin-bottom: 25px;
 }
 
 
-#acm_time .form-control, #acm_address .form-control {
+#acm_time .form-control, #acm_address .form-control, #complete-btn .form-control {
 	border: none;
 	border-radius: 0;
 	border-bottom: 2px solid grey;
@@ -148,8 +151,7 @@
 <jsp:include page="common/header.jsp" flush="false"/>
 
 <div class="main">
-<div style="height:150px;"></div>
-<div class="container" style = "min-height : 500px;">
+<div id="top-container" class="container">
 	<h3>숙소등록</h3>
 	<div id="border"></div>
 	<div class="row d-flex justify-content-center pt-5" style="max-width:1200px;">
@@ -400,7 +402,7 @@
 							<div id="toolbar-container" style="max-width:100%"></div>
 							<div id="editor"  style="max-width:100%;min-height:300px;border:1px solid grey;line-height:0.5rem"></div>
 							<textarea id="div1" name="te" style="width:50%;min-height:300px;border:1px solid grey;line-height:0.8rem;display:none">kook</textarea>
-							<div id="div2" class="ck-content" style="width:50%;min-height:300px;border:1px solid grey;">
+							<div id="div2" class="ck-content" style="width:50%;min-height:300px;border:1px solid grey;"></div>
 						</div>
 					</div>
 					 <!-- 숙소와 주변 지역에 대한 정보에서 시작해 게스트와 어떻게 소통하고 싶은지 등의 내용을 적어주세요. -->
@@ -495,10 +497,9 @@
 						</div>
 					</div>
 				
-				<div class="row">
-					<div class="col-sm-7"></div>
-				    <div class="col-sm-3 d-flex justify-content-end">
-						<button type="submit" class="form-control bg-dark text-light">숙소등록 하기</button>
+				<div id="complete-btn" class="d-flex flex-row-reverse">
+				    <div class="text-center">
+						<button type="submit" class="form-control btn btn-dark" style="border: none;">숙소등록 하기</button>
 					</div>
 				</div>
 			</form>

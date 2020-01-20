@@ -26,7 +26,6 @@ import com.jsk.stay.util.Constant;
 @Controller
 @MultipartConfig(maxFileSize=1024*1024*4)
 public class AcmController {
-	private int maxRequestSize = 1024 * 1024 * 50;
 	AcmCommand command = null;
 	private JdbcTemplate template;
 	/*transaction*/
@@ -126,18 +125,13 @@ public class AcmController {
 		outData.put("uploaded", true);
 		//요청 경로(Scheme : 프로토콜 http ServerName:localhost ServerPort:8181
 		outData.put("url", request.getScheme() + "://" + request.getServerName() + ":" + 
-				request.getServerPort() + path + "/" + originFileName); //"url"의 value값이 img태그의 src값??
+				request.getServerPort() + path + "/" + originFileName);
 		
 		System.out.println(request.getScheme() + "://" + request.getServerName() + ":" + 
 				request.getServerPort() + path + "/" + originFileName);
-		//	http://localhost:8181/ck/editUpload/shap2.jpg
 		
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
-		response.getWriter().print(outData.toString()); //데이터를 전송할때는 return말고 print씀//toString()생략가능
-		
-		/* 사진을 올리면 자동으로 html문서로 바꿔서 브라우져에 뿌려줌
-		 * <figure class="image ck-widget ck-widget_selected" contenteditable="false"><img src="http://localhost:8181/ck/editUpload/shap2.jpg"><figcaption class="ck-placeholder ck-editor__editable ck-editor__nested-editable ck-hidden" data-placeholder="Enter image caption" contenteditable="true"><br data-cke-filler="true"></figcaption></figure>
-		 * */
+		response.getWriter().print(outData.toString());
 	}
 }
