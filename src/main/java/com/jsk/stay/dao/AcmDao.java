@@ -54,8 +54,7 @@ public class AcmDao {
 						final String acm_add_detail,
 						final int acm_zip, 
 						final String acm_checkin_time,
-						final String acm_checkout_time, 
-						final String acm_img, 
+						final String acm_checkout_time,
 						final String acm_availdate, 
 						String[] rules
 						,String[] amenities
@@ -70,11 +69,11 @@ public class AcmDao {
 				@Override
 				public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
 					
-					System.out.println("dao클래스 PP_SEQ.nextval");
+					System.out.println("dao클래스의 첫번째 update메서드accommodation PP_SEQ.nextval");
 					String query = "insert into accommodation ( acm_code, acm_type,"
 							+ "acm_room_type,acm_bedding,acm_guest_num,acm_room_num,"
-							+ "acm_bath_num,acm_area,acm_charge,acm_title,acm_info,acm_address,acm_add_detail,acm_zip,acm_checkin_time,acm_checkout_time,acm_img,acm_AVAILDATE) "
-							+ "values (PP_SEQ.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+							+ "acm_bath_num,acm_area,acm_charge,acm_title,acm_info,acm_address,acm_add_detail,acm_zip,acm_checkin_time,acm_checkout_time,acm_AVAILDATE) "
+							+ "values (PP_SEQ.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 					PreparedStatement pstmt = con.prepareStatement(query);
 					pstmt.setString(1, acm_type);
 					pstmt.setString(2, acm_room_type);
@@ -92,8 +91,7 @@ public class AcmDao {
 					pstmt.setInt(13, acm_zip);
 					pstmt.setString(14, acm_checkin_time);
 					pstmt.setString(15, acm_checkout_time);
-					pstmt.setString(16, acm_img);
-					pstmt.setString(17, acm_availdate);
+					pstmt.setString(16, acm_availdate);
 					
 					return pstmt;
 				}
@@ -105,7 +103,7 @@ public class AcmDao {
 					template.update(new PreparedStatementCreator() {
 						@Override
 						public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
-							System.out.println("dao클래스의 세번째 udate문 PP_SEQ.currval");
+							System.out.println("dao클래스의 두번째 udate메서드 ACM_SUB rules PP_SEQ.currval");
 							String query = "insert into ACM_SUB (acm_code, acm_rule) "
 									+ "values (PP_SEQ.currval,?)";
 							PreparedStatement pstmt = con.prepareStatement(query);
@@ -122,7 +120,7 @@ public class AcmDao {
 					template.update(new PreparedStatementCreator() {
 						@Override
 						public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
-							System.out.println("dao클래스의 세번째 udate문 PP_SEQ.currval");
+							System.out.println("dao클래스의 세번째 udate메서드 ACM_SUB amenities PP_SEQ.currval");
 							String query = "insert into ACM_SUB (acm_code, acm_amenity) "
 									+ "values (PP_SEQ.currval,?)";
 							PreparedStatement pstmt = con.prepareStatement(query);
@@ -132,19 +130,6 @@ public class AcmDao {
 					});
 				}
 			}
-			
-			
-			
-			/*template.update(psc);
-			 * String[] rules = request.getParameterValues("acm_rule");       
-
-        		if(rules != null){
-		        	for(int i=0; i < rules.length; i++)
-		        	String sql = "insert into test values" + "("+ rules[i] +")" ;
-		        	
-		        	}
-        }
-        */
 			
 			transactionManager.commit(status); //정상처리시(DB에 commit)
 		} catch(Exception e) {

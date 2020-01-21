@@ -14,11 +14,8 @@ public class AcmWriteCommand implements AcmCommand {
 	public void execute(Model model) {
 		Map<String,Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		String acm_img = (String) map.get("fileRoots");
 		
 		System.out.println("커맨드클래스의 엑스큐트 메서드 안 ok");
-		System.out.println("acm_img  "  + acm_img);
-		
 		
 		String acm_type = request.getParameter("acm_type");
 		String acm_room_type = request.getParameter("acm_room_type");
@@ -92,7 +89,6 @@ public class AcmWriteCommand implements AcmCommand {
 				acm_zip,
 				acm_checkin_time,
 				acm_checkout_time,
-				acm_img,
 				acm_availdate,
 				rules
 				,amenities

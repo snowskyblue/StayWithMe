@@ -68,7 +68,7 @@
 			logout-url="/logout" logout-success-url="/index?logout=1" />
 		<remember-me key="wmoskey" token-validity-seconds="2419200"/> <!-- 4 주 -->
 			   
-		<csrf />
+		<csrf disabled="true"/>
 		
 	</http>
 	
