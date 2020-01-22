@@ -37,7 +37,7 @@
 	padding-top: 150px;
 }
 
-.form-group label:not(.excpt), .container h3, .container div:not(.excpt){
+.form-group label, .container h3, .container div{
 	font-family: 'S-CoreDream-2ExtraLight';
 	font-weight: bold;
 }
@@ -141,7 +141,7 @@
 		max-width: 50%;
 		float: right;
 		margin-left: var(--ck-image-style-spacing);
-	}	
+	}
 }
 /*사진 좌우로 글씨를 쓸수 있게 해줌*/
 
@@ -273,12 +273,15 @@
 								<input class="form-control btn btn-dark" type="button" onclick="daumPostcode()" value="주소찾기">
 							</div>
 						</div>
-						<div class="row d-flex justify-content-between">
-							<div class="col-sm-6">
-								<input class="form-control" type="text" name="address"  id="address" placeholder="주소 찾기를 클릭해 주소를 검색해주세요"><br>
+						<div class="row">
+							<div class="col-sm-6" style="height: 63px;">
+								<input class="form-control" type="text" name="address"  id="address" placeholder="주소d 찾기를 클릭해 주소를 검색해주세요"><br>
 							</div>
-							<div class="col-sm-6">
+							<div class="col-sm-6" style="height: 63px;">
 								<input class="form-control" type="text" name="extraAddress"  id="extraAddress" placeholder="참고주소">
+							</div>
+							<div class="col-sm-12">
+								<div id="address_check"></div>
 							</div>
 						</div>
 						<div class="row">
@@ -286,7 +289,13 @@
 								<input class="form-control" type="text" name="detailAddress"  id="detailAddress" placeholder="상세주소를 입력해주세요">
 							</div>
 							<div class="col-sm-3 d-flex justify-content-end">
-								<input class="form-control" type="text" name="postcode"  id="postcode" placeholder="우편번호" value="00000">
+								<input class="form-control" type="text" name="postcode"  id="postcode" placeholder="우편번호">
+							</div>
+							<div class="col-sm-9">
+								<div id="detailAddress_check"></div>
+							</div>
+							<div class="col-sm-3">
+								<div id="postcode_check"></div>
 							</div>
 						</div>
 						
@@ -389,7 +398,7 @@
 					<div class="row form-group">
 						<label class="mb-3 col-sm-2" for="acm_title">이름 지정</label>
 						<div class="col-sm-10">
-							<input class="form-control" id="acm_title" name="acm_title" placeholder="숙소의 특징과 장점을 강조하는 제목을 정해 게스트의 관심을 끌어보세요." type="text" value="">
+							<input class="form-control" id="acm_title" name="acm_title" placeholder="숙소 이름을 정해주세요" type="text" value="">
 						</div>
 					</div>
 					
@@ -398,7 +407,7 @@
 						<label class="mb-3 col-sm-2" for="editor">숙소 소개</label>
 						<div class="col-sm-10">
 							<div id="toolbar-container" style="max-width:100%"></div>
-							<div id="editor"  style="max-width:100%;min-height:300px;border:1px solid grey;line-height:0.5rem">숙소와 주변 지역에 대한 정보에서 시작해 게스트와 어떻게 소통하고 싶은지 등의 내용을 적어주세요.</div>
+							<div id="editor"  style="max-width:100%;min-height:300px;border:1px solid grey;line-height:0.5rem">숙소를 소개해주세요</div>
 							<textarea id="div1" name="acm_info" style="display:none;"></textarea>
 							<div id="div2" class="ck-content" style="width:50%;min-height:300px;border:1px solid grey;"></div>
 						</div>
@@ -529,6 +538,11 @@
 <script>
     $("input[type='number']").inputSpinner();
     
+
+    var postJ = /^\d{5}$/;
+
+    var result = null;
+    
     $(document).ready(function() {
         $('#datepicker').datepicker({
             startDate: new Date(),
@@ -538,11 +552,75 @@
             datesDisabled: ['07/01/2020'],
             language: 'en'
         });
+        
         $(".menu-toggle").click(function() {
     		$("nav").toggleClass("active");
     		$(".main").toggleClass("main1");
     	});
+        
+        $("#postcode").blur(function() {
+    		postcode();
+    	});
+        $("#address").blur(function() {
+    		address();
+    	});
+        $("#detailAddress").blur(function() {
+        	detailAddress();
+    	});
+        
+        $("form").on("submit", function() {
+        	postcode();
+        	address();
+        	detailAddress();
+        	
+        	if(postC == false || addressC == false || detailAddressC == false) {
+    			return false;
+    		}
+    		else {
+    			return true;
+    		}
+        });
     });
+    
+    function postcode() {
+    	if($("#postcode").val() == "") {
+    		$("#postcode_check").text("우편번호를 입력하세요.");
+    		$("#postcode_check").css("color", "red");
+    		postC = false;
+    	}
+    	
+    	else if(postJ.test($("#postcode").val()) != true) {
+    		$("#postcode_check").text("우편번호는 5자리 숫자입니다");
+    		$("#postcode_check").css("color", "red");
+    		postC = false;
+    	}
+    	
+    	else
+    		$("#postcode_check").text("");
+    		postC = true;
+    }
+    
+    function address(){
+    	if($("#address").val() == ""){
+    		$("#address_check").text("주소찾기 버튼을 눌러 주소를 검색하세요.");
+    		$("#address_check").css("color","red");
+    		addressC = false;
+    	}
+    	else
+    		$("#address_check").text("");
+			addressC = true;
+    }
+    
+    function detailAddress(){
+    	if($("#detailAddress").val() == ""){
+    		$("#detailAddress_check").text("상세주소를 입력해주세요.");
+    		$("#detailAddress_check").css("color","red");
+    		detailAddressC = false;
+    	}
+    	else
+    		$("#detailAddress_check").text("");
+    		detailAddressC = true;
+    }
     
     /*amenity checkbox to radio*/
     $('#amenity input[type=checkbox]').on("change",function(){
