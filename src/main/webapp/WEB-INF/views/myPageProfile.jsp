@@ -83,10 +83,12 @@
 	margin-bottom: 50px;
 }
 
-.form-control {
+.form-group .form-control, .form-group .form-control-inline {
 	border: none;
 	border-radius: 0;
 	border-bottom: 2px solid grey;
+	margin: 0px;
+	margin-right: 20px;
 }
 
 .form-group .btn {
@@ -97,17 +99,9 @@
 	padding-left: 35px;
 }
 .myPageform {
-	display : flex;
-	align-items: center;
 	width : 100%;
 	height : 280px;
 	border-bottom: 1px solid lightgrey;
-}
-.myPage {
-	margin : 0 auto;
-	border : 1px solid black;
-	width : 85%;
-	height : 85%;
 }
 
 @media screen and (max-width: 576px) {
@@ -158,32 +152,9 @@
 			<div class="tab-content">
 				<div id="myPage" class="tab-pane active mx-auto">
 					<div class = "container">
-						<div class = "myPageform">
-							<div class = "myPage d-flex flex-wrap align-content-center justify-content-center" id ="Edit-member-information">
-								<div class = "text-center">
-									<h5>회원정보 수정</h5>
-									<p>
-										회원정보 수정을 하려면 비밀번호를 입력해 주세요<br/>
-										<span>
-										
-											<input type = "password" class = "d-inline form-control" name = "checkPwd" id ="checkPwd" placeholder="비밀번호를 입력해 주세요." style = "width : 70%;"/>
-											<button class = "d-inline btn btn-dark form-control" style = "width : 75px;" id = "checkPw">확인</button>
-										</span>
-									</p>
-								</div>
-								
-							</div>
-						</div>
-						<div class = "myPageform">
-							<div class = "myPage" id ="pay">
-							
-							</div>
-						</div>
-						<div class = "myPageform" style = "border : 0px;">
-							<div class = "myPage" id = "alarm">
-							
-							</div>
-						</div>
+						<div class = "myPageform"></div>
+						<div class = "myPageform"></div>
+						<div class = "myPageform"></div>
 					</div>
 				</div>
 				<div id="profile" class="tab-pane">
@@ -211,6 +182,7 @@ var emailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[
 var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
 var foundId = null;
 
+
 function informationTab(elmnt, color) {
 	var i;
 	var informationTab;
@@ -224,40 +196,7 @@ function informationTab(elmnt, color) {
 	elmnt.style.color = "black";
 }
 document.getElementById("defaultTab").click(); //active
-</script>
-<script>
-$(document).ready(function(){	
-	var result = "${result}";
-	$("#checkPw").click(function(){
-		event.preventDefault;
-		$.ajax({
-			url : "checkPwd",
-			data : {checkPwd:$("#checkPwd").val()},
-			Type : "POST",
-			success : function(data) {
-				console.log(data);
-				if(data == "true") {
-					location.href = "EditInformation";
-				}
-				else {
-					location.href = "myPageProfile?fail=1";
-				}
-			},
-			error : function() {
-				alert("server error");
-			}
-		}); 
-	});
-});
-</script>
-<script>
-$(document).ready(function() {
-<c:choose>
-	<c:when test="${not empty fail}">
-		alert("비밀번호 틀렸습니다.");
-	</c:when>
-</c:choose>
-});
+
 </script>
 </body>
 </html>
