@@ -8,7 +8,7 @@ public class LoginCommand implements Command {
 
 	@Override
 	public void execute(Model model, HttpServletRequest request) {
-			
+		
 	}
 
 }
