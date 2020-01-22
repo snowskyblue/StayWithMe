@@ -2,6 +2,7 @@ package com.jsk.stay.controller;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -46,7 +47,7 @@ public class LoginController {
 
 	@RequestMapping(value = "/login", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView loginform(@RequestParam(value = "log", required = false) String log,
-			@RequestParam(value = "error", required = false) String error,HttpSession session, Model mo) {
+			@RequestParam(value = "error", required = false) String error) {
 
 		ModelAndView model = new ModelAndView();
 		if (log != null) {
@@ -81,7 +82,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/socialPhone", method = { RequestMethod.GET, RequestMethod.POST })
-	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
+	public String callback(Model model, HttpServletRequest request, @RequestParam String code, @RequestParam String state, HttpSession session)
 			throws IOException {
 		System.out.println("여기는  callback");
 		OAuth2AccessToken oauthToken;
@@ -89,7 +90,6 @@ public class LoginController {
        //로그인 사용자 정보를 읽어온다.
 	    apiResult = naverLoginBO.getUserProfile(oauthToken);
 		model.addAttribute("result", apiResult);
-                
 		return "index";
 	}
 	
