@@ -47,8 +47,6 @@
 		<intercept-url pattern="/img/**" access="permitAll" />
 		<intercept-url pattern="/icheck-1.x/**" access="permitAll" />
 		<intercept-url pattern="/write" access="permitAll" />
-		<intercept-url pattern="/checkPwd" access="permitAll" />
-		<intercept-url pattern="/EditInformation" access="permitAll" />
 		<intercept-url pattern="/myPageProfile" access="permitAll" />
 		<intercept-url pattern="/login" access="permitAll" />
 		<intercept-url pattern="/login_duplicate" access="permitAll" />

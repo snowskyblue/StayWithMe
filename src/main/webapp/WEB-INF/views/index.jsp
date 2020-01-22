@@ -454,7 +454,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 	$(document).ready(function() {
 		<c:choose>
 			<c:when test="${not empty msg}">
-				$("#logoutModal").modal("show");
+			$("#logoutModal").modal("show");
 			</c:when>
 			<c:when test="${not empty success}">
 				$("#joinModal").modal("show");
@@ -469,7 +469,6 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 <script>
 	var user ="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}";
 	sessionStorage.setItem("user", user);
-	console.log("${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal}")
 </script>
 </body>
 </html>

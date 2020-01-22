@@ -31,12 +31,5 @@ public class LoginDao implements IDao {
 		MemberDto memberDto = (MemberDto)sqlSession.selectOne("loginDao",mb_id);
 		return memberDto;
 	}
-	@Override
-	public String check(String mb_id) {
-		System.out.println("id = " + mb_id);
-		String pw = sqlSession.selectOne("checkPW",mb_id);
-		System.out.println("pw : " + pw);
-		return pw;
-	}
 
 }

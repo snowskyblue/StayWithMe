@@ -111,11 +111,6 @@ public class MemberDto {
 	public MemberDto() {
 		super();
 	}
-	public MemberDto(String mb_id, String mb_pwd) {
-		super();
-		this.mb_id = mb_id;
-		this.mb_pwd = mb_pwd;
-	}
 	
 	
 }
