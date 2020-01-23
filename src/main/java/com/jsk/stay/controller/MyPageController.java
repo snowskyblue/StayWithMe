@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.jsk.stay.command.Command;
 import com.jsk.stay.dao.LoginDao;
+import com.jsk.stay.dto.MemberDto;
 
 @Controller
 public class MyPageController {

@@ -31,6 +31,12 @@
 .main1 {
 	margin-top : 100px;
 }
+.d-flex #form .form-control {
+	border: none;
+	border-radius: 0;
+	border-bottom: 2px solid grey;
+	margin: 0px;
+}
 </style>
 </head>
 <body>
@@ -39,22 +45,25 @@
 		<div class="container" id="edit-header">
 			<h3>회원정보 수정</h3>
 			<div id="border"></div>
-			<form action = "Information" method = "GET">
-				<label>아이디 : </label>
-				<input type =  "text"/>
+			<form action = "Information" class = "d-flex justify-content-center" method = "GET">
+				<div id = "form" style = "margin : 0px; width : 50%;">
+					<label>아이디</label>
+					<input type = "text" class = "form-control" id = "id" disabled/><br/>
+					<label>새 비밀번호</label>
+					<input type = "password" class = "form-control" placeholder="변경할 비밀번호를 입력하세요."/><br/>
+					<label>비밀번호 확인</label>
+					<input type = "password" class = "form-control" placeholder="동일한 비밀번호를 입력하세요."/><br/>
+					<label>이메일</label>
+					<input type = "email" class = "form-control" placeholder="이메일을 입력해 주세요"/><br/>
+					<label>전화번호</label>
+					<input type = "tel" class = "form-control" placeholder="전화번호를 입력해 주세요"/><br/>
+					<!-- 권한이 host일 경우 보이게 하고 guest일 경우 안보이게 하면됨 -->
+					<label>주소</label>
+					<input type = "text" class = "form-control" placeholder="주소를 입력해 주세요"/><br/>
+				</div>
 			</form>
 		</div>
-
-
-
-
-
-
-
-
-
-
-</div>
+	</div>
 <jsp:include page="common/footer.jsp" flush="false"/>
 <!--jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -89,6 +98,11 @@ $(document).ready(function() {
 		$("nav").toggleClass("active");
 		$(".main").toggleClass("main1");
 	});
+});
+</script>
+<script>
+$(document).ready(function() {
+	$("#id").text("sessionStorage.getItem('user')");
 });
 </script>
 </body>
