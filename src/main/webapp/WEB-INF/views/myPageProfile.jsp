@@ -259,5 +259,13 @@ $(document).ready(function() {
 </c:choose>
 });
 </script>
+<script>
+$(document).ready(function() {
+	$(".menu-toggle").click(function() {
+		$("nav").toggleClass("active");
+		$(".main").toggleClass("main1");
+	});
+});
+</script>
 </body>
 </html>
