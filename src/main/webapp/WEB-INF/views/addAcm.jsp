@@ -146,8 +146,9 @@
 /*사진 좌우로 글씨를 쓸수 있게 해줌*/
 
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 </head>
-<body>
+<body ng-app="addAcm" ng-controller="acmCtrl">
 <jsp:include page="common/header.jsp" flush="false"/>
 
 <div class="main">
@@ -407,7 +408,7 @@
 						<label class="mb-3 col-sm-2" for="editor">숙소 소개</label>
 						<div class="col-sm-10">
 							<div id="toolbar-container" style="max-width:100%"></div>
-							<div id="editor"  style="max-width:100%;min-height:300px;border:1px solid grey;line-height:0.5rem">숙소를 소개해주세요</div>
+							<div id="editor" ng-click="editorInit()" style="max-width:100%;min-height:300px;border:1px solid grey;line-height:0.5rem">{{info}}</div>
 							<textarea id="div1" name="acm_info" style="display:none;"></textarea>
 							<div id="div2" class="ck-content" style="width:50%;min-height:300px;border:1px solid grey;"></div>
 						</div>
@@ -536,6 +537,16 @@
 <script src="icheck-1.x/icheck.min.js"></script>
 
 <script>
+var app = angular.module('addAcm', []);
+app.controller('acmCtrl', function($scope) {
+  $scope.info = "숙소에 대해 설명해주세요.";
+  $scope.editorInit = function() {
+    $scope.info = "";
+  }
+});
+</script>
+
+<script>
     $("input[type='number']").inputSpinner();
     
 
@@ -569,6 +580,7 @@
     	});
         
         $("form").on("submit", function() {
+        	console.log("submit");
         	postcode();
         	address();
         	detailAddress();
@@ -584,6 +596,7 @@
     
     function postcode() {
     	if($("#postcode").val() == "") {
+    		console.log("postcode()");
     		$("#postcode_check").text("우편번호를 입력하세요.");
     		$("#postcode_check").css("color", "red");
     		postC = false;
