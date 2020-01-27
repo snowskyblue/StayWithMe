@@ -41,7 +41,9 @@ public class MyPageController {
 	}
 	
 	@RequestMapping("/EditInformation")
-	public String EditInformation() {
+	public String EditInformation(Model model, HttpServletRequest request) {
+		String pw = request.getParameter("checkPwd");
+		model.addAttribute("pw",pw);
 		return "EditInformation";
 	}
 	
