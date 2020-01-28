@@ -83,6 +83,7 @@ public class FindIdPwdController {
 		return "findIdSuccess";
 	}
 	
+	//
 	@ResponseBody
 	@RequestMapping("/findPwd_idCheck")
 	public String findPwd_idCheck(HttpServletRequest request) {
@@ -114,7 +115,7 @@ public class FindIdPwdController {
 		
 		String newPwd = "";
 		
-		for(int i = 0 ; i < 10 ; i++) {
+		for(int i = 0 ; i < 13 ; i++) {
 			int selectRandomPwd = (int)(Math.random() * (pwdCollection.length));
 			newPwd += pwdCollection[selectRandomPwd];
 		}

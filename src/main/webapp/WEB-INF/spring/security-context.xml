@@ -26,6 +26,7 @@
     	<intercept-url pattern="/" access="permitAll" />
     	<intercept-url pattern="/editUpload/**" access="permitAll" />
     	<intercept-url pattern="/resources/**" access="permitAll" />
+    	<intercept-url pattern="/csMember" access="permitAll" />
 		<intercept-url pattern="/memberjoin" access="permitAll" />
 		<intercept-url pattern="/memberjoinpro" access="permitAll" />
 		<intercept-url pattern="/idCheck" access="permitAll" />
