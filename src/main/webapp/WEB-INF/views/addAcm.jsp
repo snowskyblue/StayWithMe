@@ -46,6 +46,12 @@
 	border: 3px solid #000000;
 	/*border-collapse: collapse;*/
 }
+
+form {
+	/*margin-top: 50px;*/
+	margin-bottom: 100px;
+}
+
 .border2 {
 	border-bottom: 3px solid #000000;
 	font-size : 1.2em;
@@ -579,8 +585,7 @@ app.controller('acmCtrl', function($scope) {
         	detailAddress();
     	});
         
-        $("form").on("submit", function() {
-        	console.log("submit");
+        $("form").on("submit", function(e) {
         	postcode();
         	address();
         	detailAddress();
@@ -608,9 +613,10 @@ app.controller('acmCtrl', function($scope) {
     		postC = false;
     	}
     	
-    	else
+    	else {
     		$("#postcode_check").text("");
     		postC = true;
+    	}
     }
     
     function address(){
@@ -619,9 +625,10 @@ app.controller('acmCtrl', function($scope) {
     		$("#address_check").css("color","red");
     		addressC = false;
     	}
-    	else
+    	else {
     		$("#address_check").text("");
 			addressC = true;
+    	}
     }
     
     function detailAddress(){
@@ -630,9 +637,10 @@ app.controller('acmCtrl', function($scope) {
     		$("#detailAddress_check").css("color","red");
     		detailAddressC = false;
     	}
-    	else
+    	else {
     		$("#detailAddress_check").text("");
     		detailAddressC = true;
+    	}
     }
     
     /*amenity checkbox to radio*/
