@@ -44,6 +44,10 @@
 .Validation {
 	margin : 0px;
 }
+.btn {
+	border: 1px solid grey;
+	border-radius: 0.7;
+}
 </style>
 </head>
 <body ng-app = "myApp">
@@ -52,32 +56,87 @@
 		<div class="container" id="edit-header">
 			<h3>회원정보 수정</h3>
 			<div id="border"></div>
-			<form action = "Information" id="information" class = "d-flex justify-content-center" method = "POST" ng-controller = "myCtrl">
-				<div id = "form" style = "margin : 0px; width : 50%;">
+			<form id="information" class = "d-flex justify-content-center" method = "POST" ng-controller = "myCtrl">
+				<div id = "form" style = "margin : 0px; width : 450px;">
 					<label>아이디</label>
-					<input type = "text" class = "form-control" id = "id" disabled ng-model = "myModel"/>
+					<input type = "text" class = "row form-control" id = "id" disabled ng-model = "myModel"/>
 					<br/>
-					<label>새 비밀번호</label>
-					<input type = "password" class = "form-control" placeholder="변경할 비밀번호를 입력하세요." id ="mb_pwd1"/>
-					<div class = "password Validation" id ="mb_pwd1_check"></div>
+				
+					<div>
+						<label>새 비밀번호</label>
+						<input type = "password" class = "form-control" placeholder="변경할 비밀번호를 입력하세요." id ="mb_pwd1" name = "checkPwd"/>
+						<div class = "password Validation" id ="mb_pwd1_check"></div>
+						<br/>
+						<label>비밀번호 확인</label>
+						<div class = "row m-0">
+							<input type = "password" class = "form-control col-9 col-sm-10 d-inline" placeholder="동일한 비밀번호를 입력하세요." id ="mb_pwd2"/>
+							<input type ="button"class = "form-control d-inline col-3 col-sm-2 btn btn-dark pwdBtn" value = "수정"/> <br/>
+						</div>
+						<div class = "password1 Validation" id ="mb_pwd2_check"></div>
+					</div>
 					<br/>
-					<label>비밀번호 확인</label>
-					<input type = "password" class = "form-control" placeholder="동일한 비밀번호를 입력하세요." id ="mb_pwd2"/>
-					<div class = "password1 Validation" id ="mb_pwd2_check"></div>
+					<div>
+						<label>이메일</label>
+						<div class = "row m-0">
+							<input type = "email" class = "form-control col-9 col-sm-10 d-inline" placeholder="이메일을 입력해 주세요" id="mb_email"/>
+							<input type ="button"class = "form-control d-inline col-3 col-sm-2 btn btn-dark emailBtn" value = "수정"/> <br/>
+						</div>
+						<div class = "email Validation" id ="email_check"></div>
+					</div>
 					<br/>
-					<label>이메일</label>
-					<input type = "email" class = "form-control" placeholder="이메일을 입력해 주세요"/>
-					<div class = "email Validation"></div>
-					<br/>
-					<label>전화번호</label>
-					<input type = "tel" class = "form-control" placeholder="전화번호를 입력해 주세요"/>
-					<div class = "tel Validation"></div>
+					<div>
+						<label>전화번호</label>
+						<div class = "row m-0">
+							<input type = "tel" class = "form-control col-9 col-sm-10 d-inline" placeholder="전화번호를 입력해 주세요" id="mb_phone"/>
+							<input type ="button"class = "form-control d-inline col-3 col-sm-2 btn btn-dark phoneBtn" value = "인증"/> <br/>
+						</div>
+						<div class = "tel Validation" id ="phone_check"></div><br/>
+						<div class = "row m-0">
+							<input type = "text" class = "form-control col-9 col-sm-10 d-inline" placeholder="인증번호를 입력해주세요." id="mb_phone1"/>
+							<input type ="button"class = "form-control d-inline col-3 col-sm-2 btn btn-dark phoneBtn1" value = "수정"/> <br/>
+						</div>
+						<div class = "tel Validation" id ="phone_check1"></div><br/>
+					</div>
 					<br/>
 					<!-- 권한이 host일 경우 보이게 하고 guest일 경우 안보이게 하면됨 -->
-					<label>주소</label>
-					<input type = "text" class = "form-control" placeholder="주소를 입력해 주세요"/>
-					<div class = "address Validation"></div>
-					<br/>
+					<div class = "address">
+						<div>
+						<label>주소</label>
+						<div class="mb-5" id="acm_address"> <!-- form안에서 이전,다음버튼과 컨텐츠과의 거리 -->
+							<div class="row d-flex justify-content-start">
+								<div class="col-sm-3 col-5">
+									<input class="form-control btn btn-dark" type="button" onclick="daumPostcode()" value="주소찾기">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12" style="height: 63px;">
+									<input class="form-control" type="text" name="address"  id="address" placeholder="주소 찾기를 클릭해 주소를 검색해주세요">
+									<div id="address_check"></div><br/>
+								</div>
+							</div>
+							<br/>
+							<div class="row">
+								<div class="col-sm-9">
+									<input class="form-control" type="text" name="detailAddress"  id="detailAddress" placeholder="상세주소를 입력해주세요">
+								</div>
+								<div class="col-sm-3 d-flex justify-content-end">
+									<input class="form-control" type="text" name="postcode"  id="postcode" placeholder="우편번호">
+								</div>
+								<div class="col-sm-9">
+									<div id="detailAddress_check"></div>
+								</div>
+								<div class="col-sm-3">
+									<div id="postcode_check"></div>
+								</div>
+								<br/>
+							</div>
+							<div class="row d-flex justify-content-end">
+								<div class="col-sm-3 col-5">
+									<input type ="button" class = "form-control btn btn-dark addressBtn" value = "수정"/> <br/>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</form>
 		</div>
@@ -93,25 +152,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <!-- iCheck(라디오 버튼) -->
 <script src="icheck-1.x/icheck.min.js"></script>
-<script>
-var emailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
-var foundId = null;
-
-function informationTab(elmnt, color) {
-	var i;
-	var informationTab;
-	informationTab = document.getElementsByClassName("informationTab");
-	for(i = 0 ; i < informationTab.length ; i++) {
-		informationTab[i].style.backgroundColor = "";
-		informationTab[i].style.color = "white";
-	}
-	
-	elmnt.style.backgroundColor = color;
-	elmnt.style.color = "black";
-}
-document.getElementById("defaultTab").click(); //active
-</script>
 <script>
 $(document).ready(function() {
 	$(".menu-toggle").click(function() {
@@ -134,6 +174,24 @@ $(document).ready(function() {
 	});
 	$("#mb_pwd2").blur(function() {
 		pwd1();
+	});
+	$("#mb_email").blur(function() {
+		email();
+	});
+	$(".phoneBtn").click(function() {
+		phone();
+	})
+	$(".phoneBtn1").click(function() {
+		sms();	
+	});
+	$("#postcode").blur(function() {
+		postcode();
+	});
+    $("#address").blur(function() {
+		address();
+	});
+    $("#detailAddress").blur(function() {
+    	detailAddress();
 	});
 	
 });
@@ -162,9 +220,27 @@ function pwd() {
 		pwdA = false;
 	}
 	else {
-		$("#mb_pwd1_check").text("사용 가능한 비밀번호 입니다.");
-		$("#mb_pwd1_check").css("color", "blue");
-		pwdA = true;
+		$.ajax({
+			url : "checkPwd",
+			data : {mb_pwd1:$("#mb_pwd1").val()},
+			Type : "POST",
+			success : function(data) {
+				console.log(data);
+				if(data == "true") {
+					$("#mb_pwd1_check").text("현재 비밀번호입니다. 비밀번호를 변경해주세요.");
+					$("#mb_pwd1_check").css("color", "red");
+					pwdA = false;
+				}
+				else {
+					$("#mb_pwd1_check").text("사용 가능한 비밀번호 입니다.");
+					$("#mb_pwd1_check").css("color", "blue");
+					pwdA = true;
+				}
+			},
+			error : function() {
+				alert("server error");
+			}
+		}); 
 	}
 }
 
@@ -172,8 +248,9 @@ function pwd1() {
 	if($("#mb_pwd2").val() == "" || $("#mb_pwd1").val() != $("#mb_pwd2").val()) {
 		$("#mb_pwd2_check").text("비밀번호가 일치하지 않습니다.");
 		$("#mb_pwd2_check").css("color", "red");
-		pwdB = false;
+		pwdA = true;
 	}
+	
 	else {
 		$("#mb_pwd2_check").text("비밀번호가 일치합니다.");
 		$("#mb_pwd2_check").css("color", "blue");
@@ -181,7 +258,189 @@ function pwd1() {
 	}
 }
 
+function email() {
+	if($("#mb_email").val() == "") {
+		$("#email_check").text("이메일을 작성해주세요");
+		$("#email_check").css("color", "red");
+	}
+	
+	else if(emailJ.test($("#mb_email").val()) != true) {
+		$("#email_check").text("이메일 형식이 올바르지 않습니다.");
+		$("#email_check").css("color", "red");
+	}
+	
+	else {
+		$("#email_check").text("");
+	}
+}
 
+function phone() {
+	if($("#mb_phone").val() == "") {
+		$("#phone_check").text("전화번호를 입력하세요.");
+		$("#phone_check").css("color", "red");
+	}
+	else if(phoneJ.test($("#mb_phone").val()) != true) {
+		$("#phone_check").text("전화번호 형식이 올바르지 않습니다.");
+		$("#phone_check").css("color", "red");
+	}
+	else if($("#mb_phone").val() != "" && phoneJ.test($("#mb_phone").val()) == true) {
+		$.ajax({
+			type : "POST",
+			data : {mb_phone : $("#mb_phone").val()},
+			url : "phoneCheck",
+			success : function(data) {
+				if(data == 1) {
+					$("#phone_check").text("중복된 전화번호 입니다.");
+					$("#phone_check").css("color", "red");
+					result = data;
+					
+				} else if(data == 0) {
+					$("#phone_check").text("사용가능한 전화번호 입니다.");
+					$("#phone_check").css("color", "blue");
+					result = data;
+				}
+			}
+		});
+		if(result == 1)
+			return false;
+		else
+			return true;
+		
+	}
+}
+function sms() {
+	if($("#mb_phone1").val() == "") {
+		$("#phone_check1").text("인증실패. 다시 입력하세요.");
+        $("#phone_check1").css("color", "red");
+        smsC = false;
+	}
+	smsC = true;
+}
+//문자 인증
+$("#certificate").on("click", function() {
+	if($("#mb_phone").val()!="" && phoneJ.test($("#mb_phone").val()) == true && result == 0) {
+		$.ajax({
+		       url : "sendSms",
+		       data : {
+		    	   mb_phone : $("#mb_phone").val()
+		       },
+		       success : function(result){
+		    	   console.log(result);
+		            if(result != null) {
+		                $(".phoneBtn1").on("click", function() {                     
+		                   if(JSON.parse(result)==($("#mb_sms").val())){
+		                      $("#phone_check1").text("인증되었습니다."); 
+		                      $("#phone_check1").css("color", "blue");
+		                      
+		                   } else {
+		                      $("#phone_check1").text("인증실패. 다시 입력하세요.");
+		                      $("#phone_check1").css("color", "red");
+		                   }
+		                });
+		             }
+		             
+		       }
+		 });
+	}
+});
+</script>
+<script>
+var authority = sessionStorage.getItem("authority");
+if(authority == "[host]") {
+	$(".address").show();
+}
+else {
+	$(".address").hide();
+}
+</script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+<script>
+    function daumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('postcode').value = data.zonecode;
+                document.getElementById("address").value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("detailAddress").focus();
+            }
+        }).open();
+    }
+    function postcode() {
+    	if($("#postcode").val() == "") {
+    		$("#postcode_check").text("우편번호를 입력하세요.");
+    		$("#postcode_check").css("color", "red");
+    	}
+    	
+    	else if(postJ.test($("#postcode").val()) != true) {
+    		$("#postcode_check").text("우편번호는 5자리 숫자입니다");
+    		$("#postcode_check").css("color", "red");
+    	}
+    	
+    	else {
+    		$("#postcode_check").text("");
+    	}
+    }
+    
+    function address(){
+    	if($("#address").val() == ""){
+    		$("#address_check").text("주소찾기 버튼을 눌러 주소를 검색하세요.");
+    		$("#address_check").css("color","red");
+    	}
+    	else {
+    		$("#address_check").text("");
+    	}
+    }
+    
+    function detailAddress(){
+    	if($("#detailAddress").val() == ""){
+    		$("#detailAddress_check").text("상세주소를 입력해주세요.");
+    		$("#detailAddress_check").css("color","red");
+    	}
+    	else {
+    		$("#detailAddress_check").text("");
+    	}
+    }
+</script>
+<script>
+$(document).ready(function() {
+	$(".pwdBtn").click(function() {
+		event.preventDefault;
+		if(pwdA == false || pwdB == false) {
+			return false;
+		}
+		else{
+			$.ajax({
+				type : "POST",
+				data : {mb_pwd1 : $("#mb_pwd1").val(), id : $("#id").val()},
+				url : "pwd",
+				success : function(data) {
+					if(data == 1) {
+						location.href = "index";
+						
+					} else {
+						alert("수정에 실패하였습니다.");
+					}
+				}
+			});
+		}
+	});
+});
 </script>
 </body>
 </html>

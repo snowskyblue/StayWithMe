@@ -42,6 +42,7 @@
 		<intercept-url pattern="/findPwd_sendEmail" access="permitAll" />
 		<intercept-url pattern="/index" access="permitAll" />
 		<intercept-url pattern="/addAcm" access="permitAll" />
+		<intercept-url pattern="/pwd" access="permitAll" />
 		<intercept-url pattern="/html/**" access="permitAll" />
 		<intercept-url pattern="/style/**" access="permitAll" />
 		<intercept-url pattern="/js/**" access="permitAll" />

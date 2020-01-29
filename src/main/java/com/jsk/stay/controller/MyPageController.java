@@ -42,8 +42,7 @@ public class MyPageController {
 	
 	@RequestMapping("/EditInformation")
 	public String EditInformation(Model model, HttpServletRequest request) {
-		String pw = request.getParameter("checkPwd");
-		model.addAttribute("pw",pw);
+		
 		return "EditInformation";
 	}
 	
@@ -52,6 +51,10 @@ public class MyPageController {
 	public String checkPwd(Model model, HttpServletRequest request) {
 		String pw = request.getParameter("checkPwd");
 		System.out.println("pw : " + pw);
+		if(pw == null) {
+			pw = request.getParameter("mb_pwd1");
+			System.out.println(pw);
+		}
 		String mb_id = request.getRemoteUser();
 		System.out.println("mb_id : " + mb_id );
 		String mb_pw = dao.check(mb_id);
