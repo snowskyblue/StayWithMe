@@ -15,6 +15,11 @@ public class HostController {
 	@Autowired
 	private HostDao dao;
 	
+	@RequestMapping("hostJoin")
+	public String hostJoin() {
+		return "hostJoin";
+	}
+	
 	@RequestMapping("hostWrite") 
 	public String hostWrite(HttpServletRequest request, Model model) {
 		//writeForm에서 오는 request에서 뺌//content dao로 받을 경우 그냥 (0,값,값)으로 받을 수 있음

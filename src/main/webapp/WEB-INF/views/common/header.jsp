@@ -224,7 +224,7 @@ nav, figure, footer, header {
 					<ul class="list-unstyled">
 						<li class="wish-btn-li"><a href="#">위시리스트</a></li>
 						<li class="confirm-btn-li"><a href="#">예약확인</a></li>
-						<li class="host-btn-li"><a href="addAcm" id="host">호스트</a></li>
+						<li class="host-btn-li"><a href="#" id="host">호스트</a></li>
 						<li class="event-btn-li"><a href="#">이벤트</a></li>
 						<li class="notice-btn-li"><a href="#">공지사항</a></li>
 					</ul>
@@ -282,6 +282,25 @@ $(document).ready(function(){
 			location.href = "memberjoin";
 		}else{
 			location.href = "myPageProfile";
+		}
+	});
+});
+</script>
+<script>
+$(document).ready(function(){
+	$("#host").click(function(){
+		event.preventDefault();
+		if(authority == "[guest]") {
+			console.log(authority + "header");
+			location.href = "hostJoin";
+		} else if (authority == "[preHost]"){
+			console.log(authority + "header");
+			location.href = "addAcm";
+		} else if (authority == "[host]") {
+			/*host 알림판으로 이동*/
+		} else {
+			/*비회원일 경우 할 것 정하기*/
+			location.href="hostJoin"
 		}
 	});
 });
