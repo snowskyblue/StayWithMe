@@ -9,6 +9,9 @@ public class HostDto {
 	private String ho_account;
 	private String ho_acc_num;
 	
+	public HostDto() {
+	}
+	
 	public HostDto(String mb_id, String ho_address, String ho_add_detail, int ho_zip, String ho_account,
 			String ho_acc_num) {
 		super();

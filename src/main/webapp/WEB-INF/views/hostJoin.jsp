@@ -18,8 +18,6 @@
 <!--font-awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<!-- ng -->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <title>Insert title here</title>
 <style>
 @font-face { font-family: 'Eoe_Zno_L'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/Eoe_Zno_L.woff') format('woff'); font-weight: normal; font-style: normal; }
@@ -69,6 +67,7 @@
 	<div class="row d-flex justify-content-center pt-5" style="max-width:1200px;">
 		<div class="col-10 col-sm-10 mt-3 mb-3"> <!-- dddddddddd -->
 			<form method="POST" action ="hostWrite" enctype="multipart/form-data">
+				<input type="hidden" id="mb_id" name="mb_id"><br/>
 				<div class="row mb-5 mt-5">
 					<div class="col-sm-3 border2">주소</div> 
 				</div>
@@ -139,6 +138,9 @@
 <!--javascript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+<!-- ng -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
 <!-- 다음 주소 검색 api -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
@@ -201,10 +203,11 @@ function daumPostcode() {
 </script>
 <script>
 $(document).ready(function(){
-	 $(".menu-toggle").click(function() {
- 		$("nav").toggleClass("active");
+	$(".menu-toggle").click(function() {
+ 		$("nav").toggleClass("active"); 
  		$(".main").toggleClass("main1");
  	});
+	$("#mb_id").val(sessionStorage.getItem("user"));
 });	
 </script>
 </body>

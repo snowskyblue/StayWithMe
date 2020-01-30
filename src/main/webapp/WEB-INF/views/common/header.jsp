@@ -297,8 +297,8 @@ $(document).ready(function(){
 			console.log(authority + "header");
 			location.href = "addAcm";
 		} else if (authority == "[host]") {
-			/*host 알림판으로 이동*/
-		} else {
+			location.href="hostBoard";
+		} else if (authority == "") {
 			/*비회원일 경우 할 것 정하기*/
 			location.href="hostJoin"
 		}
