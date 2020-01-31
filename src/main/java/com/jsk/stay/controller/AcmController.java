@@ -96,7 +96,7 @@ public class AcmController {
 		System.out.println("컨트롤러에서 커맨드클래스 생성 완료");
 		command.execute(model);
 		System.out.println("컨트롤러에서 커맨드클래스의 엑스큐트메서드 호출 완료");
-		return "hostJoin";
+		return "hostBoard";
 		
 	}
 	

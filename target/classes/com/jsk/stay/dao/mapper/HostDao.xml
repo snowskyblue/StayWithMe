@@ -9,4 +9,7 @@
 		INSERT INTO HOST (mb_id, ho_address, ho_add_detail,ho_zip, ho_account,ho_acc_num)
 		VALUES (#{mb_id}, #{ho_address}, #{ho_add_detail},#{ho_zip}, #{ho_account}, #{ho_acc_num})
 	</insert>
+	<update id="gradeUpdate" parameterType = "com.jsk.stay.dto.HostDto">
+		update member set mb_grade = 'preHost' where mb_id = #{mb_id}
+	</update>
 </mapper>	

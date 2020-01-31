@@ -164,6 +164,7 @@ form {
 	<div class="row d-flex justify-content-center pt-5" style="max-width:1200px;">
 		<div class="col-10 col-sm-10 mt-3 mb-3"> <!-- dddddddddd -->
 			<form method="POST" action ="write" enctype="multipart/form-data">
+				<input type="hidden" id="mb_id" name="mb_id"><br/>
 				<div class="row mb-5">
 					<div class="col-sm-3 border2">대여공간 (택 1)</div> 
 				</div>
@@ -282,7 +283,7 @@ form {
 						</div>
 						<div class="row">
 							<div class="col-sm-6" style="height: 63px;">
-								<input class="form-control" type="text" name="address"  id="address" placeholder="주소d 찾기를 클릭해 주소를 검색해주세요"><br>
+								<input class="form-control" type="text" name="address" value="abc"  id="address" placeholder="주소d 찾기를 클릭해 주소를 검색해주세요"><br>
 							</div>
 							<div class="col-sm-6" style="height: 63px;">
 								<input class="form-control" type="text" name="extraAddress"  id="extraAddress" placeholder="참고주소">
@@ -293,10 +294,10 @@ form {
 						</div>
 						<div class="row">
 							<div class="col-sm-9">
-								<input class="form-control" type="text" name="detailAddress"  id="detailAddress" placeholder="상세주소를 입력해주세요">
+								<input class="form-control" type="text" name="detailAddress" value="abc"   id="detailAddress" placeholder="상세주소를 입력해주세요">
 							</div>
 							<div class="col-sm-3 d-flex justify-content-end">
-								<input class="form-control" type="text" name="postcode"  id="postcode" placeholder="우편번호">
+								<input class="form-control" type="text" name="postcode" value="00000" id="postcode" placeholder="우편번호">
 							</div>
 							<div class="col-sm-9">
 								<div id="detailAddress_check"></div>
@@ -597,6 +598,8 @@ app.controller('acmCtrl', function($scope) {
     			return true;
     		}
         });
+        
+        $("#mb_id").val(sessionStorage.getItem("user"));
     });
     
     function postcode() {

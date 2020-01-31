@@ -21,6 +21,9 @@ public class HostController {
 	
 	@RequestMapping("hostWrite") 
 	public String hostWrite(HostDto dto, Model model) {
+		dao.writeDao(dto);
+		return "addAcm";
+		
 		//writeForm에서 오는 request에서 뺌//content dao로 받을 경우 그냥 (0,값,값)으로 받을 수 있음
 		/*
 		String mb_id = dto.getMb_id();
@@ -38,8 +41,6 @@ public class HostController {
 		String ho_acc_num = request.getParameter("ho_acc_num");*/
 		
 		/*dao.writeDao(mb_id, ho_address, ho_add_detail,ho_zip, ho_account,ho_acc_num);*/
-		dao.writeDao(dto);
-		return "index";
 	}
 	
 	@RequestMapping("/hostBoard")

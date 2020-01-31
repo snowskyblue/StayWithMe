@@ -19,9 +19,16 @@ public class HostDao implements IHostDao {
 		sqlSession.insert("writeDao",dto);
 		//insert("IDao.xml의 insert element의 id명",IDao.xml의 insert element의 parameterType속성에 맞는 parameter);
 	}*/
-
+	
+	@Override
 	public void writeDao(HostDto dto) {
 		sqlSession.insert("writeDao",dto);
+		gradeUpdate(dto);
+	}
+
+	@Override
+	public void gradeUpdate(HostDto dto) {
+		sqlSession.update("gradeUpdate", dto);
 	}
 
 }

@@ -17,6 +17,7 @@ public class AcmWriteCommand implements AcmCommand {
 		
 		System.out.println("커맨드클래스의 엑스큐트 메서드 안 ok");
 		
+		String mb_id = request.getParameter("mb_id");
 		String acm_type = request.getParameter("acm_type");
 		String acm_room_type = request.getParameter("acm_room_type");
 		String acm_bedding = request.getParameter("acm_bedding");
@@ -74,6 +75,7 @@ public class AcmWriteCommand implements AcmCommand {
 		
 		AcmDao dao = new AcmDao();
 		dao.write(
+				mb_id,
 				acm_type,
 				acm_room_type,
 				acm_bedding,

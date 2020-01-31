@@ -67,7 +67,7 @@
 	<div class="row d-flex justify-content-center pt-5" style="max-width:1200px;">
 		<div class="col-10 col-sm-10 mt-3 mb-3"> <!-- dddddddddd -->
 			<form method="POST" action ="hostWrite" enctype="multipart/form-data">
-				<input type="hidden" id="mb_id" name="mb_id"><br/>
+				<input type="hidden" id="mb_id" name="mb_id">
 				<div class="row mb-5 mt-5">
 					<div class="col-sm-3 border2">주소</div> 
 				</div>
@@ -83,7 +83,7 @@
 								<input class="form-control" type="text" name="ho_address"  id="address" placeholder="주소 찾기를 클릭해 주소를 검색해주세요">
 							</div>
 							<div class="col-sm-6">
-								<input class="form-control" type="text" name="mb_id"  id="extraAddress" placeholder="참고주소">
+								<input class="form-control" type="text" id="extraAddress" placeholder="참고주소">
 							</div>
 						</div>
 						<div class="row">
@@ -208,6 +208,7 @@ $(document).ready(function(){
  		$(".main").toggleClass("main1");
  	});
 	$("#mb_id").val(sessionStorage.getItem("user"));
+	console.log(sessionStorage.getItem("user"));
 });	
 </script>
 </body>
