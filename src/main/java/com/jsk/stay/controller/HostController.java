@@ -22,7 +22,8 @@ public class HostController {
 	@RequestMapping("hostWrite") 
 	public String hostWrite(HostDto dto, Model model) {
 		dao.writeDao(dto);
-		return "addAcm";
+		//return "addAcm"
+		return "preHostGrade";
 		
 		//writeForm에서 오는 request에서 뺌//content dao로 받을 경우 그냥 (0,값,값)으로 받을 수 있음
 		/*

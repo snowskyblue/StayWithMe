@@ -290,15 +290,14 @@ $(document).ready(function(){
 $(document).ready(function(){
 	$("#host").click(function(){
 		event.preventDefault();
-		if(authority == "[guest]") {
+		if(sessionStorage.getItem("authority") == "[guest]") {
 			console.log(authority + "header");
 			location.href = "hostJoin";
-		} else if (authority == "[preHost]"){
-			console.log(authority + "header");
+		} else if (sessionStorage.getItem("authority") == "[preHost]"){
 			location.href = "addAcm";
-		} else if (authority == "[host]") {
+		} else if (sessionStorage.getItem("authority") == "[host]") {
 			location.href="hostBoard";
-		} else if (authority == "") {
+		} else if (sessionStorage.getItem("authority") == "") {
 			/*비회원일 경우 할 것 정하기*/
 			location.href="hostJoin"
 		}
