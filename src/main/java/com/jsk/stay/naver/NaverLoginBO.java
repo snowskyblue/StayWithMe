@@ -18,7 +18,7 @@ public class NaverLoginBO {
 	
 	private final static String CLIENT_ID = "DR6UQLwNW77bpe7xnwK1";
 	private final static String CLIENT_SECRET = "VS6AsbUt0s";
-	private final static String REDIRECT_URI = "http://localhost:8181/stay/socialPhone";
+	private final static String REDIRECT_URI = "https://localhost:8443/stay/socialPhone";
 	private final static String SESSION_STATE = "oauth_state";
 	private final static String PROFILE_API_URL = "https://openapi.naver.com/v1/nid/me";
     

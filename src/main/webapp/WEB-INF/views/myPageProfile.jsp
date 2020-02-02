@@ -175,13 +175,23 @@
 							</div>
 						</div>
 						<div class = "myPageform">
-							<div class = "myPage" id ="pay">
-							
+							<div class = "myPage d-flex flex-wrap align-content-center justify-content-center" id ="pay">
+								<div class = "text-center">
+									<h5>계좌 정보 변경</h5>
+									<p>
+										계좌정보를 변경하려면 비밀번호를 입력해 주세요<br/>
+										<span>
+										
+											<input type = "password" class = "d-inline form-control" name = "checkPwd1" id ="checkPwd1" placeholder="비밀번호를 입력해 주세요." style = "width : 70%;"/>
+											<button class = "d-inline btn btn-dark form-control" style = "width : 75px;" id = "checkPw1">확인</button>
+										</span>
+									</p>
+								</div>
 							</div>
 						</div>
 						<div class = "myPageform" style = "border : 0px;">
 							<div class = "myPage" id = "alarm">
-							
+								
 							</div>
 						</div>
 					</div>

@@ -43,6 +43,9 @@
 		<intercept-url pattern="/index" access="permitAll" />
 		<intercept-url pattern="/addAcm" access="permitAll" />
 		<intercept-url pattern="/pwd" access="permitAll" />
+		<intercept-url pattern="/email" access="permitAll" />
+		<intercept-url pattern="/phone" access="permitAll" />
+		<intercept-url pattern="/address" access="permitAll" />
 		<intercept-url pattern="/html/**" access="permitAll" />
 		<intercept-url pattern="/style/**" access="permitAll" />
 		<intercept-url pattern="/js/**" access="permitAll" />

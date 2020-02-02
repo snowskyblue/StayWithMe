@@ -31,12 +31,12 @@ public class LoginController {
 	private String apiResult = null;
 	
 	private NaverLoginBO naverLoginBO;
-	//naverLoginBO변수를 만들어주기
-	
+
 	@Autowired
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
 		this.naverLoginBO = naverLoginBO;
 	}
+	
 
 	@Autowired
 	public void setDao(LoginDao dao) {
@@ -81,7 +81,7 @@ public class LoginController {
 		return "logout";
 	}
 	
-	@RequestMapping(value = "/socialPhone", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "socialPhone", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callback(Model model, HttpServletRequest request, @RequestParam String code, @RequestParam String state, HttpSession session)
 			throws IOException {
 		System.out.println("여기는  callback");
@@ -90,7 +90,7 @@ public class LoginController {
        //로그인 사용자 정보를 읽어온다.
 	    apiResult = naverLoginBO.getUserProfile(oauthToken);
 		model.addAttribute("result", apiResult);
-		return "index";
+		return "socialPhone";
 	}
 	
 	@RequestMapping(value = "nlogin", method = { RequestMethod.GET, RequestMethod.POST })
@@ -104,5 +104,5 @@ public class LoginController {
 		// 생성한 인증 URL을 View로 전달
 		response.sendRedirect(naverAuthUrl);
 	}
-
+	
 }

@@ -5,7 +5,16 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Edit">
-	<update id="pwdUpdate" parameterType = "String">
-		UPDATE MEMBER (MB_ID,MB_PWD) VALUES (#{id},#{pw})
+	<update id="pwdUpdate" parameterType = "com.jsk.stay.dto.MemberDto">
+		UPDATE MEMBER SET MB_PWD = #{mb_pwd} WHERE MB_ID = #{mb_id}
+	</update>
+	<update id="emailUpdate" parameterType = "com.jsk.stay.dto.MemberDto">
+		UPDATE MEMBER SET MB_EMAIL = #{mb_email} WHERE MB_ID = #{mb_id}
+	</update>
+	<update id="phoneUpdate" parameterType = "com.jsk.stay.dto.MemberDto">
+		UPDATE MEMBER SET MB_PHONE = #{mb_phone} WHERE MB_ID = #{mb_id}
+	</update>
+	<update id="addressUpdate" parameterType = "com.jsk.stay.dto.HostDto">
+		UPDATE HOST SET HO_ADDRESS = #{ho_address}, HO_ADD_DETAIL = #{ho_add_detail}, HO_ZIP = #{ho_zip} WHERE MB_ID = #{mb_id}
 	</update>
 </mapper>

@@ -57,6 +57,8 @@
 	<!-- JoinDao와 JoinDaoImp가 상속관계이기 때문에 Autowired할때 경로를 못 찾아감. 따라서 id를 지정해주어 그 id로 빈객체를 선언해주어야 함.  -->
 	<beans:bean id = "joinDao" class="com.jsk.stay.dao.JoinDaoImp">
 	</beans:bean>
+	<beans:bean id = "EditDao" class="com.jsk.stay.dao.EditDaoImp">
+	</beans:bean>
 	<!-- file Upload 추가부분 -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<!-- max upload size in bytes -->

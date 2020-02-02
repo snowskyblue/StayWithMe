@@ -93,9 +93,10 @@
 						<div class = "tel Validation" id ="phone_check"></div><br/>
 						<div class = "row m-0">
 							<input type = "text" class = "form-control col-9 col-sm-10 d-inline" placeholder="인증번호를 입력해주세요." id="mb_phone1"/>
-							<input type ="button"class = "form-control d-inline col-3 col-sm-2 btn btn-dark phoneBtn1" value = "수정"/> <br/>
+							<input type ="button"class = "form-control d-inline col-3 col-sm-2 btn btn-dark phoneBtn1" value = "확인"/> <br/>
 						</div>
 						<div class = "tel Validation" id ="phone_check1"></div><br/>
+						<input type ="button"class = "form-control d-inline col-3 col-sm-2 btn btn-dark phoneBtn2" value = "수정"/> <br/>
 					</div>
 					<br/>
 					<!-- 권한이 host일 경우 보이게 하고 guest일 경우 안보이게 하면됨 -->
@@ -180,6 +181,7 @@ $(document).ready(function() {
 	});
 	$(".phoneBtn").click(function() {
 		phone();
+		
 	})
 	$(".phoneBtn1").click(function() {
 		sms();	
@@ -193,7 +195,11 @@ $(document).ready(function() {
     $("#detailAddress").blur(function() {
     	detailAddress();
 	});
-	
+    $(".addressBtn").click(function() {
+    	postcode();
+    	address();
+    	detailAddress();
+    });
 });
 </script>
 <script>
@@ -205,6 +211,7 @@ var nameJ = /^[가-힣]{2,20}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/;
 var emailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 var phoneJ = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;
 var birthJ = /^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/;
+var postJ = /^\d{5}$/;
 var result = null;
 
 function pwd() {
@@ -262,15 +269,18 @@ function email() {
 	if($("#mb_email").val() == "") {
 		$("#email_check").text("이메일을 작성해주세요");
 		$("#email_check").css("color", "red");
+		emailA = false;
 	}
 	
 	else if(emailJ.test($("#mb_email").val()) != true) {
 		$("#email_check").text("이메일 형식이 올바르지 않습니다.");
 		$("#email_check").css("color", "red");
+		emailA = false;
 	}
 	
 	else {
 		$("#email_check").text("");
+		emailA = true;
 	}
 }
 
@@ -278,10 +288,12 @@ function phone() {
 	if($("#mb_phone").val() == "") {
 		$("#phone_check").text("전화번호를 입력하세요.");
 		$("#phone_check").css("color", "red");
+		phoneA = false;
 	}
 	else if(phoneJ.test($("#mb_phone").val()) != true) {
 		$("#phone_check").text("전화번호 형식이 올바르지 않습니다.");
 		$("#phone_check").css("color", "red");
+		phoneA = false;
 	}
 	else if($("#mb_phone").val() != "" && phoneJ.test($("#mb_phone").val()) == true) {
 		$.ajax({
@@ -292,11 +304,12 @@ function phone() {
 				if(data == 1) {
 					$("#phone_check").text("중복된 전화번호 입니다.");
 					$("#phone_check").css("color", "red");
+					phoneA = false;
 					result = data;
-					
 				} else if(data == 0) {
 					$("#phone_check").text("사용가능한 전화번호 입니다.");
 					$("#phone_check").css("color", "blue");
+					phoneA = true;
 					result = data;
 				}
 			}
@@ -304,7 +317,31 @@ function phone() {
 		if(result == 1)
 			return false;
 		else
-			return true;
+			$.ajax({
+			       url : "sendSms",
+			       data : {
+			    	   mb_phone : $("#mb_phone").val()
+			       },
+			       success : function(result){
+			    	   console.log(result);
+			            if(result != null) {
+			                $(".phoneBtn1").on("click", function() {                     
+			                   if(JSON.parse(result)==($("#mb_phone1").val())){
+			                      $("#phone_check1").text("인증되었습니다."); 
+			                      $("#phone_check1").css("color", "blue");
+			                      phoneB = true;
+			                      
+			                   } else {
+			                      $("#phone_check1").text("인증실패. 다시 입력하세요.");
+			                      $("#phone_check1").css("color", "red");
+			                      phoneB = false;
+			                   }
+			                });
+			             }
+			             
+			       }
+			 });
+		return true;
 		
 	}
 }
@@ -312,37 +349,11 @@ function sms() {
 	if($("#mb_phone1").val() == "") {
 		$("#phone_check1").text("인증실패. 다시 입력하세요.");
         $("#phone_check1").css("color", "red");
-        smsC = false;
+        phoneB = false;
 	}
-	smsC = true;
+	phoneB = true;
 }
-//문자 인증
-$("#certificate").on("click", function() {
-	if($("#mb_phone").val()!="" && phoneJ.test($("#mb_phone").val()) == true && result == 0) {
-		$.ajax({
-		       url : "sendSms",
-		       data : {
-		    	   mb_phone : $("#mb_phone").val()
-		       },
-		       success : function(result){
-		    	   console.log(result);
-		            if(result != null) {
-		                $(".phoneBtn1").on("click", function() {                     
-		                   if(JSON.parse(result)==($("#mb_sms").val())){
-		                      $("#phone_check1").text("인증되었습니다."); 
-		                      $("#phone_check1").css("color", "blue");
-		                      
-		                   } else {
-		                      $("#phone_check1").text("인증실패. 다시 입력하세요.");
-		                      $("#phone_check1").css("color", "red");
-		                   }
-		                });
-		             }
-		             
-		       }
-		 });
-	}
-});
+
 </script>
 <script>
 var authority = sessionStorage.getItem("authority");
@@ -374,7 +385,7 @@ else {
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('postcode').value = data.zonecode;
+                document.getElementById("postcode").value = data.zonecode;
                 document.getElementById("address").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
                 document.getElementById("detailAddress").focus();
@@ -385,15 +396,21 @@ else {
     	if($("#postcode").val() == "") {
     		$("#postcode_check").text("우편번호를 입력하세요.");
     		$("#postcode_check").css("color", "red");
+    		addressA = false;
+    		console.log(addressA)
     	}
     	
     	else if(postJ.test($("#postcode").val()) != true) {
     		$("#postcode_check").text("우편번호는 5자리 숫자입니다");
     		$("#postcode_check").css("color", "red");
+    		addressA = false;
+    		console.log(addressA)
     	}
     	
     	else {
     		$("#postcode_check").text("");
+    		addressA = true;
+    		console.log(addressA)
     	}
     }
     
@@ -401,9 +418,13 @@ else {
     	if($("#address").val() == ""){
     		$("#address_check").text("주소찾기 버튼을 눌러 주소를 검색하세요.");
     		$("#address_check").css("color","red");
+    		addressB = false;
+    		console.log(addressB)
     	}
     	else {
     		$("#address_check").text("");
+    		addressB = true;
+    		console.log(addressB)
     	}
     }
     
@@ -411,9 +432,13 @@ else {
     	if($("#detailAddress").val() == ""){
     		$("#detailAddress_check").text("상세주소를 입력해주세요.");
     		$("#detailAddress_check").css("color","red");
+    		addressC = false;
+    		console.log(addressC)
     	}
     	else {
     		$("#detailAddress_check").text("");
+    		addressC = true;
+    		console.log(addressC)
     	}
     }
 </script>
@@ -430,7 +455,7 @@ $(document).ready(function() {
 				data : {mb_pwd1 : $("#mb_pwd1").val(), id : $("#id").val()},
 				url : "pwd",
 				success : function(data) {
-					if(data == 1) {
+					if(data == "success") {
 						location.href = "index";
 						
 					} else {
@@ -438,6 +463,73 @@ $(document).ready(function() {
 					}
 				}
 			});
+		}
+	});
+	
+	$(".emailBtn").click(function() {
+		event.preventDefault;
+		if(emailA == true) {
+			$.ajax({
+				type : "POST",
+				data : {mb_email : $("#mb_email").val(), id : $("#id").val()},
+				url : "email",
+				success : function(data) {
+					if(data == "success") {
+						location.href = "index";
+						
+					} else {
+						alert("수정에 실패하였습니다.");
+					}
+				}
+			});
+		}
+		else {
+			return false;
+		}
+	});
+	
+	$(".phoneBtn2").click(function() {
+		event.preventDefault;
+		if(phoneA == true && phoneB == true) {
+			$.ajax({
+				type : "POST",
+				data : {mb_phone : $("#mb_phone").val(), id : $("#id").val()},
+				url : "phone",
+				success : function(data) {
+					if(data == "success") {
+						location.href = "index";
+						
+					} else {
+						alert("수정에 실패하였습니다.");
+					}
+				}
+			});
+		}
+		else {
+			return false;
+		}
+	});
+	
+	$(".addressBtn").click(function() {
+		event.preventDefault;
+		if(addressA == true && addressB == true && addressC == true) {
+			$.ajax({
+				type : "POST",
+				data : {postcode: $("#postcode").val(), address: $("#address").val(),
+					detailAddress: $("#detailAddress").val(), id : $("#id").val()},
+				url : "address",
+				success : function(data) {
+					if(data == "success") {
+						location.href = "index";
+						
+					} else {
+						alert("수정에 실패하였습니다.");
+					}
+				}
+			});
+		}
+		else {
+			return false;
 		}
 	});
 });
