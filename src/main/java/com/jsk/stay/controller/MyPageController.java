@@ -42,7 +42,9 @@ public class MyPageController {
 	
 	@RequestMapping("/EditInformation")
 	public String EditInformation(Model model, HttpServletRequest request) {
-		
+		String id = request.getRemoteUser();
+		//MemberDto dto = dao.information(id);
+		//model.addAttribute("dto",dto);
 		return "EditInformation";
 	}
 	

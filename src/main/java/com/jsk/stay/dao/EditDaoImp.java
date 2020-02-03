@@ -12,7 +12,7 @@ public class EditDaoImp implements EditDao {
 	private SqlSession sqlSession;
 	
 	@Override
-	public void pwd(String id, String pw) {
+	public void myPagePwd(String id, String pw) {
 		
 		MemberDto dto = new MemberDto(id,pw,"","");
 		
@@ -20,7 +20,7 @@ public class EditDaoImp implements EditDao {
 	}
 
 	@Override
-	public void email(String id, String email) {
+	public void myPageEmail(String id, String email) {
 		
 		MemberDto dto = new MemberDto(id,"",email,"");
 		
@@ -28,7 +28,7 @@ public class EditDaoImp implements EditDao {
 	}
 	
 	@Override
-	public void phone(String id, String phone) {
+	public void myPagePhone(String id, String phone) {
 		
 		MemberDto dto = new MemberDto(id,"","",phone);
 		
@@ -36,7 +36,7 @@ public class EditDaoImp implements EditDao {
 	}
 	
 	@Override
-	public void address(String id, String ho_address, String ho_add_detail, int ho_zip) {
+	public void myPageAddress(String id, String ho_address, String ho_add_detail, int ho_zip) {
 		
 		HostDto dto = new HostDto(id,ho_address,ho_add_detail,ho_zip,"","");
 		
