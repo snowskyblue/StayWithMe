@@ -417,7 +417,6 @@ form {
 							<div id="toolbar-container" style="max-width:100%"></div>
 							<div id="editor" ng-click="editorInit()" style="max-width:100%;min-height:300px;border:1px solid grey;line-height:0.5rem">{{info}}</div>
 							<textarea id="div1" name="acm_info" style="display:none;"></textarea>
-							<div id="div2" class="ck-content" style="width:50%;min-height:300px;border:1px solid grey;"></div>
 						</div>
 					</div>
 				</div><!-- 숙소 소개 -->
@@ -595,6 +594,10 @@ app.controller('acmCtrl', function($scope) {
     			return false;
     		}
     		else {
+    			var x = $("#editor").html();
+    			$("#div1").text(x);
+    			//$("#div2").html('<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1.0"></head><body>' + y + "</body></html>");
+    			console.log("x" + x);
     			return true;
     		}
         });
@@ -741,16 +744,6 @@ DecoupledEditor
         toolbarContainer.appendChild( editor.ui.view.toolbar.element );
     });
   
-</script>
-<script>
-$("#editor").blur(function() {
-	var x = $("#editor").html();
-	alert(x);
-	$("#div1").text(x);
-	var y = $("#div1").text();
-	//$("#div2").html('<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1.0"></head><body>' + y + "</body></html>");
-	$("#div2").html(y);
-});
 </script>
 </body>
 </html>
