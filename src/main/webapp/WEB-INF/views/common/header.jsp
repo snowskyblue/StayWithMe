@@ -291,7 +291,6 @@ $(document).ready(function(){
 	$("#host").click(function(){
 		event.preventDefault();
 		if(sessionStorage.getItem("authority") == "[guest]") {
-			console.log(authority + "header");
 			location.href = "hostJoin";
 		} else if (sessionStorage.getItem("authority") == "[preHost]"){
 			location.href = "addAcm";

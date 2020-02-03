@@ -45,7 +45,8 @@ public class HostController {
 	}
 	
 	@RequestMapping("/hostBoard")
-	public String hostBoard() {
+	public String hostBoard(Model model) {
+		model.addAttribute("hostJoin", "success");
 		return "hostBoard";
 	}
 
