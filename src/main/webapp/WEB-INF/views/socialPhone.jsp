@@ -18,9 +18,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- iCheck(라디오버튼) -->
 <link rel="stylesheet" href="icheck-1.x/skins/flat/flat.css">
-<title>아이디/비밀번호 찾기</title>
+<title>소셜 로그인 핸드폰 인증</title>
 <style>
-#find-header {
+#login-header {
 	padding-top: 150px;
 }
 #border {
@@ -28,7 +28,7 @@
 	/*border-collapse: collapse;*/
 }
 
-.findTabMenu {
+.loginTabMenu {
 	margin-top: 100px;
     width: 500px;
     margin-bottom: 150px;
@@ -38,7 +38,7 @@
 	border: 0px!important;
 }
 
-.findTab {
+.loginTab {
 	width: 250px;
 	cursor: pointer;
 	border-top: 1px solid #343a40;
@@ -49,7 +49,7 @@
     font-weight: bold;
 }
 
-.findTab a {
+.loginTab a {
 	display: block;
 	padding-top: 5px;
     height: 35px;
@@ -60,11 +60,11 @@
 	padding-top: 30px;
 }
 
-.findForm {
+.loginForm {
 	width: 400px;
 }
 
-.findTab_info {
+.loginTab_info {
 	font-size:15px;
 	font-weight: bold;
 	padding: 20px;
@@ -73,12 +73,12 @@
     border-bottom: 1px solid lightgrey;
 }
 
-.findTab_info i {
+.loginTab_info i {
 	font-size: 40px;
     margin-bottom: 10px;
 }
 
-#findId_name {
+#loginId_name {
 	margin-bottom: 50px;
 }
 
@@ -99,24 +99,24 @@
 }
 
 @media screen and (max-width: 576px) {
-	.findTabMenu {
+	.loginTabMenu {
 		width: 300px;
 	}
 	
-	.findTab {
+	.loginTab {
 		width: 150px;
 		cursor: pointer;
 	}
 	
-	.findTab_info {
+	.loginTab_info {
 		font-size: 14px;
 	}
 	
-	.findTab a {
+	.loginTab a {
 		width: 150px;
 	}
 	
-	.findForm {
+	.loginForm {
 		width: 300px;
 	}
 	
@@ -130,22 +130,20 @@
 <body>
 <jsp:include page="common/header.jsp" flush="false"/>
 <div class="main">
-	<div class="container" id="find-header">
+	<div class="container" id="login-header">
 		<h3>휴대폰 인증 받기</h3>
 		<div id="border"></div>
 		
-		<div class="findTabMenu mx-auto">
-			<!-- tab 선택에 따른 내용 -->
+		<div class="loginTabMenu mx-auto">
 			<div class="tab-content">
-
-				<div id="findId" class="tab-pane active mx-auto">
-					<div class="findTab_info text-center">
+				<div id="loginId" class="tab-pane active mx-auto">
+					<div class="loginTab_info text-center">
 						<i class="fas fa-exclamation-circle"></i><br/>
 						<p>소셜 로그인을 하려면 휴대폰 인증이 필요합니다.</p>
 					</div>
-					<form action="#" class="mx-auto findForm">
+					<form action="#" class="mx-auto loginForm">
 						<div class="form-group">
-							<label for="findId_phone">휴대폰 번호</label><br/>
+							<label for="loginId_phone">휴대폰 번호</label><br/>
 							<div class="form_center">
 								<input type="tel" class="form-control-inline col-8 col-sm-8" id="phoneNumber" name="mb_phone" maxlength="11" placeholder='"-"없이 번호만 입력'>
 								<button type="button" onclick="namePhoneCheck(); phoneCertify();" id="phone_certify" class="btn btn-dark">인증</button>
@@ -154,13 +152,13 @@
 						</div>
 						<div class="form-group">
 							<div class="form_center">
-								<input type="text" class="form-control-inline col-8 col-sm-8" id="findId_sms" name="mb_sms" maxlength="6" placeholder="인증 번호 입력">
+								<input type="text" class="form-control-inline col-8 col-sm-8" id="loginId_sms" name="mb_sms" maxlength="6" placeholder="인증 번호 입력">
 								<button type="button" id="sms_confirm" class="btn btn-dark">확인</button>
 								<div class="check_font" id="phone_check2"></div>
 							</div>
 						</div><br/><br/>
 						<div class="form-group text-center">
-							<button type="button" id="findIdBtn" class="btn btn-dark form-control" style="border: none;">아이디 찾기</button>
+							<button type="button" id="loginBtn" class="btn btn-dark form-control" style="border: none;">아이디 찾기</button>
 						</div>
 					</form>
 				</div>
@@ -168,6 +166,27 @@
 		</div>
 	</div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<img src="img/logo.jpg">
+				<button type="button" id="modalClose1" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div id="loginModal_body"class="modal-body text-center" style="font-weight:bold;">
+				 
+			</div>
+			<div class="modal-footer">
+				<button type="button" id="modalClose2" class="btn btn-dark" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <jsp:include page="common/footer.jsp" flush="false"/>
 
 <!--jquery -->
@@ -181,6 +200,79 @@
 <script>
 var phoneJ = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;
 
+function namePhoneCheck() {
+	var loginId_phone = document.getElementById("loginId_phone");
+	
+	if(loginId_phone.value == "") {
+		$("#loginModal").modal("show");
+		loginModal_body.innerHTML = "전화번호를 입력하세요.";
+	}
+	
+	else if(phoneJ.test(loginId_phone.value) != true) {
+		$("#loginModal").modal("show");
+		loginModal_body.innerHTML = "전화번호 형식이 올바르지 않습니다.";
+	}
+	
+	else if(login_phone.value == mb_phone) {
+		$("#loginModal").modal("show");
+		loginModal_body.innerHTML = "회원가입이 된 전화번호 입니다.";
+	}
+}
+
+//인증문자 발송
+function phoneCertify() {
+	if(findId_name.value != "" && phoneJ.test(findId_phone.value) == true){
+		var mb_name = findId_name.value;
+		var mb_phone = findId_phone.value;
+		
+		$.ajax({
+			url: "findIdCheck",
+			data: {mb_name : mb_name, mb_phone : mb_phone},
+			type:"POST",
+			success: function(data) {
+				console.log(data);
+				if(data != "notFoundId") {
+					$("#findModal").modal("show");
+					findModal_body.innerHTML = "인증번호가 발송되었습니다.";
+					sendSms();
+					foundId = data;
+				}
+				else {
+					$("#findModal").modal("show");
+					findModal_body.innerHTML = "입력하신 정보가 회원정보와<br/>일치하지 않습니다.<br/> 다시 확인해주세요.";	
+					foundId = data;
+				}
+				return foundId;
+			}
+		});
+
+	}
+}
+
+//문자 인증 일치확인
+function sendSms() {
+	$.ajax({
+		url: "sendSms",
+		data : {
+	    	   mb_phone : $("#findId_phone").val()
+	       },
+	       success : function(result){
+	    	   console.log(result);
+	    	   if(result != null) {
+	    		   $("#sms_confirm").on("click", function() {
+	    			 if(JSON.parse(result) == ($("#findId_sms").val())) {
+	    				 $("#phone_check2").text("인증되었습니다.");
+	    				 $("#phone_check2").css("color", "blue");
+	    			 }
+	    			 else {
+	    				 $("#phone_check2").text("인증실패. 다시 입력하세요.");
+	    				 $("#phone_check2").css("color", "red");
+	    			 }
+	    		  })
+	    	   }   
+	       }
+	});
+}
 
 
 

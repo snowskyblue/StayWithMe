@@ -1,6 +1,7 @@
 package com.jsk.stay.controller;
 
 import java.io.IOException;
+import java.security.Principal;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,7 +9,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,7 +47,6 @@ public class LoginController {
 		Constant.dao = this.dao;
 	}
 	
-
 	@RequestMapping(value = "/login", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView loginform(@RequestParam(value = "log", required = false) String log,
 			@RequestParam(value = "error", required = false) String error) {
@@ -65,7 +67,8 @@ public class LoginController {
 	@RequestMapping("/index")
 	public ModelAndView index(
 			@RequestParam(value = "success", required = false) String success,
-			@RequestParam(value = "logout", required = false) String logout) {
+			@RequestParam(value = "logout", required = false) String logout,
+			HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
 		if (success != null) {
 			model.addObject("success", "before login!");

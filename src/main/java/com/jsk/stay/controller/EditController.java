@@ -19,7 +19,7 @@ public class EditController {
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 
-	@RequestMapping("/pwd")
+	@RequestMapping("/myPagePwd")
 	@ResponseBody
 	public String pwd(HttpServletRequest request) {
 		String id = request.getParameter("id");
@@ -31,7 +31,7 @@ public class EditController {
 		return "success";
 	}
 	
-	@RequestMapping("/email")
+	@RequestMapping("/myPageEmail")
 	@ResponseBody
 	public String email(HttpServletRequest request) {
 		String id = request.getParameter("id");
@@ -41,7 +41,7 @@ public class EditController {
 		dao.email(id, email);
 		return "success";
 	}
-	@RequestMapping("/phone")
+	@RequestMapping("/myPagePhone")
 	@ResponseBody
 	public String phone(HttpServletRequest request) {
 		String id = request.getParameter("id");
@@ -52,7 +52,7 @@ public class EditController {
 		return "success";
 	}
 	
-	@RequestMapping("/address")
+	@RequestMapping("/myPageAddress")
 	@ResponseBody
 	public String address(HttpServletRequest request) {
 		String id = request.getParameter("id");

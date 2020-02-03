@@ -467,11 +467,13 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 	});
 </script>
 <script>
+if(sessionStorage.getItem("user") == "" || sessionStorage.getItem("user") == null) {
 	var user ="${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}";
 	sessionStorage.setItem("user", user);
 	var authority = "${sessionScope.SPRING_SECURITY_CONTEXT.authentication.authorities}";
 	sessionStorage.setItem("authority",authority);
-	console.log("${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal}")
+}
+console.log("${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal}")
 </script>
 </body>
 </html>

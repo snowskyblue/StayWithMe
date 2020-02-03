@@ -44,10 +44,10 @@
 		<intercept-url pattern="/findPwd_sendEmail" access="permitAll" />
 		<intercept-url pattern="/index" access="permitAll" />
 		<intercept-url pattern="/addAcm" access="permitAll" />
-		<intercept-url pattern="/pwd" access="permitAll" />
-		<intercept-url pattern="/email" access="permitAll" />
-		<intercept-url pattern="/phone" access="permitAll" />
-		<intercept-url pattern="/address" access="permitAll" />
+		<intercept-url pattern="/myPagePwd" access="permitAll" />
+		<intercept-url pattern="/myPageEmail" access="permitAll" />
+		<intercept-url pattern="/myPagePhone" access="permitAll" />
+		<intercept-url pattern="/myPageAddress" access="permitAll" />
 		<intercept-url pattern="/html/**" access="permitAll" />
 		<intercept-url pattern="/style/**" access="permitAll" />
 		<intercept-url pattern="/js/**" access="permitAll" />
@@ -67,7 +67,7 @@
 		
 		<form-login login-page="/login" 
 					username-parameter="mb_id" 
-					password-parameter="mb_pwd"															
+					password-parameter="mb_pwd"
 					default-target-url="/index"
 					authentication-failure-url="/login?error=1"
 					always-use-default-target='true'

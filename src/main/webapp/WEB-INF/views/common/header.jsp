@@ -258,21 +258,14 @@ $(document).ready(function() {
 		if ($("#nav-login").text() == "로그인") {
 			location.href = "login?log=start";
 		} else {
+			sessionStorage.clear();
 			location.href = "logout";
 		}
 	});
 	
 });
 
-$(document).ready(function(){
-	if(sessionStorage.getItem("user") != ""){
-		$("#nav-login").text("로그아웃");
-		$("#nav-memberjoin").html("<i class='fas fa-user-circle'></i>");
-		$("#nav-memberjoin").css({
-			"font-size" : "20px"
-		});
-	}
-});
+
 </script>
 <script>
 $(document).ready(function(){
@@ -301,6 +294,18 @@ $(document).ready(function(){
 			location.href="hostJoin"
 		}
 	});
+});
+
+$(document).ready(function(){
+	
+	
+	if(sessionStorage.getItem("user") != "" && sessionStorage.getItem("user") != null){
+		$("#nav-login").text("로그아웃");
+		$("#nav-memberjoin").html("<i class='fas fa-user-circle'></i>");
+		$("#nav-memberjoin").css({
+			"font-size" : "20px"
+		});
+	}
 });
 </script>
 </body>

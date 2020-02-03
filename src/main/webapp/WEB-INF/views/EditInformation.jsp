@@ -453,7 +453,7 @@ $(document).ready(function() {
 			$.ajax({
 				type : "POST",
 				data : {mb_pwd1 : $("#mb_pwd1").val(), id : $("#id").val()},
-				url : "pwd",
+				url : "myPagePwd",
 				success : function(data) {
 					if(data == "success") {
 						location.href = "index";
@@ -472,7 +472,7 @@ $(document).ready(function() {
 			$.ajax({
 				type : "POST",
 				data : {mb_email : $("#mb_email").val(), id : $("#id").val()},
-				url : "email",
+				url : "myPageEmail",
 				success : function(data) {
 					if(data == "success") {
 						location.href = "index";
@@ -494,7 +494,7 @@ $(document).ready(function() {
 			$.ajax({
 				type : "POST",
 				data : {mb_phone : $("#mb_phone").val(), id : $("#id").val()},
-				url : "phone",
+				url : "myPagePhone",
 				success : function(data) {
 					if(data == "success") {
 						location.href = "index";
@@ -517,7 +517,7 @@ $(document).ready(function() {
 				type : "POST",
 				data : {postcode: $("#postcode").val(), address: $("#address").val(),
 					detailAddress: $("#detailAddress").val(), id : $("#id").val()},
-				url : "address",
+				url : "myPageAddress",
 				success : function(data) {
 					if(data == "success") {
 						location.href = "index";
