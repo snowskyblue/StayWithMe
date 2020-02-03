@@ -31,7 +31,7 @@
 	/*border-collapse: collapse;*/
 }
 
-.form-group label, .container h3 {
+.form-group label, .container h3, .container h4 {
 	font-family: 'S-CoreDream-2ExtraLight';
 	font-weight: bold;
 }
@@ -46,83 +46,66 @@
 
 .csBoard_list tr {
 	border-collapse: collapse;
-	border: 1px solid black;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
 }
 
-.csBoard_list td.csTitle {
+.csBoard_list th {
+	background-color: #f3f3f3;
+	padding: 0.5%;
+}
+
+.csBoard_list td {
 	text-align: left;
+	padding-left: 10px;
+	font-weight: bold;
+}
+
+.csBoard_list td.contents {
+	padding: 35px 10px;
+}
+
+a{
+	color: black!important;
 }
 </style>
 </head>
 <body>
-<jsp:include page="common/header.jsp" flush="false"/>
+<jsp:include page="/WEB-INF/views/common/header.jsp" flush="false"/>
 <div class="main">
 	<div class="container" id="csM-header">
 		<h3>1:1 문의</h3>
 		<div id="border"></div>
 		
 		<div class="csBoard mx-auto">
-			<c:choose>
-				<c:when test="${list eq 'login'}">
-					<h3 class="cs_notice text-center">
-						<i class="fas fa-exclamation-circle"></i><br/><br/>
-						로그인 후 문의 내역을 확인하실 수 있습니다.
-					</h3>
-				</c:when>
-				<c:otherwise>
-					<c:choose>
-						<c:when test="${empty list}">
-							<h3 class="cs_notice text-center">
-								<i class="fas fa-exclamation-circle"></i><br/><br/>
-								1:1 문의 내역이 존재하지 않습니다.
-							</h3>
-						</c:when>
-						<c:otherwise>
-							<table class="csBoard_list mx-auto text-center">
-								<colgroup>
-									<col style="width:500px;">
-									<col style="width:90px;">
-									<col style="width:100px;">
-									<col style="width:90px;">
-								</colgroup>
-								<thead>
-									<tr>
-										<th scope="col">제목</th>
-										<th scope="col">작성자</th>
-										<th scope="col">작성일</th>
-										<th scope="col">답변유무</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach items="${list}" var="list">
-										<tr class="pc">
-											<td class="csTitle">${list.cs_title}</td>
-											<td>${list.mb_id}</td>
-											<td>${list.cs_date}</td>
-											<c:choose>
-												<c:when test="${list.cs_complete eq 'N'.charAt(0)}">
-													<td>답변대기</td>
-												</c:when>
-												<c:otherwise>
-													<td>답변완료</td>
-												</c:otherwise>
-											</c:choose>
-										</tr>
-										<tr class="mobile">
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-						</c:otherwise>
-					</c:choose>
-					
-				</c:otherwise>
-			</c:choose>
+			<table class="csBoard_list mx-auto text-center">
+				<colgroup>
+					<col style="width:100px;">
+					<col style="width:380px;">
+					<col style="width:100px;">
+					<col style="width:200px;">
+				</colgroup>
+				<tbody>
+					<tr>
+						<th scope="row">제목</th>
+						<td colspan="3">${content.cs_code}</td>
+					</tr>
+					<tr>
+						<th scope="row">작성자</th>
+						<td>이지은</td>
+						<th scope="row">작성일</th>
+						<td>20.01.29</td>
+					</tr>
+					<tr>
+						<td colspan="4" class="contents">안녕넹라너이러냉러ㅐㄴㅇㄹㄴ</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 		
 	</div>
 </div>
-<jsp:include page="common/footer.jsp" flush="false"/>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" flush="false"/>
 
 <!--jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

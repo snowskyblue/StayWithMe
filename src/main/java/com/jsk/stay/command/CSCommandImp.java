@@ -18,4 +18,8 @@ public class CSCommandImp implements CSCommand {
 	public ArrayList<CSDto> list(String mb_id) throws Exception {
 		return dao.list(mb_id);
 	}
+	
+	public ArrayList<CSDto> content(int cs_code) throws Exception {
+		return dao.content(cs_code);
+	}
 }

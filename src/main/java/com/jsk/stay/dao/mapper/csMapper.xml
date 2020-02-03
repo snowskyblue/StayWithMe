@@ -10,4 +10,9 @@
 	<select id="list" resultType="com.jsk.stay.dto.CSDto" parameterType="com.jsk.stay.dto.CSDto">
 		select * from cs where mb_id = #{mb_id} order by cs_code desc
 	</select>
+	
+	<!-- 문의 내용 -->
+	<select id="content" resultType="com.jsk.stay.dto.CSDto" parameterType="com.jsk.stay.dto.CSDto">
+		select * from cs where cs_code = #{cs_code}
+	</select>
 </mapper>

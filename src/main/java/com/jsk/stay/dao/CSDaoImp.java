@@ -17,4 +17,10 @@ public class CSDaoImp implements CSDao {
 		ArrayList<CSDto> result = (ArrayList) sql.selectList("cs.list", mb_id);
 		return result;
 	}
+	
+	public ArrayList<CSDto> content(int cs_code) throws Exception {
+		ArrayList<CSDto> result = (ArrayList) sql.selectList("cs.content", cs_code);
+		System.out.println("여기까지");
+		return result;
+	}
 }
