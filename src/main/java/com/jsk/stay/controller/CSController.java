@@ -24,22 +24,28 @@ public class CSController {
 			String mb_id = null;
 			if(principal.getName() != null) {
 				mb_id = principal.getName();
-				System.out.println(mb_id);
+				System.out.println("csMb_id: " + mb_id);
 				model.addAttribute("list", com.list(mb_id));
 			}
 		}
 		catch(NullPointerException e) {
 			model.addAttribute("list", "login");
 		}
-		return "/cs/csMember";
+		return "cs/csMember";
 	}
 	
 	@RequestMapping("/csContent")
-	public String csContent(@RequestParam int cs_code, Model model) throws Exception {
-		System.out.println(cs_code);
-		model.addAttribute("content", com.content(cs_code));
+	public String csContent(HttpServletRequest request, Model model) throws Exception {
+		String cs_code = request.getParameter("cs_code");
+		System.out.println("cs_code: " + cs_code);
+		model.addAttribute("content", com.content(Integer.parseInt(cs_code)));
 		System.out.println("여기까지2");
-		return "/cs/content";
+		return "cs/content";
+	}
+	
+	@RequestMapping("/csMbWrite")
+	public String mbWrite() {
+		return "cs/mbWrite";
 	}
 	
 }

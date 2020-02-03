@@ -85,7 +85,7 @@ a{
 							<table class="csBoard_list mx-auto text-center">
 								<colgroup>
 									<col style="width:500px;">
-									<col style="width:90px;">
+									<col style="width:100px;">
 									<col style="width:100px;">
 									<col style="width:90px;">
 								</colgroup>
@@ -135,7 +135,7 @@ a{
 								<tfoot>
 									<tr style="border:0;">
 										<td colspan="4" align="right">
-											<button type="button" id="cs_write" class="btn btn-dark" style="margin-top:10px;">문의하기</button>
+											<button type="button" onClick="location.href='csMbWrite'" id="cs_write" class="btn btn-dark" style="margin-top:10px;">문의하기</button>
 										</td>
 									</tr>
 								</tfoot>

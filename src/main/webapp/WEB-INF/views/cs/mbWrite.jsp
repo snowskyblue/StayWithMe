@@ -78,31 +78,7 @@ a{
 		<div id="border"></div>
 		
 		<div class="csBoard mx-auto">
-			<table class="csBoard_content mx-auto text-center">
-				<colgroup>
-					<col style="width:100px;">
-					<col style="width:380px;">
-					<col style="width:100px;">
-					<col style="width:200px;">
-				</colgroup>
-				<tbody>
-					<c:forEach items="${content}" var="content">
-						<tr>
-							<th scope="row">제목</th>
-							<td colspan="3">${content.cs_title}</td>
-						</tr>
-						<tr>
-							<th scope="row">작성자</th>
-							<td>${content.mb_name}</td>
-							<th scope="row">작성일</th>
-							<td>${content.cs_date}</td>
-						</tr>
-						<tr>
-							<td colspan="4" class="contents">${content.cs_content}</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
+		<h2>ddds</h2>
 		</div>
 		
 	</div>
