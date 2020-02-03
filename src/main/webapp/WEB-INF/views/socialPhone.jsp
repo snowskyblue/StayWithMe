@@ -145,7 +145,7 @@
 						<div class="form-group">
 							<label for="loginId_phone">휴대폰 번호</label><br/>
 							<div class="form_center">
-								<input type="tel" class="form-control-inline col-8 col-sm-8" id="phoneNumber" name="mb_phone" maxlength="11" placeholder='"-"없이 번호만 입력'>
+								<input type="tel" class="form-control-inline col-8 col-sm-8" id="mb_phone" name="mb_phone" maxlength="11" placeholder='"-"없이 번호만 입력'>
 								<button type="button" onclick="namePhoneCheck(); phoneCertify();" id="phone_certify" class="btn btn-dark">인증</button>
 								<div class="check_font" id="phone_check"></div>
 							</div>
@@ -201,7 +201,7 @@
 var phoneJ = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;
 
 function namePhoneCheck() {
-	var loginId_phone = document.getElementById("loginId_phone");
+	var loginId_phone = document.getElementById("mb_phone");
 	
 	if(loginId_phone.value == "") {
 		$("#loginModal").modal("show");
@@ -213,9 +213,25 @@ function namePhoneCheck() {
 		loginModal_body.innerHTML = "전화번호 형식이 올바르지 않습니다.";
 	}
 	
-	else if(login_phone.value == mb_phone) {
-		$("#loginModal").modal("show");
-		loginModal_body.innerHTML = "회원가입이 된 전화번호 입니다.";
+	else {
+		$.ajax({
+			url : "phoneCheck",
+			data : {mb_phone : $("#mb_phone").val()},
+			type : "post",
+			success : function(data) {
+				if(data == "0") {
+					$("#loginModal").modal("show");
+					loginModal_body.innerHTML = "입력 가능한 전화번호 입니다.";
+				}
+				else {
+					$("#loginModal").modal("show");
+					loginModal_body.innerHTML = "회원가입이 되어있는 전화번호 입니다.";
+				}
+			},
+			error : function() {
+				alert("server error");
+			}
+		});
 	}
 }
 
