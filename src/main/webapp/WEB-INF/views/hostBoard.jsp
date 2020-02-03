@@ -39,6 +39,60 @@ form {
 	/*margin-top: 50px;*/
 	margin-bottom: 100px;
 }
+.tabMenu {
+	margin-top: 100px;
+    width: 80%;
+    margin-bottom: 150px;
+}
+
+.nav-tabs {
+	border: 0px!important;
+}
+
+.tab {
+	width: 50%;
+	cursor: pointer;
+	border-top: 1px solid #343a40;
+	border-left: 1px solid #343a40;
+	border-right: 1px solid #343a40;
+    background-color: #343a40;
+    color: white;
+    font-weight: bold;
+}
+
+.tab a {
+	display: block;
+	padding-top: 5px;
+    height: 35px;
+    width: 100%;
+}
+
+.tab-content {
+	padding-top: 30px;
+}
+
+.form-control {
+	border: none;
+	border-radius: 0;
+	border-bottom: 2px solid grey;
+}
+
+.form-group .btn {
+	font-weight: bold;
+}
+
+@media screen and (max-width: 576px) {
+	.tabMenu {
+		width: 300px;
+	}
+	
+	.tab {
+		width: 150px;
+		cursor: pointer;
+	}
+	
+}
+
 </style>
 <title>호스트 알림판</title>
 </head>
@@ -50,6 +104,19 @@ form {
 		<h3>호스트 안내판</h3>
 		<div id="border"></div>
 		
+		<div class="tabMenu mx-auto">
+			<!-- tab 메뉴 -->
+			<ul class="nav nav-tabs text-center">
+				<li class="tab active" id="defaultTab" onclick='tab(this, "white")'><a data-toggle="tab" data-target="#list">숙소 관리</a>
+				<li class="tab" onclick='tab(this, "white")'><a data-toggle="tab" data-target="#statistics">통계</a>
+			</ul>
+			<!-- tab 메뉴 -->
+			<!-- tab 선택에 따른 내용 -->
+			<div class="tab-content">
+				<a href="addAcm" class="form-control btn btn-dark" style="border: none;">숙소등록</a>
+			</div>
+			<!-- tab 선택에 따른 내용 -->
+		</div>
 	</div>
 </div>
 <!-- Modal -->
@@ -92,6 +159,21 @@ $(document).ready(function() {
 		$(".main").toggleClass("main1")
 	});
 });
+
+function tab(elmnt, color) {
+	var i;
+	var tab;
+	tab = document.getElementsByClassName("tab");
+	for(i = 0 ; i < tab.length ; i++) {
+		tab[i].style.backgroundColor = "";
+		tab[i].style.color = "white";
+	}
+	
+	elmnt.style.backgroundColor = color;
+	elmnt.style.color = "black";
+}
+document.getElementById("defaultTab").click(); //active
 </script>
+
 </body>
 </html>
