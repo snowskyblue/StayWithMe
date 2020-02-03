@@ -17,12 +17,41 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <!--font-awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.main1 {
+	margin-top: 100px;
+}
+#top-container {
+	padding-top: 150px;
+}
+
+.form-group label, .container h3, .container div{
+	font-family: 'S-CoreDream-2ExtraLight';
+	font-weight: bold;
+}
+
+#border {
+	border: 3px solid #000000;
+	/*border-collapse: collapse;*/
+}
+
+form {
+	/*margin-top: 50px;*/
+	margin-bottom: 100px;
+}
+</style>
 <title>호스트 알림판</title>
 </head>
 <body>
 
-
-
+<jsp:include page="common/header.jsp" flush = "flase"></jsp:include>
+<div class="main">
+	<div class="container" id="top-container">
+		<h3>호스트 안내판</h3>
+		<div id="border"></div>
+		
+	</div>
+</div>
 <!-- Modal -->
 <div class="modal fade" id="hostJoinModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">

@@ -285,8 +285,6 @@ $(document).ready(function(){
 		event.preventDefault();
 		if(sessionStorage.getItem("authority") == "[guest]") {
 			location.href = "hostJoin";
-		} else if (sessionStorage.getItem("authority") == "[preHost]"){
-			location.href = "addAcm";
 		} else if (sessionStorage.getItem("authority") == "[host]") {
 			location.href="hostBoard";
 		} else if (sessionStorage.getItem("authority") == "") {

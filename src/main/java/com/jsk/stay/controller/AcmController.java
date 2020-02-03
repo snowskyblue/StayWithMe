@@ -111,13 +111,13 @@ public class AcmController {
 		long fileSize = mf.getSize(); 
 		System.out.println("originFileName : " + originFileName);
 		System.out.println("fileSize of the MultipartFile : " + fileSize);	
-		String safeFile ="D:/webSpring_workspace/stay/src/main/webapp/resources/editUpload/" + originFileName;
-		String safeFile1 ="D:/tomcat/apache-tomcat-8.5.47/wtpwebapps/stay/resources/editUpload/" + originFileName;		
+		String safeFile ="D:/webSpring_workspace/stay/src/main/webapp/resources/img/imgUp/" + originFileName;
+		String safeFile1 ="D:/tomcat/apache-tomcat-8.5.47/wtpwebapps/stay/resources/img/imgUp/" + originFileName;		
 		System.out.println("safeFile : " + safeFile);
 		try {
 			mf.transferTo(new File(safeFile));
 			mf.transferTo(new File(safeFile1));
-		} catch (Exception e) {			
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		JSONObject outData = new JSONObject(); //json °´Ã¼ »ý¼º
