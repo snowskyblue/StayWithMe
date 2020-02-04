@@ -48,7 +48,7 @@ public class AcmController {
 		return "addAcm";
 	}
 	/*
-	@RequestMapping("/write") //다중 파일 업로드 처리
+	@RequestMapping("/write") //다중 파일 업로드 처리d
 	public String write(MultipartHttpServletRequest mtfRequest, HttpServletRequest request, Model model) {
 		System.out.println("write()");
 		
