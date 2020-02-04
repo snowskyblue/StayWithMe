@@ -76,8 +76,8 @@
 	}
 }
 
-.btn {
-	/*float: right;*/
+.modal-content .modal-header, .modal-content .modal-footer {
+	border: 0px;
 }
 
 @media screen and (min-width:992px) {
@@ -169,12 +169,14 @@ $(document).ready(function() {
 	});
 	
 	$("form").on("submit", function(e) {
+		
+		
 		if($("#cs_title").val() == "") {
 			$("#modal").modal("show");
 			modal_body.innerHTML = "제목을 입력하세요";
 			return false;
 		}
-		else if($("#editor").html() == null) {
+		else if($("#editor").html() == '<p><br data-cke-filler="true"></p>') {
 			$("#modal").modal("show");
 			modal_body.innerHTML = "내용을 입력하세요";
 			return false;
@@ -183,8 +185,10 @@ $(document).ready(function() {
 			var x = $("#editor").html();
 			$("#cs_content").text(x);
 			console.log("x" + x);
+			
 			return true;
 		}
+		
 	});
 });
 

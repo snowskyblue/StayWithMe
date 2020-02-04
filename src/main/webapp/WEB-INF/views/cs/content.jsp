@@ -99,6 +99,14 @@ a{
 						</tr>
 					</c:forEach>
 				</tbody>
+				<tfoot>
+					<tr style="border:0px;">
+						<td colspan="4" align="right">
+							<button type="button" id="cs_modify" class="btn btn-dark" style="margin-top:10px;">수정</button>
+							<button type="button" id="cs_delete" class="btn btn-dark" style="margin-top:10px;">삭제</button>
+						</td>
+					</tr>
+				</tfoot>
 			</table>
 		</div>
 		

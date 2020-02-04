@@ -33,7 +33,7 @@ public class CustomUserDetailsService implements UserDetailsService{
 		roles.add(new SimpleGrantedAuthority(dto.getMb_grade())); //º¯°æ
 		System.out.println("roles : " + roles);
 		UserDetails user = new User(username, pw , roles);
-
+		System.out.println(user);
 		return user;
 	}
 }
