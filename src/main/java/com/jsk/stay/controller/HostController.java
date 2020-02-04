@@ -27,7 +27,7 @@ public class HostController {
 		dao.writeDao(dto);
 		HttpSession session = request.getSession();
 		session.setAttribute("authority","[host]");
-		return "redirect:addAcm";
+		return "redirect:hostBoard";
 		//return "hostBoard";
 		//return "preHostGrade";
 	}

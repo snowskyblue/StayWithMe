@@ -111,9 +111,9 @@ public class AcmController {
 		System.out.println("originFileName " + originFileName);
 		long fileSize = mf.getSize(); 
 		System.out.println("originFileName : " + originFileName);
-		System.out.println("fileSize of the MultipartFile : " + fileSize);	
-		String safeFile ="D:/work-spring/team/src/main/webapp/resources/img/imgUp/" + originFileName;
-		String safeFile1 ="D:/apache-tomcat-8.5.47/apache-tomcat-8.5.47/wtpwebapps/stay/resources/img/imgUp/" + originFileName;		
+		System.out.println("fileSize of the MultipartFile : " + fileSize);
+		String safeFile ="D:/webSpring_workspace/stay/src/main/webapp/resources/img/imgUp/" + originFileName;
+		String safeFile1 ="D:/tomcat/apache-tomcat-8.5.47/wtpwebapps/stay/resources/img/imgUp/" + originFileName;	
 		System.out.println("safeFile : " + safeFile);
 		try {
 			mf.transferTo(new File(safeFile));

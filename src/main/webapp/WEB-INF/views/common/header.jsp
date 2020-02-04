@@ -288,7 +288,7 @@ $(document).ready(function(){
 		} else if (sessionStorage.getItem("authority") == "[host]") {
 			location.href="hostBoard";
 		} else if (sessionStorage.getItem("authority") == "") {
-			/*비회원일 경우 할 것 정하기*/
+			/*비회원일시 로그인으로 이동후 인덱스로 이동*/
 			location.href="hostJoin"
 		}
 	});

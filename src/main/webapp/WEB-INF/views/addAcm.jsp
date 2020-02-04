@@ -415,7 +415,7 @@ form {
 						<label class="mb-3 col-sm-2" for="editor">숙소 소개</label>
 						<div class="col-sm-10">
 							<div id="toolbar-container" style="max-width:100%"></div>
-							<div id="editor" ng-click="editorInit()" style="max-width:100%;min-height:300px;border:1px solid grey;line-height:0.5rem">{{info}}</div>
+							<div id="editor" class="ck-content"  ng-click="editorInit()" style="max-width:100%;min-height:300px;border:1px solid grey;line-height:0.5rem">{{info}}</div>
 							<textarea id="div1" name="acm_info" style="display:none;"></textarea>
 						</div>
 					</div>
