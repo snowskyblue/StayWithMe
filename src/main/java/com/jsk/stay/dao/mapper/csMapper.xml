@@ -15,4 +15,24 @@
 	<select id="content" resultType="com.jsk.stay.dto.CSDto" parameterType="int">
 		select * from cs where cs_code = #{cs_code}
 	</select>
+	
+	<!-- 문의 작성에 저장해줄 mb_name 불러오기 -->
+	<select id="mb_name" parameterType="com.jsk.stay.dto.MemberDto" resultType="String">
+		select mb_name from member where mb_id = #{mb_id}
+	</select>
+	
+	<!-- 문의 작성내용 DB 저장 -->
+	<insert id="mbWritePro" parameterType="com.jsk.stay.dto.CSDto">
+		insert into cs (cs_code, mb_name, mb_id, cs_title, cs_content, cs_date, cs_group, cs_complete)
+		values (
+		cs_seq.nextval,
+		#{mb_name},
+		#{mb_id},
+		#{cs_title},
+		#{cs_content},
+		SYSDATE,
+		null,
+		'N'
+		)
+	</insert>
 </mapper>

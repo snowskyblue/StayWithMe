@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jsk.stay.command.CSCommandImp;
+import com.jsk.stay.dto.CSDto;
 
 @Controller
 public class CSController {
@@ -39,13 +40,24 @@ public class CSController {
 		String cs_code = request.getParameter("cs_code");
 		System.out.println("cs_code: " + cs_code);
 		model.addAttribute("content", com.content(Integer.parseInt(cs_code)));
-		System.out.println("ø©±‚±Ó¡ˆ2");
+		System.out.println("Ïó¨Í∏∞ÍπåÏßÄ2");
 		return "cs/content";
 	}
 	
 	@RequestMapping("/csMbWrite")
-	public String mbWrite() {
+	public String mbWrite(Model model, Principal principal) {
+		String mb_id = principal.getName();
+		System.out.println("csMb_id: " + mb_id);
+		model.addAttribute("mb_id", mb_id);
+		model.addAttribute("mb_name", com.mb_name(mb_id));
 		return "cs/mbWrite";
+	}
+	
+	@RequestMapping("/csMbWritePro")
+	public String mbWritePro(CSDto dto) throws Exception {
+		System.out.println("ÎêêÎÇò?1");
+		com.mbWritePro(dto);
+		return "redirect:csMember";
 	}
 	
 }

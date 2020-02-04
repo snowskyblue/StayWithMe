@@ -36,9 +36,6 @@
 	font-weight: bold;
 }
 
-.cs_notice .fas {
-	font-size: 40px;
-}
 .csBoard {
 	margin-top: 100px;
 	margin-bottom: 200px;

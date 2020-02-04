@@ -10,4 +10,6 @@ import com.jsk.stay.dto.CSDto;
 public interface CSCommand {
 	public ArrayList<CSDto> list(String mb_id) throws Exception;
 	public ArrayList<CSDto> content(int cs_code) throws Exception;
+	public String mb_name(String mb_id);
+	public void mbWritePro(CSDto dto) throws Exception;
 }

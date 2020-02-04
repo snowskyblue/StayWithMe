@@ -103,7 +103,7 @@ public class AcmController {
 	@RequestMapping("ckedit")
 	public void ckedit(MultipartHttpServletRequest request, HttpServletResponse response) throws IOException {
 		System.out.println("ckedit µé¾î¿È");
-		String path = "/stay/editUpload";
+		String path = "/stay/img/imgUp";
 		String real_save_path = request.getServletContext().getRealPath(path);
 		System.out.println("real_save_path " + real_save_path);
 		MultipartFile mf = request.getFile("upload");
@@ -112,8 +112,8 @@ public class AcmController {
 		long fileSize = mf.getSize(); 
 		System.out.println("originFileName : " + originFileName);
 		System.out.println("fileSize of the MultipartFile : " + fileSize);	
-		String safeFile ="D:/webSpring_workspace/stay/src/main/webapp/resources/img/imgUp/" + originFileName;
-		String safeFile1 ="D:/tomcat/apache-tomcat-8.5.47/wtpwebapps/stay/resources/img/imgUp/" + originFileName;		
+		String safeFile ="D:/work-spring/team/src/main/webapp/resources/img/imgUp/" + originFileName;
+		String safeFile1 ="D:/apache-tomcat-8.5.47/apache-tomcat-8.5.47/wtpwebapps/stay/resources/img/imgUp/" + originFileName;		
 		System.out.println("safeFile : " + safeFile);
 		try {
 			mf.transferTo(new File(safeFile));

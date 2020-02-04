@@ -22,4 +22,12 @@ public class CSCommandImp implements CSCommand {
 	public ArrayList<CSDto> content(int cs_code) throws Exception {
 		return dao.content(cs_code);
 	}
+	
+	public String mb_name(String mb_id) {
+		return dao.mb_name(mb_id);
+	}
+	
+	public void mbWritePro(CSDto dto) throws Exception {
+		dao.mbWritePro(dto);
+	}
 }

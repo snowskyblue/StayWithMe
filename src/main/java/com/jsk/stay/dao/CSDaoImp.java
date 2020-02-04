@@ -25,4 +25,15 @@ public class CSDaoImp implements CSDao {
 		System.out.println(result);
 		return result;
 	}
+	
+	public String mb_name(String mb_id) {
+		String mb_name = sql.selectOne("cs.mb_name", mb_id);
+		return mb_name;
+	}
+	
+	public void mbWritePro(CSDto dto) throws Exception {
+		System.out.println("µÆ³ª?2");
+		sql.insert("cs.mbWritePro", dto);
+		System.out.println("µÆ³ª?3");
+	}
 }
