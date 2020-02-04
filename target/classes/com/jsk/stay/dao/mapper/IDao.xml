@@ -11,4 +11,7 @@
 	<select id= "checkPW" parameterType = "String" resultType = "String">
 		SELECT MB_PWD FROM MEMBER WHERE mb_id = #{mb_id}
 	</select>
+	<select id = "information" parameterType = "String" resultType = "com.jsk.stay.dto.MemberDto">
+		SELECT * FROM MEMBER WHERE mb_id = #{mb_id}
+	</select>
 </mapper>

@@ -1,5 +1,7 @@
 package com.jsk.stay.dao;
 
+import com.jsk.stay.dto.MemberDto;
+
 public interface EditDao {
 
 	public void myPagePwd(String id, String pw);

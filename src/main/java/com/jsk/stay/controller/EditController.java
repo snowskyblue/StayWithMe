@@ -27,7 +27,7 @@ public class EditController {
 		String pw1 = request.getParameter("mb_pwd1");
 		String pw = passwordEncoder.encode(pw1);
 		System.out.println("pw : " + pw);
-		//dao.pwd(id, pw);
+		dao.myPagePwd(id, pw);
 		return "success";
 	}
 	
@@ -38,7 +38,7 @@ public class EditController {
 		System.out.println("id : " + id);
 		String email = request.getParameter("mb_email");
 		System.out.println("email : " + email);
-		//dao.email(id, email);
+		dao.myPageEmail(id, email);
 		return "success";
 	}
 	@RequestMapping("/myPagePhone")
@@ -48,7 +48,7 @@ public class EditController {
 		System.out.println("id : " + id);
 		String phone = request.getParameter("mb_phone");
 		System.out.println("phone : " + phone);
-		//dao.phone(id, phone);
+		dao.myPagePhone(id, phone);
 		return "success";
 	}
 	
@@ -63,7 +63,7 @@ public class EditController {
 		System.out.println("detailAddress : " + detailAddress);
 		int postcode = Integer.parseInt(request.getParameter("postcode"));
 		System.out.println("postcode : " + postcode);
-		//dao.address(id, address, detailAddress,postcode);
+		dao.myPageAddress(id, address, detailAddress,postcode);
 		return "success";
 	}
 }

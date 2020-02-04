@@ -78,7 +78,7 @@
 					<div>
 						<label>이메일</label>
 						<div class = "row m-0">
-							<input type = "email" class = "form-control col-9 col-sm-10 d-inline" placeholder="이메일을 입력해 주세요" id="mb_email"/>
+							<input type = "email" class = "form-control col-9 col-sm-10 d-inline" id="mb_email" value = "${dto.mb_email}"/>
 							<input type ="button"class = "form-control d-inline col-3 col-sm-2 btn btn-dark emailBtn" value = "수정"/> <br/>
 						</div>
 						<div class = "email Validation" id ="email_check"></div>
@@ -87,7 +87,7 @@
 					<div>
 						<label>전화번호</label>
 						<div class = "row m-0">
-							<input type = "tel" class = "form-control col-9 col-sm-10 d-inline" placeholder="전화번호를 입력해 주세요" id="mb_phone"/>
+							<input type = "tel" class = "form-control col-9 col-sm-10 d-inline" id="mb_phone" value = "${dto.mb_phone}"/>
 							<input type ="button"class = "form-control d-inline col-3 col-sm-2 btn btn-dark phoneBtn" value = "인증"/> <br/>
 						</div>
 						<div class = "tel Validation" id ="phone_check"></div><br/>

@@ -38,5 +38,11 @@ public class LoginDao implements IDao {
 		System.out.println("pw : " + pw);
 		return pw;
 	}
+	
+	@Override
+	public MemberDto information(String mb_id) {
+		MemberDto dto = sqlSession.selectOne("information",mb_id);
+		return dto;
+	}
 
 }
