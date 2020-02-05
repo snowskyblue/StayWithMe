@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.jsk.stay.command.Command;
 import com.jsk.stay.dao.LoginDao;
+import com.jsk.stay.dto.HostDto;
 import com.jsk.stay.dto.MemberDto;
 
 @Controller
@@ -44,7 +45,9 @@ public class MyPageController {
 	public String EditInformation(Model model, HttpServletRequest request) {
 		String id = request.getRemoteUser();
 		MemberDto dto = dao.information(id);
+		HostDto dto1 = dao.information1(id);
 		model.addAttribute("dto",dto);
+		model.addAttribute("dto1",dto1);
 		return "EditInformation";
 	}
 	
@@ -67,6 +70,14 @@ public class MyPageController {
 		model.addAttribute("result", result1);
 		
 		return result1;
+	}
+	
+	@RequestMapping("/Account")
+	public String Account(Model model, HttpServletRequest request) {
+		String id = request.getRemoteUser();
+		HostDto dto = dao.information1(id);
+		model.addAttribute("dto",dto);
+		return "Account";
 	}
 	
 }

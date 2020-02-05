@@ -66,4 +66,6 @@ public class EditController {
 		dao.myPageAddress(id, address, detailAddress,postcode);
 		return "success";
 	}
+	
+	
 }

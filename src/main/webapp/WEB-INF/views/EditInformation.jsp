@@ -111,17 +111,17 @@
 							</div>
 							<div class="row">
 								<div class="col-sm-12" style="height: 63px;">
-									<input class="form-control" type="text" name="address"  id="address" placeholder="주소 찾기를 클릭해 주소를 검색해주세요">
+									<input class="form-control" type="text" name="address"  id="address" value = "${dto1.ho_address}">
 									<div id="address_check"></div><br/>
 								</div>
 							</div>
 							<br/>
 							<div class="row">
 								<div class="col-sm-9">
-									<input class="form-control" type="text" name="detailAddress"  id="detailAddress" placeholder="상세주소를 입력해주세요">
+									<input class="form-control" type="text" name="detailAddress"  id="detailAddress" value = "${dto1.ho_add_detail}">
 								</div>
 								<div class="col-sm-3 d-flex justify-content-end">
-									<input class="form-control" type="text" name="postcode"  id="postcode" placeholder="우편번호">
+									<input class="form-control" type="text" name="postcode"  id="postcode" value = "${dto1.ho_zip}">
 								</div>
 								<div class="col-sm-9">
 									<div id="detailAddress_check"></div>
@@ -357,7 +357,7 @@ function sms() {
 </script>
 <script>
 var authority = sessionStorage.getItem("authority");
-if(authority == "[host]") {
+if(authority == "[ROLE_HOST]") {
 	$(".address").show();
 }
 else {

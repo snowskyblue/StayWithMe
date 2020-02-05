@@ -174,7 +174,7 @@
 								
 							</div>
 						</div>
-						<div class = "myPageform">
+						<div class = "myPageform" id = "accountEdit">
 							<div class = "myPage d-flex flex-wrap align-content-center justify-content-center" id ="pay">
 								<div class = "text-center">
 									<h5>계좌 정보 변경</h5>
@@ -190,8 +190,12 @@
 							</div>
 						</div>
 						<div class = "myPageform" style = "border : 0px;">
-							<div class = "myPage" id = "alarm">
-								
+							<div class = "myPage" id = "deleteMember">
+								<div class = "text-center">
+									<h5>계좌 정보 변경</h5>
+									<p>
+										계좌정보를 변경하려면 비밀번호를 입력해 주세요<br/>
+									</p>
 							</div>
 						</div>
 					</div>
@@ -258,6 +262,26 @@ $(document).ready(function(){
 			}
 		}); 
 	});
+	$("#checkPw1").click(function(){
+		event.preventDefault;
+		$.ajax({
+			url : "checkPwd",
+			data : {checkPwd:$("#checkPwd1").val()},
+			Type : "POST",
+			success : function(data) {
+				console.log(data);
+				if(data == "true") {
+					location.href = "Account";
+				}
+				else {
+					location.href = "myPageProfile?fail=1";
+				}
+			},
+			error : function() {
+				alert("server error");
+			}
+		}); 
+	});
 });
 </script>
 <script>
@@ -275,6 +299,16 @@ $(document).ready(function() {
 		$("nav").toggleClass("active");
 		$(".main").toggleClass("main1");
 	});
+});
+</script>
+<script>
+$(document).ready(function() {
+	if(authority == "[ROLE_HOST]") {
+		$("#accountEdit").show();
+	}
+	else {
+		$("#accountEdit").hide();
+	}
 });
 </script>
 </body>

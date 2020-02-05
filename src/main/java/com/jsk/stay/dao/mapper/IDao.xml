@@ -14,4 +14,8 @@
 	<select id = "information" parameterType = "String" resultType = "com.jsk.stay.dto.MemberDto">
 		SELECT * FROM MEMBER WHERE mb_id = #{mb_id}
 	</select>
+	<select id = "information1" parameterType = "String" resultType = "com.jsk.stay.dto.HostDto">
+		SELECT * FROM HOST WHERE mb_id = #{mb_id}
+	</select>
+	
 </mapper>

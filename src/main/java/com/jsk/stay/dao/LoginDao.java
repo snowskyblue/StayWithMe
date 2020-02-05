@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.jsk.stay.dto.HostDto;
 import com.jsk.stay.dto.MemberDto;
 import com.jsk.stay.util.Constant;
 
@@ -42,6 +43,11 @@ public class LoginDao implements IDao {
 	@Override
 	public MemberDto information(String mb_id) {
 		MemberDto dto = sqlSession.selectOne("information",mb_id);
+		return dto;
+	}
+	@Override
+	public HostDto information1(String mb_id) {
+		HostDto dto = sqlSession.selectOne("information1",mb_id);
 		return dto;
 	}
 
