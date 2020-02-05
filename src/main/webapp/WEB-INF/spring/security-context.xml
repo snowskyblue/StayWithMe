@@ -24,47 +24,48 @@
         </headers>
         	
     	<intercept-url pattern="/" access="permitAll" />
-    	<intercept-url pattern="/editUpload/**" access="permitAll" />
     	<intercept-url pattern="/resources/**" access="permitAll" />
-    	<intercept-url pattern="/csMember" access="hasRole('ROLE_GUEST')" />
-    	<intercept-url pattern="/csMbWrite" access="permitAll" />
-    	<intercept-url pattern="/csContent" access="permitAll" />
-    	<intercept-url pattern="/csMbWritePro" access="permitAll" />
-		<intercept-url pattern="/memberjoin" access="permitAll" />
-		<intercept-url pattern="/memberjoinpro" access="permitAll" />
 		<intercept-url pattern="/idCheck" access="permitAll" />
 		<intercept-url pattern="/phoneCheck" access="permitAll" />
-		<intercept-url pattern="/nlogin" access="permitAll" />
-		<intercept-url pattern="/socialPhone" access="permitAll" />
+		<intercept-url pattern="/login" access="permitAll" />
 		<intercept-url pattern="/sendSms" access="permitAll" />
-		<intercept-url pattern="/findIdPwd" access="permitAll" />
-		<intercept-url pattern="/findIdSuccess" access="permitAll" />
-		<intercept-url pattern="/findPwd" access="permitAll" />
-		<intercept-url pattern="/findIdCheck" access="permitAll" />
-		<intercept-url pattern="/findPwd_idCheck" access="permitAll" />
-		<intercept-url pattern="/findPwd_sendEmail" access="permitAll" />
+		<intercept-url pattern="/login_duplicate" access="permitAll" />
 		<intercept-url pattern="/index" access="permitAll" />
-		<intercept-url pattern="/addAcm" access="permitAll" />
-		<intercept-url pattern="/pwd" access="permitAll" />
-		<intercept-url pattern="/email" access="permitAll" />
-		<intercept-url pattern="/phone" access="permitAll" />
-		<intercept-url pattern="/address" access="permitAll" />
 		<intercept-url pattern="/html/**" access="permitAll" />
 		<intercept-url pattern="/style/**" access="permitAll" />
 		<intercept-url pattern="/js/**" access="permitAll" />
 		<intercept-url pattern="/img/**" access="permitAll" />
 		<intercept-url pattern="/icheck-1.x/**" access="permitAll" />
-		<intercept-url pattern="/write" access="permitAll" />
-		<intercept-url pattern="/hostJoin" access="permitAll" />
-		<intercept-url pattern="/hostWrite" access="permitAll" />
-		<intercept-url pattern="/hostBoard" access="permitAll" />
-		<intercept-url pattern="/checkPwd" access="permitAll" />
-		<intercept-url pattern="/EditInformation" access="permitAll" />
-		<intercept-url pattern="/myPageProfile" access="permitAll" />
-		<intercept-url pattern="/login" access="permitAll" />
-		<intercept-url pattern="/login_duplicate" access="permitAll" />
-		<intercept-url pattern="/ckedit" access="permitAll" />
-		<intercept-url pattern="/**" access="hasRole('guest')" />
+    	<intercept-url pattern="/editUpload/**" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
+    	<intercept-url pattern="/csMember" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
+    	<intercept-url pattern="/csMbWrite" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
+    	<intercept-url pattern="/csContent" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
+    	<intercept-url pattern="/csMbWritePro" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
+		<intercept-url pattern="/memberjoin" access="isAnonymous()" />
+		<intercept-url pattern="/memberjoinpro" access="isAnonymous()" />
+		<intercept-url pattern="/nlogin" access="isAnonymous()" />
+		<intercept-url pattern="/socialPhone" access="isAnonymous()" />
+		<intercept-url pattern="/findIdPwd" access="isAnonymous()" />
+		<intercept-url pattern="/findIdSuccess" access="isAnonymous()" />
+		<intercept-url pattern="/findPwd" access="isAnonymous()" />
+		<intercept-url pattern="/findIdCheck" access="isAnonymous()" />
+		<intercept-url pattern="/findPwd_idCheck" access="isAnonymous()" />
+		<intercept-url pattern="/findPwd_sendEmail" access="isAnonymous()" />
+		<intercept-url pattern="/pwd" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
+		<intercept-url pattern="/email" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
+		<intercept-url pattern="/phone" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
+		<intercept-url pattern="/address" access="hasAnyRole('ROLE_HOST','ROLE_ADMIN')" />
+		<intercept-url pattern="/addAcm" access="hasAnyRole('ROLE_HOST','ROLE_ADMIN')" />
+		<intercept-url pattern="/write" access="hasAnyRole('ROLE_HOST','ROLE_ADMIN')" />
+		<intercept-url pattern="/hostJoin" access="hasAnyRole('ROLE_GUEST','ROLE_ADMIN')" />
+		<intercept-url pattern="/hostWrite" access="hasAnyRole('ROLE_GUEST','ROLE_ADMIN')" />
+		<intercept-url pattern="/hostBoard" access="hasAnyRole('ROLE_HOST','ROLE_ADMIN')" />
+		<intercept-url pattern="/checkPwd" access="hasAnyRole('ROLE_HOST','ROLE_ADMIN')" />
+		<intercept-url pattern="/EditInformation" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
+		<intercept-url pattern="/myPageProfile" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
+		<intercept-url pattern="/logout" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
+		<intercept-url pattern="/ckedit" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
+		<intercept-url pattern="/**" access="authenticated" />
 		
 		<form-login login-page="/login" 
 					username-parameter="mb_id" 
@@ -81,7 +82,7 @@
 			logout-url="/logout" logout-success-url="/index?logout=1" />
 		<remember-me key="wmoskey" token-validity-seconds="2419200"/> <!-- 4 주 -->
 			   
-		<csrf disabled="true"/>
+		<csrf />
 		
 	</http>
 	
