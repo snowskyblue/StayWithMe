@@ -283,9 +283,9 @@ $(document).ready(function(){
 $(document).ready(function(){
 	$("#host").click(function(){
 		event.preventDefault();
-		if(sessionStorage.getItem("authority") == "[guest]") {
+		if(sessionStorage.getItem("authority") == "[ROLE_GUEST]") {
 			location.href = "hostJoin";
-		} else if (sessionStorage.getItem("authority") == "[host]") {
+		} else if (sessionStorage.getItem("authority") == "[ROLE_HOST]") {
 			location.href="hostBoard";
 		} else if (sessionStorage.getItem("authority") == "") {
 			/*비회원일시 로그인으로 이동후 인덱스로 이동*/

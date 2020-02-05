@@ -32,9 +32,10 @@ public class HostController {
 		//return "preHostGrade";
 	}
 	
+	/*
 	@RequestMapping("/hostBoard")
 	public String hostBoard(Model model) {
 		return "hostBoard";
 	}
-
+	*/
 }

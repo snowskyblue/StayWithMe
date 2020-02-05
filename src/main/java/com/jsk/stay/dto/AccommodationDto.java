@@ -1,166 +1,198 @@
 package com.jsk.stay.dto;
 
 public class AccommodationDto {
+	
+	private String ACM_ADDRESS;
+	private String ACM_ADD_DETAIL;
+	private int ACM_AREA;
+	private String ACM_AVAILDATE;
+	private int ACM_BATH_NUM;
+	private String ACM_BEDDING;
+	private int ACM_CHARGE;
+	private String ACM_CHECKIN_TIME;
+	private String ACM_CHECKOUT_TIME;
+	private int ACM_CODE;
+	private int ACM_GUEST_NUM;
+	private String ACM_INFO;
+	private int ACM_ROOM_NUM;
+	private String ACM_ROOM_TYPE;
+	private String ACM_TITLE;
+	private String ACM_TYPE;
+	private int ACM_ZIP;
 	private String mb_id;
-	private int acm_code;
-	private String acm_img;
-	private String acm_info;
-	private String acm_rule;
-	private int acm_charge;
-	private String acm_availdate;
-	private String acm_checkin_time;
-	private String acm_ckeckout_time;
-	private String acm_type;
-	private String acm_room_type;
-	private int acm_guest_num;
-	private int acm_room_num;
-	private int acm_bath_num;
-	private double acm_area;
-	private String acm_bedding;
-	private String acm_address;
-	private String acm_add_detail;
-	private String acm_title;
-	public AccommodationDto(String mb_id, int acm_code, String acm_img, String acm_info, String acm_rule,
-			int acm_charge, String acm_availdate, String acm_checkin_time, String acm_ckeckout_time, String acm_type,
-			String acm_room_type, int acm_guest_num, int acm_room_num, int acm_bath_num, double acm_area,
-			String acm_bedding, String acm_address, String acm_add_detail, String acm_title) {
-		super();
-		this.mb_id = mb_id;
-		this.acm_code = acm_code;
-		this.acm_img = acm_img;
-		this.acm_info = acm_info;
-		this.acm_rule = acm_rule;
-		this.acm_charge = acm_charge;
-		this.acm_availdate = acm_availdate;
-		this.acm_checkin_time = acm_checkin_time;
-		this.acm_ckeckout_time = acm_ckeckout_time;
-		this.acm_type = acm_type;
-		this.acm_room_type = acm_room_type;
-		this.acm_guest_num = acm_guest_num;
-		this.acm_room_num = acm_room_num;
-		this.acm_bath_num = acm_bath_num;
-		this.acm_area = acm_area;
-		this.acm_bedding = acm_bedding;
-		this.acm_address = acm_address;
-		this.acm_add_detail = acm_add_detail;
-		this.acm_title = acm_title;
-	}
+	
 	public AccommodationDto() {
 		super();
 	}
+
+	public AccommodationDto(String aCM_ADDRESS, String aCM_ADD_DETAIL, int aCM_AREA, String aCM_AVAILDATE,
+			int aCM_BATH_NUM, String aCM_BEDDING, int aCM_CHARGE, String aCM_CHECKIN_TIME, String aCM_CHECKOUT_TIME,
+			int aCM_CODE, int aCM_GUEST_NUM, String aCM_INFO, int aCM_ROOM_NUM, String aCM_ROOM_TYPE, String aCM_TITLE,
+			String aCM_TYPE, int aCM_ZIP, String mb_id) {
+		super();
+		ACM_ADDRESS = aCM_ADDRESS;
+		ACM_ADD_DETAIL = aCM_ADD_DETAIL;
+		ACM_AREA = aCM_AREA;
+		ACM_AVAILDATE = aCM_AVAILDATE;
+		ACM_BATH_NUM = aCM_BATH_NUM;
+		ACM_BEDDING = aCM_BEDDING;
+		ACM_CHARGE = aCM_CHARGE;
+		ACM_CHECKIN_TIME = aCM_CHECKIN_TIME;
+		ACM_CHECKOUT_TIME = aCM_CHECKOUT_TIME;
+		ACM_CODE = aCM_CODE;
+		ACM_GUEST_NUM = aCM_GUEST_NUM;
+		ACM_INFO = aCM_INFO;
+		ACM_ROOM_NUM = aCM_ROOM_NUM;
+		ACM_ROOM_TYPE = aCM_ROOM_TYPE;
+		ACM_TITLE = aCM_TITLE;
+		ACM_TYPE = aCM_TYPE;
+		ACM_ZIP = aCM_ZIP;
+		this.mb_id = mb_id;
+	}
+
+	public String getACM_ADDRESS() {
+		return ACM_ADDRESS;
+	}
+
+	public void setACM_ADDRESS(String aCM_ADDRESS) {
+		ACM_ADDRESS = aCM_ADDRESS;
+	}
+
+	public String getACM_ADD_DETAIL() {
+		return ACM_ADD_DETAIL;
+	}
+
+	public void setACM_ADD_DETAIL(String aCM_ADD_DETAIL) {
+		ACM_ADD_DETAIL = aCM_ADD_DETAIL;
+	}
+
+	public int getACM_AREA() {
+		return ACM_AREA;
+	}
+
+	public void setACM_AREA(int aCM_AREA) {
+		ACM_AREA = aCM_AREA;
+	}
+
+	public String getACM_AVAILDATE() {
+		return ACM_AVAILDATE;
+	}
+
+	public void setACM_AVAILDATE(String aCM_AVAILDATE) {
+		ACM_AVAILDATE = aCM_AVAILDATE;
+	}
+
+	public int getACM_BATH_NUM() {
+		return ACM_BATH_NUM;
+	}
+
+	public void setACM_BATH_NUM(int aCM_BATH_NUM) {
+		ACM_BATH_NUM = aCM_BATH_NUM;
+	}
+
+	public String getACM_BEDDING() {
+		return ACM_BEDDING;
+	}
+
+	public void setACM_BEDDING(String aCM_BEDDING) {
+		ACM_BEDDING = aCM_BEDDING;
+	}
+
+	public int getACM_CHARGE() {
+		return ACM_CHARGE;
+	}
+
+	public void setACM_CHARGE(int aCM_CHARGE) {
+		ACM_CHARGE = aCM_CHARGE;
+	}
+
+	public String getACM_CHECKIN_TIME() {
+		return ACM_CHECKIN_TIME;
+	}
+
+	public void setACM_CHECKIN_TIME(String aCM_CHECKIN_TIME) {
+		ACM_CHECKIN_TIME = aCM_CHECKIN_TIME;
+	}
+
+	public String getACM_CHECKOUT_TIME() {
+		return ACM_CHECKOUT_TIME;
+	}
+
+	public void setACM_CHECKOUT_TIME(String aCM_CHECKOUT_TIME) {
+		ACM_CHECKOUT_TIME = aCM_CHECKOUT_TIME;
+	}
+
+	public int getACM_CODE() {
+		return ACM_CODE;
+	}
+
+	public void setACM_CODE(int aCM_CODE) {
+		ACM_CODE = aCM_CODE;
+	}
+
+	public int getACM_GUEST_NUM() {
+		return ACM_GUEST_NUM;
+	}
+
+	public void setACM_GUEST_NUM(int aCM_GUEST_NUM) {
+		ACM_GUEST_NUM = aCM_GUEST_NUM;
+	}
+
+	public String getACM_INFO() {
+		return ACM_INFO;
+	}
+
+	public void setACM_INFO(String aCM_INFO) {
+		ACM_INFO = aCM_INFO;
+	}
+
+	public int getACM_ROOM_NUM() {
+		return ACM_ROOM_NUM;
+	}
+
+	public void setACM_ROOM_NUM(int aCM_ROOM_NUM) {
+		ACM_ROOM_NUM = aCM_ROOM_NUM;
+	}
+
+	public String getACM_ROOM_TYPE() {
+		return ACM_ROOM_TYPE;
+	}
+
+	public void setACM_ROOM_TYPE(String aCM_ROOM_TYPE) {
+		ACM_ROOM_TYPE = aCM_ROOM_TYPE;
+	}
+
+	public String getACM_TITLE() {
+		return ACM_TITLE;
+	}
+
+	public void setACM_TITLE(String aCM_TITLE) {
+		ACM_TITLE = aCM_TITLE;
+	}
+
+	public String getACM_TYPE() {
+		return ACM_TYPE;
+	}
+
+	public void setACM_TYPE(String aCM_TYPE) {
+		ACM_TYPE = aCM_TYPE;
+	}
+
+	public int getACM_ZIP() {
+		return ACM_ZIP;
+	}
+
+	public void setACM_ZIP(int aCM_ZIP) {
+		ACM_ZIP = aCM_ZIP;
+	}
+
 	public String getMb_id() {
 		return mb_id;
 	}
+
 	public void setMb_id(String mb_id) {
 		this.mb_id = mb_id;
 	}
-	public int getAcm_code() {
-		return acm_code;
-	}
-	public void setAcm_code(int acm_code) {
-		this.acm_code = acm_code;
-	}
-	public String getAcm_img() {
-		return acm_img;
-	}
-	public void setAcm_img(String acm_img) {
-		this.acm_img = acm_img;
-	}
-	public String getAcm_info() {
-		return acm_info;
-	}
-	public void setAcm_info(String acm_info) {
-		this.acm_info = acm_info;
-	}
-	public String getAcm_rule() {
-		return acm_rule;
-	}
-	public void setAcm_rule(String acm_rule) {
-		this.acm_rule = acm_rule;
-	}
-	public int getAcm_charge() {
-		return acm_charge;
-	}
-	public void setAcm_charge(int acm_charge) {
-		this.acm_charge = acm_charge;
-	}
-	public String getAcm_availdate() {
-		return acm_availdate;
-	}
-	public void setAcm_availdate(String acm_availdate) {
-		this.acm_availdate = acm_availdate;
-	}
-	public String getAcm_checkin_time() {
-		return acm_checkin_time;
-	}
-	public void setAcm_checkin_time(String acm_checkin_time) {
-		this.acm_checkin_time = acm_checkin_time;
-	}
-	public String getAcm_ckeckout_time() {
-		return acm_ckeckout_time;
-	}
-	public void setAcm_ckeckout_time(String acm_ckeckout_time) {
-		this.acm_ckeckout_time = acm_ckeckout_time;
-	}
-	public String getAcm_type() {
-		return acm_type;
-	}
-	public void setAcm_type(String acm_type) {
-		this.acm_type = acm_type;
-	}
-	public String getAcm_room_type() {
-		return acm_room_type;
-	}
-	public void setAcm_room_type(String acm_room_type) {
-		this.acm_room_type = acm_room_type;
-	}
-	public int getAcm_guest_num() {
-		return acm_guest_num;
-	}
-	public void setAcm_guest_num(int acm_guest_num) {
-		this.acm_guest_num = acm_guest_num;
-	}
-	public int getAcm_room_num() {
-		return acm_room_num;
-	}
-	public void setAcm_room_num(int acm_room_num) {
-		this.acm_room_num = acm_room_num;
-	}
-	public int getAcm_bath_num() {
-		return acm_bath_num;
-	}
-	public void setAcm_bath_num(int acm_bath_num) {
-		this.acm_bath_num = acm_bath_num;
-	}
-	public double getAcm_area() {
-		return acm_area;
-	}
-	public void setAcm_area(double acm_area) {
-		this.acm_area = acm_area;
-	}
-	public String getAcm_bedding() {
-		return acm_bedding;
-	}
-	public void setAcm_bedding(String acm_bedding) {
-		this.acm_bedding = acm_bedding;
-	}
-	public String getAcm_address() {
-		return acm_address;
-	}
-	public void setAcm_address(String acm_address) {
-		this.acm_address = acm_address;
-	}
-	public String getAcm_add_detail() {
-		return acm_add_detail;
-	}
-	public void setAcm_add_detail(String acm_add_detail) {
-		this.acm_add_detail = acm_add_detail;
-	}
-	public String getAcm_title() {
-		return acm_title;
-	}
-	public void setAcm_title(String acm_title) {
-		this.acm_title = acm_title;
-	}
+
 	
 }

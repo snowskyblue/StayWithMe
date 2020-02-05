@@ -2,7 +2,7 @@ package com.jsk.stay.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
+import java.security.Principal;
 
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.jsk.stay.command.AcmCommand;
+import com.jsk.stay.command.AcmListCommand;
 import com.jsk.stay.command.AcmWriteCommand;
 import com.jsk.stay.util.Constant;
 
@@ -133,5 +134,15 @@ public class AcmController {
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().print(outData.toString());
+	}
+	
+	@RequestMapping("/hostBoard")
+	public String list(Model model,Principal principal) {
+		String mb_id = principal.getName();
+		System.out.println("list()");
+		command = new AcmListCommand();
+		model.addAttribute("mb_id", mb_id);
+		command.execute(model);
+		return "hostBoard";
 	}
 }

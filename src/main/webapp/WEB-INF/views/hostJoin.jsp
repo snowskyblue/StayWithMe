@@ -13,6 +13,9 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- csrf정보  -->
+<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+<!-- 기본값으로 Header가 존재 (X-CSRF-TOKEN) default값 -->
 <!--bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <!--font-awesome -->
@@ -67,6 +70,7 @@
 	<div class="row d-flex justify-content-center pt-5" style="max-width:1200px;">
 		<div class="col-10 col-sm-10 mt-3 mb-3"> <!-- dddddddddd -->
 			<form method="POST" action ="hostWrite" enctype="multipart/form-data">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<input type="hidden" id="mb_id" name="mb_id">
 				<div class="row mb-5 mt-5">
 					<div class="col-sm-3 border2">주소</div> 

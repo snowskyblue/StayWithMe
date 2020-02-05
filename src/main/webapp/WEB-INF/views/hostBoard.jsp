@@ -115,6 +115,32 @@ form {
 			<div class="tab-content">
 				<a href="addAcm" class="form-control btn btn-dark" style="border: none;">숙소등록</a>
 			</div>
+			<!-- **********삭제************************** -->
+			<table width="500" cellpadding="0" cellspacing="0" border="1">
+		<tr>
+			<td>번호</td>
+			<td>이름</td>
+			<td>제목</td>
+			<td>날짜</td>
+			<td>히트</td>
+		</tr>
+		<c:forEach items="${list1}" var="dto">
+		<tr>
+			<td>${dto.MB_ID}</td>
+			<td>${dto.ACM_CODE}</td>
+			<td>
+				<c:forEach begin="1" end="${dto.ACM_INFO}">-</c:forEach>
+				<a href="content_view?bId=${dto.ACM_ADDRESS}">${dto.ACM_ADD_DETAIL}</a></td>
+			<td>${dto.ACM_ROOM_NUM}</td>
+			<td>${dto.ACM_CHARGE}</td>
+		</tr>
+		</c:forEach>
+		<tr>
+			<td colspan="5"> <a href="write_view">글작성</a> </td>
+		</tr>
+	</table>
+			
+		<!-- **********삭제************************** -->
 			<!-- tab 선택에 따른 내용 -->
 		</div>
 	</div>

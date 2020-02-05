@@ -3,7 +3,9 @@ package com.jsk.stay.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -12,6 +14,8 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.transaction.support.TransactionTemplate;
 
+import com.jsk.stay.dto.AccommodationDto;
+import com.jsk.stay.dto.AcmSubDto;
 import com.jsk.stay.util.Constant;
 
 public class AcmDao {
@@ -138,7 +142,7 @@ public class AcmDao {
 				@Override
 				public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
 					System.out.println("dao클래스의 네번째 update메서드 권한 바꾸기");
-					String query = "update member set mb_grade = 'host' where mb_id = ? ";
+					String query = "update member set mb_grade = 'ROLE_HOST' where mb_id = ? ";
 					PreparedStatement pstmt = con.prepareStatement(query);
 					pstmt.setString(1, mb_id);
 					return pstmt;
@@ -153,5 +157,37 @@ public class AcmDao {
 			System.out.println("트랜잭션 롤백");
 		}
 		
+	}
+
+	public ArrayList<AccommodationDto> list1(final String mb_id) {
+		
+		ArrayList<AccommodationDto> dtos1 = (ArrayList<AccommodationDto>) template.query(new PreparedStatementCreator() {
+
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+
+				String query = "select * from accommodation where mb_id = ? order by acm_code asc";
+				PreparedStatement pstmt = con.prepareStatement(query);
+				pstmt.setString(1, mb_id);
+				return pstmt;
+				
+			}}, new BeanPropertyRowMapper<AccommodationDto>(AccommodationDto.class));
+		//드라이버 로드, 커넥션 생성 & DB 연결, SQL 실행, DB 연결 해제 부분은 JDBC 템플릿이 알아서 해준다
+		System.out.println("tem" + template);
+		return dtos1;
+		
+		/*(ACM_ADDRESS,ACM_ADD_DETAIL,ACM_AREA,ACM_AVAILDATE,ACM_BATH_NUM,ACM_BEDDING,ACM_CHARGE,ACM_CHECKIN_TIME,ACM_CHECKOUT_TIME,ACM_CODE,ACM_GUEST_NUM,ACM_INFO,ACM_ROOM_NUM,ACM_ROOM_TYPE,ACM_TITLE,ACM_TYPE,ACM_ZIP,MB_ID)
+		 * <BDto> List<BDto> org.springframework.jdbc.core.JdbcTemplate.query(String sql, RowMapper<BDto> rowMapper)
+		 * ArrayList<BDto> : the result List, containing mapped objects
+		 * 
+		 * new BeanPropertyRowMapper<BDto>(BDto.class)는 
+		 * resultset의 각행을 Bdto객체로 변환하여 모든 행을 list형태로 반환
+		 * org.springframework.jdbc.core.BeanPropertyRowMapper.BeanPropertyRowMapper<BDto>(Class<BDto> mappedClass)
+		 * (ArrayList<BDto>) template.query(query, new BeanPropertyRowMapper<BDto>(BDto.class));*/
+	}
+
+	public ArrayList<AcmSubDto> list2() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
