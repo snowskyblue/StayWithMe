@@ -12,6 +12,8 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- csrf정보  -->
+<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
 <!--bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <!--font-awesome -->
@@ -96,6 +98,7 @@
 		
 		<div class="csBoard mx-auto">
 			<form method="POST" action="csMbWritePro">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
 				<input type="hidden" name="mb_id" value="${mb_id}">
 				<input type="hidden" name="mb_name" value="${mb_name}">
 				<table class="csBoard_write mx-auto text-center">
