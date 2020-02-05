@@ -17,7 +17,7 @@
                                  http://www.springframework.org/schema/security/spring-security.xsd">
     
     
-    <http pattern="/ckedit" security="none"></http>
+    <http pattern="/ckedit" security ="none"/>
     <http auto-config='true' use-expressions = "true">
     	<headers>  <!-- X-Frame-Options : deny 해결(iframe사용시) -->
         	<frame-options disabled="true"></frame-options>
@@ -59,7 +59,7 @@
 		<intercept-url pattern="/write" access="hasAnyRole('ROLE_HOST','ROLE_ADMIN')" />
 		<intercept-url pattern="/hostJoin" access="hasAnyRole('ROLE_GUEST','ROLE_ADMIN')" />
 		<intercept-url pattern="/hostWrite" access="hasAnyRole('ROLE_GUEST','ROLE_ADMIN')" />
-		<intercept-url pattern="/hostBoard" access="hasAnyRole('ROLE_HOST','ROLE_ADMIN')" />
+		<intercept-url pattern="/hostBoard" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
 		<intercept-url pattern="/checkPwd" access="hasAnyRole('ROLE_HOST','ROLE_ADMIN')" />
 		<intercept-url pattern="/EditInformation" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
 		<intercept-url pattern="/myPageProfile" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
