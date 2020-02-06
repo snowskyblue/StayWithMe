@@ -3,6 +3,7 @@ package com.jsk.stay.controller;
 import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.Map;
 
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
@@ -139,10 +140,30 @@ public class AcmController {
 	@RequestMapping("/hostBoard")
 	public String list(Model model,Principal principal) {
 		String mb_id = principal.getName();
-		System.out.println("list()");
+		System.out.println("호스트보드 컨트롤러 : " + mb_id);
 		command = new AcmListCommand();
+		System.out.println("11111111111111");
+		
 		model.addAttribute("mb_id", mb_id);
 		command.execute(model);
+		
+		System.out.println("22222222222");
+		/*
+		 * System.out.println("11111111111111");
+		
+		model.addAttribute("mb_id", mb_id);
+		command.execute(model);
+		
+		Map<String,Object> map = model.asMap();
+		System.out.println("호스트보드 멥으로");
+		ArrayList<AccommodationDto> dtos1 = (ArrayList<AccommodationDto>) map.get("list1");
+		
+		model.addAttribute("list1", dtos1);
+		System.out.println("22222222222");
+		 * 
+		 * */
+		
+		
 		return "hostBoard";
 	}
 }

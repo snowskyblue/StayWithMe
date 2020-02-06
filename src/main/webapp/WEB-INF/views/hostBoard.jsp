@@ -126,13 +126,9 @@ form {
 		</tr>
 		<c:forEach items="${list1}" var="dto">
 		<tr>
-			<td>${dto.MB_ID}</td>
-			<td>${dto.ACM_CODE}</td>
+			
+			<td>${dto.mb_id}</td>
 			<td>
-				<c:forEach begin="1" end="${dto.ACM_INFO}">-</c:forEach>
-				<a href="content_view?bId=${dto.ACM_ADDRESS}">${dto.ACM_ADD_DETAIL}</a></td>
-			<td>${dto.ACM_ROOM_NUM}</td>
-			<td>${dto.ACM_CHARGE}</td>
 		</tr>
 		</c:forEach>
 		<tr>
@@ -140,7 +136,9 @@ form {
 		</tr>
 	</table>
 			
-		<!-- **********삭제************************** -->
+		<!-- **********삭제***
+		ACM_CODE ACM_TITLE 
+		*********************** -->
 			<!-- tab 선택에 따른 내용 -->
 		</div>
 	</div>

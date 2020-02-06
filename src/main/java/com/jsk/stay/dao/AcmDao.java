@@ -160,7 +160,7 @@ public class AcmDao {
 	}
 
 	public ArrayList<AccommodationDto> list1(final String mb_id) {
-		
+		System.out.println("dao의 list1 메서드들어옴 " + mb_id);
 		ArrayList<AccommodationDto> dtos1 = (ArrayList<AccommodationDto>) template.query(new PreparedStatementCreator() {
 
 			@Override
