@@ -58,15 +58,15 @@ public class MyPageController {
 	@RequestMapping("/checkPwd")
 	@ResponseBody
 	public String checkPwd(Model model, HttpServletRequest request) {
+		String mb_id = request.getRemoteUser();
+		System.out.println("mb_id : " + mb_id );
+		String mb_pw = dao.check(mb_id);
 		String pw = request.getParameter("checkPwd");
 		System.out.println("pw : " + pw);
 		if(pw == null) {
 			pw = request.getParameter("mb_pwd1");
 			System.out.println(pw);
 		}
-		String mb_id = request.getRemoteUser();
-		System.out.println("mb_id : " + mb_id );
-		String mb_pw = dao.check(mb_id);
 		//암호화 시켜준것
 		boolean result = passwordEncoder.matches(pw, mb_pw);
 		String result1 = Boolean.toString(result);

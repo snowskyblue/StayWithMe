@@ -33,7 +33,7 @@
 }
 
 .informationTabMenu {
-	margin-top: 100px;
+	margin-top: 40px;
     width: 80%;
     margin-bottom: 150px;
 }
@@ -149,15 +149,7 @@
 	<div class="container" id="information-header">
 		<h3>마이페이지/프로필</h3>
 		<div id="border"></div>
-		
 		<div class="informationTabMenu mx-auto">
-			<!-- tab 메뉴 -->
-			<ul class="nav nav-tabs text-center">
-				<li class="informationTab active" id="defaultTab" onclick='informationTab(this, "white")'><a data-toggle="tab" data-target="#myPage">마이페이지</a>
-				<li class="informationTab" onclick='informationTab(this, "white")'><a data-toggle="tab" data-target="#profile">프로필</a>
-			</ul>
-			<!-- tab 메뉴 -->
-			<!-- tab 선택에 따른 내용 -->
 			<div class="tab-content">
 				<div id="myPage" class="tab-pane active mx-auto">
 					<div class = "container">
@@ -168,7 +160,6 @@
 									<p>
 										회원정보 수정을 하려면 비밀번호를 입력해 주세요<br/>
 										<span>
-										
 											<input type = "password" class = "d-inline form-control" name = "checkPwd" id ="checkPwd" placeholder="비밀번호를 입력해 주세요." style = "width : 70%;"/>
 											<button class = "d-inline btn btn-dark form-control" style = "width : 75px;" id = "checkPw">확인</button>
 										</span>
@@ -203,13 +194,7 @@
 						</div>
 					</div>
 				</div>
-				<div id="profile" class="tab-pane">
-					<div class = "container">
-						
-					</div>
-				</div>
 			</div>
-			<!-- tab 선택에 따른 내용 -->
 		</div>
 	</div>
 </div>
@@ -237,21 +222,6 @@ var emailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[
 var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
 var foundId = null;
 
-function informationTab(elmnt, color) {
-	var i;
-	var informationTab;
-	informationTab = document.getElementsByClassName("informationTab");
-	for(i = 0 ; i < informationTab.length ; i++) {
-		informationTab[i].style.backgroundColor = "";
-		informationTab[i].style.color = "white";
-	}
-	
-	elmnt.style.backgroundColor = color;
-	elmnt.style.color = "black";
-}
-document.getElementById("defaultTab").click(); //active
-</script>
-<script>
 $(document).ready(function(){	
 	var result = "${result}";
 	$("#checkPw").click(function(){

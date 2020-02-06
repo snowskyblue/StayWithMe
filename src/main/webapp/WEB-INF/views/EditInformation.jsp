@@ -60,7 +60,6 @@
 			<h3>회원정보 수정</h3>
 			<div id="border"></div>
 			<form id="information" class = "d-flex justify-content-center" method = "POST" ng-controller = "myCtrl">
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
 				<div id = "form" style = "margin : 0px; width : 450px;">
 					<label>아이디</label>
 					<input type = "text" class = "row form-control" id = "id" ng-model = "myModel" disabled/>
