@@ -43,6 +43,14 @@ public class EditDaoImp implements EditDao {
 		sqlSession.update("addressUpdate",dto);
 	}
 	
+	@Override
+	public void myPageAccount(String id,String ho_account,String ho_acc_num) {
+		
+		HostDto dto = new HostDto(id,"","",0,ho_account,ho_acc_num);
+		
+		sqlSession.update("accountUpdate",dto);
+	}
+	
 	
 
 }

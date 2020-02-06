@@ -11,6 +11,8 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- csrf정보  -->
+<meta name="_csrf" content="${_csrf.token}"/>
 <!--bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <!--font-awesome -->
@@ -64,8 +66,8 @@
 	<div id="border"></div>
 	<div class="row d-flex justify-content-center pt-5" style="max-width:1200px;">
 		<div class="col-10 col-sm-10 mt-3 mb-3">
-			<form method="POST" action ="hostWrite" enctype="multipart/form-data">
-				<input type="hidden" id="mb_id" name="mb_id">
+			<form method="POST" action ="accountEdit">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
 				<div><!-- 계좌 정보 -->
 					<div class="mb-5"> <!-- form안에서 이전,다음버튼과 컨텐츠과의 거리 -->
 						<div class="row">
@@ -75,7 +77,7 @@
 								<input type="hidden" value="{{selectedBank}}" name="ho_account"  id="ho_account">
 							</div>
 							<div class="col-sm-9">
-								<input class="form-control" type="text" name="ho_acc_num"  id="ho_acc_num" placeholder="계좌번호를 입력해 주세요">
+								<input class="form-control" type="text" name="ho_acc_num"  id="ho_acc_num" value = "${dto.ho_acc_num}">
 							</div>
 						</div>
 					</div>
@@ -105,8 +107,6 @@
 
 <!-- 다음 주소 검색 api -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
-
 <script>
 var app = angular.module('Account', []);
 app.controller('AccountCtrl', function($scope) {
@@ -119,8 +119,6 @@ $(document).ready(function(){
  		$("nav").toggleClass("active"); 
  		$(".main").toggleClass("main1");
  	});
-	$("#mb_id").val(sessionStorage.getItem("user"));
-	console.log(sessionStorage.getItem("user"));
 });	
 </script>
 </body>

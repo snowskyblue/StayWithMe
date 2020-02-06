@@ -44,10 +44,14 @@ public class MyPageController {
 	@RequestMapping("/EditInformation")
 	public String EditInformation(Model model, HttpServletRequest request) {
 		String id = request.getRemoteUser();
+		System.out.println("1");
 		MemberDto dto = dao.information(id);
-		HostDto dto1 = dao.information1(id);
+		System.out.println("1");
 		model.addAttribute("dto",dto);
+		HostDto dto1 = dao.information1(id);
+		System.out.println("1");
 		model.addAttribute("dto1",dto1);
+
 		return "EditInformation";
 	}
 	

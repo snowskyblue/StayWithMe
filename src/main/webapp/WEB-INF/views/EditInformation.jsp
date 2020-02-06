@@ -11,6 +11,9 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- csrf정보  -->
+<meta name="_csrf" content="${_csrf.token}"/>
+<meta name="_csrf_header" content="${_csrf.headerName}"/>
 <!--bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <!--font-awesome -->
@@ -57,9 +60,10 @@
 			<h3>회원정보 수정</h3>
 			<div id="border"></div>
 			<form id="information" class = "d-flex justify-content-center" method = "POST" ng-controller = "myCtrl">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
 				<div id = "form" style = "margin : 0px; width : 450px;">
 					<label>아이디</label>
-					<input type = "text" class = "row form-control" id = "id" disabled ng-model = "myModel"/>
+					<input type = "text" class = "row form-control" id = "id" ng-model = "myModel" disabled/>
 					<br/>
 				
 					<div>
@@ -229,7 +233,7 @@ function pwd() {
 	else {
 		$.ajax({
 			url : "checkPwd",
-			data : {mb_pwd1:$("#mb_pwd1").val()},
+			data : {mb_pwd1 : $("#mb_pwd1").val()},
 			Type : "POST",
 			success : function(data) {
 				console.log(data);
@@ -443,6 +447,15 @@ else {
     }
 </script>
 <script>
+$(function () {
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    $(document).ajaxSend(function (e, xhr, options) {
+        xhr.setRequestHeader(header, token);
+    });
+});
+</script>
+<script>
 $(document).ready(function() {
 	$(".pwdBtn").click(function() {
 		event.preventDefault;
@@ -451,9 +464,9 @@ $(document).ready(function() {
 		}
 		else{
 			$.ajax({
-				type : "POST",
-				data : {mb_pwd1 : $("#mb_pwd1").val(), id : $("#id").val()},
 				url : "myPagePwd",
+				data : {checkPwd : $("#mb_pwd1").val()},
+				type : "POST",
 				success : function(data) {
 					if(data == "success") {
 						location.href = "index";
@@ -471,7 +484,7 @@ $(document).ready(function() {
 		if(emailA == true) {
 			$.ajax({
 				type : "POST",
-				data : {mb_email : $("#mb_email").val(), id : $("#id").val()},
+				data : {mb_email : $("#mb_email").val()},
 				url : "myPageEmail",
 				success : function(data) {
 					if(data == "success") {
@@ -493,7 +506,7 @@ $(document).ready(function() {
 		if(phoneA == true && phoneB == true) {
 			$.ajax({
 				type : "POST",
-				data : {mb_phone : $("#mb_phone").val(), id : $("#id").val()},
+				data : {mb_phone : $("#mb_phone").val()},
 				url : "myPagePhone",
 				success : function(data) {
 					if(data == "success") {
@@ -516,7 +529,7 @@ $(document).ready(function() {
 			$.ajax({
 				type : "POST",
 				data : {postcode: $("#postcode").val(), address: $("#address").val(),
-					detailAddress: $("#detailAddress").val(), id : $("#id").val()},
+					detailAddress: $("#detailAddress").val()},
 				url : "myPageAddress",
 				success : function(data) {
 					if(data == "success") {

@@ -17,4 +17,7 @@
 	<update id="addressUpdate" parameterType = "com.jsk.stay.dto.HostDto">
 		UPDATE HOST SET HO_ADDRESS = #{ho_address}, HO_ADD_DETAIL = #{ho_add_detail}, HO_ZIP = #{ho_zip} WHERE MB_ID = #{mb_id}
 	</update>
+	<update id="accountUpdate" parameterType = "com.jsk.stay.dto.HostDto">
+		UPDATE HOST SET HO_ACCOUNT = #{ho_account}, HO_ACC_NUM = #{ho_acc_num} WHERE MB_ID = #{mb_id}
+	</update>
 </mapper>

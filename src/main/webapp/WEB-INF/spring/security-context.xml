@@ -51,16 +51,15 @@
 		<intercept-url pattern="/findIdCheck" access="isAnonymous()" />
 		<intercept-url pattern="/findPwd_idCheck" access="isAnonymous()" />
 		<intercept-url pattern="/findPwd_sendEmail" access="isAnonymous()" />
-		<intercept-url pattern="/pwd" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
-		<intercept-url pattern="/email" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
-		<intercept-url pattern="/phone" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
-		<intercept-url pattern="/address" access="hasAnyRole('ROLE_HOST','ROLE_ADMIN')" />
+		<intercept-url pattern="/myPagePwd" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
+		<intercept-url pattern="/myPageEmail" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
+		<intercept-url pattern="/myPagePhone" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
+		<intercept-url pattern="/myPageAddress" access="hasAnyRole('ROLE_HOST','ROLE_ADMIN')" />
 		<intercept-url pattern="/addAcm" access="hasAnyRole('ROLE_HOST','ROLE_ADMIN')" />
 		<intercept-url pattern="/write" access="hasAnyRole('ROLE_HOST','ROLE_ADMIN')" />
 		<intercept-url pattern="/hostJoin" access="hasAnyRole('ROLE_GUEST','ROLE_ADMIN')" />
-		<intercept-url pattern="/hostWrite" access="hasAnyRole('ROLE_GUEST','ROLE_ADMIN')" />
 		<intercept-url pattern="/hostBoard" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
-		<intercept-url pattern="/checkPwd" access="hasAnyRole('ROLE_HOST','ROLE_ADMIN')" />
+		<intercept-url pattern="/checkPwd" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
 		<intercept-url pattern="/EditInformation" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
 		<intercept-url pattern="/myPageProfile" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
 		<intercept-url pattern="/logout" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
