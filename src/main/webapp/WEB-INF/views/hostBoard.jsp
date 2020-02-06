@@ -126,9 +126,11 @@ form {
 		</tr>
 		<c:forEach items="${list1}" var="dto">
 		<tr>
-			
 			<td>${dto.mb_id}</td>
-			<td>
+			<td>${dto.acm_code}</td>
+			<td>${dto.acm_title}</td>
+			<td>${dto.acm_code}</td>
+			<td>${dto.acm_title}</td>
 		</tr>
 		</c:forEach>
 		<tr>
@@ -137,7 +139,7 @@ form {
 	</table>
 			
 		<!-- **********삭제***
-		ACM_CODE ACM_TITLE 
+		ACM_CODE ACM_TITLE mb_id 
 		*********************** -->
 			<!-- tab 선택에 따른 내용 -->
 		</div>

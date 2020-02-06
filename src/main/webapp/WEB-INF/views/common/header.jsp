@@ -239,7 +239,7 @@ nav, figure, footer, header {
 						<li class="wish-btn-li"><a href="#">위시리스트</a></li>
 						<li class="confirm-btn-li"><a href="#">예약확인</a></li>
 						<sec:authorize access="isAnonymous()">
-							<li class="host-btn-li"><a href="#" id="host">호스트</a></li>
+							<li class="host-btn-li"><a href="hostJoin" id="host">호스트</a></li>
 						</sec:authorize>
 						<sec:authorize access="hasAnyRole('ROLE_GUEST', 'ROLE_ADMIN')">
 							<li class="host-btn-li"><a href="hostJoin" id="host">호스트</a></li>
