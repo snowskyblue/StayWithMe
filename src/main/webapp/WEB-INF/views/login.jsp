@@ -146,6 +146,24 @@
 		</div>
 	</div>
 </div>
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<img src="img/logo.jpg">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body text-center" style="font-weight:bold;">
+				 로그인 후 이용 가능합니다.
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
 <h3>${foundId2}</h3>
 <jsp:include page="common/footer.jsp" flush="false"/>
 <!--jquery -->
@@ -165,8 +183,11 @@
 		<c:when test="${not empty log}">
 			
 		</c:when>
-		<c:otherwise>
+		<c:when test="${not empty error}">
 			$("#loginBtnModal").modal("show");
+		</c:when>
+		<c:otherwise>
+			$("#loginModal").modal("show");
 		</c:otherwise>
 		</c:choose>
 		/*
