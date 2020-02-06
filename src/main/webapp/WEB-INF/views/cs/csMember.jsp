@@ -82,35 +82,58 @@ a{
 					</h4>
 				</c:when>
 				<c:otherwise>
-							<table class="csBoard_list mx-auto text-center">
-								<colgroup>
-									<col style="width:500px;">
-									<col style="width:100px;">
-									<col style="width:100px;">
-									<col style="width:90px;">
-								</colgroup>
-								<thead>
+					<table class="csBoard_list mx-auto text-center">
+						<colgroup>
+							<col style="width:500px;">
+							<col style="width:100px;">
+							<col style="width:100px;">
+							<col style="width:90px;">
+						</colgroup>
+						<thead>
+							<tr>
+								<th scope="col">제목</th>
+								<th scope="col">작성자</th>
+								<th scope="col">작성일</th>
+								<th scope="col">답변유무</th>
+							</tr>
+						</thead>
+						<tbody>
+						<sec:authorize access="hasAnyRole('ROLE_GUEST','ROLE_HOST', 'ROLE_ADMIN')">
+							<c:choose>
+								<c:when test="${empty list}">
 									<tr>
-										<th scope="col">제목</th>
-										<th scope="col">작성자</th>
-										<th scope="col">작성일</th>
-										<th scope="col">답변유무</th>
+										<td colspan="4" style="height:400px;">
+											<h4 class="cs_notice text-center">
+												<i class="fas fa-exclamation-circle"></i><br/><br/>
+												1:1 문의 내역이 존재하지 않습니다.
+											</h4>
+										</td>
 									</tr>
-								</thead>
-								<tbody>
-									<c:choose>
-										<c:when test="${empty list}">
-											<tr>
-												<td colspan="4" style="height:400px;">
-													<h4 class="cs_notice text-center">
-														<i class="fas fa-exclamation-circle"></i><br/><br/>
-														1:1 문의 내역이 존재하지 않습니다.
-													</h4>
-												</td>
-											</tr>
-										</c:when>
-										<c:otherwise>
-											<c:forEach items="${list}" var="list">
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${list}" var="list">
+										<!-- <tr>
+											<td class="csTitle">
+												<a href="csContent?cs_code=${list.cs_code}">
+													${list.cs_title}
+												</a>
+											</td>
+											<td>${list.mb_name}</td>
+											<td>${list.cs_date}</td>
+											<c:choose>
+												<c:when test="${list.cs_complete eq 'N'.charAt(0)}">
+													<td class="text-danger" style="font-weight:bold;">답변대기</td>
+												</c:when>
+												<c:otherwise>
+													<td class="text-primary" style="font-weight:bold;">답변완료</td>
+												</c:otherwise>
+											</c:choose>
+										</tr> -->
+										<sec:authentication property="principal.username" var="mb_id"/>
+										<sec:authentication property="principal.authorities" var="mb_grade"/>
+										<c:choose>
+											
+											<c:when test="${list.mb_id eq mb_id && mb_grade eq '[ROLE_GUEST]'}">
 												<tr>
 													<td class="csTitle">
 														<a href="csContent?cs_code=${list.cs_code}">
@@ -128,18 +151,66 @@ a{
 														</c:otherwise>
 													</c:choose>
 												</tr>
-											</c:forEach>
-										</c:otherwise>
-									</c:choose>
-								</tbody>
-								<tfoot>
-									<tr style="border:0;">
-										<td colspan="4" align="right">
-											<button type="button" onClick="location.href='csMbWrite'" id="cs_write" class="btn btn-dark" style="margin-top:10px;">문의하기</button>
-										</td>
-									</tr>
-								</tfoot>
-							</table>
+											</c:when>
+											<c:when test="${list.mb_id eq mb_id && mb_grade eq '[ROLE_HOST]'}">
+												<tr>
+													<td class="csTitle">
+														<a href="csContent?cs_code=${list.cs_code}">
+															${list.cs_title}
+														</a>
+													</td>
+													<td>${list.mb_name}</td>
+													<td>${list.cs_date}</td>
+													<c:choose>
+														<c:when test="${list.cs_complete eq 'N'.charAt(0)}">
+															<td class="text-danger" style="font-weight:bold;">답변대기</td>
+														</c:when>
+														<c:otherwise>
+															<td class="text-primary" style="font-weight:bold;">답변완료</td>
+														</c:otherwise>
+													</c:choose>
+												</tr>
+											</c:when>
+											<c:when test="${mb_grade eq '[ROLE_ADMIN]'}">
+												<tr>
+													<td class="csTitle">
+														<a href="csContent?cs_code=${list.cs_code}">
+															${list.cs_title}
+														</a>
+													</td>
+													<td>${list.mb_name}</td>
+													<td>${list.cs_date}</td>
+													<c:choose>
+														<c:when test="${list.cs_complete eq 'N'.charAt(0)}">
+															<td class="text-danger" style="font-weight:bold;">답변대기</td>
+														</c:when>
+														<c:otherwise>
+															<td class="text-primary" style="font-weight:bold;">답변완료</td>
+														</c:otherwise>
+													</c:choose>
+												</tr>
+											</c:when>
+											<c:otherwise>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
+						</sec:authorize>
+						<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+							
+						</sec:authorize>
+						</tbody>
+						<sec:authorize access="hasAnyRole('ROLE_GUEST','ROLE_HOST')">
+							<tfoot>
+								<tr style="border:0;">
+									<td colspan="4" align="right">
+										<button type="button" onClick="location.href='csMbWrite'" id="cs_write" class="btn btn-dark" style="margin-top:10px;">문의하기</button>
+									</td>
+								</tr>
+							</tfoot>
+						</sec:authorize>
+					</table>
 				</c:otherwise>
 			</c:choose>
 		</div>

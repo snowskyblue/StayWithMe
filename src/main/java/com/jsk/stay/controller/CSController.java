@@ -1,6 +1,7 @@
 package com.jsk.stay.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,17 +22,20 @@ public class CSController {
 	
 	@RequestMapping("/csMember")
 	public String csMember(Model model, Principal principal) throws Exception {
-		try {
+		/*try {
 			String mb_id = null;
 			if(principal.getName() != null) {
 				mb_id = principal.getName();
 				System.out.println("csMb_id: " + mb_id);
 				model.addAttribute("list", com.list(mb_id));
+			
 			}
 		}
 		catch(NullPointerException e) {
 			model.addAttribute("list", "login");
-		}
+		}*/
+		model.addAttribute("list", com.list2());
+		
 		return "cs/csMember";
 	}
 	

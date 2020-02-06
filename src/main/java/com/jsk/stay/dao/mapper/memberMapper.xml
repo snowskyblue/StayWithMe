@@ -20,7 +20,7 @@
 		null,
 		null,
 		null,
-		'guest'
+		'ROLE_GUEST'
 		)
 	</insert>
 	
