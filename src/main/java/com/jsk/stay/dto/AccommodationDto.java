@@ -55,6 +55,18 @@ public class AccommodationDto {
 		this.acm_zip = acm_zip;
 		this.acm_title = acm_title;
 	}
+	
+	public AccommodationDto(String mb_id, int acm_code, int acm_charge, String acm_availdate, String acm_checkin_time,
+			String acm_checkout_time, int acm_guest_num) {
+		super();
+		this.mb_id = mb_id;
+		this.acm_code = acm_code;
+		this.acm_charge = acm_charge;
+		this.acm_availdate = acm_availdate;
+		this.acm_checkin_time = acm_checkin_time;
+		this.acm_checkout_time = acm_checkout_time;
+		this.acm_guest_num = acm_guest_num;
+	}
 
 	public String getMb_id() {
 		return mb_id;
