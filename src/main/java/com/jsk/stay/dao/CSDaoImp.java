@@ -32,8 +32,8 @@ public class CSDaoImp implements CSDao {
 		return result;
 	}
 	
-	public String mb_name(String mb_id) {
-		String mb_name = sql.selectOne("cs.mb_name", mb_id);
+	public String mbWrite(String mb_id) {
+		String mb_name = sql.selectOne("cs.mbWrite", mb_id);
 		return mb_name;
 	}
 	
@@ -41,5 +41,11 @@ public class CSDaoImp implements CSDao {
 		System.out.println("µÆ³ª?2");
 		sql.insert("cs.mbWritePro", dto);
 		System.out.println("µÆ³ª?3");
+	}
+	
+	public void mbModifyPro(CSDto dto) {
+		//CSDto dto = new CSDto(cs_code, cs_title, cs_content);
+		sql.update("cs.mbModifyPro", dto);
+
 	}
 }

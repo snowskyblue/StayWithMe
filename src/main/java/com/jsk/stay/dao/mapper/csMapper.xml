@@ -21,7 +21,7 @@
 	</select>
 	
 	<!-- 문의 작성에 저장해줄 mb_name 불러오기 -->
-	<select id="mb_name" parameterType="com.jsk.stay.dto.MemberDto" resultType="String">
+	<select id="mbWrite" parameterType="com.jsk.stay.dto.MemberDto" resultType="String">
 		select mb_name from member where mb_id = #{mb_id}
 	</select>
 	
@@ -39,4 +39,10 @@
 		'N'
 		)
 	</insert>
+	
+	<!-- 문의 내용 수정 -->
+	<update id="mbModifyPro" parameterType="com.jsk.stay.dto.CSDto">
+		update cs set cs_title = #{cs_title}, cs_content = #{cs_content}
+		where cs_code = #{cs_code}
+	</update>
 </mapper>
