@@ -14,7 +14,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- csrf정보  -->
 <meta name="_csrf" content="${_csrf.token}"/>
-<meta name="_csrf_header" content="${_csrf.headerName}"/>
 <!--bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <!--font-awesome -->
@@ -23,9 +22,9 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet" />
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-<title>마이 페이지</title>
+<title>마이페이지/프로필</title>
 <style>
-#information-header {
+#reservation-header {
 	padding-top: 150px;
 }
 #border {
@@ -33,7 +32,7 @@
 	/*border-collapse: collapse;*/
 }
 
-.informationTabMenu {
+.reservationTabMenu {
 	margin-top: 40px;
     width: 80%;
     margin-bottom: 150px;
@@ -115,11 +114,11 @@
 }
 
 @media screen and (max-width: 576px) {
-	.informationTabMenu {
+	.reservationTabMenu {
 		width: 300px;
 	}
 	
-	.informationTab {
+	.reservation {
 		width: 150px;
 		cursor: pointer;
 	}
@@ -147,55 +146,36 @@
 <body>
 <jsp:include page="common/header.jsp" flush = "flase"></jsp:include>
 <div class="main">
-	<div class="container" id="information-header">
-		<h3>마이페이지/프로필</h3>
+	<div class="container" id="reservation-header">
+		<h3>예약 페이지</h3>
 		<div id="border"></div>
-		<div class="informationTabMenu mx-auto">
-			<div class="tab-content">
-				<div id="myPage" class="tab-pane active mx-auto">
-					<div class = "container">
-						<div class = "myPageform">
-							<div class = "myPage d-flex flex-wrap align-content-center justify-content-center" id ="Edit-member-information">
-								<div class = "text-center">
-									<h5>회원정보 수정</h5>
-									<p>
-										회원정보 수정을 하려면 비밀번호를 입력해 주세요<br/>
-										<span>
-											<input type = "password" class = "d-inline form-control" name = "checkPwd" id ="checkPwd" placeholder="비밀번호를 입력해 주세요." style = "width : 70%;"/>
-											<button class = "d-inline btn btn-dark form-control" style = "width : 75px;" id = "checkPw">확인</button>
-										</span>
-									</p>
-								</div>
-								
+		<div class="reservationTabMenu mx-auto">
+			<div class = "row">
+				<div class = "col-sm-9">
+					<form action = "reservation" method = "post">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+						<label>숙박비</label>
+						<div>${rdto.acm_charge}</div>
+						<!-- ***************** acm_availdate ***********-->
+						<div class="input-group date form-group d-flex justify-content-between" id="datepicker">
+							<div>
+								<label class="mb-3" for="acm_availdate">예약 가능한 날짜를 선택해주세요</label>
 							</div>
+							<div>
+						    	<input type="hidden" id="acm_availdate" name="acm_availdate" placeholder="Select days" required />
+						    </div>
 						</div>
-						<sec:authorize access="hasAnyRole('ROLE_HOST','ROLE_ADMIN')">
-						<div class = "myPageform" id = "accountEdit">
-							<div class = "myPage d-flex flex-wrap align-content-center justify-content-center" id ="pay">
-								<div class = "text-center">
-									<h5>계좌 정보 변경</h5>
-									<p>
-										계좌정보를 변경하려면 비밀번호를 입력해 주세요<br/>
-										<span>
-				
-											<input type = "password" class = "d-inline form-control" name = "checkPwd1" id ="checkPwd1" placeholder="비밀번호를 입력해 주세요." style = "width : 70%;"/>
-											<button class = "d-inline btn btn-dark form-control" style = "width : 75px;" id = "checkPw1">확인</button>
-										</span>
-									</p>
-								</div>
-							</div>
-						</div>
-						</sec:authorize>
-						<div class = "myPageform" style = "border : 0px;">
-							<div class = "myPage" id = "deleteMember">
-								<div class = "text-center">
-									<h5>계좌 정보 변경</h5>
-									<p>
-										계좌정보를 변경하려면 비밀번호를 입력해 주세요<br/>
-									</p>
-							</div>
-						</div>
-					</div>
+						<!-- 달력 아이콘
+						<i class="glyphicon glyphicon-calendar"></i>  -->
+						<label>성인</label>
+						<input type = "number" id = "Adult" class = "form-control" />
+						<label>어린이</label>
+						<input type = "number" id = "Child" class = "form-control" /><br/>
+						
+						<input type = "submit" class = "btn btn-dark form-control" value = "예약" />
+					</form>
+				</div>
+				<div class = "col-sm-3">
 				</div>
 			</div>
 		</div>
@@ -209,6 +189,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <!--javascript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
 <!-- iCheck(라디오 버튼) -->
 <script src="icheck-1.x/icheck.min.js"></script>
 <script>
@@ -221,69 +203,19 @@ $(function () {
 });
 </script>
 <script>
-var emailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
-var foundId = null;
-
-$(document).ready(function(){	
-	var result = "${result}";
-	$("#checkPw").click(function(){
-		event.preventDefault;
-		$.ajax({
-			url : "checkPwd",
-			data : {checkPwd:$("#checkPwd").val()},
-			Type : "POST",
-			success : function(data) {
-				console.log(data);
-				if(data == "true") {
-					location.href = "EditInformation";
-				}
-				else {
-					location.href = "myPageProfile?fail=1";
-				}
-			},
-			error : function() {
-				alert("server error");
-			}
-		}); 
-	});
-	$("#checkPw1").click(function(){
-		event.preventDefault;
-		$.ajax({
-			url : "checkPwd",
-			data : {checkPwd:$("#checkPwd1").val()},
-			Type : "POST",
-			success : function(data) {
-				console.log(data);
-				if(data == "true") {
-					location.href = "Account";
-				}
-				else {
-					location.href = "myPageProfile?fail=1";
-				}
-			},
-			error : function() {
-				alert("server error");
-			}
-		}); 
-	});
-});
-</script>
-<script>
-$(document).ready(function() {
-<c:choose>
-	<c:when test="${not empty fail}">
-		alert("비밀번호 틀렸습니다.");
-	</c:when>
-</c:choose>
-});
-</script>
-<script>
 $(document).ready(function() {
 	$(".menu-toggle").click(function() {
 		$("nav").toggleClass("active");
 		$(".main").toggleClass("main1");
 	});
+	$('#datepicker').datepicker({
+        startDate: new Date(),
+        multidate: true,
+        format: "dd/mm/yyyy",
+        daysOfWeekHighlighted: "6,0",
+        datesDisabled: ['07/01/2020'],
+        language: 'en'
+    });
 });
 </script>
 </body>
