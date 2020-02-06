@@ -15,6 +15,12 @@ public class CSDto {
 	public CSDto() {
 		super();
 	}
+	public CSDto(int cs_code, String cs_title, String cs_content) {
+		super();
+		this.cs_code = cs_code;
+		this.cs_title = cs_title;
+		this.cs_content = cs_content;
+	}
 
 	public CSDto(int cs_code, String mb_name, String mb_id, String cs_title, String cs_content, Timestamp cs_date,
 			int cs_group, char cs_complete) {

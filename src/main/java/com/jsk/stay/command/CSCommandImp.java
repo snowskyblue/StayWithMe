@@ -27,11 +27,15 @@ public class CSCommandImp implements CSCommand {
 		return dao.content(cs_code);
 	}
 	
-	public String mb_name(String mb_id) {
-		return dao.mb_name(mb_id);
+	public String mbWrite(String mb_id) {
+		return dao.mbWrite(mb_id);
 	}
 	
 	public void mbWritePro(CSDto dto) throws Exception {
 		dao.mbWritePro(dto);
+	}
+	
+	public void mbModifyPro(CSDto dto) {
+		dao.mbModifyPro(dto);
 	}
 }

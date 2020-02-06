@@ -178,7 +178,7 @@ a{
 															${list.cs_title}
 														</a>
 													</td>
-													<td>${list.mb_name}</td>
+													<td>${list.mb_id}</td>
 													<td>${list.cs_date}</td>
 													<c:choose>
 														<c:when test="${list.cs_complete eq 'N'.charAt(0)}">

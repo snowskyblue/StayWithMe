@@ -12,6 +12,8 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- csrf정보  -->
+<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
 <!--bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <!--font-awesome -->
@@ -104,8 +106,14 @@ a{
 					<tr style="border:0px;">
 						<td colspan="4">
 							<div align="right">
-								<button type="button" id="cs_modify" class="btn btn-dark" style="margin-top:10px;">수정</button>
-								<button type="button" id="cs_delete" class="btn btn-dark" style="margin-top:10px;">삭제</button>
+								<form role="form" method="post">
+									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+									<input type="hidden" name="cs_code" value="${content[0].cs_code}">
+									<input type="hidden" name="cs_title" value="${content[0].cs_title}">
+									<input type="hidden" name="cs_content" value="${content[0].cs_content}">
+								</form>
+								<button type="submit" id="cs_mbModify" class="btn btn-dark" style="margin-top:10px;">수정</button>
+								<button type="button" id="cs_mbDelete" class="btn btn-dark" style="margin-top:10px;">삭제</button>
 							</div>
 						</td>
 					</tr>
@@ -126,11 +134,19 @@ a{
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script>
+
+//var mb_id = "${content[0].mb_id}";
 $(document).ready(function() {
 	$(".menu-toggle").click(function() {
 		$("nav").toggleClass("active");
 		$(".main").toggleClass("main1");
 	});
+});
+
+var formObj = $("form[role='form']");
+$(document).on("click", "#cs_mbModify", function() {
+	formObj.attr("action", "csMbModify");
+	formObj.submit();
 });
 
 </script>
