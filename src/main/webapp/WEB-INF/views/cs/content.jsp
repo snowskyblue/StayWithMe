@@ -99,6 +99,7 @@ a{
 						</tr>
 					</c:forEach>
 				</tbody>
+				<sec:authorize access="hasAnyRole('ROLE_GUEST','ROLE_HOST')">
 				<tfoot>
 					<tr style="border:0px;">
 						<td colspan="4">
@@ -109,6 +110,7 @@ a{
 						</td>
 					</tr>
 				</tfoot>
+				</sec:authorize>
 			</table>
 		</div>
 		

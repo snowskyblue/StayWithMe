@@ -5,6 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -215,8 +216,21 @@ nav, figure, footer, header {
 					</div>
 					<div class="link-box">
 						<ul class="list-unstyled">
-							<li class="login-btn-li"><a href="login" id="nav-login">로그인</a></li>
-							<li class="signup-btn-li"><a href="memberjoin" id = "nav-memberjoin">회원가입</a></li>
+							<sec:authorize access="hasAnyRole('ROLE_GUEST','ROLE_HOST', 'ROLE_ADMIN')">
+								<li class="login-btn-li"><a href="logout" id="nav-login">로그아웃</a></li>
+							</sec:authorize>
+							<sec:authorize access="isAnonymous()">
+								<li class="login-btn-li"><a href="login?log=start" id="nav-login">로그인</a></li>
+							</sec:authorize>
+							<sec:authorize access="isAnonymous()">
+								<li class="signup-btn-li"><a href="memberjoin" id = "nav-memberjoin">회원가입</a></li>
+							</sec:authorize>
+							<sec:authorize access="hasAnyRole('ROLE_GUEST','ROLE_HOST')">
+								<li class="signup-btn-li"><a href="myPageProfile" id = "nav-memberjoin"><i class="fas fa-user-circle" style="font-size:20px;"></i></a></li>
+							</sec:authorize>
+							<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+								<li class="signup-btn-li"><a href="#" id = "nav-memberjoin">관리자</a></li>
+							</sec:authorize>
 						</ul>
 					</div>
 				</div>
@@ -224,7 +238,16 @@ nav, figure, footer, header {
 					<ul class="list-unstyled">
 						<li class="wish-btn-li"><a href="#">위시리스트</a></li>
 						<li class="confirm-btn-li"><a href="#">예약확인</a></li>
-						<li class="host-btn-li"><a href="#" id="host">호스트</a></li>
+						<sec:authorize access="isAnonymous()">
+							<li class="host-btn-li"><a href="#" id="host">호스트</a></li>
+						</sec:authorize>
+						<sec:authorize access="hasAnyRole('ROLE_GUEST', 'ROLE_ADMIN')">
+							<li class="host-btn-li"><a href="hostJoin" id="host">호스트</a></li>
+						</sec:authorize>
+						<sec:authorize access="hasAnyRole('ROLE_HOST')">
+							<li class="host-btn-li"><a href="hostBoard" id="host">호스트</a></li>
+						</sec:authorize>
+						<!-- <li class="host-btn-li"><a href="#" id="host">호스트</a></li> -->
 						<li class="event-btn-li"><a href="#">이벤트</a></li>
 						<li class="notice-btn-li"><a href="#">공지사항</a></li>
 					</ul>
@@ -268,7 +291,7 @@ $(document).ready(function() {
 
 </script>
 <script>
-$(document).ready(function(){
+/*$(document).ready(function(){
 	$("#nav-memberjoin").click(function(){
 		event.preventDefault();
 		if($("#nav-memberjoin").text() == "회원가입") {
@@ -277,9 +300,9 @@ $(document).ready(function(){
 			location.href = "myPageProfile";
 		}
 	});
-});
+});*/
 </script>
-<script>
+<script>/*
 $(document).ready(function(){
 	$("#host").click(function(){
 		event.preventDefault();
@@ -288,12 +311,12 @@ $(document).ready(function(){
 		} else if (sessionStorage.getItem("authority") == "[ROLE_HOST]") {
 			location.href="hostBoard";
 		} else if (sessionStorage.getItem("authority") == "") {
-			/*비회원일시 로그인으로 이동후 인덱스로 이동*/
+			/*비회원일시 로그인으로 이동후 인덱스로 이동*//*
 			location.href="hostJoin"
 		}
 	});
 });
-
+/*
 $(document).ready(function(){
 	
 	
@@ -304,7 +327,7 @@ $(document).ready(function(){
 			"font-size" : "20px"
 		});
 	}
-});
+});*/
 </script>
 </body>
 </html>
