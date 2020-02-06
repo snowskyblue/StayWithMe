@@ -5,6 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -61,8 +62,10 @@
 			<div id="border"></div>
 			<form id="information" class = "d-flex justify-content-center" method = "POST" ng-controller = "myCtrl">
 				<div id = "form" style = "margin : 0px; width : 450px;">
+					<sec:authentication property="principal.username" var="mb_id"/>
+					<sec:authentication property="principal.authorities" var="mb_grade"/>
 					<label>아이디</label>
-					<input type = "text" class = "row form-control" id = "id" ng-model = "myModel" disabled/>
+					<input type = "text" class = "row form-control" id = "id" value = "${mb_id}" disabled/>
 					<br/>
 				
 					<div>
@@ -105,40 +108,43 @@
 					<!-- 권한이 host일 경우 보이게 하고 guest일 경우 안보이게 하면됨 -->
 					<div class = "address">
 						<div>
-						<label>주소</label>
-						<div class="mb-5" id="acm_address"> <!-- form안에서 이전,다음버튼과 컨텐츠과의 거리 -->
-							<div class="row d-flex justify-content-start">
-								<div class="col-sm-3 col-5">
-									<input class="form-control btn btn-dark" type="button" onclick="daumPostcode()" value="주소찾기">
+							<sec:authorize access="hasAnyRole('ROLE_HOST', 'ROLE_ADMIN')">
+								<label>주소</label>
+								<div class="mb-5" id="acm_address"> <!-- form안에서 이전,다음버튼과 컨텐츠과의 거리 -->
+									<div class="row d-flex justify-content-start">
+										<div class="col-sm-3 col-5">
+											<input class="form-control btn btn-dark" type="button" onclick="daumPostcode()" value="주소찾기">
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12" style="height: 63px;">
+											<input class="form-control" type="text" name="address"  id="address" value = "${dto1.ho_address}">
+											<div id="address_check"></div><br/>
+										</div>
+									</div>
+									<br/>
+									<div class="row">
+										<div class="col-sm-9">
+											<input class="form-control" type="text" name="detailAddress"  id="detailAddress" value = "${dto1.ho_add_detail}">
+										</div>
+										<div class="col-sm-3 d-flex justify-content-end">
+											<input class="form-control" type="text" name="postcode"  id="postcode" value = "${dto1.ho_zip}">
+										</div>
+										<div class="col-sm-9">
+											<div id="detailAddress_check"></div>
+										</div>
+										<div class="col-sm-3">
+											<div id="postcode_check"></div>
+										</div>
+									<br/>
+									</div>
+									<div class="row d-flex justify-content-end">
+										<div class="col-sm-3 col-5">
+											<input type ="button" class = "form-control btn btn-dark addressBtn" value = "수정"/> <br/>
+										</div>
+									</div>
 								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-12" style="height: 63px;">
-									<input class="form-control" type="text" name="address"  id="address" value = "${dto1.ho_address}">
-									<div id="address_check"></div><br/>
-								</div>
-							</div>
-							<br/>
-							<div class="row">
-								<div class="col-sm-9">
-									<input class="form-control" type="text" name="detailAddress"  id="detailAddress" value = "${dto1.ho_add_detail}">
-								</div>
-								<div class="col-sm-3 d-flex justify-content-end">
-									<input class="form-control" type="text" name="postcode"  id="postcode" value = "${dto1.ho_zip}">
-								</div>
-								<div class="col-sm-9">
-									<div id="detailAddress_check"></div>
-								</div>
-								<div class="col-sm-3">
-									<div id="postcode_check"></div>
-								</div>
-								<br/>
-							</div>
-							<div class="row d-flex justify-content-end">
-								<div class="col-sm-3 col-5">
-									<input type ="button" class = "form-control btn btn-dark addressBtn" value = "수정"/> <br/>
-								</div>
-							</div>
+							</sec:authorize>
 						</div>
 					</div>
 				</div>
@@ -162,13 +168,6 @@ $(document).ready(function() {
 		$("nav").toggleClass("active");
 		$(".main").toggleClass("main1");
 	});
-});
-</script>
-<script>
-var user = sessionStorage.getItem("user")
-var app = angular.module("myApp",[])
-app.controller("myCtrl",function($scope){
-	$scope.myModel = user;
 });
 </script>
 <script>
@@ -357,15 +356,6 @@ function sms() {
 	phoneB = true;
 }
 
-</script>
-<script>
-var authority = sessionStorage.getItem("authority");
-if(authority == "[ROLE_HOST]") {
-	$(".address").show();
-}
-else {
-	$(".address").hide();
-}
 </script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 

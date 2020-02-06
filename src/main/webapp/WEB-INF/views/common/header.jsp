@@ -281,7 +281,6 @@ $(document).ready(function() {
 		if ($("#nav-login").text() == "·Î±×ÀÎ") {
 			location.href = "login?log=start";
 		} else {
-			sessionStorage.clear();
 			location.href = "logout";
 		}
 	});

@@ -5,6 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -168,6 +169,7 @@
 								
 							</div>
 						</div>
+						<sec:authorize access="hasAnyRole('ROLE_HOST','ROLE_ADMIN')">
 						<div class = "myPageform" id = "accountEdit">
 							<div class = "myPage d-flex flex-wrap align-content-center justify-content-center" id ="pay">
 								<div class = "text-center">
@@ -175,7 +177,7 @@
 									<p>
 										계좌정보를 변경하려면 비밀번호를 입력해 주세요<br/>
 										<span>
-										
+				
 											<input type = "password" class = "d-inline form-control" name = "checkPwd1" id ="checkPwd1" placeholder="비밀번호를 입력해 주세요." style = "width : 70%;"/>
 											<button class = "d-inline btn btn-dark form-control" style = "width : 75px;" id = "checkPw1">확인</button>
 										</span>
@@ -183,6 +185,7 @@
 								</div>
 							</div>
 						</div>
+						</sec:authorize>
 						<div class = "myPageform" style = "border : 0px;">
 							<div class = "myPage" id = "deleteMember">
 								<div class = "text-center">
@@ -281,17 +284,6 @@ $(document).ready(function() {
 		$("nav").toggleClass("active");
 		$(".main").toggleClass("main1");
 	});
-});
-</script>
-<script>
-var authority = sessionStorage.getItem("authority");
-$(document).ready(function() {
-	if(authority == "[ROLE_HOST]") {
-		$("#accountEdit").show();
-	}
-	else {
-		$("#accountEdit").hide();
-	}
 });
 </script>
 </body>
