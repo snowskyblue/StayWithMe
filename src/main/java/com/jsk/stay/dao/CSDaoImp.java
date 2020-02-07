@@ -1,28 +1,32 @@
 package com.jsk.stay.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jsk.stay.dto.CSDto;
+import com.jsk.stay.dto.Criteria;
 
 @Repository
 public class CSDaoImp implements CSDao {
 	@Autowired
 	private SqlSession sql;
 	
-	public ArrayList<CSDto> list(String mb_id) throws Exception {
-		ArrayList<CSDto> result = (ArrayList) sql.selectList("cs.list", mb_id);
-		System.out.println(result);
-		return result;
-	}
-	
 	public ArrayList<CSDto> list2() throws Exception {
 		ArrayList<CSDto> result = (ArrayList) sql.selectList("cs.list2");
 		System.out.println(result);
 		return result;
+	}
+	
+	public List<CSDto> list(Criteria cri) throws Exception {
+		return sql.selectList("cs.listPage", cri);
+	}
+	
+	public int listCount() throws Exception {
+		return sql.selectOne("cs.listCount");
 	}
 	
 	public ArrayList<CSDto> content(int cs_code) throws Exception {

@@ -1,6 +1,7 @@
 package com.jsk.stay.command;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.jsk.stay.dao.CSDaoImp;
 import com.jsk.stay.dto.CSDto;
+import com.jsk.stay.dto.Criteria;
 
 @Service
 public class CSCommandImp implements CSCommand {
@@ -15,13 +17,17 @@ public class CSCommandImp implements CSCommand {
 	@Autowired
 	private CSDaoImp dao;
 	
-	public ArrayList<CSDto> list(String mb_id) throws Exception {
-		return dao.list(mb_id);
-	}
-	
 	public ArrayList<CSDto> list2() throws Exception {
 		return dao.list2();
 	};
+	
+	public List<CSDto> list(Criteria cri) throws Exception {
+		return dao.list(cri);
+	}
+	
+	public int listCount() throws Exception {
+		return dao.listCount();
+	}
 	
 	public ArrayList<CSDto> content(int cs_code) throws Exception {
 		return dao.content(cs_code);

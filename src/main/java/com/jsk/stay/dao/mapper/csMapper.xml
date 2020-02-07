@@ -7,10 +7,6 @@
 <mapper namespace="cs">
 
 	<!-- 문의 목록 -->
-	<select id="list" resultType="com.jsk.stay.dto.CSDto" parameterType="com.jsk.stay.dto.CSDto">
-		select * from cs where mb_id = #{mb_id} order by cs_code desc
-	</select>
-	
 	<select id="list2" resultType="com.jsk.stay.dto.CSDto">
 		select * from cs order by cs_code desc
 	</select>
@@ -27,17 +23,26 @@
 	
 	<!-- 문의 작성내용 DB 저장 -->
 	<insert id="mbWritePro" parameterType="com.jsk.stay.dto.CSDto">
-		insert into cs (cs_code, mb_name, mb_id, cs_title, cs_content, cs_date, cs_group, cs_complete)
+		insert into cs (
+			cs_code,
+			mb_name,
+			mb_id,
+			cs_title,
+			cs_content,
+			cs_date,
+			cs_group,
+			cs_complete
+			)
 		values (
-		cs_seq.nextval,
-		#{mb_name},
-		#{mb_id},
-		#{cs_title},
-		#{cs_content},
-		SYSDATE,
-		null,
-		'N'
-		)
+			cs_seq.nextval,
+			#{mb_name},
+			#{mb_id},
+			#{cs_title},
+			#{cs_content},
+			SYSDATE,
+			null,
+			'N'
+			)
 	</insert>
 	
 	<!-- 문의 내용 수정 -->
@@ -53,17 +58,26 @@
 
 	<!-- 답변 작성내용 DB 저장 & 답변한 게시글 답변상태 변경 -->
 	<insert id="adReplyPro" parameterType="com.jsk.stay.dto.CSDto">
-		insert into cs (cs_code, mb_name, mb_id, cs_title, cs_content, cs_date, cs_group, cs_complete)
+		insert into cs (
+			cs_code,
+			mb_name,
+			mb_id,
+			cs_title,
+			cs_content,
+			cs_date,
+			cs_group,
+			cs_complete
+			)
 		values (
-		cs_seq.nextval,
-		#{mb_name},
-		#{mb_id},
-		#{cs_title},
-		#{cs_content},
-		SYSDATE,
-		#{cs_code},
-		'Y'
-		)
+			cs_seq.nextval,
+			#{mb_name},
+			#{mb_id},
+			#{cs_title},
+			#{cs_content},
+			SYSDATE,
+			#{cs_code},
+			'Y'
+			)
 	</insert>
 	<update id="adReplyPro2" parameterType="com.jsk.stay.dto.CSDto">
 		update cs set cs_group = #{cs_code}, cs_complete = 'Y'
@@ -89,4 +103,39 @@
 		update cs set cs_group = null, cs_complete = 'N'
 		where cs_code = #{cs_group}
 	</update>
+	
+	<!-- 페이지 -->
+	<select id="listPage" resultType="com.jsk.stay.dto.CSDto" parameterType="com.jsk.stay.dto.Criteria">
+		select	cs_code,
+				mb_name,
+				mb_id,
+				cs_title,
+				cs_content,
+				cs_date,
+				cs_group,
+				cs_complete
+		from (
+				select	cs_code,
+						mb_name,
+						mb_id,
+						cs_title,
+						cs_content,
+						cs_date,
+						cs_group,
+						cs_complete,
+						row_number() over(order by cs_code desc) as rNum
+				from cs
+				where cs_group is null or cs_group = cs_code
+				) mp
+		where rNum between #{rowStart} and #{rowEnd}
+		order by cs_code desc
+	</select>
+	
+	<select id="listCount" resultType="int">
+	<![CDATA[
+		select count(cs_code)
+		from cs
+		where cs_code > 0
+	]]>
+	</select>
 </mapper>

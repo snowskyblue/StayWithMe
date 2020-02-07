@@ -61,6 +61,12 @@
 	font-weight: bold;
 }
 
+#dd li {
+	list-style: none;
+	float: left;
+	padding: 6px;
+}
+
 a{
 	color: black!important;
 }
@@ -132,7 +138,6 @@ a{
 										<sec:authentication property="principal.username" var="mb_id"/>
 										<sec:authentication property="principal.authorities" var="mb_grade"/>
 										<c:choose>
-											
 											<c:when test="${list.mb_id eq mb_id && mb_grade eq '[ROLE_GUEST]'}">
 												<tr>
 													<td class="csTitle">
@@ -197,10 +202,8 @@ a{
 								</c:otherwise>
 							</c:choose>
 						</sec:authorize>
-						<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
-							
-						</sec:authorize>
 						</tbody>
+						
 						<sec:authorize access="hasAnyRole('ROLE_GUEST','ROLE_HOST')">
 							<tfoot>
 								<tr style="border:0;">
@@ -213,8 +216,32 @@ a{
 					</table>
 				</c:otherwise>
 			</c:choose>
+			<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+				<!-- <tfoot>
+					<tr style="border:0;">
+						<td colspan="4">
+							
+						</td>
+					</tr>
+				</tfoot> -->
+				<div class="container col-6 col-sm-2 col-lg-2" id="dd">
+					<ul>
+						<c:if test="${pageMaker.prev}">
+							<li><a href="csMember${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+						</c:if> 
+					
+						<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+							<li><a href="csMember${pageMaker.makeQuery(idx)}">${idx}</a></li>
+						</c:forEach>
+					
+						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+							<li><a href="csMember${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+						</c:if> 
+					</ul>
+				</div>				
+							
+			</sec:authorize>
 		</div>
-		
 	</div>
 </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" flush="false"/>

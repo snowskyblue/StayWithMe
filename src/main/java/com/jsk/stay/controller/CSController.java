@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jsk.stay.command.CSCommandImp;
 import com.jsk.stay.dto.CSDto;
+import com.jsk.stay.dto.Criteria;
+import com.jsk.stay.dto.PageMaker;
 
 @Controller
 public class CSController {
@@ -24,7 +26,7 @@ public class CSController {
 	private CSCommandImp com;
 	
 	@RequestMapping("/csMember")
-	public String csMember(Model model, Principal principal) throws Exception {
+	public String csMember(Model model, Criteria cri, HttpServletRequest request) throws Exception {
 		/*try {
 			String mb_id = null;
 			if(principal.getName() != null) {
@@ -37,8 +39,22 @@ public class CSController {
 		catch(NullPointerException e) {
 			model.addAttribute("list", "login");
 		}*/
-		model.addAttribute("list", com.list2());
 		
+		//model.addAttribute("list", com.list());
+		
+		
+		if(request.isUserInRole("ROLE_ADMIN") == true) {
+			model.addAttribute("list", com.list(cri));
+			
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setCri(cri);
+			pageMaker.setTotalCount(com.listCount());
+			
+			model.addAttribute("pageMaker", pageMaker);
+		}
+		else {
+			model.addAttribute("list", com.list2());
+		}
 		return "cs/csMember";
 	}
 	
