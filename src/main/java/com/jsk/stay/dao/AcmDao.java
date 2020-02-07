@@ -186,8 +186,28 @@ public class AcmDao {
 		 * (ArrayList<BDto>) template.query(query, new BeanPropertyRowMapper<BDto>(BDto.class));*/
 	}
 
-	public ArrayList<AcmSubDto> list2() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<AcmSubDto> list2(int acm_code) {
+		ArrayList<AcmSubDto> dtos2 = (ArrayList<AcmSubDto>) template.query(new PreparedStatementCreator() {
+
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+
+				String query = "select * from ACM_SUB where acm_code = ?";
+				PreparedStatement pstmt = con.prepareStatement(query);
+				pstmt.setInt(1, acm_code);
+				return pstmt;
+				
+			}}, new BeanPropertyRowMapper<AcmSubDto>(AcmSubDto.class));
+		//드라이버 로드, 커넥션 생성 & DB 연결, SQL 실행, DB 연결 해제 부분은 JDBC 템플릿이 알아서 해준다
+		
+		return dtos2;
+	}
+
+	public AccommodationDto contentView(int acm_code) {
+		
+		String query = "select * from accommodation where acm_code = ?";
+		System.out.println("AcmDao로 들어와서 query 실행할 준비");
+		AccommodationDto dto = template.queryForObject(query, new BeanPropertyRowMapper<AccommodationDto>(AccommodationDto.class), acm_code);
+		return dto;
 	}
 }

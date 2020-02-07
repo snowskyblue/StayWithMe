@@ -3,7 +3,6 @@ package com.jsk.stay.controller;
 import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
-import java.util.Map;
 
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.jsk.stay.command.AcmCommand;
+import com.jsk.stay.command.AcmContentCommand;
 import com.jsk.stay.command.AcmListCommand;
 import com.jsk.stay.command.AcmWriteCommand;
 import com.jsk.stay.util.Constant;
@@ -105,7 +105,7 @@ public class AcmController {
 	@RequestMapping("ckedit")
 	public void ckedit(MultipartHttpServletRequest request, HttpServletResponse response) throws IOException {
 		System.out.println("ckedit µé¾î¿È");
-		String path = "/stay/img/imgUp";
+		String path = "/stay/resources/upImg";
 		String real_save_path = request.getServletContext().getRealPath(path);
 		System.out.println("real_save_path " + real_save_path);
 		MultipartFile mf = request.getFile("upload");
@@ -114,8 +114,8 @@ public class AcmController {
 		long fileSize = mf.getSize(); 
 		System.out.println("originFileName : " + originFileName);
 		System.out.println("fileSize of the MultipartFile : " + fileSize);
-		String safeFile ="D:/webSpring_workspace/stay/src/main/webapp/resources/img/imgUp/" + originFileName;
-		String safeFile1 ="D:/tomcat/apache-tomcat-8.5.47/wtpwebapps/stay/resources/img/imgUp/" + originFileName;	
+		String safeFile ="D:/webSpring_workspace/stay/src/main/webapp/resources/upImg/" + originFileName;
+		String safeFile1 ="D:/tomcat/apache-tomcat-8.5.47/wtpwebapps/stay/resources/upImg/" + originFileName;	
 		System.out.println("safeFile : " + safeFile);
 		try {
 			mf.transferTo(new File(safeFile));
@@ -164,6 +164,22 @@ public class AcmController {
 		 * */
 		
 		
-		return "hostBoard";
+		return "hostBoard/hostBoard";
+	}
+	
+	@RequestMapping("acmContent")
+	public String acmContent(Model model,Principal principal,HttpServletRequest request) {
+		//int acm_code = Integer.parseInt(request.getParameter("acm_code"));
+		
+		model.addAttribute("request", request);
+		command = new AcmContentCommand();
+		command.execute(model);
+		
+		return "hostBoard/acmContent";
+	}
+	
+	@RequestMapping("acmModify")
+	public String acmModify(Model model,Principal principal,HttpServletRequest request) {
+		return null;
 	}
 }

@@ -117,25 +117,47 @@ form {
 			</div>
 			<!-- **********삭제************************** -->
 			<table width="500" cellpadding="0" cellspacing="0" border="1">
-		<tr>
+				<tr>
 			<td>번호</td>
 			<td>이름</td>
 			<td>제목</td>
 			<td>날짜</td>
 			<td>히트</td>
 		</tr>
-		<c:forEach items="${list1}" var="dto">
-		<tr>
-			<td>${dto.mb_id}</td>
-			<td>${dto.acm_code}</td>
-			<td>${dto.acm_title}</td>
-			<td>${dto.acm_code}</td>
-			<td>${dto.acm_title}</td>
-		</tr>
-		</c:forEach>
-		<tr>
-			<td colspan="5"> <a href="write_view">글작성</a> </td>
-		</tr>
+		<c:choose>
+			<c:when test="${empty list1}">
+				<tr>
+					<td colspan="4" style="height:400px;">
+						<h4 class="text-center">
+							<i class="fas fa-exclamation-circle"></i><br/><br/>
+							asdf
+						</h4>
+					</td>
+				</tr>
+			</c:when>
+			<c:otherwise>
+				<c:forEach items="${list1}" var="dto">
+					<tr>
+						<td>${dto.mb_id}</td>
+						<td>${dto.acm_code}</td>
+						<td>${dto.acm_charge}</td>
+						<td>${dto.acm_bath_num}</td>
+						<td>${dto.acm_checkout_time}</td>
+					</tr>
+				</c:forEach>
+				<c:forEach items="${list2}" var="dto">
+					<tr>
+						<td>${dto.acm_rule}</td>
+						<td>${dto.acm_amenity}</td>
+					</tr>
+				</c:forEach>
+				<tr>
+					<td colspan="5"> <a href="write_view">글작성</a> </td>
+				</tr>
+			</c:otherwise>
+		</c:choose>
+		
+						
 	</table>
 			
 		<!-- **********삭제***

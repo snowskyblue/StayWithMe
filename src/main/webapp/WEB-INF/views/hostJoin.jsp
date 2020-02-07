@@ -5,6 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 
 <!DOCTYPE html>
@@ -71,7 +72,8 @@
 		<div class="col-10 col-sm-10 mt-3 mb-3"> <!-- dddddddddd -->
 			<form method="POST" action ="hostWrite" enctype="multipart/form-data">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-				<input type="hidden" id="mb_id" name="mb_id">
+				<sec:authentication property="principal.username" var="mb_id"/>
+				<input type="hidden" id="mb_id" name="mb_id" value="${mb_id}">
 				<div class="row mb-5 mt-5">
 					<div class="col-sm-3 border2">주소</div> 
 				</div>
@@ -122,12 +124,20 @@
 						</div>
 					</div>
 			    </div>
-			    
-			    <div id="complete-btn" class="d-flex flex-row-reverse">
-				    <div class="text-center">
-						<button type="submit" class="form-control btn btn-dark" style="border: none;">호스트 등록 하기</button>
+			    <sec:authorize access="hasAnyRole('ROLE_GUEST')">
+				    <div id="complete-btn" class="d-flex flex-row-reverse">
+					    <div class="text-center">
+							<button type="submit" class="form-control btn btn-dark" style="border: none;">호스트 등록 하기</button>
+						</div>
 					</div>
-				</div>
+				</sec:authorize>
+				<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+				    <div id="complete-btn" class="d-flex flex-row-reverse">
+					    <div class="text-center">
+							<a href="hostBoard" class="form-control btn btn-dark" style="border: none;">호스팅 안내판으로 이동</a>
+						</div>
+					</div>
+				</sec:authorize>
 			</form>
 		</div>
 	</div>
@@ -211,8 +221,6 @@ $(document).ready(function(){
  		$("nav").toggleClass("active"); 
  		$(".main").toggleClass("main1");
  	});
-	$("#mb_id").val(sessionStorage.getItem("user"));
-	console.log(sessionStorage.getItem("user"));
 });	
 </script>
 </body>

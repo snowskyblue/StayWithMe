@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 
 import com.jsk.stay.dao.AcmDao;
 import com.jsk.stay.dto.AccommodationDto;
+import com.jsk.stay.dto.AcmSubDto;
 
 public class AcmListCommand implements AcmCommand {
 
@@ -21,14 +22,19 @@ public class AcmListCommand implements AcmCommand {
 		AcmDao dao = new AcmDao();
 		System.out.println("bbbb " + mb_id);
 		ArrayList<AccommodationDto> dtos1 = dao.list1(mb_id);
+		ArrayList<AcmSubDto> dtos2 = dao.list2(134);
 		System.out.println("cccccc");
 		for(int i=0; i< dtos1.size(); i++){
-			System.out.println("이름 : "+ dtos1.get(i).getAcm_add_detail());
-			System.out.println("주소 : "+ dtos1.get(i).getMb_id());
+			System.out.println("getAcm_code() : "+ dtos1.get(i).getAcm_code());
+			System.out.println("getMb_id() : "+ dtos1.get(i).getMb_id());
+		}	
+		for(int i=0; i< dtos2.size(); i++){
+			System.out.println("getAcm_code() : "+ dtos2.get(i).getAcm_rule());
+			System.out.println("getMb_id() : "+ dtos2.get(i).getAcm_amenity());
 		}	
 		//ArrayList<AcmSubDto> dtos2 = dao.list2();
-		model.addAttribute("list1", dtos1);
-		//model.addAttribute("list2", dtos2);
+		model.addAttribute("list", dtos1);
+		model.addAttribute("list2", dtos2);
 	}
 
 }

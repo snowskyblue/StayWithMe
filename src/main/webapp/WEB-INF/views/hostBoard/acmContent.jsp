@@ -28,7 +28,7 @@
 <!-- iCheck(라디오버튼) -->
 <link rel="stylesheet" href="icheck-1.x/skins/flat/flat.css">
 
-<title>Insert title here</title>
+<title>${dto.acm_code }</title>
 <style>
 @font-face { font-family: 'Eoe_Zno_L'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/Eoe_Zno_L.woff') format('woff'); font-weight: normal; font-style: normal; }
 @font-face { font-family: 'S-CoreDream-2ExtraLight'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-2ExtraLight.woff') format('woff'); font-weight: normal; font-style: normal; }
@@ -159,7 +159,7 @@ form {
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 </head>
 <body ng-app="addAcm" ng-controller="acmCtrl">
-<jsp:include page="common/header.jsp" flush="false"/>
+<jsp:include page="../common/header.jsp" flush="false"/>
 
 <div class="main">
 <div id="top-container" class="container">
@@ -240,7 +240,7 @@ form {
 					<div class="row">
 						<div class="col-sm-8">최대 숙박 가능 인원은 몇 명인가요?</div>
 						<div class="col-sm-4">
-							<input type="number" id="acm_guest_num" name="acm_guest_num" value="1" min="1" max="500" step="1"/>
+							<input type="number" id="acm_guest_num" name="acm_guest_num" value="${dto.acm_guest_num}" min="1" max="500" step="1"/>
 						</div>
 					</div>
 					
@@ -287,10 +287,10 @@ form {
 						</div>
 						<div class="row">
 							<div class="col-sm-6" style="height: 63px;">
-								<input class="form-control" type="text" name="address" value="abc"  id="address" placeholder="주소d 찾기를 클릭해 주소를 검색해주세요"><br>
+								<input class="form-control" type="text" name="address" value="${dto.acm_address }"  id="address"><br>
 							</div>
 							<div class="col-sm-6" style="height: 63px;">
-								<input class="form-control" type="text" name="extraAddress"  id="extraAddress" placeholder="참고주소">
+								<input class="form-control" type="text" name="extraAddress" id="extraAddress">
 							</div>
 							<div class="col-sm-12">
 								<div id="address_check"></div>
@@ -298,10 +298,10 @@ form {
 						</div>
 						<div class="row">
 							<div class="col-sm-9">
-								<input class="form-control" type="text" name="detailAddress" value="abc"   id="detailAddress" placeholder="상세주소를 입력해주세요">
+								<input class="form-control" type="text" name="detailAddress" value="${dto.acm_add_detail}"   id="detailAddress">
 							</div>
 							<div class="col-sm-3 d-flex justify-content-end">
-								<input class="form-control" type="text" name="postcode" value="00000" id="postcode" placeholder="우편번호">
+								<input class="form-control" type="text" name="postcode" value="${dto.acm_zip }" id="postcode" placeholder="우편번호">
 							</div>
 							<div class="col-sm-9">
 								<div id="detailAddress_check"></div>
@@ -327,7 +327,7 @@ form {
 							<div class="form-group">
 				  				<label for="acm_checkin_time" class="col-form-label">체크인 시간</label>
 								<div>
-								    <input class="form-control not" type="time" value="09:30" name="acm_checkin_time" id="acm_checkin_time">
+								    <input class="form-control not" type="time" value="${dto.acm_checkin_time }" name="acm_checkin_time" id="acm_checkin_time">
 								</div>
 							</div>
 						</div>
@@ -335,7 +335,7 @@ form {
 							<div class="form-group">
 				  				<label for="acm_checkout_time" class="col-form-label">체크아웃 시간</label>
 								<div>
-								    <input class="form-control not" type="time" value="21:30" name="acm_checkout_time" id="acm_checkout_time">
+								    <input class="form-control not" type="time" value="${dto.acm_checkout_time }" name="acm_checkout_time" id="acm_checkout_time">
 								</div>
 							</div>
 						</div>
@@ -392,7 +392,7 @@ form {
 							<label class="mb-3" for="acm_availdate">예약 가능한 날짜를 선택해주세요</label>
 						</div>
 						<div>
-					    	<input type="hidden" id="acm_availdate" name="acm_availdate" required />
+					    	<input type="hidden" id="acm_availdate" name="acm_availdate" value="${dto.acm_availdate}" required />
 					    </div>
 					</div>
 					<!-- 달력 아이콘
@@ -408,7 +408,7 @@ form {
 					<div class="row form-group">
 						<label class="mb-3 col-sm-2" for="acm_title">이름 지정</label>
 						<div class="col-sm-10">
-							<input class="form-control" id="acm_title" name="acm_title" placeholder="숙소 이름을 정해주세요" type="text" value="">
+							<input class="form-control" id="acm_title" name="acm_title" placeholder="숙소 이름을 정해주세요" type="text" value="${dto.acm_title }">
 						</div>
 					</div>
 					
@@ -417,7 +417,7 @@ form {
 						<label class="mb-3 col-sm-2" for="editor">숙소 소개</label>
 						<div class="col-sm-10">
 							<div id="toolbar-container" style="max-width:100%"></div>
-							<div id="editor" class="ck-content"  ng-click="editorInit()" style="max-width:100%;min-height:300px;border:1px solid grey;line-height:0.5rem">{{info}}</div>
+							<div id="editor" class="ck-content" style="max-width:100%;min-height:300px;border:1px solid grey;line-height:0.5rem">{{info}}</div>
 							<textarea id="div1" name="acm_info" style="display:none;"></textarea>
 						</div>
 					</div>
@@ -515,7 +515,7 @@ form {
 				</div>
 				<div id="complete-btn" class="d-flex flex-row-reverse">
 				    <div class="text-center">
-						<button type="submit" class="form-control btn btn-dark" style="border: none;">숙소등록 하기</button>
+						<button type="submit" class="form-control btn btn-dark" style="border: none;">숙소수정 하기</button>
 					</div>
 				</div>
 			</form>
@@ -523,7 +523,7 @@ form {
 	</div>
 </div>
 </div>
-<jsp:include page="common/footer.jsp" flush="false"/>
+<jsp:include page="../common/footer.jsp" flush="false"/>
 
 
 <!--jquery -->
@@ -547,7 +547,7 @@ form {
 <script>
 var app = angular.module('addAcm', []);
 app.controller('acmCtrl', function($scope) {
-  $scope.info = "숙소에 대해 설명해주세요.";
+  $scope.info = "${dto.acm_info}";
   $scope.editorInit = function() {
     $scope.info = "";
   }
