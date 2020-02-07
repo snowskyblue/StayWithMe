@@ -26,11 +26,11 @@ public class ReservationController {
 		String acm_guest_num_w = request.getParameter("acm_guest_num");
 		int acm_guest_num = Integer.parseInt(acm_guest_num_w);
 		
-		AccommodationDto dto = new AccommodationDto(mb_id, acm_code, acm_charge, acm_availdate,
-				acm_checkin_time,acm_checkout_time,acm_guest_num);
+		 */
+		AccommodationDto dto = new AccommodationDto("jhw00025", 20, 20000, "03/05/2020",
+				"시간","시간",20);
 		
 		model.addAttribute("rdto",dto);
-		*/
 		return "reservation";
 	}
 
