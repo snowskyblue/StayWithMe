@@ -14,4 +14,9 @@ public interface CSCommand {
 	public String mbWrite(String mb_id);
 	public void mbWritePro(CSDto dto) throws Exception;
 	public void mbModifyPro(CSDto dto);
+	public void mbDelete(int cs_code);
+	public void adReplyPro(CSDto dto);
+	public ArrayList<CSDto> reply(int cs_group);
+	public void adModifyPro(CSDto dto);
+	public void adDelete(int cs_code, int cs_group);
 }

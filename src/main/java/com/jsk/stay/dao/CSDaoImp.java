@@ -48,4 +48,27 @@ public class CSDaoImp implements CSDao {
 		sql.update("cs.mbModifyPro", dto);
 
 	}
+	
+	public void mbDelete(int cs_code) {
+		sql.delete("cs.mbDelete", cs_code);
+	}
+	
+	public void adReplyPro(CSDto dto) {
+		sql.insert("cs.adReplyPro", dto);
+		sql.update("cs.adReplyPro2", dto);
+	}
+	
+	public ArrayList<CSDto> reply(int cs_group) {
+		ArrayList<CSDto> result = (ArrayList) sql.selectList("cs.reply", cs_group);
+		return result;
+	}
+	
+	public void adModifyPro(CSDto dto) {
+		sql.update("cs.adModifyPro", dto);
+	}
+	
+	public void adDelete(int cs_code, int cs_group) {
+		sql.delete("cs.adDelete", cs_code);
+		sql.update("cs.adDelete2", cs_group);
+	}
 }

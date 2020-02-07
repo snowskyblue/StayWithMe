@@ -97,11 +97,11 @@
 		<div id="border"></div>
 		
 		<div class="csBoard mx-auto">
-			<form method="POST" action="csMbModifyPro">
+			<form method="POST" action="csAdReplyPro">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
 				<input type="hidden" name="cs_code" value="${cs_code}">
-				<!-- <input type="hidden" name="mb_id" value="${mb_id}">
-				<input type="hidden" name="mb_name" value="${mb_name}"> -->
+				<input type="hidden" name="mb_id" value="${mb_id}">
+				<input type="hidden" name="mb_name" value="${mb_name}">
 				<table class="csBoard_write mx-auto text-center">
 					<colgroup>
 						<col style="width:100px;">
@@ -112,18 +112,18 @@
 					<tbody>
 						<tr>
 							<th scope="row">제목</th>
-							<td colspan="3"><input type="text" id="cs_title" name="cs_title" value="${cs_title}"></td>
+							<td colspan="3"><input type="text" id="cs_title" name="cs_title" value="답변: ${cs_title}"></td>
 						</tr>
 					</tbody>
 				</table>
 				<div class="mx-auto" id="cs_contents">
 					<div class="mx-auto">
 						<div id="toolbar-container" style="max-width:100%"></div>
-						<div id="editor" style="max-width:100%;min-height:300px;border:1px solid grey;line-height:0.5rem">${cs_content}</div>
+						<div id="editor" style="max-width:100%;min-height:300px;border:1px solid grey;line-height:0.5rem"></div>
 						<textarea class="ck-content" id="cs_content" name="cs_content" style="display:none;"></textarea>
 					</div>
 					<div align="right">
-						<button type="submit" id="cs_ModifySubmit" class="btn btn-dark" style="margin-top:10px;">수정</button>
+						<button type="submit" id="cs_replySubmit" class="btn btn-dark" style="margin-top:10px;">답변</button>
 						<button type="button" id="cs_goListBtn" onClick="location.href='csMember'" class="btn btn-dark" style="margin-top:10px;">목록</button>
 					</div>
 				</div>

@@ -43,6 +43,12 @@
     	<intercept-url pattern="/csMbWritePro" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
     	<intercept-url pattern="/csMbModify" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
     	<intercept-url pattern="/csMbModifyPro" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
+    	<intercept-url pattern="/csMbDelete" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
+    	<intercept-url pattern="/csAdReply" access="hasAnyRole('ROLE_ADMIN')" />
+    	<intercept-url pattern="/csAdReplyPro" access="hasAnyRole('ROLE_ADMIN')" />
+    	<intercept-url pattern="/csAdModify" access="hasAnyRole('ROLE_ADMIN')" />
+    	<intercept-url pattern="/csAdModifyPro" access="hasAnyRole('ROLE_ADMIN')" />
+    	<intercept-url pattern="/csAdDelete" access="hasAnyRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/memberjoin" access="isAnonymous()" />
 		<intercept-url pattern="/memberjoinpro" access="isAnonymous()" />
 		<intercept-url pattern="/nlogin" access="isAnonymous()" />

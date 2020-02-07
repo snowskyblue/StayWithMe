@@ -38,4 +38,24 @@ public class CSCommandImp implements CSCommand {
 	public void mbModifyPro(CSDto dto) {
 		dao.mbModifyPro(dto);
 	}
+	
+	public void mbDelete(int cs_code) {
+		dao.mbDelete(cs_code);
+	}
+	
+	public void adReplyPro(CSDto dto) {
+		dao.adReplyPro(dto);
+	}
+	
+	public ArrayList<CSDto> reply(int cs_group) {
+		return dao.reply(cs_group);
+	}
+	
+	public void adModifyPro(CSDto dto)	{
+		dao.adModifyPro(dto);
+	}
+	
+	public void adDelete(int cs_code, int cs_group) {
+		dao.adDelete(cs_code, cs_group);
+	}
 }

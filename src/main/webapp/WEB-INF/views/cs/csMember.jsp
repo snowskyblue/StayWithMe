@@ -136,7 +136,7 @@ a{
 											<c:when test="${list.mb_id eq mb_id && mb_grade eq '[ROLE_GUEST]'}">
 												<tr>
 													<td class="csTitle">
-														<a href="csContent?cs_code=${list.cs_code}">
+														<a href="csContent?cs_code=${list.cs_code}&mb_id=${list.mb_id}">
 															${list.cs_title}
 														</a>
 													</td>
@@ -155,7 +155,7 @@ a{
 											<c:when test="${list.mb_id eq mb_id && mb_grade eq '[ROLE_HOST]'}">
 												<tr>
 													<td class="csTitle">
-														<a href="csContent?cs_code=${list.cs_code}">
+														<a href="csContent?cs_code=${list.cs_code}&mb_id=${list.mb_id}">
 															${list.cs_title}
 														</a>
 													</td>
@@ -171,10 +171,10 @@ a{
 													</c:choose>
 												</tr>
 											</c:when>
-											<c:when test="${mb_grade eq '[ROLE_ADMIN]'}">
+											<c:when test="${mb_grade eq '[ROLE_ADMIN]' && list.mb_id ne mb_id }">
 												<tr>
 													<td class="csTitle">
-														<a href="csContent?cs_code=${list.cs_code}">
+														<a href="csContent?cs_code=${list.cs_code}&mb_id=${list.mb_id}">
 															${list.cs_title}
 														</a>
 													</td>

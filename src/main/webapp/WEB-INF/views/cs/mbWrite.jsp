@@ -122,8 +122,8 @@
 						<textarea class="ck-content" id="cs_content" name="cs_content" style="display:none;"></textarea>
 					</div>
 					<div align="right">
-						<button type="button" id="cs_goListBtn" onClick="location.href='csMember'" class="btn btn-dark" style="margin-top:10px;">목록</button>
 						<button type="submit" id="cs_writeSubmit" class="btn btn-dark" style="margin-top:10px;">작성</button>
+						<button type="button" id="cs_goListBtn" onClick="location.href='csMember'" class="btn btn-dark" style="margin-top:10px;">목록</button>
 					</div>
 				</div>
 				
