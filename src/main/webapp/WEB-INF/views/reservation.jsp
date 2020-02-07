@@ -22,7 +22,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet" />
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-<title>마이페이지/프로필</title>
+<title>예약 페이지</title>
 <style>
 #reservation-header {
 	padding-top: 150px;
@@ -152,10 +152,11 @@
 		<div class="reservationTabMenu mx-auto">
 			<div class = "row">
 				<div class = "col-sm-9">
-					<form action = "reservation" method = "post">
+					<form action = "reservation1" method = "post">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
-						<label>숙박비</label>
-						<div>${rdto.acm_charge}</div>
+						<label class = "d-inline">숙박비 : </label>
+						<div class = "d-inline">${rdto.acm_charge}</div>
+						<br/>
 						<!-- ***************** acm_availdate ***********-->
 						<div class="input-group date form-group d-flex justify-content-between" id="datepicker">
 							<div>
@@ -167,15 +168,21 @@
 						</div>
 						<!-- 달력 아이콘
 						<i class="glyphicon glyphicon-calendar"></i>  -->
-						<label>성인</label>
-						<input type = "number" id = "Adult" class = "form-control" />
-						<label>어린이</label>
-						<input type = "number" id = "Child" class = "form-control" /><br/>
+						<div class = "row">
+							<div class = "col-sm-6">
+								<label>성인</label>
+								<input type = "number" id = "Adult" class = "form-control" min = "1" value = "1"/>
+							</div>
+							<div class = "col-sm-6">
+								<label>어린이</label>
+								<input type = "number" id = "Child" class = "form-control" min = "0" onfocus = "number()"/><br/>
+							</div>
+						</div>
 						
 						<input type = "submit" class = "btn btn-dark form-control" value = "예약" />
 					</form>
 				</div>
-				<div class = "col-sm-3">
+				<div class = "col-sm-3 row">
 				</div>
 			</div>
 		</div>
@@ -208,6 +215,7 @@ $(document).ready(function() {
 		$("nav").toggleClass("active");
 		$(".main").toggleClass("main1");
 	});
+	/*
 	$('#datepicker').datepicker({
         startDate: new Date(),
         multidate: true,
@@ -216,7 +224,50 @@ $(document).ready(function() {
         datesDisabled: ['07/01/2020'],
         language: 'en'
     });
+	*/
 });
+</script>
+<script>
+var acm_availdate = "<c:out value = '${rdto.acm_availdate}'/>"
+$(function(){
+    if($("#acm_availdate").length){
+    	//숫자 1이상일 경우 true가 됨
+        var datesEnabled = [acm_availdate];
+    	//활성화 해줄 날짜를 변수로 만들어 사용(controller에서 model로 보낸것을 el로 가지고 온것을 변수로 사용하여 적용함)
+        $('#datepicker').datepicker({
+        	startDate: new Date(),
+            language: "en",
+            format: 'dd/mm/yyyy',      
+            daysOfWeekHighlighted: "6,0",
+            beforeShowDay: function (date) {
+            	//선택할수 있는 날짜를 지정하는 것
+                var allDates = ( '0' + date.getDate() ).slice( -2 ) + "/" + ( '0' + (date.getMonth()+1) ).slice( -2 ) + "/" + date.getFullYear();
+            	//date에 년,월,일을 가져옴 (포맷같은 느낌) slice()는 문자를 가져오는것 -2는 맨뒤에서 두글자를 뜻함
+                if(datesEnabled.indexOf(allDates) != -1)
+                	//인덱스 번호를 가져온다.
+                    return true;
+                
+        		else
+                    return false;
+            }
+       
+        });
+    }    
+});
+</script>
+<script>
+var guest_num = "<c:out value = '${rdto.acm_guest_num}'/>"
+console.log(guest_num);
+
+$(document).ready(function() {
+	$("#Adult").attr('max',Number(guest_num));
+});
+
+function number() {
+	var Adult = $("#Adult").val();
+	$("#Child").attr('max',Number(guest_num) - Number(Adult));
+}
+
 </script>
 </body>
 </html>
