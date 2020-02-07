@@ -257,11 +257,12 @@ $(function(){
 </script>
 <script>
 var guest_num = "<c:out value = '${rdto.acm_guest_num}'/>"
-
+console.log(guest_num);
 
 $(document).ready(function() {
 	$("#Adult").attr('max',Number(guest_num));
 });
+
 function number() {
 	var Adult = $("#Adult").val();
 	$("#Child").attr('max',Number(guest_num) - Number(Adult));

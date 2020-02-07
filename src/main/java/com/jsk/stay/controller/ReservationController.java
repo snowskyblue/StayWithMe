@@ -28,7 +28,8 @@ public class ReservationController {
 		
 		 */
 		AccommodationDto dto = new AccommodationDto("jhw00025", 20, 20000, "03/05/2020",
-				"시간","시간",20);
+				"시간","시간",6);
+		
 		
 		model.addAttribute("rdto",dto);
 		return "reservation";
