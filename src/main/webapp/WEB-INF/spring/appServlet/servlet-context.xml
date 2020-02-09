@@ -59,6 +59,8 @@
 	</beans:bean>
 	<beans:bean id = "EditDao" class="com.jsk.stay.dao.EditDaoImp">
 	</beans:bean>
+	<beans:bean id = "ReservationDao" class="com.jsk.stay.dao.ReservationDao">
+	</beans:bean>
 	<!-- file Upload 추가부분 -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<!-- max upload size in bytes -->

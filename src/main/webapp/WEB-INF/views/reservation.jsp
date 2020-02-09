@@ -166,8 +166,7 @@
 						    	<input type="hidden" id="acm_availdate" name="acm_availdate" placeholder="Select days" required />
 						    </div>
 						</div>
-						<!-- 달력 아이콘
-						<i class="glyphicon glyphicon-calendar"></i>  -->
+						
 						<div class = "row">
 							<div class = "col-sm-6">
 								<label>성인</label>
@@ -177,6 +176,7 @@
 								<label>어린이</label>
 								<input type = "number" id = "Child" class = "form-control" min = "0" onfocus = "number()"/><br/>
 							</div>
+							<input type = "hidden" id ="res_"></div>
 						</div>
 						
 						<input type = "submit" class = "btn btn-dark form-control" value = "예약" />
