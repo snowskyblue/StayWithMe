@@ -156,7 +156,6 @@ form {
 /*사진 좌우로 글씨를 쓸수 있게 해줌*/
 
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 </head>
 <body ng-app="addAcm" ng-controller="acmCtrl">
 <jsp:include page="../common/header.jsp" flush="false"/>
@@ -167,7 +166,7 @@ form {
 	<div id="border"></div>
 	<div class="row d-flex justify-content-center pt-5" style="max-width:1200px;">
 		<div class="col-10 col-sm-10 mt-3 mb-3">
-			<form method="POST" action ="write" enctype="multipart/form-data">
+			<form name="frm" method="POST" action ="write" enctype="multipart/form-data">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<sec:authentication property="principal.username" var="mb_id"/>
 				<input type="hidden" id="mb_id" name="mb_id" value="${mb_id}"><br/>
@@ -177,26 +176,76 @@ form {
 				<div><!-- 대여공간 정보 -->
 					<!--********************** name=acm_room_type **********************-->
 					<div class="room_type">
-						<div>
-							<div class="mb-3">
-								<input type="radio" id="acm_room_type1" name="acm_room_type" value="wholeH" checked> 집 전체<br/>
-								<div style="margin-left:20px;">
-									<label  for="acm_room_type1">게스트가 숙소 전체를 다른 사람과 공유하지 않고 단독으로 이용합니다. 일반적으로 침실, 욕실, 부엌이 포함됩니다.</label>
+					<c:set var="type" value="${acm_room_type }" />
+					<c:choose>
+						<c:when test="${type == 'wholeH' }">
+							<div>
+								<div class="mb-3">
+									<input type="radio" id="acm_room_type1" name="acm_room_type" value="wholeH" checked> 집 전체<br/>
+									<div style="margin-left:20px;">
+										<label  for="acm_room_type1">게스트가 숙소 전체를 다른 사람과 공유하지 않고 단독으로 이용합니다. 일반적으로 침실, 욕실, 부엌이 포함됩니다.</label>
+									</div>
 								</div>
-							</div>
-							<div class="mb-3">
-								<input type="radio" id="acm_room_type2"  name="acm_room_type" value="exclusiveR"> 개인실<br/>
-								<div style="margin-left:20px;">
-									<label  for="acm_room_type2">게스트에게 개인 침실이 제공됩니다. 침실 이외의 공간은 공용일 수 있습니다.</label>
+								<div class="mb-3">
+									<input type="radio" id="acm_room_type2"  name="acm_room_type" value="exclusiveR"> 개인실<br/>
+									<div style="margin-left:20px;">
+										<label  for="acm_room_type2">게스트에게 개인 침실이 제공됩니다. 침실 이외의 공간은 공용일 수 있습니다.</label>
+									</div>
 								</div>
-							</div>
-							<div class="mb-3">
-								<input type="radio" id="acm_room_type3"   name="acm_room_type" value="shareR"> 다인실<br/>
-								<div style="margin-left:20px;">
-									<label  for="acm_room_type3">게스트는 개인 공간 없이, 다른 사람과 함께 쓰는 침실이나 공용 공간에서 숙박합니다.</label>
+								<div class="mb-3">
+									<input type="radio" id="acm_room_type3"   name="acm_room_type" value="shareR"> 다인실<br/>
+									<div style="margin-left:20px;">
+										<label  for="acm_room_type3">게스트는 개인 공간 없이, 다른 사람과 함께 쓰는 침실이나 공용 공간에서 숙박합니다.</label>
+									</div>
 								</div>
-							</div>
-						</div>
+							</div>						
+						</c:when>
+						<c:when test="${type == 'exclusiveR' }">
+							<div>
+								<div class="mb-3">
+									<input type="radio" id="acm_room_type1" name="acm_room_type" value="wholeH"> 집 전체<br/>
+									<div style="margin-left:20px;">
+										<label  for="acm_room_type1">게스트가 숙소 전체를 다른 사람과 공유하지 않고 단독으로 이용합니다. 일반적으로 침실, 욕실, 부엌이 포함됩니다.</label>
+									</div>
+								</div>
+								<div class="mb-3">
+									<input type="radio" id="acm_room_type2"  name="acm_room_type" value="exclusiveR" checked> 개인실<br/>
+									<div style="margin-left:20px;">
+										<label  for="acm_room_type2">게스트에게 개인 침실이 제공됩니다. 침실 이외의 공간은 공용일 수 있습니다.</label>
+									</div>
+								</div>
+								<div class="mb-3">
+									<input type="radio" id="acm_room_type3"   name="acm_room_type" value="shareR"> 다인실<br/>
+									<div style="margin-left:20px;">
+										<label  for="acm_room_type3">게스트는 개인 공간 없이, 다른 사람과 함께 쓰는 침실이나 공용 공간에서 숙박합니다.</label>
+									</div>
+								</div>
+							</div>	
+						</c:when>
+						<c:otherwise>
+							<div>
+								<div class="mb-3">
+									<input type="radio" id="acm_room_type1" name="acm_room_type" value="wholeH"> 집 전체<br/>
+									<div style="margin-left:20px;">
+										<label  for="acm_room_type1">게스트가 숙소 전체를 다른 사람과 공유하지 않고 단독으로 이용합니다. 일반적으로 침실, 욕실, 부엌이 포함됩니다.</label>
+									</div>
+								</div>
+								<div class="mb-3">
+									<input type="radio" id="acm_room_type2"  name="acm_room_type" value="exclusiveR"> 개인실<br/>
+									<div style="margin-left:20px;">
+										<label  for="acm_room_type2">게스트에게 개인 침실이 제공됩니다. 침실 이외의 공간은 공용일 수 있습니다.</label>
+									</div>
+								</div>
+								<div class="mb-3">
+									<input type="radio" id="acm_room_type3"   name="acm_room_type" value="shareR" checked> 다인실<br/>
+									<div style="margin-left:20px;">
+										<label  for="acm_room_type3">게스트는 개인 공간 없이, 다른 사람과 함께 쓰는 침실이나 공용 공간에서 숙박합니다.</label>
+									</div>
+								</div>
+							</div>	
+						</c:otherwise>
+					</c:choose>
+
 					</div>
 					
 				</div>
@@ -224,16 +273,33 @@ form {
 					
 					<div class="d-flex justify-content-between" id="acm_bedding" style="height:38px;">
 						<div>침실 타입</div>
-						<div>
-							<div class="d-inline">
-								<input type="radio" id="bed" name="acm_bedding" value="bed" checked>
-								<label for="bed">침대</label>
-							</div>
-							<div class="d-inline">
-								<input type="radio" id="floor" name="acm_bedding" value="floor">
-								<label for="floor">온돌</label>
-							</div>
-						</div>
+						<c:set var="bedding" value="${acm_bedding }" />
+						<c:choose>
+							<c:when test="${bedding == 'bed' }">
+								<div>
+									<div class="d-inline">
+										<input type="radio" id="bed" name="acm_bedding" value="bed" checked>
+										<label for="bed">침대</label>
+									</div>
+									<div class="d-inline">
+										<input type="radio" id="floor" name="acm_bedding" value="floor">
+										<label for="floor">온돌</label>
+									</div>
+								</div>							
+							</c:when>
+							<c:otherwise>
+								<div>
+									<div class="d-inline">
+										<input type="radio" id="bed" name="acm_bedding" value="bed">
+										<label for="bed">침대</label>
+									</div>
+									<div class="d-inline">
+										<input type="radio" id="floor" name="acm_bedding" value="floor" checked>
+										<label for="floor">온돌</label>
+									</div>
+								</div>							
+							</c:otherwise>
+						</c:choose>
 					</div>
 				    
 				    <!-- ********************** name="acm_guest_num" ********************* -->
@@ -544,6 +610,7 @@ form {
 <!-- iCheck(라디오 버튼) -->
 <script src="icheck-1.x/icheck.min.js"></script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <script>
 var app = angular.module('addAcm', []);
 app.controller('acmCtrl', function($scope) {
@@ -746,6 +813,82 @@ DecoupledEditor
         toolbarContainer.appendChild( editor.ui.view.toolbar.element );
     });
   
+</script>
+<!-- 체크박스 체크해주기 -->
+<script>
+var arr = new Array();
+arr = "${subList}";
+arr = arr.slice(0,-1);	//뒷자 잘라내기
+arr = arr.substring(1);	//앞자 잘라내기
+arr = arr.split(', ');
+
+var valueArr = new Array();
+$("input[type='checkbox']").each(function(){
+	var value = $(this).val();
+	valueArr.push(value);
+});
+console.log(valueArr);
+console.log(valueArr.length);
+
+var fLen = document.forms["frm"].elements.length;
+
+for(var f = 0; f < fLen; f++){
+	for (var i in arr) {
+		for (var n in valueArr){
+			if(arr[i] == valueArr[n]){
+				if(document.forms["frm"].elements[f].value == arr[i]){
+					document.forms["frm"].elements[f].checked = true;
+				}
+			}
+		}
+	}
+}
+
+
+
+arr = "${subList2}";
+arr = arr.slice(0,-1);	//뒷자 잘라내기
+arr = arr.substring(1);	//앞자 잘라내기
+arr = arr.split(', ');
+for(var f = 0; f < fLen; f++){
+	for (var i in arr) {
+		for (var n in valueArr){
+			if(arr[i] == valueArr[n]){
+				if(document.forms["frm"].elements[f].value == arr[i]){
+					document.forms["frm"].elements[f].checked = true;
+				}
+			}
+		}
+	}
+}
+
+//$("input:radio[name='acm_bed_type']:radio[value='floor']").prop('checked', true); 
+
+/* arr = "${radioList}";
+arr = arr.slice(0,-1);	//뒷자 잘라내기
+arr = arr.substring(1);	//앞자 잘라내기
+arr = arr.split(', ');
+var valueArrR = new Array();
+$("input[type='radio']").each(function(){
+	var value = $(this).val();
+	valueArrR.push(value);
+});
+console.log(arr);
+console.log(valueArrR);
+console.log(arr.length);
+console.log(valueArrR.length);
+for(var f = 0; f < fLen; f++){
+	for (var i in arr) {
+		for (var n in valueArrR){
+			if(arr[i] == valueArrR[n]){
+				if(document.forms["frm"].elements[f].value == arr[i]){
+					console.log(arr[i]);
+					document.forms["frm"].elements[f].checked = true;
+				}
+			}
+		}
+	}
+} */
 </script>
 </body>
 </html>
