@@ -3,6 +3,7 @@ package com.jsk.stay.controller;
 import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +29,7 @@ import com.jsk.stay.util.Constant;
 
 
 @Controller
-@MultipartConfig(maxFileSize=1024*1024*4)
+@MultipartConfig(maxFileSize=1024*1024*4,location="D:/upimage/") //다운로드
 public class AcmController {
 	AcmCommand command = null;
 	private JdbcTemplate template;
@@ -51,50 +52,32 @@ public class AcmController {
 	public String addAcm() {
 		return "addAcm";
 	}
-	/*
-	@RequestMapping("/write") //다중 파일 업로드 처리d
-	public String write(MultipartHttpServletRequest mtfRequest, HttpServletRequest request, Model model) {
-		System.out.println("write()");
-		
-		//복수개의 파일을 얻기 위해 getFiles(form의 name속성)
-		List<MultipartFile> fileList = mtfRequest.getFiles("acm_img");
-		System.out.println("멀티파트파일 리스트를 form의 리퀘스트에서부터 얻어냄");
+	
+	@RequestMapping("/write") //단일 파일 업로드 처리 public String
+	public String write(MultipartHttpServletRequest mtfRequest, Model model,HttpServletRequest request) {
+		MultipartFile mf = mtfRequest.getFile("acm_thumbnail");
 		//MultipartFile객체를 얻어냄, 이때는 getParameter(일반 input)대신 getFile() 메서드 사용
-		String path = "D:/upimage/"; //업로드된 파일 저장 위치
-		String fileRoots = "";
-		for (MultipartFile mf : fileList) {
-			//폼에서 전달된 파일 이름
-			String orginFileName = mf.getOriginalFilename();
-			//업로드된 파일크기
-			long fileSize = mf.getSize();
-			System.out.println("originFileName: "+ orginFileName);
-			System.out.println("fileSize: "+ fileSize );
-			String safeFile = path + System.currentTimeMillis() + orginFileName; //pathname
-			String dfile = System.currentTimeMillis() + orginFileName;
-			System.out.println(" dfile: "+  dfile );
-			String fileRoot = path + dfile; //db에 저장될 파일 전체 경로
-			fileRoots += fileRoot + " ";
-			try {
-				mf.transferTo(new File(safeFile));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		String path = "/stay/resources/upImg"; //업로드된 파일 저장 위치 (이름은 원본이름에 시간을 붙여 유일성)
+		String real_save_path = request.getServletContext().getRealPath(path);
+		
+		//폼에서 전달된 파일 이름
+		String orginFileName = mf.getOriginalFilename();
+		//업로드된 파일크기
+		long fileSize = mf.getSize();
+		
+		//저장할 파일은 이름을 바꾸어 저장(동일한 이름의 파일이 왔을때 중복을 피함,시간을 앞에 붙여 중복 피함)
+		//String safeFile = path + System.currentTimeMillis() + orginFileName; //pathname
+		String dfile = System.currentTimeMillis() + orginFileName;
+		String safeFile ="D:/webSpring_workspace/stay/src/main/webapp/resources/upImg/" + dfile;
+		String safeFile1 ="D:/tomcat/apache-tomcat-8.5.47/wtpwebapps/stay/resources/upImg/" + dfile;	
+		
+		try {
+			mf.transferTo(new File(safeFile));
+			mf.transferTo(new File(safeFile1));
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		System.out.println(fileRoots);
-		model.addAttribute("fileRoots", fileRoots);
-		
-		model.addAttribute("request", request);
-		command = new AcmWriteCommand();
-		System.out.println("컨트롤러에서 커맨드클래스 생성 완료");
-		command.execute(model);
-		System.out.println("컨트롤러에서 커맨드클래스의 엑스큐트메서드 호출 완료");
-		return "index";
-		
-	}*/
-	@RequestMapping("/write")
-	public String write(HttpServletRequest request, Model model) {
-		System.out.println("write()");
-		
+		//model.addAttribute("fileName",dfile);
 		model.addAttribute("request", request);
 		command = new AcmWriteCommand();
 		System.out.println("컨트롤러에서 커맨드클래스 생성 완료");
@@ -102,7 +85,9 @@ public class AcmController {
 		System.out.println("컨트롤러에서 커맨드클래스의 엑스큐트메서드 호출 완료");
 		model.addAttribute("hostJoin", "success");
 		return "redirect:hostBoard";
+		
 	}
+
 	
 	@RequestMapping("ckedit")
 	public void ckedit(MultipartHttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -199,4 +184,57 @@ public class AcmController {
 		command.execute(model);
 		return "redirect:hostBoard";
 	}
+	/*
+	@RequestMapping("/write") //다중 파일 업로드 처리d
+	public String write(MultipartHttpServletRequest mtfRequest, HttpServletRequest request, Model model) {
+		System.out.println("write()");
+		
+		//복수개의 파일을 얻기 위해 getFiles(form의 name속성)
+		List<MultipartFile> fileList = mtfRequest.getFiles("acm_thumbnail");
+		System.out.println("멀티파트파일 리스트를 form의 리퀘스트에서부터 얻어냄");
+		//MultipartFile객체를 얻어냄, 이때는 getParameter(일반 input)대신 getFile() 메서드 사용
+		String path = "D:/upimage/"; //업로드된 파일 저장 위치
+		String fileRoots = "";
+		for (MultipartFile mf : fileList) {
+			//폼에서 전달된 파일 이름
+			String orginFileName = mf.getOriginalFilename();
+			//업로드된 파일크기
+			long fileSize = mf.getSize();
+			System.out.println("originFileName: "+ orginFileName);
+			System.out.println("fileSize: "+ fileSize );
+			String safeFile = path + System.currentTimeMillis() + orginFileName; //pathname
+			String dfile = System.currentTimeMillis() + orginFileName;
+			System.out.println(" dfile: "+  dfile );
+			String fileRoot = path + dfile; //db에 저장될 파일 전체 경로
+			fileRoots += fileRoot + " ";
+			try {
+				mf.transferTo(new File(safeFile));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println(fileRoots);
+		model.addAttribute("fileRoots", fileRoots);
+		
+		model.addAttribute("request", request);
+		command = new AcmWriteCommand();
+		System.out.println("컨트롤러에서 커맨드클래스 생성 완료");
+		command.execute(model);
+		System.out.println("컨트롤러에서 커맨드클래스의 엑스큐트메서드 호출 완료");
+		model.addAttribute("hostJoin", "success");
+		return "redirect:hostBoard";
+		
+	}*/
+/*	@RequestMapping("/write")
+	public String write(HttpServletRequest request, Model model) {
+		System.out.println("write()");
+		
+		model.addAttribute("request", request);
+		command = new AcmWriteCommand();
+		System.out.println("컨트롤러에서 커맨드클래스 생성 완료");
+		command.execute(model);
+		System.out.println("컨트롤러에서 커맨드클래스의 엑스큐트메서드 호출 완료");
+		model.addAttribute("hostJoin", "success");
+		return "redirect:hostBoard";
+	}*/
 }

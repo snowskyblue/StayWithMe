@@ -25,7 +25,7 @@ public class HostController {
 	@RequestMapping("hostWrite") 
 	public String hostWrite(HostDto dto, Model model,HttpServletRequest request) {
 		dao.writeDao(dto);
-		return "redirect:hostBoard";
+		return "logout";
 		/*
 		 * HttpSession session = request.getSession();
 		 * session.setAttribute("authority","[ROLE_HOST]");

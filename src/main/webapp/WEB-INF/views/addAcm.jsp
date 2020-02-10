@@ -411,6 +411,14 @@ form {
 							<input class="form-control" id="acm_title" name="acm_title" placeholder="숙소 이름을 정해주세요" type="text" value="">
 						</div>
 					</div>
+					<!-- ***********  name="acm_thumbnail" *************** -->
+					<div class="row form-group">
+						<label class="mb-3 col-sm-2" for="acm_thumbnail">썸네일 사진</label>
+						<div class="col-sm-10">
+							<input class="form-control"  type="file" id="acm_thumbnail" name="acm_thumbnail" />
+							<input type="text" name="src" placeholder="올린사람이름" /><br/><br/>
+						</div>
+					</div>
 					
 					<!-- ************ name="acm_info"***************** -->
 					<div class="row form-group">

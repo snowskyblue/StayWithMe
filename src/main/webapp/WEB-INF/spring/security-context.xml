@@ -18,6 +18,7 @@
     
     
     <http pattern="/ckedit" security ="none"/>
+    <http pattern="/write" security ="none"/>
     <http auto-config='true' use-expressions = "true">
     	<headers>  <!-- X-Frame-Options : deny 해결(iframe사용시) -->
         	<frame-options disabled="true"></frame-options>
