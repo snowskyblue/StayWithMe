@@ -197,4 +197,5 @@ public class CSController {
 		com.adDelete(Integer.parseInt(cs_code), Integer.parseInt(cs_group));
 		return "redirect:csMember";
 	}
+	
 }

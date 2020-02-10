@@ -86,6 +86,19 @@
 	background-color: #cccccc!important;
 	border-color: #cccccc!important;
 }
+
+#mbBtnDiv {
+	float: right;
+}
+
+@media screen and (max-width:768px) {
+	#mbBtnDiv {
+		float: none;
+		display: grid;
+	}
+
+}
+
 a{
 	color: black!important;
 }
@@ -227,10 +240,10 @@ a{
 								<td colspan="4">
 									<sec:authorize access="hasAnyRole('ROLE_GUEST','ROLE_HOST')">
 										<!-- <div class="container col-6 col-sm-2 col-lg-2 dd"> -->
-										<div align="right" style="float:right;">
+										<div align="right" id="mbBtnDiv">
 											<button type="button" onClick="location.href='csMbWrite'" id="cs_write" class="btn btn-dark" style="margin-top:10px;">문의하기</button>
 										</div>
-										<div class="paging mx-auto col-sm-2 col-4 col-lg-2">
+										<div class="paging mx-auto col-6 col-lg-2">
 											<ul class="pagination">
 												<c:if test="${pageMaker.prev}">
 													<li class="page-item"><a class="page-link" href="csMember${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
