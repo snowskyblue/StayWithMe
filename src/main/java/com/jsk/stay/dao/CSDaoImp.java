@@ -15,8 +15,8 @@ public class CSDaoImp implements CSDao {
 	@Autowired
 	private SqlSession sql;
 	
-	public ArrayList<CSDto> list2() throws Exception {
-		ArrayList<CSDto> result = (ArrayList) sql.selectList("cs.list2");
+	public ArrayList<CSDto> list2(Criteria cri) throws Exception {
+		ArrayList<CSDto> result = (ArrayList) sql.selectList("cs.list2", cri);
 		System.out.println(result);
 		return result;
 	}
@@ -25,8 +25,8 @@ public class CSDaoImp implements CSDao {
 		return sql.selectList("cs.listPage", cri);
 	}
 	
-	public int listCount() throws Exception {
-		return sql.selectOne("cs.listCount");
+	public int listCount(String mb_id) throws Exception {
+		return sql.selectOne("cs.listCount", mb_id);
 	}
 	
 	public ArrayList<CSDto> content(int cs_code) throws Exception {

@@ -46,14 +46,24 @@ public class CSController {
 		if(request.isUserInRole("ROLE_ADMIN") == true) {
 			model.addAttribute("list", com.list(cri));
 			
+			String mb_id = null;
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setCri(cri);
-			pageMaker.setTotalCount(com.listCount());
+			pageMaker.setTotalCount(com.listCount(mb_id));
 			
 			model.addAttribute("pageMaker", pageMaker);
 		}
 		else {
-			model.addAttribute("list", com.list2());
+			String mb_id = request.getRemoteUser();
+			cri.setMb_id(mb_id);
+			System.out.println("list2");
+			model.addAttribute("list", com.list2(cri));
+			System.out.println(mb_id);
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setCri(cri);
+			pageMaker.setTotalCount(com.listCount(mb_id));
+			
+			model.addAttribute("pageMaker", pageMaker);
 		}
 		return "cs/csMember";
 	}

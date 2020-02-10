@@ -17,16 +17,16 @@ public class CSCommandImp implements CSCommand {
 	@Autowired
 	private CSDaoImp dao;
 	
-	public ArrayList<CSDto> list2() throws Exception {
-		return dao.list2();
+	public ArrayList<CSDto> list2(Criteria cri) throws Exception {
+		return dao.list2(cri);
 	};
 	
 	public List<CSDto> list(Criteria cri) throws Exception {
 		return dao.list(cri);
 	}
 	
-	public int listCount() throws Exception {
-		return dao.listCount();
+	public int listCount(String mb_id) throws Exception {
+		return dao.listCount(mb_id);
 	}
 	
 	public ArrayList<CSDto> content(int cs_code) throws Exception {

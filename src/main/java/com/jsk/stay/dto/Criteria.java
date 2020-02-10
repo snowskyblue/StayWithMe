@@ -5,7 +5,19 @@ public class Criteria {
 	private int perPageNum;
 	private int rowStart;
 	private int rowEnd;
+	private String mb_id;
 	
+	
+	public String getMb_id() {
+		return mb_id;
+	}
+
+
+	public void setMb_id(String mb_id) {
+		this.mb_id = mb_id;
+	}
+
+
 	public Criteria() {
 		this.page = 1;
 		this.perPageNum = 10;

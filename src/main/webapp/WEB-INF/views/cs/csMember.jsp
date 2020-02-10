@@ -61,12 +61,31 @@
 	font-weight: bold;
 }
 
-#dd li {
+.dd li {
 	list-style: none;
 	float: left;
-	padding: 6px;
+	padding: 2px 6px;
+	border: 1px solid #343a40;
+	margin: 2px;
 }
 
+.paging {
+	/*align: center;*/
+	margin-top: 10px;
+}
+
+.paging .pagination {
+	display: inline-flex;
+}
+
+.dd li:hover {
+	background-color: #cccccc;
+}
+
+.paging .pagination .page-item.active .page-link {
+	background-color: #cccccc!important;
+	border-color: #cccccc!important;
+}
 a{
 	color: black!important;
 }
@@ -203,8 +222,35 @@ a{
 							</c:choose>
 						</sec:authorize>
 						</tbody>
-						
-						<sec:authorize access="hasAnyRole('ROLE_GUEST','ROLE_HOST')">
+						<tfoot>
+							<tr style="border:0;">
+								<td colspan="4">
+									<sec:authorize access="hasAnyRole('ROLE_GUEST','ROLE_HOST')">
+										<!-- <div class="container col-6 col-sm-2 col-lg-2 dd"> -->
+										<div align="right" style="float:right;">
+											<button type="button" onClick="location.href='csMbWrite'" id="cs_write" class="btn btn-dark" style="margin-top:10px;">문의하기</button>
+										</div>
+										<div class="paging mx-auto col-sm-2 col-4 col-lg-2">
+											<ul class="pagination">
+												<c:if test="${pageMaker.prev}">
+													<li class="page-item"><a class="page-link" href="csMember${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+												</c:if> 
+											
+												<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+													<li class="page-item pageNumber">
+													<a class="page-link pageNum" href="csMember${pageMaker.makeQuery(idx)}" num="${idx}">${idx}</a></li>
+												</c:forEach>
+											
+												<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+													<li class="page-item"><a class="page-link" href="csMember${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+												</c:if> 
+											</ul>
+										</div>
+									</sec:authorize>
+								</td>
+							</tr>
+						</tfoot>
+						<!--<sec:authorize access="hasAnyRole('ROLE_GUEST','ROLE_HOST')">
 							<tfoot>
 								<tr style="border:0;">
 									<td colspan="4" align="right">
@@ -212,7 +258,7 @@ a{
 									</td>
 								</tr>
 							</tfoot>
-						</sec:authorize>
+						</sec:authorize>-->
 					</table>
 				</c:otherwise>
 			</c:choose>
@@ -224,23 +270,25 @@ a{
 						</td>
 					</tr>
 				</tfoot> -->
-				<div class="container col-6 col-sm-2 col-lg-2" id="dd">
-					<ul>
-						<c:if test="${pageMaker.prev}">
-							<li><a href="csMember${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
-						</c:if> 
-					
-						<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-							<li><a href="csMember${pageMaker.makeQuery(idx)}">${idx}</a></li>
-						</c:forEach>
-					
-						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-							<li><a href="csMember${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
-						</c:if> 
-					</ul>
-				</div>				
-							
+				<div>
+					<div class="paging" align="center">
+						<ul class="pagination">
+							<c:if test="${pageMaker.prev}">
+								<li class="page-item"><a class="page-link" href="csMember${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+							</c:if> 
+						
+							<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+								<li class="page-item pageNumber"><a class="page-link pageNum" href="csMember${pageMaker.makeQuery(idx)}" num="${idx}">${idx}</a></li>
+							</c:forEach>
+						
+							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+								<li class="page-item"><a class="page-link" href="csMember${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+							</c:if> 
+						</ul>
+					</div>
+				</div>					
 			</sec:authorize>
+			
 		</div>
 	</div>
 </div>
@@ -254,13 +302,69 @@ a{
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script>
+
+
 $(document).ready(function() {
+	//var makeQuery = "${pageMaker.makeQuery(idx)}"; document.ready안에서 이렇게 하면 모델값을 받을 수 있음.
+	//var startPage = "${page}";
+	//alert(startPage);
 	$(".menu-toggle").click(function() {
 		$("nav").toggleClass("active");
 		$(".main").toggleClass("main1");
 	});
-});
+	
+	/*$("#pageNum").click(function() {
+		var endPage = "${pageMaker.endPage}";
+		var x;
+		
+		for(x=0; x <= endPage ; x++) {
+			if($(this).attr("num") == x) {
+			alert(x);	
+			}
+			
+		}
+	});*/
+	var x;
+	var endPage = window.location.search.substr(6,1);
+	var d = window.location.pathname;
+	if(endPage == "") {
+		$(".pageNumber").eq(0).addClass("active");
+	}
+	else if(endPage == $(".pageNum").eq(0).attr("num")) {
+		$(".pageNumber").eq(0).addClass("active");
+	}
+	else if(endPage == $(".pageNum").eq(1).attr("num")) {
+		$(".pageNumber").eq(1).addClass("active");
+	}
+	else if(endPage == $(".pageNum").eq(2).attr("num")) {
+		$(".pageNumber").eq(2).addClass("active");
+	}
+	else if(endPage == $(".pageNum").eq(3).attr("num")) {
+		$(".pageNumber").eq(3).addClass("active");
+	}
+	else if(endPage == $(".pageNum").eq(4).attr("num")) {
+		$(".pageNumber").eq(4).addClass("active");
+	}
 
+	
+	/*if($(this).attr("aaa") == $(this).html()) {
+		$(this).html() = x;
+		
+	}*/
+	
+	/*$(".pageNum").click(function() {
+		if($(this).attr("aaa") == $(this).html()) {
+			$(this).html() = x;
+			var endPage = "${pageMaker.makeQuery(x)}";
+		}
+	});*/
+	
+});
+/*$(document).ready(function() {
+		if(makeQuery == idx) {
+			$(".page").css("background-color", "#cccccc");
+		}
+});*/
 </script>
 </body>
 </html>

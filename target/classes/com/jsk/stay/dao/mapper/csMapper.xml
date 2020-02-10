@@ -8,7 +8,29 @@
 
 	<!-- 문의 목록 -->
 	<select id="list2" resultType="com.jsk.stay.dto.CSDto">
-		select * from cs order by cs_code desc
+		select	cs_code,
+				mb_name,
+				mb_id,
+				cs_title,
+				cs_content,
+				cs_date,
+				cs_group,
+				cs_complete
+		from (
+				select	cs_code,
+						mb_name,
+						mb_id,
+						cs_title,
+						cs_content,
+						cs_date,
+						cs_group,
+						cs_complete,
+						row_number() over(order by cs_code desc) as rNum
+				from cs
+				where mb_id = #{mb_id}
+				) mp
+		where rNum between #{rowStart} and #{rowEnd}
+		order by cs_code desc
 	</select>
 	
 	<!-- 문의 내용 -->
@@ -131,11 +153,14 @@
 		order by cs_code desc
 	</select>
 	
-	<select id="listCount" resultType="int">
-	<![CDATA[
+	<select id="listCount" resultType="int" parameterType="com.jsk.stay.dto.CSDto">
+
 		select count(cs_code)
 		from cs
-		where cs_code > 0
-	]]>
+		where cs_code > 0 
+		<if test='_parameter != null'>
+		and mb_id = #{mb_id}
+		</if>
+
 	</select>
 </mapper>
