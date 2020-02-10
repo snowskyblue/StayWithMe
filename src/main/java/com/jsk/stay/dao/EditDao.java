@@ -1,6 +1,5 @@
 package com.jsk.stay.dao;
 
-import com.jsk.stay.dto.MemberDto;
 
 public interface EditDao {
 

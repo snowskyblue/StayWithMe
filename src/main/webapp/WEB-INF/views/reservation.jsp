@@ -154,29 +154,32 @@
 				<div class = "col-sm-9">
 					<form action = "reservation1" method = "post">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+						<input type = "hidden" name = "acm_code" value = "${rdto.acm_code}"/>
 						<label class = "d-inline">숙박비 : </label>
-						<div class = "d-inline">${rdto.acm_charge}</div>
+						<input class = "d-inline" name = "acm_charge" value = "${rdto.acm_charge}">
 						<br/>
 						<!-- ***************** acm_availdate ***********-->
-						<div class="input-group date form-group d-flex justify-content-between" id="datepicker">
+						<div class="input-group date form-group d-flex justify-content-between" id="datepicker" style = "font-weight : bold" onclick = "checkIn(), checkOut()">
 							<div>
 								<label class="mb-3" for="acm_availdate">예약 가능한 날짜를 선택해주세요</label>
 							</div>
 							<div>
-						    	<input type="hidden" id="acm_availdate" name="acm_availdate" placeholder="Select days" required />
+						    	<input type="text" id="acm_availdate" name="acm_availdate" placeholder="Select days" required />
+					    	
+						    	<!-- 예약한 날짜가 여기에 저장이 됨 음..... 예약 가능 날짜는 한개만 가능하게 하는걸루 한다. -->
 						    </div>
 						</div>
 						
 						<div class = "row">
 							<div class = "col-sm-6">
 								<label>성인</label>
-								<input type = "number" id = "Adult" class = "form-control" min = "1" value = "1"/>
+								<input type = "number" name = "Adult" id = "Adult" class = "form-control" min = "1" value = "1"/>
 							</div>
 							<div class = "col-sm-6">
 								<label>어린이</label>
-								<input type = "number" id = "Child" class = "form-control" min = "0" onfocus = "number()"/><br/>
+								<input type = "number" name = "Child" id = "Child" class = "form-control" min = "0" onfocus = "number()"/><br/>
 							</div>
-							<input type = "hidden" id ="res_"></div>
+
 						</div>
 						
 						<input type = "submit" class = "btn btn-dark form-control" value = "예약" />
@@ -187,7 +190,6 @@
 			</div>
 		</div>
 	</div>
-</div>
 
 <jsp:include page="common/footer.jsp" flush="false"/>
 <!--jquery -->
@@ -232,13 +234,15 @@ var acm_availdate = "<c:out value = '${rdto.acm_availdate}'/>"
 $(function(){
     if($("#acm_availdate").length){
     	//숫자 1이상일 경우 true가 됨
-        var datesEnabled = [acm_availdate];
+        var datesEnabled = new Array();
+        datesEnabled = acm_availdate;
     	//활성화 해줄 날짜를 변수로 만들어 사용(controller에서 model로 보낸것을 el로 가지고 온것을 변수로 사용하여 적용함)
         $('#datepicker').datepicker({
         	startDate: new Date(),
             language: "en",
-            format: 'dd/mm/yyyy',      
+            format: 'dd/mm/yyyy',
             daysOfWeekHighlighted: "6,0",
+            multidate: true,
             beforeShowDay: function (date) {
             	//선택할수 있는 날짜를 지정하는 것
                 var allDates = ( '0' + date.getDate() ).slice( -2 ) + "/" + ( '0' + (date.getMonth()+1) ).slice( -2 ) + "/" + date.getFullYear();
@@ -268,6 +272,19 @@ function number() {
 	$("#Child").attr('max',Number(guest_num) - Number(Adult));
 }
 
+
+</script>
+<script>
+function checkIn() {
+	var checkIn = new Array(); 
+	checkIn = $("#acm_availdate").val();
+	$("#checkIn").val(checkIn);
+}
+function checkOut() {
+	var checkOut = new Array();
+	checkOut = $("#acm_availdate").setDate($("#acm_availdate").getDate() + 1);
+	$("#checkOut").val(checkOut);
+}
 </script>
 </body>
 </html>
