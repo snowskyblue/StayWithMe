@@ -20,7 +20,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.jsk.stay.command.AcmCommand;
 import com.jsk.stay.command.AcmContentCommand;
+import com.jsk.stay.command.AcmDeleteCommand;
 import com.jsk.stay.command.AcmListCommand;
+import com.jsk.stay.command.AcmModifyCommand;
 import com.jsk.stay.command.AcmWriteCommand;
 import com.jsk.stay.util.Constant;
 
@@ -180,6 +182,21 @@ public class AcmController {
 	
 	@RequestMapping("acmModify")
 	public String acmModify(Model model,Principal principal,HttpServletRequest request) {
-		return null;
+		
+		model.addAttribute("request", request);
+		command = new AcmModifyCommand();
+		System.out.println("컨트롤러acmModify에서 커맨드클래스 생성 완료");
+		command.execute(model);
+		System.out.println("컨트롤러acmModify에서 커맨드클래스의 엑스큐트메서드 호출 완료");
+		model.addAttribute("hostModify", "success");
+		return "redirect:hostBoard";
+	}
+	
+	@RequestMapping("acmDelete")
+	public String acmDelete(Model model,Principal principal,HttpServletRequest request) {
+		model.addAttribute("request", request);
+		command = new AcmDeleteCommand();
+		command.execute(model);
+		return "redirect:hostBoard";
 	}
 }

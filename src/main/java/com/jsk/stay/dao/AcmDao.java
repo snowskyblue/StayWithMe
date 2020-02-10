@@ -210,4 +210,143 @@ public class AcmDao {
 		AccommodationDto dto = template.queryForObject(query, new BeanPropertyRowMapper<AccommodationDto>(AccommodationDto.class), acm_code);
 		return dto;
 	}
+
+	public void modify(String mb_id, int acm_code, String acm_type, String acm_room_type, String acm_bedding,
+			int acm_guest_num, int acm_room_num, int acm_bath_num, int acm_area, int acm_charge, String acm_title,
+			String acm_info, String acm_address, String acm_add_detail, int acm_zip, String acm_checkin_time,
+			String acm_checkout_time, String acm_availdate, String[] rules, String[] amenities) {
+		//transaction 실행 방식
+		TransactionDefinition definition = new DefaultTransactionDefinition();
+		//transaction 상태
+		TransactionStatus status = transactionManager.getTransaction(definition);
+		try {
+			template.update(new PreparedStatementCreator() {
+				
+				@Override
+				public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+					
+					System.out.println("dao클래스의 첫번째 update메서드accommodation PP_SEQ.nextval");
+					String query = "update accommodation set acm_type = ? ,acm_room_type = ? ,acm_bedding = ? ,acm_guest_num = ? ,acm_room_num = ? ,acm_bath_num = ? ,acm_area = ? ,acm_charge = ? ,acm_title = ? ,acm_info = ? ,acm_address = ? ,acm_add_detail = ? ,acm_zip = ? ,acm_checkin_time = ? ,acm_checkout_time = ? ,acm_AVAILDATE = ? where acm_code = ? ";
+				
+					PreparedStatement pstmt = con.prepareStatement(query);
+					pstmt.setString(1, acm_type);
+					pstmt.setString(2, acm_room_type);
+					pstmt.setString(3, acm_bedding);
+					pstmt.setInt(4, acm_guest_num);
+					pstmt.setInt(5, acm_room_num);
+					pstmt.setInt(6, acm_bath_num);
+					pstmt.setInt(7, acm_area);
+					pstmt.setInt(8, acm_charge);
+					pstmt.setString(9, acm_title);
+					pstmt.setString(10, acm_info);
+					pstmt.setString(11, acm_address);
+					pstmt.setString(12, acm_add_detail);
+					pstmt.setInt(13, acm_zip);
+					pstmt.setString(14, acm_checkin_time);
+					pstmt.setString(15, acm_checkout_time);
+					pstmt.setString(16, acm_availdate);
+					pstmt.setInt(17, acm_code);
+					
+					return pstmt;
+				}
+			});
+			
+			template.update(new PreparedStatementCreator() {
+
+				@Override
+				public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+					String query = "delete from acm_sub where acm_code = ?";
+					
+					PreparedStatement pstmt = con.prepareStatement(query);
+					pstmt.setInt(1, acm_code);
+					return pstmt;
+				}
+			});
+			
+			if(rules != null){
+				for(int i=0; i < rules.length; i++) {
+					final int x = i;
+					template.update(new PreparedStatementCreator() {
+						@Override
+						public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+							System.out.println("dao클래스의 두번째 udate메서드 ACM_SUB rules PP_SEQ.currval");
+							String query = "insert into ACM_SUB (acm_rule,acm_code) "
+									+ "values (?,?)";
+							PreparedStatement pstmt = con.prepareStatement(query);
+							pstmt.setString(1, rules[x]);
+							pstmt.setInt(2, acm_code);
+							return pstmt;
+						}
+					});
+				}
+			}
+			
+			if(amenities != null){
+				for(int i=0; i < amenities.length; i++) {
+					final int x = i;
+					template.update(new PreparedStatementCreator() {
+						@Override
+						public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+							System.out.println("dao클래스의 세번째 udate메서드 ACM_SUB amenities PP_SEQ.currval");
+							String query = "insert into ACM_SUB (acm_amenity,acm_code) "
+									+ "values (?,?)";
+							PreparedStatement pstmt = con.prepareStatement(query);
+							pstmt.setString(1, amenities[x]);
+							pstmt.setInt(2, acm_code);
+							return pstmt;
+						}
+					});
+				}
+			}
+			
+			transactionManager.commit(status); //정상처리시(DB에 commit)
+			System.out.println("트랜젝션 성공(커밋)");
+		} catch(Exception e) {
+			e.printStackTrace();
+			transactionManager.rollback(status);
+			System.out.println("트랜잭션 롤백");
+		}
+		
+	}
+
+	public void delete(int acm_code) {
+		//transaction 실행 방식
+		TransactionDefinition definition = new DefaultTransactionDefinition();
+		//transaction 상태
+		TransactionStatus status = transactionManager.getTransaction(definition);
+		try {
+			template.update(new PreparedStatementCreator() {
+				
+				@Override
+				public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+					
+					System.out.println("dao클래스의 첫번째 update메서드accommodation PP_SEQ.nextval");
+					String query = "delete from accommodation where acm_code = ?";
+				
+					PreparedStatement pstmt = con.prepareStatement(query);
+					pstmt.setInt(1, acm_code);
+					return pstmt;
+				}
+			});
+			
+			template.update(new PreparedStatementCreator() {
+
+				@Override
+				public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+					String query = "delete from acm_sub where acm_code = ?";
+					
+					PreparedStatement pstmt = con.prepareStatement(query);
+					pstmt.setInt(1, acm_code);
+					return pstmt;
+				}
+			});
+			
+			transactionManager.commit(status); //정상처리시(DB에 commit)
+			System.out.println("트랜젝션 성공(커밋)");
+		} catch(Exception e) {
+			e.printStackTrace();
+			transactionManager.rollback(status);
+			System.out.println("트랜잭션 롤백");
+		}		
+	}
 }

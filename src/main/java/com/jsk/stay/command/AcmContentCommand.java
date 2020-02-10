@@ -25,7 +25,7 @@ public class AcmContentCommand implements AcmCommand {
 		model.addAttribute("dto", dto);
 		model.addAttribute("subDtos",subDtos);
 		
-		/*체크박스 체크해주기*/
+		/*üũ�ڽ� üũ ���ֱ�*/
 		ArrayList<String> subList = new ArrayList<String>();
 		for(int i=0; i < subDtos.size(); i++) {
 			subList.add(subDtos.get(i).getAcm_amenity());

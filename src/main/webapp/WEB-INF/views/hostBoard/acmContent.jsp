@@ -166,10 +166,11 @@ form {
 	<div id="border"></div>
 	<div class="row d-flex justify-content-center pt-5" style="max-width:1200px;">
 		<div class="col-10 col-sm-10 mt-3 mb-3">
-			<form name="frm" method="POST" action ="write" enctype="multipart/form-data">
+			<form name="frm" method="POST" action ="acmModify" enctype="multipart/form-data">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<sec:authentication property="principal.username" var="mb_id"/>
 				<input type="hidden" id="mb_id" name="mb_id" value="${mb_id}"><br/>
+				<input type="hidden" id="acm_code" name="acm_code" value="${dto.acm_code }">
 				<div class="row mb-5">
 					<div class="col-sm-3 border2">대여공간 (택 1)</div> 
 				</div>
@@ -315,7 +316,7 @@ form {
 					<div class="row">
 						<div class="col-sm-8">게스트가 사용할 방의 개수는 몇 개인가요?</div>
 						<div class="col-sm-4">
-							<input type="number" id="acm_room_num" name="acm_room_num" value="1" min="1" max="100" step="1"/>
+							<input type="number" id="acm_room_num" name="acm_room_num" value="${dto.acm_room_num}"  min="1" max="100" step="1"/>
 						</div>
 					</div>
 					
@@ -324,7 +325,7 @@ form {
 					<div class="row">
 						<div class="col-sm-8">게스트가 사용할 수 있는 화장실은 몇 개인가요?</div>
 						<div class="col-sm-4">
-							<input type="number" id="acm_bath_num" name= "acm_bath_num" value="1" min="1" max="100" step="1"/>
+							<input type="number" id="acm_bath_num" name= "acm_bath_num" value="${dto.acm_bath_num}" min="1" max="100" step="1"/>
 						</div>
 					</div>
 					
@@ -333,7 +334,7 @@ form {
 					<div class="row">
 						<div class="col-sm-8">게스트가 사용할 전체 공간의 대략적인 평수를 입력해주세요 (단위 : m²) </div>
 						<div class=" col-sm-4">
-							<input type="number" id="acm_area" name= "acm_area" value="1" min="1" max="100" step="1"/>
+							<input type="number" id="acm_area" name= "acm_area" value="${dto.acm_area}" min="1" max="100" step="1"/>
 							<!-- <input type="number" name="acm_area" value="4.5" data-decimals="1" min="0" max="9" step="0.1" /><!-- data-suffix="m²" --> 
 							
 						</div>
@@ -447,7 +448,7 @@ form {
 					<div class="row">
 						<div class="col-sm-8">설정하고 싶은 하루 숙박료를 입력해주세요 (단위 : 원)</div>
 						<div class="col-sm-4">
-							<input type="number" name="acm_charge" value="50000" min="1000" max="5000000" step="1000"/>
+							<input type="number" name="acm_charge" value="${dto.acm_charge }" min="1000" max="5000000" step="1000"/>
 						</div>
 					</div>
 					
@@ -483,7 +484,7 @@ form {
 						<label class="mb-3 col-sm-2" for="editor">숙소 소개</label>
 						<div class="col-sm-10">
 							<div id="toolbar-container" style="max-width:100%"></div>
-							<div id="editor" class="ck-content" style="max-width:100%;min-height:300px;border:1px solid grey;line-height:0.5rem">{{info}}</div>
+							<div id="editor" class="ck-content" style="max-width:100%;min-height:300px;border:1px solid grey;line-height:0.5rem">${dto.acm_info}</div>
 							<textarea id="div1" name="acm_info" style="display:none;"></textarea>
 						</div>
 					</div>
@@ -579,15 +580,53 @@ form {
 						</label>
 					</div>
 				</div>
-				<div id="complete-btn" class="d-flex flex-row-reverse">
-				    <div class="text-center">
-						<button type="submit" class="form-control btn btn-dark" style="border: none;">숙소수정 하기</button>
-					</div>
+				<div align="right">
+					<input type="submit" class="btn btn-dark" style="margin-top:10px;" value="수정"></input>
+					<button type="button" onclick="delConfirmM()" class="btn btn-dark" style="margin-top:10px;">삭제</button>
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<img src="img/logo.jpg">
+				<button type="button" id="modalClose1" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div id="modal_body"class="modal-body text-center" style="font-weight:bold;">
+				 
+			</div>
+			<div class="modal-footer">
+				<button type="button" onclick="location.href='acmDelete?acm_code=${dto.acm_code}'" class="btn btn-dark" data-dismiss="modal">네</button>
+				<button type="button" class="btn btn-dark" data-dismiss="modal">아니오</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Modal 222 -->
+<div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<img src="img/logo.jpg">
+				<button type="button" id="modalClose1" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div id="modal_body2"class="modal-body text-center" style="font-weight:bold;">
+				 
+			</div>
+			<div class="modal-footer">
+				<button type="button" id="modalClose2" class="btn btn-dark" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
 </div>
 <jsp:include page="../common/footer.jsp" flush="false"/>
 
@@ -609,17 +648,6 @@ form {
 <script src="js/bootstrap-input-spinner.js"></script>
 <!-- iCheck(라디오 버튼) -->
 <script src="icheck-1.x/icheck.min.js"></script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-<script>
-var app = angular.module('addAcm', []);
-app.controller('acmCtrl', function($scope) {
-  $scope.info = "${dto.acm_info}";
-  $scope.editorInit = function() {
-    $scope.info = "";
-  }
-});
-</script>
 
 <script>
     $("input[type='number']").inputSpinner();
@@ -662,11 +690,15 @@ app.controller('acmCtrl', function($scope) {
         	if(postC == false || addressC == false || detailAddressC == false) {
     			return false;
     		}
+        	else if($("#acm_title").val() == "") {
+    			$("#modal2").modal("show");
+    			modal_body2.innerHTML = "제목을 입력하세요";
+    			return false;
+    		}
     		else {
     			var x = $("#editor").html();
     			$("#div1").text(x);
     			//$("#div2").html('<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1.0"></head><body>' + y + "</body></html>");
-    			console.log("x" + x);
     			return true;
     		}
         });
@@ -747,53 +779,58 @@ app.controller('acmCtrl', function($scope) {
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script>
-    function daumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+function daumPostcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
-                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var addr = ''; // 주소 변수
-                var extraAddr = ''; // 참고항목 변수
+            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var addr = ''; // 주소 변수
+            var extraAddr = ''; // 참고항목 변수
 
-                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                    addr = data.roadAddress;
-                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                    addr = data.jibunAddress;
-                }
-
-                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-                if(data.userSelectedType === 'R'){
-                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                        extraAddr += data.bname;
-                    }
-                    // 건물명이 있고, 공동주택일 경우 추가한다.
-                    if(data.buildingName !== '' && data.apartment === 'Y'){
-                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                    }
-                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                    if(extraAddr !== ''){
-                        extraAddr = ' (' + extraAddr + ')';
-                    }
-                    // 조합된 참고항목을 해당 필드에 넣는다.
-                    document.getElementById("extraAddress").value = extraAddr;
-                
-                } else {
-                    document.getElementById("extraAddress").value = '';
-                }
-
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('postcode').value = data.zonecode;
-                document.getElementById("address").value = addr;
-                // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("detailAddress").focus();
+            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                addr = data.roadAddress;
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                addr = data.jibunAddress;
             }
-        }).open();
-    }
+
+            // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+            if(data.userSelectedType === 'R'){
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraAddr !== ''){
+                    extraAddr = ' (' + extraAddr + ')';
+                }
+                // 조합된 참고항목을 해당 필드에 넣는다.
+                document.getElementById("extraAddress").value = extraAddr;
+            
+            } else {
+                document.getElementById("extraAddress").value = '';
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('postcode').value = data.zonecode;
+            document.getElementById("address").value = addr;
+            // 커서를 상세주소 필드로 이동한다.
+            document.getElementById("detailAddress").focus();
+        }
+    }).open();
+}
+
+function delConfirmM(){
+	$("#modal").modal("show");
+	modal_body.innerHTML = "정말 삭제하시겠습니까?";
+}
 </script>
 <script type="module">
 DecoupledEditor
