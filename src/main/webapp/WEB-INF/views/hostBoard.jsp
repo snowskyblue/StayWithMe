@@ -197,11 +197,12 @@ form {
 
 <script>
 $(document).ready(function() {
-	<c:choose>
-		<c:when test="${not empty hostJoin}">
-			$("#hostJoinModal").modal("show");
-		</c:when>
-	</c:choose>
+	if("${not empty addS}"){
+		$("#hostJoinModal").modal("show");
+	}
+	else {
+		console.log("숙소추가 안했음");
+	}
 	$(".menu-toggle").click(function() {
 		$("nav").toggleClass("active")
 		$(".main").toggleClass("main1")

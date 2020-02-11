@@ -31,7 +31,7 @@ footer {
 <footer class="bg-dark">
 	<div class="text-center text-secondary">
 		<div>방문자수 : <span id="visitN"></span></div>
-		<div>방문자수 : <span id="visitMN"></span></div>
+		<div>회원 방문수 : <span id="visitMN"></span></div>
 		<div>- 상호 : (주)스테이윗미 - 대표자 : 이상묵</div>
 		<div>- 사업장소재지 : 서울특별시 종로구 자하문로9길 24, 2층(통인동) - TEL : 1670-4123</div>
 		<div>- 사업자등록번호: 676-87-00055 - 통신판매업신고 : 제2015-서울종로-0499호 </div>
