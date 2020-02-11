@@ -26,7 +26,16 @@ public class AccommodationDto {
 	private String acm_add_detail;
 	private int acm_zip;
 	private String acm_title;
+	private String acm_thumbnail;
 	
+	public String getAcm_thumbnail() {
+		return acm_thumbnail;
+	}
+
+	public void setAcm_thumbnail(String acm_thumbnail) {
+		this.acm_thumbnail = acm_thumbnail;
+	}
+
 	public AccommodationDto() {
 		super();
 	}
@@ -34,7 +43,7 @@ public class AccommodationDto {
 	public AccommodationDto(String mb_id, int acm_code, String acm_info, int acm_charge, String acm_availdate,
 			String acm_checkin_time, String acm_checkout_time, String acm_type, String acm_room_type, int acm_guest_num,
 			int acm_room_num, int acm_bath_num, int acm_area, String acm_bedding, String acm_address,
-			String acm_add_detail, int acm_zip, String acm_title) {
+			String acm_add_detail, int acm_zip, String acm_title, String acm_thumbnail) {
 		super();
 		this.mb_id = mb_id;
 		this.acm_code = acm_code;
@@ -54,6 +63,7 @@ public class AccommodationDto {
 		this.acm_add_detail = acm_add_detail;
 		this.acm_zip = acm_zip;
 		this.acm_title = acm_title;
+		this.acm_thumbnail = acm_thumbnail;
 	}
 	
 	public AccommodationDto(String mb_id, int acm_code, int acm_charge, String acm_availdate, String acm_checkin_time,
