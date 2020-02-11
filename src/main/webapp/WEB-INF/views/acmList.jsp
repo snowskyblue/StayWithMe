@@ -104,7 +104,7 @@
 	float: left;
 	display: block;
 	padding-left: 20px;
-	width: 450px;
+	width: 600px;
 }
 
 .contHead {
