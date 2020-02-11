@@ -165,11 +165,11 @@
 							</div>
 							<div>
 						    	<input type="text" id="acm_availdate" name="acm_availdate" placeholder="Select days" required />
-					    	
 						    	<!-- 예약한 날짜가 여기에 저장이 됨 음..... 예약 가능 날짜는 한개만 가능하게 하는걸루 한다. -->
 						    </div>
 						</div>
-						
+						checkIn : <input type = "text" id = "checkIn" name = "checkIn"/>					
+						checkOut : <input type = "text" id = "checkOut" name = "checkOut"/>					
 						<div class = "row">
 							<div class = "col-sm-6">
 								<label>성인</label>
