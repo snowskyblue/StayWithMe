@@ -77,7 +77,7 @@ public class AcmController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//model.addAttribute("fileName",dfile);
+		model.addAttribute("fileName",dfile);
 		model.addAttribute("request", request);
 		command = new AcmWriteCommand();
 		System.out.println("컨트롤러에서 커맨드클래스 생성 완료");

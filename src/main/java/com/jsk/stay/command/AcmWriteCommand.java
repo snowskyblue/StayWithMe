@@ -73,6 +73,8 @@ public class AcmWriteCommand implements AcmCommand {
 		String[] rules = request.getParameterValues("acm_rule");
 		String[] amenities = request.getParameterValues("acm_amenity");
 		
+		String acm_thumbnail = (String) map.get("fileName");
+		
 		AcmDao dao = new AcmDao();
 		dao.write(
 				mb_id,
@@ -94,6 +96,7 @@ public class AcmWriteCommand implements AcmCommand {
 				acm_availdate,
 				rules
 				,amenities
+				,acm_thumbnail
 		);
 	}
 

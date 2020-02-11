@@ -63,6 +63,7 @@ public class AcmDao {
 						final String acm_availdate, 
 						String[] rules
 						,String[] amenities
+						, String acm_thumbnail
 			) {
 		//transaction 실행 방식
 		TransactionDefinition definition = new DefaultTransactionDefinition();
@@ -77,8 +78,8 @@ public class AcmDao {
 					System.out.println("dao클래스의 첫번째 update메서드accommodation PP_SEQ.nextval");
 					String query = "insert into accommodation ( acm_code, acm_type,"
 							+ "acm_room_type,acm_bedding,acm_guest_num,acm_room_num,"
-							+ "acm_bath_num,acm_area,acm_charge,acm_title,acm_info,acm_address,acm_add_detail,acm_zip,acm_checkin_time,acm_checkout_time,acm_AVAILDATE,mb_id) "
-							+ "values (PP_SEQ.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+							+ "acm_bath_num,acm_area,acm_charge,acm_title,acm_info,acm_address,acm_add_detail,acm_zip,acm_checkin_time,acm_checkout_time,acm_AVAILDATE,mb_id,acm_thumbnail) "
+							+ "values (PP_SEQ.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 					PreparedStatement pstmt = con.prepareStatement(query);
 					pstmt.setString(1, acm_type);
 					pstmt.setString(2, acm_room_type);
@@ -97,6 +98,7 @@ public class AcmDao {
 					pstmt.setString(15, acm_checkout_time);
 					pstmt.setString(16, acm_availdate);
 					pstmt.setString(17, mb_id);
+					pstmt.setString(18, acm_thumbnail);
 					
 					return pstmt;
 				}
