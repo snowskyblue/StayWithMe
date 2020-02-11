@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -84,7 +85,7 @@ public class AcmController {
 		command.execute(model);
 		System.out.println("컨트롤러에서 커맨드클래스의 엑스큐트메서드 호출 완료");
 		model.addAttribute("addAcm", "success");
-		return "redirect:hostBoard";
+		return "redirect:hostBoard?addS=1";
 		
 	}
 
@@ -125,7 +126,12 @@ public class AcmController {
 	}
 	
 	@RequestMapping("/hostBoard")
-	public String list(Model model,Principal principal) {
+	public String list(
+			@RequestParam(value = "addS", required = false) String addS,
+			Model model,Principal principal) {
+		if (addS != null) {
+			model.addAttribute("addS", "add ACM success");
+		}
 		String mb_id = principal.getName();
 		System.out.println("호스트보드 컨트롤러 : " + mb_id);
 		command = new AcmListCommand();

@@ -161,8 +161,7 @@ a{
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script>
 $(document).ready(function() {
-	if (${not empty addAcm}){
-		console.log("addAcm");
+	if ( ${not empty addS} ){
 		$("#addAcmModal").modal("show");
 	}
 	else {
