@@ -17,6 +17,8 @@ public class Constant {
 	public static PlatformTransactionManager transactionManager;
 	public static TransactionTemplate transactionTemplate;
 	public static LoginDao dao;
+	public static int visitN;
+	public static int visitMN;
 	
 	public MemberDto login(String mb_id) {
 		System.out.println("id = " + mb_id);

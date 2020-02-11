@@ -66,12 +66,13 @@ public class LoginController {
 
 	@RequestMapping("/index")
 	public ModelAndView index(
-			@RequestParam(value = "success", required = false) String success,
 			@RequestParam(value = "logout", required = false) String logout,
+			@RequestParam(value = "loginS", required = false) String loginS,
 			HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
-		if (success != null) {
-			model.addObject("success", "before login!");
+		if (loginS != null) {
+			Constant.visitMN += 1;
+			System.out.println("·Î±×ÀÎ");
 		}
 		if (logout != null) {
 			model.addObject("msg", "You've been logged out successfully.");

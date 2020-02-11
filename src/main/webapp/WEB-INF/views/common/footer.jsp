@@ -24,12 +24,22 @@
 <style>
 footer {
     height:300px;
-    width:100%;
+    width:100%;	
 }
 </style>
 <body>
 <footer class="bg-dark">
-	
+	<div class="text-center text-secondary">
+		<div>방문자수 : <span id="visitN"></span></div>
+		<div>방문자수 : <span id="visitMN"></span></div>
+		<div>- 상호 : (주)스테이윗미 - 대표자 : 이상묵</div>
+		<div>- 사업장소재지 : 서울특별시 종로구 자하문로9길 24, 2층(통인동) - TEL : 1670-4123</div>
+		<div>- 사업자등록번호: 676-87-00055 - 통신판매업신고 : 제2015-서울종로-0499호 </div>
+		<div>- 관광사업자등록 : 일반여행업 2018-000049호(종로구청)</div>
+		<div>&nbsp;</div>
+		<div>* 스테이윗미의 모든 거래에 대한 책임과 환불, 민원 등의 처리는 스테이윗미에서 진행합니다.</div>
+		<div>* 자세한 문의는 웹사이트의 Contact 또는 유선(1670-4123)으로 가능합니다.</div>
+	</div>
 </footer>
 
 <!--jquery -->
@@ -38,6 +48,18 @@ footer {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <!--javascript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function(){
+	//이벤트를 받기 위한 이벤트소스 객체 생성
+	var eventSource = new EventSource("event"); //서버요청경로가 eventEx
+	eventSource.addEventListener("up_visit",function(event){
+        $("#visitN").text(event.data);
+     },false);
+     eventSource.addEventListener("up_visitM",function(event){
+        $("#visitMN").text(event.data);
+     },false);
+});
+</script>
 
 </body>
 </html>

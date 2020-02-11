@@ -19,6 +19,7 @@
     
     <http pattern="/ckedit" security ="none"/>
     <http pattern="/write" security ="none"/>
+    <http pattern="/event" security ="none"/>
     <http auto-config='true' use-expressions = "true">
     	<headers>  <!-- X-Frame-Options : deny 해결(iframe사용시) -->
         	<frame-options disabled="true"></frame-options>
@@ -79,7 +80,7 @@
 		<form-login login-page="/login" 
 					username-parameter="mb_id" 
 					password-parameter="mb_pwd"															
-					default-target-url="/index"
+					default-target-url="/index?loginS=1"
 					authentication-failure-url="/login?error=1"
 					always-use-default-target='true'
 					/>		

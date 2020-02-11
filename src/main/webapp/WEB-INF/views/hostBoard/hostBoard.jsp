@@ -134,7 +134,7 @@ a{
 	</div>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="joinModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addAcmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -144,26 +144,7 @@ a{
 				</button>
 			</div>
 			<div class="modal-body text-center" style="font-weight:bold;">
-				 회원가입이 성공적으로 이루어졌습니다.
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="hostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<img src="img/logo.jpg">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body text-center" style="font-weight:bold;">
-				호스트로 등록되셨습니다. 이제 숙소를 등록해주세요.
+				 숙소등록이 성공적으로 이루어졌습니다.
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
@@ -180,14 +161,14 @@ a{
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script>
 $(document).ready(function() {
-	<c:choose>
-		<c:when test="${not empty hostJoin}">
-			$("#hostModal").modal("show");
-		</c:when>
-		<c:when test="${not empty success}">
-			$("#joinModal").modal("show");
-		</c:when>
-	</c:choose>
+	if (${not empty addAcm}){
+		console.log("addAcm");
+		$("#addAcmModal").modal("show");
+	}
+	else {
+		console.log("esle");
+	}
+	
 	$(".menu-toggle").click(function() {
 		$("nav").toggleClass("active");
 		$(".main").toggleClass("main1");
