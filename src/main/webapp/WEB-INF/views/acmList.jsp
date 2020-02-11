@@ -111,6 +111,9 @@
 	font-size: 13px;
 }
 
+.lsConDivMobile {
+	display: none;
+}
 @media screen and (min-width: 1000px) and (max-width: 1300px) {
 	.mapcont {
 		width: 30%;
@@ -142,10 +145,34 @@
 	}
 	
 	.lsConDiv {
-		width: 500px;
+		width: 550px;
 	}
 }
 
+@media screen and (max-width: 640px) {
+	.listForm {
+		height: 500px;
+		align-items: normal;
+		padding-top: 10px;
+	}
+	
+	.lsImgDiv {
+		width: 100%;
+    	height: 350px;
+	}
+	.lsImg {
+		width: 100%;
+    	height: 350px;
+	}
+	
+	.lsConDiv {
+		display: none;
+	}
+	
+	.lsConDivMobile {
+		display: block;
+	}
+}
 
 </style>
 </head>
@@ -166,9 +193,9 @@
 						<div id="border"></div>
 					</div>
 					<c:forEach items="${list}" var="list">
-						<div class="mx-auto">
+						<div class="mx-auto d-flex flex-wrap align-content-center container-fluid">
 							<div class="listForm">
-								<div class = "listSection d-flex flex-wrap align-content-center container-fluid" id ="listFormInner">
+								<!-- <div class = "listSection d-flex flex-wrap align-content-center container-fluid" id ="listFormInner"> -->
 									<div class="lsImgDiv">
 										<img src="/stay/resources/upImg/${list.acm_thumbnail}" class="lsImg">
 									</div>
@@ -226,10 +253,48 @@
 											${list.acm_charge}
 											<span style="color:black; font-size:0.9rem;"> /1박</span>
 										</h4>
+									</div>
+									<br/>
+									<div class="lsConDivMobile my-auto">
 										
+										<c:choose>
+											<c:when test="${list.acm_type eq 'apt'}">
+												<span class="contHead">아파트</span>
+											</c:when>
+											<c:when test="${list.acm_type eq 'flat'}">
+												<span class="contHead">주택</span>
+											</c:when>
+											<c:when test="${list.acm_type eq 'guestHouse'}">
+												<span class="contHead">게스트하우스</span>
+											</c:when>
+											<c:when test="${list.acm_type eq 'villa'}">
+												<span class="contHead">빌라</span>
+											</c:when>
+											<c:when test="${list.acm_type eq 'Hanok'}">
+												<span class="contHead">한옥스테이</span>
+											</c:when>
+											<c:when test="${list.acm_type eq pension}">
+												<span class="contHead">펜션</span>
+											</c:when>
+											<c:otherwise>
+												<span class="contHead">템플스테이</span>
+											</c:otherwise>
+										</c:choose>
+										<c:choose>
+											<c:when test="${list.acm_room_type eq 'wholeH'}">
+												<span class="contHead">&nbsp;&nbsp;전체</span>
+											</c:when>
+											<c:when test="${list.acm_room_type eq 'exclusiveR'}">
+												<span class="contHead">&nbsp;&nbsp;개인실</span>
+											</c:when>
+											<c:when test="${list.acm_room_type eq 'shareR'}">
+												<span class="contHead">&nbsp;&nbsp;다인실</span>
+											</c:when>
+										</c:choose>
+										<h4 style="margin-top:10px; word-break: keep-all;">${list.acm_title}</h4>
 									</div>
 									
-								</div>
+								<!-- </div> -->
 							</div>
 						</div>
 					</c:forEach>
@@ -307,7 +372,7 @@ function geocodeAddress(geocoder, resultMap) {
 			
 			if(status == 'OK') {
 				resultMap.setCenter(result[0].geometry.location);
-				resultMap.setZoom(10);
+				resultMap.setZoom(11);
 				var marker = new google.maps.Marker({
 					map: resultMap,
 					position: result[0].geometry.location
