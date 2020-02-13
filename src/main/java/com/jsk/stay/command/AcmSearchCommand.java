@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.jsk.stay.dao.AcmSearchDao;
 import com.jsk.stay.dao.AcmSearchDaoImp;
 import com.jsk.stay.dto.AccommodationDto;
+import com.jsk.stay.dto.CriteriaAcm;
 
 public interface AcmSearchCommand {
 	
-	public List<AccommodationDto> acmList();
+	public List<AccommodationDto> acmList(CriteriaAcm cri);
+	public int acmListCount();
 }

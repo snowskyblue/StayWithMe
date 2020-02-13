@@ -6,6 +6,53 @@
 
 <mapper namespace="acm">
 	<select id="acmList" resultType="com.jsk.stay.dto.AccommodationDto">
-		select * from accommodation order by acm_code desc
+		select	mb_id,
+				acm_code,
+				acm_info,
+				acm_charge,
+				acm_availdate,
+				acm_checkin_time,
+				acm_checkout_time,
+				acm_type,
+				acm_room_type,
+				acm_guest_num,
+				acm_room_num,
+				acm_bath_num,
+				acm_area,
+				acm_bedding,
+				acm_address,
+				acm_add_detail,
+				acm_zip,
+				acm_title,
+				acm_thumbnail
+		from (
+				select	mb_id,
+						acm_code,
+						acm_info,
+						acm_charge,
+						acm_availdate,
+						acm_checkin_time,
+						acm_checkout_time,
+						acm_type,
+						acm_room_type,
+						acm_guest_num,
+						acm_room_num,
+						acm_bath_num,
+						acm_area,
+						acm_bedding,
+						acm_address,
+						acm_add_detail,
+						acm_zip,
+						acm_title,
+						acm_thumbnail,
+						row_number() over(order by acm_code desc) as rNum
+				from accommodation
+			) mp
+		where rNum between ${rowStart} and #{rowEnd}
+		order by acm_code desc
+	</select>
+	
+	<select id="acmListCount" resultType="int">
+		select count(acm_code) from accommodation order by acm_code desc
 	</select>
 </mapper>
