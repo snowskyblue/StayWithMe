@@ -27,22 +27,7 @@ public class CSController {
 	
 	@RequestMapping("/csMember")
 	public String csMember(Model model, Criteria cri, HttpServletRequest request) throws Exception {
-		/*try {
-			String mb_id = null;
-			if(principal.getName() != null) {
-				mb_id = principal.getName();
-				System.out.println("csMb_id: " + mb_id);
-				model.addAttribute("list", com.list(mb_id));
-			
-			}
-		}
-		catch(NullPointerException e) {
-			model.addAttribute("list", "login");
-		}*/
-		
-		//model.addAttribute("list", com.list());
-		
-		
+	
 		if(request.isUserInRole("ROLE_ADMIN") == true) {
 			model.addAttribute("list", com.list(cri));
 			

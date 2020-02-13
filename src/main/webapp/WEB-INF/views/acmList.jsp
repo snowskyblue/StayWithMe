@@ -151,9 +151,10 @@
 
 @media screen and (max-width: 640px) {
 	.listForm {
-		height: 500px;
+		height: 460px;
 		align-items: normal;
 		padding-top: 10px;
+		display: inline-block;
 	}
 	
 	.lsImgDiv {
@@ -193,7 +194,7 @@
 						<div id="border"></div>
 					</div>
 					<c:forEach items="${list}" var="list">
-						<div class="mx-auto d-flex flex-wrap align-content-center container-fluid">
+						<div class="section mx-auto d-flex flex-wrap align-content-center container-fluid" value="${list.acm_address}">
 							<div class="listForm">
 								<!-- <div class = "listSection d-flex flex-wrap align-content-center container-fluid" id ="listFormInner"> -->
 									<div class="lsImgDiv">
@@ -235,8 +236,8 @@
 											</c:when>
 										</c:choose>
 										<br/>
-										<span>${list.acm_address}</span>
-										<input type="hidden" name="address" value="${list.acm_address}">
+										<span id="address">${list.acm_address}</span>
+										<!-- <input type="hidden" name="address" value="${list.acm_address}"> -->
 										<h4 style="margin-top:10px; word-break: keep-all;">${list.acm_title}</h4>
 										<span>인원 ${list.acm_guest_num}명 /</span>
 										<span> 침실 ${list.acm_room_num}개 /</span>
@@ -323,187 +324,384 @@ $(document).ready(function() {
 	$(".menu-toggle").click(function() {
 		$("nav").toggleClass("active");
 		$(".main").toggleClass("main1");
-		//$(".mapcont").toggleClass("main1");
-		//$(".acmList").toggleClass("main1");
-		//$().css("top", "200px");
-		//$(".acmList").css("top", "200px");
 	});
-	
-	//geocodeAddress(geocoder, map);
-	
-	
-	
-	
 });
-
-var address = new Array();
-//address = document.getElementsByClassName("address").value;
-address = document.getElementsByName("address");
-//var address = '서울 중구 명동길 11 (명동1가)';
-/*var contentArray = [];
-var iConArray = [];
-var markers = [];
-var iterator = 0;
-var markerArray = [];
-var map;*/
 
 function initMap() {
 	var map = new google.maps.Map(document.getElementById("map"), {
-		zoom: 12.5,
+		zoom: 11,
 		center: {
-			lat: -34.397,
-			lng: 150.644
+			lat: 37.564524,
+			lng: 126.973872
 		}
 	});
 	var geocoder = new google.maps.Geocoder();
 	
-	geocodeAddress(geocoder, map);
-}
-
-function geocodeAddress(geocoder, resultMap) {
-
+	//geocodeAddress(geocoder, map);
+	var addressArray = [];
+	$(".section").each(function(){
+		var value = $(this).attr("value");
+		addressArray.push(value);
+	});
 	
-	for(var i = 0; i < 3; i++) {
-		var a = address[i].value;
-		
-		geocoder.geocode({'address':a}, function(result, status) {
+	var xObject = [];
+	var markers = [];
+	var info = [];
+	var total = addressArray.length;
+	var counter = 0;
+	
+	//alert(addressArray[0]);
+	
+	addressArray.forEach(function(addr) {
+		geocoder.geocode({'address':addr}, function(result, status) {
 			console.log(result);
 			console.log(status);
+			xObject.push({
+				"addr" : addr,
+				"lat" : result[0].geometry.location.lat(),
+				"lng" : result[0].geometry.location.lng()
+			});
 			
-			if(status == 'OK') {
-				resultMap.setCenter(result[0].geometry.location);
-				resultMap.setZoom(11);
-				var marker = new google.maps.Marker({
-					map: resultMap,
-					position: result[0].geometry.location
+			counter++;
+			
+			var marker, i;
+			if(total === counter) {
+				for(i = 0 ; i < total ; i++) {
+					marker = new google.maps.Marker({
+						id:xObject[i].addr,
+						position: new google.maps.LatLng(xObject[i].lat, xObject[i].lng),
+						map: map,
+						icon: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+					});
+					
+					markers.push(marker);
+					
+					var infowindow = new google.maps.InfoWindow({
+						content:xObject[i].addr,
+						id:xObject[i].addr,
+						disableAutoPan: true
+					});
+					
+					info.push(infowindow);
+					
+					//infowindow.open(map, markers[i]);
+					
+					/*function hand(k) {
+						return function(e) {
+							
+							if(info[k].getMap()) {
+								info[k].close();
+								markers[0].setIcon("https://maps.google.com/mapfiles/ms/icons/blue-dot.png");
+							}
+							else {
+								info[k].open(map, markers[0]);
+								markers[0].setIcon("https://maps.google.com/mapfiles/ms/icons/red-dot.png");
+							}
+						}
+					}
+					for(var k = 0, kk = markers.length; k<kk; k++) {
+						if(info[k].id == markers[0].id) {
+							google.maps.event.addListener(markers[0], "click", hand(k));
+							
+						}
+					}
+					function hand(k) {
+						return function(e) {
+							
+							if(info[k].getMap()) {
+								info[k].close();
+								markers[0].setIcon("https://maps.google.com/mapfiles/ms/icons/blue-dot.png");
+							}
+							else {
+								info[k].open(map, markers[1]);
+								markers[0].setIcon("https://maps.google.com/mapfiles/ms/icons/red-dot.png");
+							}
+						}
+					}
+					for(var k = 0, kk = markers.length; k<kk; k++) {
+						if(info[k].id == markers[1].id) {
+							google.maps.event.addListener(markers[1], "click", hand(k));
+							
+						}
+					}*/
+				}
+				function hand0(k) {
+					return function(e) {
+						
+						if(info[k].getMap()) {
+							info[k].close();
+							markers[0].setIcon("https://maps.google.com/mapfiles/ms/icons/blue-dot.png");
+						}
+						else {
+							info[k].open(map, markers[0]);
+							markers[0].setIcon("https://maps.google.com/mapfiles/ms/icons/red-dot.png");
+						}
+					}
+				}
+				for(var k = 0, kk = markers.length; k<kk; k++) {
+					if(info[k].id == markers[0].id) {
+						google.maps.event.addListener(markers[0], "click", hand0(k));
+						
+					}
+				}
+				function hand1(k) {
+					return function(e) {
+						
+						if(info[k].getMap()) {
+							info[k].close();
+							markers[1].setIcon("https://maps.google.com/mapfiles/ms/icons/blue-dot.png");
+						}
+						else {
+							info[k].open(map, markers[1]);
+							markers[1].setIcon("https://maps.google.com/mapfiles/ms/icons/red-dot.png");
+						}
+					}
+				}
+				for(var k = 0, kk = markers.length; k<kk; k++) {
+					if(info[k].id == markers[1].id) {
+						google.maps.event.addListener(markers[1], "click", hand1(k));
+						
+					}
+				}
+				function hand2(k) {
+					return function(e) {
+						
+						if(info[k].getMap()) {
+							info[k].close();
+							markers[2].setIcon("https://maps.google.com/mapfiles/ms/icons/blue-dot.png");
+						}
+						else {
+							info[k].open(map, markers[2]);
+							markers[2].setIcon("https://maps.google.com/mapfiles/ms/icons/red-dot.png");
+						}
+					}
+				}
+				for(var k = 0, kk = markers.length; k<kk; k++) {
+					if(info[k].id == markers[2].id) {
+						google.maps.event.addListener(markers[2], "click", hand2(k));
+						
+					}
+				}
+				function hand3(k) {
+					return function(e) {
+						
+						if(info[k].getMap()) {
+							info[k].close();
+							markers[3].setIcon("https://maps.google.com/mapfiles/ms/icons/blue-dot.png");
+						}
+						else {
+							info[k].open(map, markers[3]);
+							markers[3].setIcon("https://maps.google.com/mapfiles/ms/icons/red-dot.png");
+						}
+					}
+				}
+				for(var k = 0, kk = markers.length; k<kk; k++) {
+					if(info[k].id == markers[3].id) {
+						google.maps.event.addListener(markers[3], "click", hand3(k));
+						
+					}
+				}
+				function hand4(k) {
+					return function(e) {
+						
+						if(info[k].getMap()) {
+							info[k].close();
+							markers[4].setIcon("https://maps.google.com/mapfiles/ms/icons/blue-dot.png");
+						}
+						else {
+							info[k].open(map, markers[4]);
+							markers[4].setIcon("https://maps.google.com/mapfiles/ms/icons/red-dot.png");
+						}
+					}
+				}
+				for(var k = 0, kk = markers.length; k<kk; k++) {
+					if(info[k].id == markers[4].id) {
+						google.maps.event.addListener(markers[4], "click", hand4(k));
+						
+					}
+				}
+				
+				$(".section").eq(0).mouseover(function() {
+					for(var j = 0; j < total; j++) {
+						if(markers[j].id == $(".section").eq(0).attr("value")) {
+							markers[j].setIcon("https://maps.google.com/mapfiles/ms/icons/red-dot.png");
+							map.setCenter(new google.maps.LatLng(xObject[j].lat, xObject[j].lng));
+						}
+					}
 				});
-				
-				console.log("위도 : " + marker.position.lat());
-				console.log("경도 : " + marker.position.lng());
+				$(".section").eq(0).mouseout(function() {
+					for(var j = 0; j < total; j++) {
+						if(markers[j].id == $(".section").eq(0).attr("value")) {
+							markers[j].setIcon("https://maps.google.com/mapfiles/ms/icons/blue-dot.png");
+						}
+					}
+				});
+				$(".section").eq(1).mouseover(function() {
+					for(var j = 0; j < total; j++) {
+						if(markers[j].id == $(".section").eq(1).attr("value")) {
+							markers[j].setIcon("https://maps.google.com/mapfiles/ms/icons/red-dot.png");
+							map.setCenter(new google.maps.LatLng(xObject[j].lat, xObject[j].lng));
+						}
+					}
+				});
+				$(".section").eq(1).mouseout(function() {
+					for(var j = 0; j < total; j++) {
+						if(markers[j].id == $(".section").eq(1).attr("value")) {
+							markers[j].setIcon("https://maps.google.com/mapfiles/ms/icons/blue-dot.png");
+						}
+					}
+				});
+				$(".section").eq(2).mouseover(function() {
+					for(var j = 0; j < total; j++) {
+						if(markers[j].id == $(".section").eq(2).attr("value")) {
+							markers[j].setIcon("https://maps.google.com/mapfiles/ms/icons/red-dot.png");
+							map.setCenter(new google.maps.LatLng(xObject[j].lat, xObject[j].lng));
+						}
+					}
+				});
+				$(".section").eq(2).mouseout(function() {
+					for(var j = 0; j < total; j++) {
+						if(markers[j].id == $(".section").eq(2).attr("value")) {
+							markers[j].setIcon("https://maps.google.com/mapfiles/ms/icons/blue-dot.png");
+						}
+					}
+				});
+				$(".section").eq(3).mouseover(function() {
+					for(var j = 0; j < total; j++) {
+						if(markers[j].id == $(".section").eq(3).attr("value")) {
+							markers[j].setIcon("https://maps.google.com/mapfiles/ms/icons/red-dot.png");
+						}
+					}
+				});
+				$(".section").eq(3).mouseout(function() {
+					for(var j = 0; j < total; j++) {
+						if(markers[j].id == $(".section").eq(3).attr("value")) {
+							markers[j].setIcon("https://maps.google.com/mapfiles/ms/icons/blue-dot.png");
+						}
+					}
+				});
+				$(".section").eq(4).mouseover(function() {
+					for(var j = 0; j < total; j++) {
+						if(markers[j].id == $(".section").eq(4).attr("value")) {
+							markers[j].setIcon("https://maps.google.com/mapfiles/ms/icons/red-dot.png");
+						}
+					}
+				});
+				$(".section").eq(4).mouseout(function() {
+					for(var j = 0; j < total; j++) {
+						if(markers[j].id == $(".section").eq(4).attr("value")) {
+							markers[j].setIcon("https://maps.google.com/mapfiles/ms/icons/blue-dot.png");
+						}
+					}
+				});
+				/*$(".section").eq(5).mouseover(function() {
+					for(var j = 0; j < total; j++) {
+						if(markers[j].id == $(".section").eq(5).attr("value")) {
+							markers[j].setIcon("https://maps.google.com/mapfiles/ms/icons/red-dot.png");
+						}
+					}
+				});
+				$(".section").eq(5).mouseout(function() {
+					for(var j = 0; j < total; j++) {
+						if(markers[j].id == $(".section").eq(5).attr("value")) {
+							markers[j].setIcon("https://maps.google.com/mapfiles/ms/icons/blue-dot.png");
+						}
+					}
+				});
+				$(".section").eq(6).mouseover(function() {
+					for(var j = 0; j < total; j++) {
+						if(markers[j].id == $(".section").eq(6).attr("value")) {
+							markers[j].setIcon("https://maps.google.com/mapfiles/ms/icons/red-dot.png");
+						}
+					}
+				});
+				$(".section").eq(6).mouseout(function() {
+					for(var j = 0; j < total; j++) {
+						if(markers[j].id == $(".section").eq(6).attr("value")) {
+							markers[j].setIcon("https://maps.google.com/mapfiles/ms/icons/blue-dot.png");
+						}
+					}
+				});
+				$(".section").eq(7).mouseover(function() {
+					for(var j = 0; j < total; j++) {
+						if(markers[j].id == $(".section").eq(7).attr("value")) {
+							markers[j].setIcon("https://maps.google.com/mapfiles/ms/icons/red-dot.png");
+						}
+					}
+				});
+				$(".section").eq(7).mouseout(function() {
+					for(var j = 0; j < total; j++) {
+						if(markers[j].id == $(".section").eq(7).attr("value")) {
+							markers[j].setIcon("https://maps.google.com/mapfiles/ms/icons/blue-dot.png");
+						}
+					}
+				});
+				$(".section").eq(8).mouseover(function() {
+					for(var j = 0; j < total; j++) {
+						if(markers[j].id == $(".section").eq(8).attr("value")) {
+							markers[j].setIcon("https://maps.google.com/mapfiles/ms/icons/red-dot.png");
+						}
+					}
+				});
+				$(".section").eq(8).mouseout(function() {
+					for(var j = 0; j < total; j++) {
+						if(markers[j].id == $(".section").eq(8).attr("value")) {
+							markers[j].setIcon("https://maps.google.com/mapfiles/ms/icons/blue-dot.png");
+						}
+					}
+				});
+				$(".section").eq(9).mouseover(function() {
+					for(var j = 0; j < total; j++) {
+						if(markers[j].id == $(".section").eq(9).attr("value")) {
+							markers[j].setIcon("https://maps.google.com/mapfiles/ms/icons/red-dot.png");
+						}
+					}
+				});
+				$(".section").eq(9).mouseout(function() {
+					for(var j = 0; j < total; j++) {
+						if(markers[j].id == $(".section").eq(9).attr("value")) {
+							markers[j].setIcon("https://maps.google.com/mapfiles/ms/icons/blue-dot.png");
+						}
+					}
+				});*/
 				
 			}
-			else {
-				alert("실패");
+			
+			/*function showMarker(map, marker) {
+				if(marker.setMap()) return;
+				marker.setMap(map);
 			}
+			
+			function hideMarker(map, marker) {
+				if(!marker.setMap()) return;
+				marker.setMap(null);
+			}
+			
+			function getClickHandler(seq) {
+				return function(e) {
+					var marker = markers[seq],
+						infowindow = info[seq];
+					
+					
+					if(infowindow.getMap()) {
+						infowindow.close();
+					}
+					else {
+						infowindow.open(map, marker);
+					}
+					
+				}
+			}
+			
+			for(var k = 0, kk = markers.length; k<kk; k++) {
+				google.maps.event.addListener(markers[k], "click", getClickHandler(k));
+			}*/
 		});
 		
-	}
-	
-		
-
+	});
 }
 
-//window.onload = 
-/*
-var array1 = new Array();
-var array2 = new Array();
-$(".editor").eq(0).find('figure img').each(function(){
-	
-	var value = $(this).attr("src");
-	value = "<img src= '" + value + "' >";
-	array1.push(value);
-	console.log(array1);
-	$("#s0").html(array1);
-});
-$(".editor").eq(1).find('figure img').each(function(){
-	
-	var value = $(this).attr("src");
-	value = "<img src= '" + value + "' >";
-	array2.push(value);
-	console.log(array2);
-	$("#s1").html(array2);
-});*/
 
-
-
- 
-/* infowindow contents 배열
- contentArray[0] = "Kay";
- contentArray[1] = "uhoons blog";
- contentArray[2] = "blog.uhoon.co.kr";
- contentArray[3] = "blog.uhoon.co.kr ";
- contentArray[4] = "blog.uhoon.co.kr";
- contentArray[5] = "blog.goodkiss.co.kr";
- contentArray[6] = "GG";
- contentArray[7] = "blog.goodkiss.co.kr";
- contentArray[8] = "II";
- contentArray[9] = "blog.goodkiss.co.kr";
- 
-// marker icon 배열
- iConArray[0] = "http://maps.google.com/mapfiles/ms/micons/yellow-dot.png";
- iConArray[1] = "http://maps.google.com/mapfiles/ms/micons/yellow-dot.png";
- iConArray[2] = "http://maps.google.com/mapfiles/ms/micons/yellow-dot.png";
- iConArray[3] = "http://maps.google.com/mapfiles/ms/micons/yellow-dot.png";
- iConArray[4] = "http://maps.google.com/mapfiles/ms/micons/yellow-dot.png";
- iConArray[5] = "http://maps.google.com/mapfiles/ms/micons/yellow-dot.png";
- iConArray[6] = "http://maps.google.com/mapfiles/ms/micons/yellow-dot.png";
- iConArray[7] = "http://maps.google.com/mapfiles/ms/micons/yellow-dot.png";
- iConArray[8] = "http://maps.google.com/mapfiles/ms/micons/yellow-dot.png";
- iConArray[9] = "http://maps.google.com/mapfiles/ms/micons/yellow-dot.png";
- 
-// 위경도 배열
-
-var markerArray = [ new google.maps.LatLng(40.3938,-3.7077)
-, new google.maps.LatLng(40.45038,-3.69803)
-, new google.maps.LatLng(40.45848,-3.69477)
-, new google.maps.LatLng(40.40672,-3.68327)
-, new google.maps.LatLng(40.43672,-3.62093)
-, new google.maps.LatLng(40.46725,-3.67443)
-, new google.maps.LatLng(40.43794,-3.67228)
-, new google.maps.LatLng(40.46212,-3.69166)
-, new google.maps.LatLng(40.41926,-3.70445)
-, new google.maps.LatLng(40.42533,-3.6844)
-];
-*/
-/*
-markerArray[0] = new google.maps.LatLng(40.3938,-3.7077);
-markerArray[1] = new google.maps.LatLng(40.45038,-3.69803);
-markerArray[2] = new google.maps.LatLng(40.45848,-3.69477);
-markerArray[3] = new google.maps.LatLng(40.40672,-3.68327);
-markerArray[4] = new google.maps.LatLng(40.43672,-3.62093);
-markerArray[5] = new google.maps.LatLng(40.46725,-3.67443);
-markerArray[6] = new google.maps.LatLng(40.43794,-3.67228);
-markerArray[7] = new google.maps.LatLng(40.46212,-3.69166);
-markerArray[8] = new google.maps.LatLng(40.41926,-3.70445);
-markerArray[9] = new google.maps.LatLng(40.42533,-3.6844);
- 
-function initialize() {
-    var mapOptions = {
-        zoom: 11,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        center: new google.maps.LatLng(40.4167754,-3.7037901999999576)
-    };
- 
-    map = new google.maps.Map(document.getElementById('map'),mapOptions);
- 
-    for (var i = 0; i < markerArray.length; i++) {
-        addMarker();
-    }
-}
- 
- 
-// 마커 추가
-function addMarker() {
- 
-    var marker = new google.maps.Marker({
-        position: markerArray[iterator],
-        map: map,
-        draggable: false,
-        icon: iConArray[iterator]
-    });
-    markers.push(marker);
- 
-    var infowindow = new google.maps.InfoWindow({
-      content: contentArray[iterator]
-    });
- 
-    google.maps.event.addListener(marker, 'click', function() {
-        infowindow.open(map,marker);
-    });
-    iterator++;
-}
- 
-google.maps.event.addDomListener(window, 'load', initialize);*/
 </script>
 </body>
 </html>
