@@ -23,7 +23,7 @@
 	margin-top: 100px;
 }
 
-#csM-header {
+#acmList-header {
 	padding-top: 110px;
 }
 
@@ -98,6 +98,7 @@
 .lsImg {
 	width: 300px;
 	height: 200px;
+	border-radius: 5px;
 }
 
 .lsConDiv {
@@ -118,15 +119,18 @@
 .scrollFix {
 	overflow: hidden;
 	line-height: 1.35;
-    width: 200px;
+    width: 270px;
 }
 
 .infoTitle {
+	width: 100%;
 	margin-top: 10px;
+	margin-bottom: 10px;
 	word-break: keep-all;
 	font-size: 17px;
 	font-weight: bold;
 	text-align: center;
+	display: block;
 }
 
 .paging {
@@ -147,6 +151,15 @@
 	border-color: #cccccc!important;
 }
 
+.gm-style .gm-style-iw-c {
+	padding: 0!important;
+	max-width: 300px!important;
+}
+
+.gm-style .gm-style-iw-d {
+	overflow: visible!important;
+	display: contents;
+}
 @media screen and (min-width: 1000px) and (max-width: 1300px) {
 	.mapcont {
 		width: 30%;
@@ -163,7 +176,7 @@
 }
 
 @media screen and (max-width: 1000px) {
-	#csM-header {
+	#acmList-header {
 		padding-top: 120px;
 	}
 	.mapcont {
@@ -216,7 +229,7 @@ a{
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" flush="false"/>
 <div class="main">
-	<div class="container-fluid" id="csM-header">
+	<div class="container-fluid" id="acmList-header">
 		
 		
 		<div class="mx-auto">
@@ -487,7 +500,7 @@ function initMap() {
 					//인포창을 생성해줌. 마찬가지로 xObject배열 이용
 					var infowindow = new google.maps.InfoWindow({
 						id: xObject[i].addr,
-						maxWidth: 300
+						maxWidth: 1000
 					});
 					
 					//활용 위해 배열 안에 푸쉬함.
@@ -526,8 +539,8 @@ function initMap() {
 										if(infom.id == titleArray[n].addr) {
 											//인포내용 set
 											infom.setContent('<div class="scrollFix">' +
-										            '	<div><img src="'+ imgArray[n] + '" style="width:200px;height:200px;"></div>' +
-										            '	<div class="infoTitle">' + titleArray[n].html + '</div>' +
+										            '	<div style="display:block;width:270px;height:180px;"><img src="'+ imgArray[n] + '" style="width:100%;height:100%;"></div>' +
+										            '	<div class="infoTitle container">' + titleArray[n].html + '</div>' +
 										            '</div>');
 										}
 									}
