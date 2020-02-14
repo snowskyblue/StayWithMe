@@ -245,7 +245,7 @@ nav, figure, footer, header {
 							<li class="host-btn-li"><a href="hostJoin" id="host">호스트</a></li>
 						</sec:authorize>
 						<sec:authorize access="hasAnyRole('ROLE_HOST')">
-							<li class="host-btn-li"><a href="hostBoard" id="host">호스트</a></li>
+							<li class="host-btn-li"><a href="hostBoard?pagenum=1&contentnum=10" id="host">호스트</a></li>
 						</sec:authorize>
 						<!-- <li class="host-btn-li"><a href="#" id="host">호스트</a></li> -->
 						<li class="event-btn-li"><a href="#">이벤트</a></li>

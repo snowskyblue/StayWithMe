@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +28,7 @@ import com.jsk.stay.command.AcmListCommand;
 import com.jsk.stay.command.AcmModifyCommand;
 import com.jsk.stay.command.AcmWriteCommand;
 import com.jsk.stay.util.Constant;
+import com.jsk.stay.util.PagingMaker;
 
 
 @Controller
@@ -128,19 +130,17 @@ public class AcmController {
 	@RequestMapping("/hostBoard")
 	public String list(
 			@RequestParam(value = "addS", required = false) String addS,
-			Model model,Principal principal) {
+			Model model,Principal principal,HttpServletRequest request) {
 		if (addS != null) {
 			model.addAttribute("addS", "add ACM success");
 		}
 		String mb_id = principal.getName();
 		System.out.println("호스트보드 컨트롤러 : " + mb_id);
 		command = new AcmListCommand();
-		System.out.println("11111111111111");
 		
 		model.addAttribute("mb_id", mb_id);
+		model.addAttribute("request",request);
 		command.execute(model);
-		
-		System.out.println("22222222222");
 		/*
 		 * System.out.println("11111111111111");
 		
@@ -156,6 +156,8 @@ public class AcmController {
 		 * 
 		 * */
 		
+		
+		//return "redirect:hostBoard?pagenum=1&contentnum=10";
 		return "hostBoard/hostBoard";
 	}
 	

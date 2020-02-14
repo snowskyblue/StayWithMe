@@ -68,6 +68,28 @@
 a{
 	color: black!important;
 }
+
+.paging {
+	/*align: center;*/
+	margin-top: 10px;
+}
+
+.paging .pagination {
+	display: inline-flex;
+}
+.paging .pagination .page-item.active .page-link {
+	background-color: #cccccc!important;
+	border-color: #cccccc!important;
+}
+#addBtnDiv {
+	float: right;
+}
+
+@media screen and (max-width:768px) {
+	#addBtnDiv {
+		float: none;
+		display: grid;
+	}
 </style>
 </head>
 <body>
@@ -76,6 +98,12 @@ a{
 	<div class="container" id="board">
 		<h3>호스트 안내판</h3>
 		<div id="border"></div>
+		
+		<select name="contentnum" id="contentnum">
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+		</select>
 		
 		<div class="hostBoard mx-auto">
 			<table class="hostBoard_list mx-auto text-center">
@@ -124,9 +152,33 @@ a{
 				</tbody>
 				<tfoot>
 					<tr style="border:0;">
-						<td colspan="4" align="right">
-							<button type="button" onClick="location.href='addAcm'" id="cs_write" class="btn btn-dark" style="margin-top:10px;">숙소 추가하기</button>
+						<td colspan="4">
+							<div align="right" id="addBtnDiv">
+								<button type="button" onClick="location.href='addAcm'" id="cs_write" class="btn btn-dark" style="margin-top:10px;">숙소 추가하기</button>
+							</div>
+							<div class="paging mx-auto col-6 col-lg-2">
+								<ul class="pagination">
+									<c:if test="${page.prev }">
+										<li class="page-item"><a class="page-link" href="javascript:page(${page.getStartPage()-1});">&laquo;</a></li>
+									</c:if>
+									<c:forEach begin="${page.getStartPage()}" end="${page.getEndPage()}" var="idx">
+										<li class="page-item pageNumber" id="${idx}">
+											<a class="page-link pageNum" href="javascript:page(${idx});">${idx}</a>
+										</li>
+									</c:forEach>
+									<c:if test="${page.next }" >
+										<li class="page-item">
+											<a class="page-link" href="javascript:page(${page.getEndPage()+1});">&raquo;</a>
+										</li>
+									</c:if>
+								</ul>
+							</div>
 						</td>
+					</tr>
+					<tr>
+						
+							
+						
 					</tr>
 				</tfoot>
 			</table>
@@ -161,7 +213,7 @@ a{
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script>
 $(document).ready(function() {
-	if ( ${not empty addS} ){
+	if (${not empty addS}){ //${not empty addS}
 		$("#addAcmModal").modal("show");
 	}
 	else {
@@ -172,7 +224,38 @@ $(document).ready(function() {
 		$("nav").toggleClass("active");
 		$(".main").toggleClass("main1");
 	});
+	
+	console.log(getParameters('pagenum'));
+	var sel = '#' + getParameters('pagenum');
+	$(sel).addClass("active");
+
 });
+
+function page(idx){
+	var pagenum = idx;
+	var contentnum = $("#contentnum option:selected").val();
+	location.href="hostBoard?pagenum=" + pagenum + "&contentnum=" + contentnum;
+}
+
+var getParameters = function (paramName) {
+    // 리턴값을 위한 변수 선언
+    var returnValue;
+
+    // 현재 URL 가져오기
+    var url = location.href;
+
+    // get 파라미터 값을 가져올 수 있는 ? 를 기점으로 slice 한 후 split 으로 나눔
+    var parameters = (url.slice(url.indexOf('?') + 1, url.length)).split('&');
+
+    // 나누어진 값의 비교를 통해 paramName 으로 요청된 데이터의 값만 return
+    for (var i = 0; i < parameters.length; i++) {
+        var varName = parameters[i].split('=')[0];
+        if (varName.toUpperCase() == paramName.toUpperCase()) {
+            returnValue = parameters[i].split('=')[1];
+            return decodeURIComponent(returnValue);
+        }
+    }
+};
 
 </script>
 </body>

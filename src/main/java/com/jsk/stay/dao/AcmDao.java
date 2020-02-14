@@ -351,4 +351,43 @@ public class AcmDao {
 			System.out.println("트랜잭션 롤백");
 		}		
 	}
+
+	public ArrayList<AccommodationDto> boardList(String mb_id, int pagenum,int contentnum) {
+		ArrayList<AccommodationDto> dtos = (ArrayList<AccommodationDto>) template.query(new PreparedStatementCreator() {
+
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				System.out.println(pagenum + "pagenum");
+				System.out.println(contentnum + "contentnum");
+				int rowStart = (pagenum -1 ) * contentnum + 1;
+				int rowEnd = pagenum * contentnum;
+				System.out.println("시작과 끝 넘버 : " + rowStart + " " + rowEnd);
+				//String query = "select a.* from ( select a.*,  ROWNUM AS RNUM from ( select * from accommodation order by acm_code asc ) a ) a where rnum between ? and ? and mb_id = ?";
+				String query = "select a.* from ( select a.*,  ROWNUM AS RNUM from ( select * from accommodation where mb_id= ? order by acm_code asc) a ) a where rnum between ? and ? and mb_id = ?";
+				/*String query = "select a.*"
+						+ "from ("
+						+ " select a.*,  ROWNUM AS RNUM"
+						+ " from ("
+						+ "select * from accommodation order by acm_code asc ) a"
+						+ ") a"
+						+ "where rnum between ? and ?"
+						+ "and mb_id = ?";*/
+				PreparedStatement pstmt = con.prepareStatement(query);
+				pstmt.setString(1, mb_id);
+				pstmt.setInt(2, rowStart);
+				pstmt.setInt(3, rowEnd);
+				pstmt.setString(4, mb_id);
+				return pstmt;
+				
+			}}, new BeanPropertyRowMapper<AccommodationDto>(AccommodationDto.class));
+		//드라이버 로드, 커넥션 생성 & DB 연결, SQL 실행, DB 연결 해제 부분은 JDBC 템플릿이 알아서 해준다"select * from accommodation where mb_id = ? order by acm_code asc";
+		System.out.println("새로만든");
+		return dtos;
+	}
+
+	public int totalcount(String mb_id) {
+		String query = "select count(*) from accommodation where mb_id = '" + mb_id + "'" ;
+		int cnt = this.template.queryForObject(query, Integer.class);
+		return cnt;
+	}
 }

@@ -52,7 +52,7 @@ public class HomeController {
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter writer = response.getWriter();
 		
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < 2000; i++) {
 			
 			writer.write("event:up_visit\n"); //이벤트 이름을 up_vote
 			writer.write("data: " + Constant.visitN + "\n\n"); //up_vote이벤트 값을 나타냄
