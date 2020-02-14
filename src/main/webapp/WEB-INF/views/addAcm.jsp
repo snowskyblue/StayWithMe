@@ -287,7 +287,7 @@ form {
 						</div>
 						<div class="row">
 							<div class="col-sm-6" style="height: 63px;">
-								<input class="form-control" type="text" name="address" value="abc"  id="address" placeholder="주소d 찾기를 클릭해 주소를 검색해주세요"><br>
+								<input class="form-control" type="text" name="address" value="abc"  id="address" placeholder="주소 찾기를 클릭해 주소를 검색해주세요"><br>
 							</div>
 							<div class="col-sm-6" style="height: 63px;">
 								<input class="form-control" type="text" name="extraAddress"  id="extraAddress" placeholder="참고주소">
@@ -390,6 +390,7 @@ form {
 					<div class="input-group date form-group d-flex justify-content-between" id="datepicker">
 						<div>
 							<label class="mb-3" for="acm_availdate">예약 가능한 날짜를 선택해주세요</label>
+					    	<div id="date_check"></div>
 						</div>
 						<div>
 					    	<input type="hidden" id="acm_availdate" name="acm_availdate" required />
@@ -408,7 +409,8 @@ form {
 					<div class="row form-group">
 						<label class="mb-3 col-sm-2" for="acm_title">이름 지정</label>
 						<div class="col-sm-10">
-							<input class="form-control" id="acm_title" name="acm_title" placeholder="숙소 이름을 정해주세요" type="text" value="">
+							<input class="form-control" size="20" id="acm_title" name="acm_title" placeholder="숙소 이름을 정해주세요" type="text" value="">
+							<div id="title_check"></div>
 						</div>
 					</div>
 					<!-- ***********  name="acm_thumbnail" *************** -->
@@ -594,13 +596,18 @@ app.controller('acmCtrl', function($scope) {
         $("#detailAddress").blur(function() {
         	detailAddress();
     	});
+        $("#acm_title").blur(function() {
+        	title();
+    	});
         
         $("form").on("submit", function(e) {
         	postcode();
         	address();
         	detailAddress();
+        	title();
+        	date();
         	
-        	if(postC == false || addressC == false || detailAddressC == false) {
+        	if(postC == false || addressC == false || detailAddressC == false || titleC == false || dateC == false) {
     			return false;
     		}
     		else {
@@ -656,6 +663,30 @@ app.controller('acmCtrl', function($scope) {
     	else {
     		$("#detailAddress_check").text("");
     		detailAddressC = true;
+    	}
+    }
+    
+    function title(){
+    	if($("#acm_title").val() == ""){
+    		$("#title_check").text("숙소 제목을 입력해주세요");
+    		$("#title_check").css("color","red");
+    		titleC = false;
+    	}
+    	else {
+    		$("#title_check").text("");
+    		titleC = true;
+    	}
+    }
+    
+    function date(){
+    	if($("#acm_availdate").val() == ""){
+    		$("#date_check").text("예약 가능한 날짜를 지정해주세요");
+    		$("#date_check").css("color","red");
+    		dateC = false;
+    	}
+    	else {
+    		$("#date_check").text("");
+    		dateC = true;
     	}
     }
     

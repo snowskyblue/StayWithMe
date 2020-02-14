@@ -98,15 +98,19 @@ a{
 	<div class="container" id="board">
 		<h3>호스트 안내판</h3>
 		<div id="border"></div>
-		
-		<select name="contentnum" id="contentnum">
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-		</select>
-		
 		<div class="hostBoard mx-auto">
 			<table class="hostBoard_list mx-auto text-center">
+				<caption style="caption-side: top;">
+					<span class="d-flex justify-content-end">
+						<span>정렬 개수 : </span>
+						<select name="contentnum" id="contentnum">
+							<option value="5">5</option>
+							<option value="10" selected>10</option>
+							<option value="15">15</option>
+							<option value="20">20</option>
+						</select>
+					</span>
+				</caption>
 				<colgroup>
 					<col style="width:450px;">
 					<col style="width:300px;">
@@ -133,7 +137,7 @@ a{
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${list}" var="list">
-								<tr>
+								<tr style="height : 49.3px;">
 									<td id="acmTitle">
 										<a href="acmContent?acm_code=${list.acm_code}">
 											${list.acm_title}
