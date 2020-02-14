@@ -105,7 +105,7 @@
 	float: left;
 	display: block;
 	padding-left: 20px;
-	width: 600px;
+	width: 100%;
 }
 
 .contHead {
@@ -169,10 +169,6 @@
 		width: 70%;
 		position: fixed;
 	}
-	
-	.lsConDiv {
-		width: 400px;
-	}
 }
 
 @media screen and (max-width: 1000px) {
@@ -188,10 +184,6 @@
 		position: relative;
 		top: 0;
 		width: 100%;
-	}
-	
-	.lsConDiv {
-		width: 550px;
 	}
 }
 
@@ -342,8 +334,11 @@ a{
 									</c:choose>
 									<h4 style="margin-top:10px; word-break: keep-all;">${list.acm_title}</h4>
 								</div>
-								<div style="font-size: 1.5em; height:100%;"" class="float-right">
-									<i class="far fa-heart"></i>
+								<div style="height:100%;" class="float-right">
+									<input type="hidden"/>
+									<span class="heart" style="font-size: 1.5em;"><!-- onclick="wish()"  -->
+									  <i class="far fa-heart"></i>
+									</span>
 								</div>
 							</div>
 						</div>
@@ -368,8 +363,6 @@ a{
 				</section>
 			</div>
 		</div>
-		
-
 	</div>
 </div>
 
@@ -385,6 +378,12 @@ a{
 
 
 <script>
+/*
+function wish(){
+	console.log("111");
+	var s = "${list[0].acm_code}";
+	console.log(s);
+}*/
 
 $(document).ready(function() {
 	$(".menu-toggle").click(function() {
@@ -413,7 +412,28 @@ $(document).ready(function() {
 	else if(endPage == $(".pageNum").eq(4).attr("num")) {
 		$(".pageNumber").eq(4).addClass("active");
 	}
+	
 
+    $(".heart").on("click",function(){
+        var target = $(this).parent().find('input[type=hidden]').val();
+        var s = "${list[0].acm_code}";
+    	console.log(s);
+    	var t = $(this).parent().parent().parent().html();
+    	console.log(t);
+        if(target == 0)
+        {
+            target = 1;
+            $(this).parent().find('input[type=hidden]').val(target);
+            $(this).css({"color": "red"});
+        }
+        else
+        {
+            target = 0;
+            $(this).parent().find('input[type=hidden]').val(target);
+            $(this).css({"color": "black"});
+        }
+        $(this).parent().find('input[type=hidden]').val(target);
+    });
 });
 
 //geocoder callback함수(비동기 처리)

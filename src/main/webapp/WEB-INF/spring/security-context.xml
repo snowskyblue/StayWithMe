@@ -75,6 +75,7 @@
 		<intercept-url pattern="/myPageProfile" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
 		<intercept-url pattern="/logout" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
 		<intercept-url pattern="/ckedit" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
+		<intercept-url pattern="/wishList" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
 		<intercept-url pattern="/**" access="authenticated" />
 		
 		<form-login login-page="/login" 

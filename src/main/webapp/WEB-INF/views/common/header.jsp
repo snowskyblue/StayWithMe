@@ -236,7 +236,7 @@ nav, figure, footer, header {
 				</div>
 				<div id="main-nav-bar" class="main-navbar row">
 					<ul class="list-unstyled">
-						<li class="wish-btn-li"><a href="#">위시리스트</a></li>
+						<li class="wish-btn-li"><a href="wishList">위시리스트</a></li>
 						<li class="confirm-btn-li"><a href="#">예약확인</a></li>
 						<sec:authorize access="isAnonymous()">
 							<li class="host-btn-li"><a href="hostJoin" id="host">호스트</a></li>
