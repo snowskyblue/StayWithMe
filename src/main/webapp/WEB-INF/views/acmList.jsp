@@ -342,6 +342,9 @@ a{
 									</c:choose>
 									<h4 style="margin-top:10px; word-break: keep-all;">${list.acm_title}</h4>
 								</div>
+								<div style="font-size: 1.5em; height:100%;"" class="float-right">
+									<i class="far fa-heart"></i>
+								</div>
 							</div>
 						</div>
 					</c:forEach>
