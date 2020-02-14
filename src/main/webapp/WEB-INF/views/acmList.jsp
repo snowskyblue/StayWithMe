@@ -336,7 +336,7 @@ a{
 						<div class="paging" align="center">
 							<ul class="pagination">
 								<c:if test="${pageMaker.prev}">
-									<li class="page-item"><a class="page-link" href="csMember${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+									<li class="page-item"><a class="page-link" href="acmList${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
 								</c:if> 
 							
 								<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
@@ -344,7 +344,7 @@ a{
 								</c:forEach>
 							
 								<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-									<li class="page-item"><a class="page-link" href="csMember${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+									<li class="page-item"><a class="page-link" href="acmList${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
 								</c:if> 
 							</ul>
 						</div>
