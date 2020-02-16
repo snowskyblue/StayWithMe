@@ -167,35 +167,36 @@
 						</div>
 						<br/>
 						<!-- ***************** acm_availdate ***********-->
-						<div id = "checkInform">
-							<div class="input-group date form-group d-flex justify-content-between" id="datepicker" style = "font-weight : bold">
-								<div>
-									<label class="mb-3" for="acm_availdate">Check In 날짜를 선택해주세요.</label>
+						<div class = "row">
+							<div id = "checkInform" class = "col-sm-6">
+								<div class="input-group date form-group d-flex justify-content-between" id="datepicker" style = "font-weight : bold">
+									<div>
+										<label class="mb-3 text-center" for="checkInDate">CheckIn</label>
+									</div>
+									<div>
+								    	<input type="text" id="checkInDate" class = "form-control" name="checkInDate" placeholder="Select days" required/>
+								    	<!-- 예약한 날짜가 여기에 저장이 됨 음..... 예약 가능 날짜는 한개만 가능하게 하는걸루 한다. -->
+								    </div>
 								</div>
-								<div>
-							    	<input type="hidden" id="acm_availdate" name="acm_availdate" placeholder="Select days" required />
-							    	<!-- 예약한 날짜가 여기에 저장이 됨 음..... 예약 가능 날짜는 한개만 가능하게 하는걸루 한다. -->
-							    </div>
-							</div>
-						</div>		
-						<div id = "checkOutform">
-							<div class="input-group date form-group d-flex justify-content-between" id="datepicker1" style = "font-weight : bold">
-								<div>
-									<label class="mb-3" for="acm_availdate1">Check Out 날짜를 선택해주세요</label>
+							</div>		
+							<div id = "checkOutform" class = "col-sm-6">
+								<div class="input-group date form-group d-flex justify-content-between" id="datepicker1" style = "font-weight : bold">
+									<div>
+										<label class="mb-3 text-center" for="checkOutDate">CheckOut</label>
+									</div>
+									<div>
+								    	<input type="text" id="checkOutDate" class = "form-control" name="checkOutDate" placeholder="Select days" required />
+								    	<!-- 예약한 날짜가 여기에 저장이 됨 음..... 예약 가능 날짜는 한개만 가능하게 하는걸루 한다. -->
+								    </div>
 								</div>
-								<div>
-							    	<input type="hidden" id="acm_availdate1" name="acm_availdate1" placeholder="Select days" required />
-							    	<!-- 예약한 날짜가 여기에 저장이 됨 음..... 예약 가능 날짜는 한개만 가능하게 하는걸루 한다. -->
-							    </div>
 							</div>
-						</div>		
-						<input type = "hidden" id = "checkIn" name = "checkIn" disabled/>		
-						<input type = "hidden" id = "checkOut" name = "checkOut" disabled/>		
+						</div>	
 						<div class = "row">
 							<div class = "col-sm-6">
 								<label>성인</label>
 								<input type = "number" name = "adult" id = "adult" class = "form-control" min = "1" value = "1" onchange = "number()"/>
 							</div>
+							
 							<div class = "col-sm-6">
 								<label>어린이</label>
 								<input type = "number" name = "child" id = "child" class = "form-control" min = "0" value = "0"/><br/>
@@ -262,6 +263,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
 <!-- iCheck(라디오 버튼) -->
 <script src="icheck-1.x/icheck.min.js"></script>
+<!-- 아임포트 결제창 띄우기 -->
+<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
 <script>
 $(function () {
     var token = $("meta[name='_csrf']").attr("content");
@@ -283,25 +286,28 @@ $(document).ready(function() {
 <!-- datepicker를 사용하기 위한 script -->
 <script>
 function checkIn() {
-	var checkIn = $("#acm_availdate").val();
-	$("#checkIn").val(checkIn);
-	if($("#checkIn").val() != null && $("#checkIn").val() != "") {
-		$("#checkOutform").show();
-		$("#checkInform").hide();
+	if($("#acm_availdate").val() == null || $("#acm_availdate").val() == "") {
+		checkInA = false;
 	}
-	else {
-		$("#checkOutform").hide();
-		$("#checkInform").show();
+	else{
+		var checkIn = $("#acm_availdate").val();
+		$("#checkIn").val(checkIn);
+		checkInA = true;
 	}
 }
 function checkOut() {
-	var checkOut = $("#acm_availdate1").val();
-	$("#checkOut").val(checkOut);
+	if($("#acm_availdate1").val() == null || $("#acm_availdate1").val() == "") {
+		checkOutA = false;
+	}
+	else {
+		var checkOut = $("#acm_availdate1").val();
+		$("#checkOut").val(checkOut);
+		checkOutA = true;
+	}
 }
 $(document).ready(function(){
-	$("#checkOutform").hide();
 	var acm_availdate = "<c:out value = '${rdto.acm_availdate}'/>"
-    if($("#acm_availdate").length) {
+    if($("#checkInDate").length) {
     	//숫자 1이상일 경우 true가 됨    	
         var datesEnabled = acm_availdate;
     	var date = new Date();
@@ -372,42 +378,46 @@ peopleNumber = Number($("#adult").val()) + Number($("#child").val());
 
 
 <script>
-
 $(document).ready(function() {
 	$("#button").click(function() {
-		if(Number($("#adult").val()) + Number($("#child").val()) <= guest_num) {
-			$("#guest_num").val(Number($("#adult").val()) + Number($("#child").val()));
-			$("#checkInCheck").val($("#checkIn").val());
-			$("#checkOutCheck").val($("#checkOut").val());
-			var sdd = $("#checkIn").val();
-			console.log(sdd);
-		    var edd = $("#checkOut").val();
-		    console.log(edd);
-		    var ar1 = sdd.split('/');
-		    console.log(ar1.toString());
-		    var ar2 = edd.split('/');
-		    console.log(ar2.toString());
-		    var da1 = new Date(ar1[2], ar1[1]-1, ar1[0]);
-		    console.log(new Date(ar1[2], ar1[1]-1, ar1[0]));
-		    var da2 = new Date(ar2[2], ar2[1]-1, ar2[0]);
-		    console.log(new Date(ar2[2], ar2[1]-1, ar2[0]));
-		    var dif = da2 - da1;
-		    var cDay = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
-		    var x = parseInt(dif/cDay);
-		    var y = parseInt(dif/cDay) + parseInt(1);
-			if(sdd && edd){
-				$(".checkIncheckOut").val(x + "박 " +  y + "일");
+		if(checkInA == false || checkOutA == false) {
+			if(Number($("#adult").val()) + Number($("#child").val()) <= guest_num) {
+				$("#guest_num").val(Number($("#adult").val()) + Number($("#child").val()));
+				$("#checkInCheck").val($("#checkInDate").val());
+				$("#checkOutCheck").val($("#checkOutDate").val());
+				var sdd = $("#checkInDate").val();
+				console.log(sdd);
+			    var edd = $("#checkOutDate").val();
+			    console.log(edd);
+			    var ar1 = sdd.split('/');
+			    console.log(ar1.toString());
+			    var ar2 = edd.split('/');
+			    console.log(ar2.toString());
+			    var da1 = new Date(ar1[2], ar1[1]-1, ar1[0]);
+			    console.log(new Date(ar1[2], ar1[1]-1, ar1[0]));
+			    var da2 = new Date(ar2[2], ar2[1]-1, ar2[0]);
+			    console.log(new Date(ar2[2], ar2[1]-1, ar2[0]));
+			    var dif = da2 - da1;
+			    var cDay = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
+			    var x = parseInt(dif/cDay);
+			    var y = parseInt(dif/cDay) + parseInt(1);
+				if(sdd && edd){
+					$(".checkIncheckOut").val(x + "박 " +  y + "일");
+				}
+				//숫자를 천단위,를 해주려고 만듬
+				function addComma(num) {
+				  var regexp = /\B(?=(\d{3})+(?!\d))/g;
+				  return num.toString().replace(regexp, ',');
+				}
+				totalNumber = Number(dif/cDay) * Number($("#acm_charge").val());
+				console.log(totalNumber);
+				$("#total").val(addComma(Number(dif/cDay) * Number($("#acm_charge").val())) + "원");	
+				var total = $("#total").val();
+				console.log("total" + $("#total").val());
 			}
-			//숫자를 천단위,를 해주려고 만듬
-			function addComma(num) {
-			  var regexp = /\B(?=(\d{3})+(?!\d))/g;
-			  return num.toString().replace(regexp, ',');
+			else {
+			/*채워 넣어야 함*/	
 			}
-			totalNumber = Number(dif/cDay) * Number($("#acm_charge").val());
-			$("#total").val(addComma(Number(dif/cDay) * Number($("#acm_charge").val())) + "원");	
-		}
-		else {
-		/*채워 넣어야 함*/	
 		}
 	});
 });
@@ -436,7 +446,7 @@ function CheckIn() {
 	if($("#checkInCheck").val() == null || $("#checkInCheck").val() == "") {
 		CheckIn = false;
 	}
-	else if($("#checkInCheck").val() != $("#checkIn").val()) {		
+	else if($("#checkInCheck").val() != $("#checkInDate").val()) {		
 		CheckIn = false;
 	}
 	
@@ -449,7 +459,7 @@ function CheckOut() {
 	if($("#checkOutCheck").val() == null || $("#checkOutCheck").val() == "") {
 		CheckOut = false;
 	}
-	else if($("#checkOutCheck").val() != $("#checkOut").val()) {
+	else if($("#checkOutCheck").val() != $("#checkOutDate").val()) {
 		CheckOut = false;
 	}
 	else {
@@ -482,20 +492,65 @@ $(document).ready(function() {
 			return false;
 		}
 		else {
-			$.ajax({
-				url : "resPay",
-				data : $("#form").serialize(),
-				type : "post",
-				success : function(data) {
-					location.href = "index";
-				},
-				error : function() {
-					alert("서버 에러");
-				}
+			IMP.init('imp38240115');
+			//IMP.request_pay(param, callback) 는 2개의 argument를 받는 함수입니다.
+			IMP.request_pay({
+			    pg : 'html5_inicis', //이니시스 웹(표준)
+			    pay_method : 'card', //결제 수단
+			    merchant_uid : 'merchant_' + new Date().getTime(),
+			    //가맹점에서 생성 관리하는 고유 주문번호
+			    name : '결제 창',
+			    amount : parseInt(totalNumber),
+			    currency : 'KRW',
+			    language : 'ko',
+			    buyer_email : '${dto.mb_email}',
+			    buyer_name : '${dto.mb_name}',
+			    buyer_tel : '${dto.mb_phone}'
+			}, function(rsp) {
+				if ( rsp.success ) {
+			    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+			    	$.ajax({
+			    		url: "/stay/reservationCheck", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+			    		type: 'POST',
+			    		dataType: 'json',
+			    		data: {
+				    		imp_uid : rsp.imp_uid
+				    		//기타 필요한 데이터가 있으면 추가 전달
+			    		}
+			    	})
+			    	.done(function(data) {
+			    		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+			    		console.log("1");
+			    		if ( everythings_fine ) {
+			    			console.log("2");
+			    			var msg = '결제가 완료되었습니다.';
+			    			msg += '\n고유ID : ' + rsp.imp_uid;
+			    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+			    			msg += '\결제 금액 : ' + rsp.paid_amount;
+			    			msg += '카드 승인번호 : ' + rsp.apply_num;
+			    			
+			    			alert(msg);
+			    			location.href = "index";
+			    			
+			    		} else {
+			    			console.log("[3] 아직 제대로 결제가 되지 않았습니다.");
+			    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+			    		}
+			    	});
+			    } else {
+			        var msg = '결제에 실패하였습니다.';
+			        msg += '에러내용 : ' + rsp.error_msg;
+
+			        alert(msg);
+			    }
 			});
 		}
 	});
 });
 </script>
+<!-- 아임포트 결제 관련 script -->
+<!-- 아임포트 관련 개발할때 보고 한것
+https://github.com/iamport/iamport-manual/blob/master/인증결제/README.md -->
+
 </body>
 </html>
