@@ -432,6 +432,25 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 		</div>
 	</div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="reservationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<img src="img/logo.jpg">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body text-center" style="font-weight:bold;">
+				 예약이 완료 되었습니다.
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
 <jsp:include page="common/footer.jsp" flush="false"/>
 
 <!--jquery -->
@@ -459,10 +478,13 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 			<c:when test="${not empty success}">
 				$("#joinModal").modal("show");
 			</c:when>
+			<c:when test ="${not empty reservation}">
+				$("#reservationModel").modal("show");
+			</c:when>
 		</c:choose>
 		$(".menu-toggle").click(function() {
-			$("nav").toggleClass("active")
-			$(".main").toggleClass("main1")
+			$("nav").toggleClass("active");
+			$(".main").toggleClass("main1");
 		});
 	});
 </script>

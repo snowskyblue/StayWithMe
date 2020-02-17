@@ -316,7 +316,7 @@ $(document).ready(function(){
         $('#datepicker').datepicker({
         	startDate: date,
             language: "en",
-            format: 'dd/mm/yyyy',
+            format: 'yyyy-mm-dd',
             daysOfWeekHighlighted: "6,0",
             beforeShowDay: function (date) {
             	//선택할수 있는 날짜를 지정하는 것
@@ -340,7 +340,7 @@ $(document).ready(function(){
     	
         $('#datepicker1').datepicker({
             language: "en",
-            format: 'dd/mm/yyyy',
+            format: 'yyyy-mm-dd',
             daysOfWeekHighlighted: "6,0",
            	beforeShowDay: function (date) {
                	//선택할수 있는 날짜를 지정하는 것
@@ -390,14 +390,14 @@ $(document).ready(function() {
 				console.log(sdd);
 			    var edd = $("#checkOutDate").val();
 			    console.log(edd);
-			    var ar1 = sdd.split('/');
+			    var ar1 = sdd.split('-');
 			    console.log(ar1.toString());
-			    var ar2 = edd.split('/');
+			    var ar2 = edd.split('-');
 			    console.log(ar2.toString());
-			    var da1 = new Date(ar1[2], ar1[1]-1, ar1[0]);
-			    console.log(new Date(ar1[2], ar1[1]-1, ar1[0]));
-			    var da2 = new Date(ar2[2], ar2[1]-1, ar2[0]);
-			    console.log(new Date(ar2[2], ar2[1]-1, ar2[0]));
+			    var da1 = new Date(ar1[0], ar1[1]-1, ar1[2]);
+			    console.log(new Date(ar1[0], ar1[1]-1, ar1[2]));
+			    var da2 = new Date(ar2[0], ar2[1]-1, ar2[2]);
+			    console.log(new Date(ar2[0], ar2[1]-1, ar2[2]));
 			    var dif = da2 - da1;
 			    var cDay = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
 			    var x = parseInt(dif/cDay);
@@ -506,16 +506,38 @@ $(document).ready(function() {
 			    language : 'ko',
 			    buyer_email : '${dto.mb_email}',
 			    buyer_name : '${dto.mb_name}',
-			    buyer_tel : '${dto.mb_phone}'
-			}, function (rsp) {
+			    buyer_tel : '${dto.mb_phone}',
+			    custom_data: "",
+			    bank_name: ""
+			}, 
+			function (rsp) {
 				console.log(rsp);
 				if (rsp.success) {
-				var msg = '결제가 완료되었습니다.';
-				msg += '고유ID : ' + rsp.imp_uid;
-				msg += '상점 거래ID : ' + rsp.merchant_uid;
-				msg += '결제 금액 : ' + rsp.paid_amount;
-				msg += '카드 승인번호 : ' + rsp.apply_num;
-				location.href = "payList";
+					var msg = '결제가 완료되었습니다.';
+					msg += '고유ID : ' + rsp.imp_uid;
+					msg += '상점 거래ID : ' + rsp.merchant_uid;
+					msg += '결제 금액 : ' + rsp.paid_amount;
+					msg += '카드 승인번호 : ' + rsp.apply_num;
+					
+					$.ajax({
+						data : {
+							checkIn : $("#checkInDate").val(),
+							checkOut : $("#checkOutDate").val(),
+							acm_code : "${rdto.acm_code}",
+							amount : rsp.paid_amount,
+							guestNum : $("#guest_num").val(),
+							pay_method : rsp.pay_method,
+							imp_uid : rsp.imp_uid
+						},
+						url : "reservationCheck",
+						type : "post",
+						success : function() {
+							location.href = "index?reservation";
+						},
+						error : function() {
+							alert("에러");
+						}
+					});
 				} else {
 				var msg = '결제에 실패하였습니다.';
 				msg += '에러내용 : ' + rsp.error_msg;

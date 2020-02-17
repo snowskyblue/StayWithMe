@@ -7,4 +7,19 @@
 	<select id="reservationImport" parameterType = "int" resultType = "com.jsk.stay.dto.AccommodationDto">
 		select * from accommodation where acm_code = #{acm_code}
 	</select>
+	<insert id="reservationIn" parameterType = "com.jsk.stay.dto.ReservationDto">
+		insert into reservation (res_code, mb_id, acm_code, res_pay_method, res_amount, res_pay_date, res_guest_num, res_checkin_date, res_checkout_date, res_confirm)
+		values(
+		#{res_code},
+		#{mb_id},
+		#{acm_code},
+		#{res_pay_method},
+		#{res_amount},
+		SYSDATE,
+		#{res_guest_num},
+		#{res_checkin_date},
+		#{res_checkout_date},
+		FALSE
+		)
+	</insert>
 </mapper>

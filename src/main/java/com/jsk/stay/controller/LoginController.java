@@ -68,6 +68,7 @@ public class LoginController {
 	public ModelAndView index(
 			@RequestParam(value = "logout", required = false) String logout,
 			@RequestParam(value = "loginS", required = false) String loginS,
+			@RequestParam(value = "reservation", required = false) String reservation,
 			HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
 		if (loginS != null) {
@@ -76,6 +77,9 @@ public class LoginController {
 		}
 		if (logout != null) {
 			model.addObject("msg", "You've been logged out successfully.");
+		}
+		if (reservation != null) {
+			model.addObject("reservation", "예약이 완료 되었습니다.");
 		}
 		model.setViewName("index");
 		return model;

@@ -1,5 +1,6 @@
 package com.jsk.stay.controller;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -13,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jsk.stay.command.Command;
+import com.jsk.stay.command.ReservationCommand;
 import com.jsk.stay.dao.LoginDao;
 import com.jsk.stay.dao.ReservationDaoImp;
 import com.jsk.stay.dto.AccommodationDto;
@@ -27,6 +30,8 @@ public class ReservationController {
 	@Autowired
 	LoginDao dao1;
 	
+	Command com;
+	
 	
 	@RequestMapping("/reservation")
 	public String reservation(HttpServletRequest request, Model model) {
@@ -35,7 +40,11 @@ public class ReservationController {
 		AccommodationDto dto = new AccommodationDto();
 		MemberDto dto1 = new MemberDto();
 		System.out.println("1");
-		dto = dao.reservation(3);
+		try {
+			dto = dao.reservation(20);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		dto1 = dao1.information(request.getRemoteUser());
 		System.out.println("2");
 		model.addAttribute("rdto",dto);
@@ -44,13 +53,10 @@ public class ReservationController {
 	}
 	
 	@RequestMapping("/reservationCheck")
-	@ResponseBody
-	public String reservationCheck(HttpServletRequest request, Model model) {
-		String imp_uid = request.getParameter("imp_uid");
-		System.out.println(imp_uid);
+	public void reservationCheck(HttpServletRequest request, Model model) {
 		
-		
-		
-		return "success";	
+		com = new ReservationCommand();
+		com.execute(model, request);
+			
 	}
 }
