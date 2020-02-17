@@ -197,7 +197,7 @@ nav, figure, footer, header {
 	<div class="container">
 		<div class="row">
 			<figure id="logo" class="col-md-6 m-0">
-				<a href="index" id="home"> <img src="img/logo.jpg" id="logoimg" alt="stay with me">
+				<a href="../index" id="home"> <img src="../img/logo.jpg" id="logoimg" alt="stay with me">
 				</a>
 				<div class="menu-toggle" onclick="toggle()"></div>
 			</figure>
@@ -210,7 +210,7 @@ nav, figure, footer, header {
 					<div class="link-box">
 						<ul class="list-unstyled">
 							<li class="qna-btn-li"><a href="#">Q&A</a></li>
-							<li class="cs-btn-li"><a href="csMember" id="nav-cs">∞Ì∞¥ºæ≈Õ</a></li>
+							<li class="cs-btn-li"><a href="../csMember" id="nav-cs">∞Ì∞¥ºæ≈Õ</a></li>
 						</ul>
 					</div>
 					<div class="link-box">

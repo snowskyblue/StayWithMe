@@ -40,6 +40,8 @@
 		<intercept-url pattern="/img/**" access="permitAll" />
 		<intercept-url pattern="/icheck-1.x/**" access="permitAll" />
 		<intercept-url pattern="/acmList" access="permitAll" />
+		<intercept-url pattern="/header" access="permitAll" />
+		<intercept-url pattern="/footer" access="permitAll" />
     	<intercept-url pattern="/editUpload/**" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
     	<intercept-url pattern="/csMember" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
     	<intercept-url pattern="/csMbWrite" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
@@ -76,7 +78,6 @@
 		<intercept-url pattern="/myPageProfile" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
 		<intercept-url pattern="/logout" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
 		<intercept-url pattern="/ckedit" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
-		<intercept-url pattern="/wishList" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
 		<intercept-url pattern="/**" access="authenticated" />
 		
 		<form-login login-page="/login" 
