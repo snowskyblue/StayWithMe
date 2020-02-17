@@ -1,23 +1,24 @@
 package com.jsk.stay.dto;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class ReservationDto {
-	private int res_code;
+	private String res_code;
 	private String mb_id;
 	private int acm_code;
 	private String res_pay_method;
 	private int res_amount;
 	private Timestamp res_pay_date;
 	private int res_guest_num;
-	private Timestamp res_checkin_date;
-	private Timestamp res_checkout_date;
+	private Date res_checkin_date;
+	private Date res_checkout_date;
 	private boolean res_confirm;
 	
-	public int getRes_code() {
+	public String getRes_code() {
 		return res_code;
 	}
-	public void setRes_code(int res_code) {
+	public void setRes_code(String res_code) {
 		this.res_code = res_code;
 	}
 	public String getMb_id() {
@@ -56,16 +57,16 @@ public class ReservationDto {
 	public void setRes_guest_num(int res_guest_num) {
 		this.res_guest_num = res_guest_num;
 	}
-	public Timestamp getRes_checkin_date() {
+	public Date getRes_checkin_date() {
 		return res_checkin_date;
 	}
-	public void setRes_checkin_date(Timestamp res_checkin_date) {
+	public void setRes_checkin_date(Date res_checkin_date) {
 		this.res_checkin_date = res_checkin_date;
 	}
-	public Timestamp getRes_checkout_date() {
+	public Date getRes_checkout_date() {
 		return res_checkout_date;
 	}
-	public void setRes_checkout_date(Timestamp res_checkout_date) {
+	public void setRes_checkout_date(Date res_checkout_date) {
 		this.res_checkout_date = res_checkout_date;
 	}
 	public boolean isRes_confirm() {
@@ -74,8 +75,8 @@ public class ReservationDto {
 	public void setRes_confirm(boolean res_confirm) {
 		this.res_confirm = res_confirm;
 	}
-	public ReservationDto(int res_code, String mb_id, int acm_code, String res_pay_method, int res_amount,
-			Timestamp res_pay_date, int res_guest_num, Timestamp res_checkin_date, Timestamp res_checkout_date,
+	public ReservationDto(String res_code, String mb_id, int acm_code, String res_pay_method, int res_amount,
+			Timestamp res_pay_date, int res_guest_num, Date res_checkin_date, Date res_checkout_date,
 			boolean res_confirm) {
 		super();
 		this.res_code = res_code;
@@ -93,5 +94,16 @@ public class ReservationDto {
 		super();
 	}
 	
-	
+	public ReservationDto(String res_code, String mb_id, int acm_code, String res_pay_method, int res_amount,
+			 int res_guest_num, Date res_checkin_date, Date res_checkout_date) {
+		super();
+		this.res_code = res_code;
+		this.mb_id = mb_id;
+		this.acm_code = acm_code;
+		this.res_pay_method = res_pay_method;
+		this.res_amount = res_amount;
+		this.res_guest_num = res_guest_num;
+		this.res_checkin_date = res_checkin_date;
+		this.res_checkout_date = res_checkout_date;
+	}
 }
