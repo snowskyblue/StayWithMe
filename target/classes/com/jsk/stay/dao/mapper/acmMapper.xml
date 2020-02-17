@@ -55,4 +55,16 @@
 	<select id="acmListCount" resultType="int">
 		select count(acm_code) from accommodation order by acm_code desc
 	</select>
+	
+	<select id="accommodation" resultType="com.jsk.stay.dto.AccommodationDto" parameterType="int">
+		select * from accommodation where acm_code = #{acm_code}
+	</select>
+	
+	<select id="amenity" resultType="com.jsk.stay.dto.AcmSubDto" parameterType="int">
+		select acm_amenity from acm_sub where acm_code = #{acm_code} and acm_amenity is not null
+	</select>
+	
+	<select id="rule" resultType="com.jsk.stay.dto.AcmSubDto" parameterType="int">
+		select acm_rule from acm_sub where acm_code = #{acm_code} and acm_rule is not null
+	</select>
 </mapper>

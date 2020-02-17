@@ -40,6 +40,7 @@
 		<intercept-url pattern="/img/**" access="permitAll" />
 		<intercept-url pattern="/icheck-1.x/**" access="permitAll" />
 		<intercept-url pattern="/acmList" access="permitAll" />
+		<intercept-url pattern="/acmInfo" access="permitAll" />
     	<intercept-url pattern="/editUpload/**" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
     	<intercept-url pattern="/csMember" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
     	<intercept-url pattern="/csMbWrite" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />

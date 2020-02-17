@@ -64,6 +64,10 @@
 	padding: 35px 10px;
 }
 
+.ck-widget img {
+	width: 700px;
+}
+
 #replyContent {
 	margin-top: 50px;
 }

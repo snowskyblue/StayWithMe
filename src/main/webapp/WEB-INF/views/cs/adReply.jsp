@@ -66,6 +66,10 @@
 	border-style: none;
 }
 
+.ck-widget img {
+	width: 700px;
+}
+
 :root {
 	--ck-image-style-spacing: 1.5em;
 }
