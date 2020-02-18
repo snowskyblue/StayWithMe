@@ -252,6 +252,25 @@
 		</div>
 	</div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="failModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<img src="img/logo.jpg">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body text-center" style="font-weight:bold;">
+				 결제에 실패하셨습니다.
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
 <jsp:include page="common/footer.jsp" flush="false"/>
 <!--jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -288,12 +307,12 @@ $(document).ready(function() {
 <script>
 function checkIn() {
 	if($("#acm_availdate").val() == null || $("#acm_availdate").val() == "") {
-		checkInA = false;
+		this.checkInA = false;
 	}
 	else{
 		var checkIn = $("#acm_availdate").val();
 		$("#checkIn").val(checkIn);
-		checkInA = true;
+		this.checkInA = true;
 	}
 }
 function checkOut() {
@@ -339,6 +358,7 @@ $(document).ready(function(){
 		  });
     	
         $('#datepicker1').datepicker({
+        	startDate: date,
             language: "en",
             format: 'yyyy-mm-dd',
             daysOfWeekHighlighted: "6,0",
@@ -368,6 +388,7 @@ console.log(guest_num);
 
 $(document).ready(function() {
 	$("#adult").attr('max',Number(guest_num));
+	$("#child").attr('max',Number(guest_num)-Number($("#adult").val()));
 });
 
 function number() {
@@ -529,9 +550,9 @@ $(document).ready(function() {
 							pay_method : rsp.pay_method,
 							imp_uid : rsp.imp_uid
 						},
-						url : "reservationCheck",
+						url : "res",
 						type : "post",
-						success : function() {
+						success : function(data) {
 							location.href = "index?reservation";
 						},
 						error : function() {
@@ -551,6 +572,14 @@ $(document).ready(function() {
 <!-- 아임포트 결제 관련 script -->
 <!-- 아임포트 관련 개발할때 보고 한것
 https://github.com/iamport/iamport-manual/blob/master/인증결제/README.md -->
-
+<script>
+$(document).ready(function() {
+	<c:choose>
+	<c:when test="${not empty fail}">
+		$("#failModal").modal("show");
+	</c:when>
+	</c:choose>
+});
+</script>
 </body>
 </html>

@@ -236,7 +236,12 @@ nav, figure, footer, header {
 				<div id="main-nav-bar" class="main-navbar row">
 					<ul class="list-unstyled">
 						<li class="wish-btn-li"><a href="html/wishList.html">위시리스트</a></li>
-						<li class="confirm-btn-li"><a href="#">예약확인</a></li>
+						<sec:authorize access="isAnonymous()">
+							<li class="confirm-btn-li"><a href="login">예약확인</a></li>
+						</sec:authorize>
+						<sec:authorize access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')">
+							<li class="confirm-btn-li"><a href="reservationCheck">예약확인</a></li>
+						</sec:authorize>
 						<sec:authorize access="isAnonymous()">
 							<li class="host-btn-li"><a href="hostJoin" id="host">호스트</a></li>
 						</sec:authorize>

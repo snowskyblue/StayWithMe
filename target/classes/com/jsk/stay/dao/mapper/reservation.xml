@@ -8,18 +8,7 @@
 		select * from accommodation where acm_code = #{acm_code}
 	</select>
 	<insert id="reservationIn" parameterType = "com.jsk.stay.dto.ReservationDto">
-		insert into reservation (res_code, mb_id, acm_code, res_pay_method, res_amount, res_pay_date, res_guest_num, res_checkin_date, res_checkout_date, res_confirm)
-		values(
-		#{res_code},
-		#{mb_id},
-		#{acm_code},
-		#{res_pay_method},
-		#{res_amount},
-		SYSDATE,
-		#{res_guest_num},
-		#{res_checkin_date},
-		#{res_checkout_date},
-		FALSE
-		)
+		insert into reservation (RES_CODE, MB_ID, ACM_CODE, RES_PAY_METHOD, RES_AMOUNT, RES_PAY_DATE, RES_GUEST_NUM, RES_CHECKIN_DATE, RES_CHECKOUT_DATE, RES_CONFIRM)
+		values(#{res_code},#{mb_id},#{acm_code},#{res_pay_method},#{res_amount},SYSDATE,#{res_guest_num},#{res_checkin_date},#{res_checkout_date},null)
 	</insert>
 </mapper>

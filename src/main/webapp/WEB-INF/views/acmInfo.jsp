@@ -12,6 +12,9 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- csrf정보  -->
+<meta name="_csrf" content="${_csrf.token}"/>
+<meta name="_csrf_header" content="${_csrf.headerName}"/>
 <!--bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <!--font-awesome -->
@@ -377,8 +380,11 @@ a{
 											</c:when>
 										</c:choose>
 									</c:forEach>
-									<div style="margin:20px;">
-										<button type="button" class="btn btn-dark" style="width:70%;">예약하기</button>
+									<div style="margin:20px;">		
+										<form method = "Get" action = "reservation">
+											<input type = "hidden" value = "${acmInfo[0].acm_code}" name = "acm_code">
+											<button type="submit" class="btn btn-dark" style="width:70%;">예약하기</button>
+										</form>							
 									</div>
 								</div>
 							</div>
@@ -400,7 +406,15 @@ a{
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <!-- datepicker -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
-
+<script>
+$(function () {
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    $(document).ajaxSend(function (e, xhr, options) {
+        xhr.setRequestHeader(header, token);
+    });
+});
+</script>
 <script>
 $(document).ready(function() {
 
