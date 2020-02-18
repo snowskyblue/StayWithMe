@@ -68,7 +68,8 @@ a{
 }
 
 .amenity {
-	width:140px;
+	width:130px;
+	margin-right: 15px;
 	display:inline-block;
 }
 
@@ -76,6 +77,45 @@ a{
 	width: 100%;
 }
 
+#sideSticker {
+	position :absolute;
+	top: 0px;
+	border : 1px solid gray;
+	width : 100%;
+	margin-left : 10px;
+	margin-right : 10px;
+	height : auto;
+}
+/*스크롤 footer까지 넘어가지 않게 하는 부분*/
+#sideSticker.on {
+	top: 980px!important;
+}
+
+.sideSub {
+	margin: 10px;
+	width:70%;
+	border-top:1px solid lightgray;
+}
+
+.rule {
+    width:120px;
+    display:inline-block;
+}
+
+
+#sideTitle {
+	text-align:center;
+	width:180px;
+	background-color:lightgrey;
+	margin-bottom:10px;
+	margin-top:20px;
+}
+
+@media screen and (max-width: 991px) {
+	#sideSticker {
+		position: static;
+	}
+}
 </style>
 </head>
 <body>
@@ -87,7 +127,7 @@ a{
 		
 		<div class="mainDiv mx-auto">
 			<div class = "row" style = "margin-botoom : 300px">
-				<div class = "col-sm-8">
+				<div class = "col-lg-8">
 					<div class="option">
 						<i class="fas fa-home"></i>
 						<c:choose>
@@ -153,7 +193,7 @@ a{
 					</div>
 					<div style="border-top: 3px solid #000000; padding: 15px 0px;">
 						<div>
-							<h4>편의시설</h4>
+							<h4 style="border-bottom:1px solid lightgrey;padding-bottom:5px;">편의시설</h4>
 						</div>
 						<div>
 							<c:forEach items="${amenity}" var="amenity">
@@ -273,9 +313,9 @@ a{
 										</span>
 									</c:when>
 									<c:when test="${amenity.acm_amenity eq 'infodesk'}">
-										<span class="amenity" style="width:160px;">
+										<span class="amenity">
 											<i class="fas fa-info-circle"></i>
-											<span>인포메이션 데스크</span>
+											<span>인포 데스크</span>
 										</span>
 									</c:when>
 								</c:choose>
@@ -284,10 +324,63 @@ a{
 						</div>
 					</div>
 				</div>
-				<div class = "col-sm-4 row" style = "position : relative;">
-					<div style = "width : 100%; margin-left : 10px; margin-right : 10px; ">
-						<div id = "sideSticker" style = "border : 1px solid grey; width : 100%; margin-left : 10px; margin-right : 10px; height : auto;">
-							<div class="input-group date form-group d-flex justify-content-between" id="datepicker" style = "font-weight : bold">
+				<div class = "mx-auto col-11 col-sm-8 col-lg-4 row" style = "position : relative;">
+					<div style="width:90%;">
+						<div id="sideSticker">
+							<h4 id="sideTitle" class="mx-auto">예약가능 날짜</h4>
+							<div align="center" id="datepicker" style = "font-weight : bold">
+								<div>
+							    	<input type="hidden" id="acm_availdate" name="acm_availdate" value="${acmInfo[0].acm_availdate}" required />
+							    </div>
+							</div>
+							<div class="mx-auto" style="padding-bottom:10px;">
+								<div class="mx-auto sideSub">
+								</div>
+								<div style="text-align:center;">
+									<h4><i class="fas fa-won-sign"></i> ${acmInfo[0].acm_charge}<span style="font-size:13px;">/1박</span></h4>
+									<span>체크인: ${acmInfo[0].acm_checkin_time} / </span>
+									<span>체크아웃: ${acmInfo[0].acm_checkout_time}</span>
+									<div class="mx-auto sideSub">
+									</div>
+									<h4 id="rule" class="mx-auto" style="width:150px;background-color:lightgrey;margin:20px;">숙소규정</h4>
+									<c:forEach items="${rule}" var="rule">
+										<c:choose>
+											<c:when test="${rule.acm_rule eq 'infant'}">
+												<span class="rule" style="width:250px;">
+													<span>유아(2세 미만) 숙박 <i class="far fa-circle"></i></span>
+												</span>
+											</c:when>
+											<c:when test="${rule.acm_rule eq 'child'}">
+												<span class="rule" style="width:250px;">
+													<span>어린이(2~12세) 숙박 <i class="far fa-circle"></i></span>
+												</span>
+											</c:when>
+											<c:when test="${rule.acm_rule eq 'pet'}">
+												<span class="rule">
+													<span>반려동물 <i class="far fa-circle"></i></span>
+												</span>
+											</c:when>
+											<c:when test="${rule.acm_rule eq 'smoking'}">
+												<span class="rule">
+													<span>흡연 <i class="far fa-circle"></i></span>
+												</span>
+											</c:when>
+											<c:when test="${rule.acm_rule eq 'party'}">
+												<span class="rule">
+													<span>행사/파티 <i class="far fa-circle"></i></span>
+												</span>
+											</c:when>
+											<c:when test="${rule.acm_rule eq 'commercial'}">
+												<span class="rule">
+													<span>상업적 이용 <i class="far fa-circle"></i></span>
+												</span>
+											</c:when>
+										</c:choose>
+									</c:forEach>
+									<div style="margin:20px;">
+										<button type="button" class="btn btn-dark" style="width:70%;">예약하기</button>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -315,13 +408,58 @@ $(document).ready(function() {
 		$("nav").toggleClass("active");
 		$(".main").toggleClass("main1");
 	});
+	
+	var select = ["17/02/2020", "18/02/2020"];
+	
+	var s = "${acmInfo[0].acm_availdate}";
+	var s3 = s.split(",");
+	//console.log(s3);
+	
+	
 	$('#datepicker').datepicker({
 		format: "dd/mm/yyyy",
-		startDate: '17/02/2020',
+		multidate: true,
 		daysOfWeekHighlighted: "6,0",
-		datesDisabled: ['07/01/2020'],
+		daysOfWeekDisabled: "0,1,2,3,4,5,6",
 		language: 'en'
 	});
+	
+	//기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
+	var floatPosition = parseInt($("#sideSticker").css("top")); 
+	//parseInt( 값)은 px를 삭제하고 가져옴
+	$(window).scroll(function(){ //브라우져 제공 scroll이벤트 처리
+		//현재 스크롤 위치를 가져온다.
+		var scrollTop = $(window).scrollTop();	
+	
+		//원래의 위치에서 스크롤해준것을 가져옴
+		var newPosition= scrollTop + floatPosition +"px"; //이때는 다시px를 붙여줘야함
+		$("#sideSticker").stop().animate({
+			"top" : newPosition
+		},100,"swing");
+		
+		/*스크롤 footer까지 넘어가지 않게 하는 부분*/
+		if(scrollTop >= 980) {
+			$("#sideSticker").addClass("on");
+		}
+		else {
+			$("#sideSticker").removeClass("on");
+		}
+	}).scroll();
+	//$('#datepicker').datepicker("update", "17/02/2020", "18/02/2020");
+	
+	var srcArray = [];
+	
+	$(".ck-widget img").each(function() {
+
+		var src = $(this).attr("src");
+		var atr = src.substring(22);
+		console.log(atr);
+		$(this).attr("src", atr);
+	});
+
+	if($(".rule").text() == "") {
+		$("#rule").remove();
+	}
 });
 </script>
 
