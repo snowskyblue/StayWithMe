@@ -339,6 +339,7 @@ $(document).ready(function() {
 	});*/
 	var x;
 	var endPage = window.location.search.substr(6,1);
+	console.log(endPage);
 	var d = window.location.pathname;
 	if(endPage == "") {
 		$(".pageNumber").eq(0).addClass("active");

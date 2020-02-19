@@ -430,7 +430,12 @@ $(document).ready(function() {
 		    }
 		    $(this).parent().find('input[type=hidden]').val(target);
 		});
-	 
+	
+
+});
+
+
+$(document).ready(function() {
 	$(".menu-toggle").click(function() {
 		$("nav").toggleClass("active");
 		$(".main").toggleClass("main1");
@@ -438,6 +443,7 @@ $(document).ready(function() {
 	
 	var x;
 	var endPage = window.location.search.substr(6,1);
+	console.log(endPage);
 	var d = window.location.pathname;
 	if(endPage == "") {
 		$(".pageNumber").eq(0).addClass("active");
@@ -458,7 +464,6 @@ $(document).ready(function() {
 		$(".pageNumber").eq(4).addClass("active");
 	}
 	
-
 });
 
 //geocoder callback함수(비동기 처리)
