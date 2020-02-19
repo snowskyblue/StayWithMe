@@ -196,6 +196,7 @@
 		align-items: normal;
 		padding-top: 10px;
 		display: inline-block;
+		position: relative;
 	}
 	
 	.lsImgDiv {
@@ -214,11 +215,18 @@
 	.lsConDivMobile {
 		display: block;
 	}
+	
+	.heartDiv {
+		position: absolute;
+		top: 20px;
+		right : 20px;
+	}
 }
 
 a{
 	color: black!important;
 }
+
 </style>
 </head>
 <body>
@@ -297,7 +305,7 @@ a{
 										${list.acm_charge}
 										<span style="color:black; font-size:0.9rem;"> /1박</span>
 									</h4>
-								</div>
+								</div><!-- lsConDiv -->
 								<br/>
 								<div class="lsConDivMobile my-auto">
 									
@@ -336,14 +344,14 @@ a{
 										</c:when>
 									</c:choose>
 									<h4 style="margin-top:10px; word-break: keep-all;">${list.acm_title}</h4>
-								</div>
-								<div style="height:100%;" class="float-right">
+								</div><!-- lsConDivMobile -->
+								<div style="height:100%;" class="heartDiv">
 									<input type="hidden"/>
 									<span class="heart" style="font-size: 1.5em;"><!-- onclick="wish()"  -->
 									  <i class="far fa-heart"></i>
 									</span>
 								</div>
-							</div>
+							</div><!-- listForm -->
 						</div>
 					</c:forEach>
 					<div>
@@ -399,7 +407,8 @@ $(document).ready(function() {
 		    {
 		        target = 1;
 		        $(this).parent().find('input[type=hidden]').val(target);
-		        $(this).css({"color": "red"});
+		        $(this).find("i").removeClass("far fa-heart").addClass("fas fa-heart");
+				$(this).css({"color": "#FC4C4E"});
 				 console.log(json[ix].acm_title);
 				 console.log(json[ix]);
 				 
@@ -426,6 +435,7 @@ $(document).ready(function() {
 		    {
 		        target = 0;
 		        $(this).parent().find('input[type=hidden]').val(target);
+		        $(this).find("i").removeClass("fas fa-heart").addClass("far fa-heart");
 		        $(this).css({"color": "black"});
 		    }
 		    $(this).parent().find('input[type=hidden]').val(target);
