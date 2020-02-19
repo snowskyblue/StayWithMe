@@ -24,12 +24,19 @@ public class ReservationDaoImp implements ReservationDao{
 		System.out.println(dto);
 		sqlSession.insert("reservationIn",dto);
 	}
-	/*
+	
 	@Override
 	public List<ReservationDto> reservationList(String mb_id) throws Exception {
 		System.out.println(mb_id);
 		return sqlSession.selectList("reservationList",mb_id);
 	}
-*/
+
+	@Override
+	public ReservationDto resReceipt(String res_code) throws Exception {
+		System.out.println(res_code);
+		return sqlSession.selectOne("resReceipt",res_code);
+	}
+	
+	
 	
 }

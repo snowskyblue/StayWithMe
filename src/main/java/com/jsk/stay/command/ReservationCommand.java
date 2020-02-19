@@ -9,21 +9,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 
 import com.jsk.stay.dao.ReservationDao;
+import com.jsk.stay.dao.ReservationDaoImp;
 import com.jsk.stay.dto.AccommodationDto;
 import com.jsk.stay.dto.ReservationDto;
 
 public class ReservationCommand implements Command{
 	
 	@Autowired
-	ReservationDao dao;
+	ReservationDaoImp dao;
 
 	@Override
 	public void execute(Model model, HttpServletRequest request) {
 		String checkIn_w = request.getParameter("checkIn");
-		Date checkIn = Date.valueOf(checkIn_w);
+		Timestamp checkIn = Timestamp.valueOf(checkIn_w);
 		System.out.println(checkIn);
 		String checkOut_w = request.getParameter("checkOut");
-		Date checkOut = Date.valueOf(checkOut_w);
+		Timestamp checkOut = Timestamp.valueOf(checkOut_w);
 		System.out.println(checkOut);
 		String acm_code_w = request.getParameter("acm_code");
 		int acm_code = Integer.parseInt(acm_code_w);
@@ -41,16 +42,7 @@ public class ReservationCommand implements Command{
 		String mb_id = request.getRemoteUser();
 		System.out.println(mb_id);
 		
-		ReservationDto dto = new ReservationDto(imp_uid, mb_id,acm_code,pay_method,amount,guest_num,checkIn,checkOut);
 		
-		System.out.println("dto" + dto);
-		try {
-			dao.reservationIn(dto);
-			System.out.println("Ελ");
-		} 
-		catch (Exception e) {
-			e.printStackTrace();
-		}
 		
 		
 	}

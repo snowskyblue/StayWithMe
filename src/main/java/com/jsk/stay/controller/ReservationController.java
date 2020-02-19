@@ -64,7 +64,7 @@ public class ReservationController {
 		return "reservation";
 	}
 	
-	@RequestMapping("/res")
+	@RequestMapping("/reser")
 	public void res(HttpServletRequest request, Model model) {
 		
 		String checkIn = request.getParameter("checkIn");
@@ -86,8 +86,12 @@ public class ReservationController {
 		System.out.println(imp_uid);
 		String mb_id = request.getRemoteUser();
 		System.out.println(mb_id);
+		String acm_title = request.getParameter("acm_title"); 
+		String acm_address = request.getParameter("acm_address"); 
+		String acm_add_detail = request.getParameter("acm_add_detail"); 
+		String card_name = request.getParameter("card_name"); 
 		
-		ReservationDto dto = new ReservationDto(imp_uid, mb_id,acm_code,pay_method,amount,guest_num,checkIn,checkOut);
+		ReservationDto dto = new ReservationDto(imp_uid, mb_id,acm_code,pay_method,amount,guest_num,checkIn,checkOut,acm_title,acm_address,acm_add_detail,card_name);
 		
 		System.out.println("dto" + dto);
 		try {
@@ -96,14 +100,33 @@ public class ReservationController {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		return;
 	}
+	
 	@RequestMapping("reservationCheck")
-	public String reservationCheck(HttpServletRequest request, Model model) {
-		
+	public String reservationCheck(HttpServletRequest request, Model model) throws Exception {
+		 
 		String mb_id = request.getRemoteUser();
-		//List<ReservationDto> =  dao.reservationList(mb_id);
+		System.out.println(mb_id);
+		List<ReservationDto> dto =  dao.reservationList(mb_id);
+		
+		System.out.println(dto);
+		
+		model.addAttribute("list",dto);
 		
 		return "reservationCheck";
 	}
+	
+	@RequestMapping("resReceipt")
+	@ResponseBody
+	public ReservationDto resReeceipt(HttpServletRequest request, Model model) throws Exception {
+		
+		String res_code = request.getParameter("res_code");
+		System.out.println(res_code);
+
+		ReservationDto dto = dao.resReceipt(res_code);
+		
+		return dto;
+	}
+	
 }

@@ -548,11 +548,15 @@ $(document).ready(function() {
 							amount : rsp.paid_amount,
 							guestNum : $("#guest_num").val(),
 							pay_method : rsp.pay_method,
-							imp_uid : rsp.imp_uid
+							imp_uid : rsp.imp_uid,
+							acm_title : "${rdto.acm_title}",
+							acm_address : "${rdto.acm_address}",
+							acm_add_detail : "${rdto.acm_add_detail}",
+							card_name : rsp.card_name
 						},
-						url : "res",
+						url : "reser",
 						type : "post",
-						success : function(data) {
+						success : function() {
 							location.href = "index?reservation";
 						},
 						error : function() {

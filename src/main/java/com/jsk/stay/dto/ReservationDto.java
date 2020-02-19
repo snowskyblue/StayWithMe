@@ -14,6 +14,10 @@ public class ReservationDto {
 	private String res_checkin_date;
 	private String res_checkout_date;
 	private boolean res_confirm;
+	private String acm_title;
+	private String acm_address;
+	private String acm_add_detail;
+	private String card_name;
 	
 	public String getRes_code() {
 		return res_code;
@@ -75,9 +79,35 @@ public class ReservationDto {
 	public void setRes_confirm(boolean res_confirm) {
 		this.res_confirm = res_confirm;
 	}
+	
+	public String getAcm_title() {
+		return acm_title;
+	}
+	public void setAcm_title(String acm_title) {
+		this.acm_title = acm_title;
+	}
+	public String getAcm_address() {
+		return acm_address;
+	}
+	public void setAcm_address(String acm_address) {
+		this.acm_address = acm_address;
+	}
+	public String getAcm_add_detail() {
+		return acm_add_detail;
+	}
+	public void setAcm_add_detail(String acm_add_detail) {
+		this.acm_add_detail = acm_add_detail;
+	}
+	public String getCard_name() {
+		return card_name;
+	}
+	public void setCard_name(String card_name) {
+		this.card_name = card_name;
+	}
+	
 	public ReservationDto(String res_code, String mb_id, int acm_code, String res_pay_method, int res_amount,
 			Timestamp res_pay_date, int res_guest_num, String res_checkin_date, String res_checkout_date,
-			boolean res_confirm) {
+			boolean res_confirm, String acm_title, String acm_address, String acm_add_detail, String card_name) {
 		super();
 		this.res_code = res_code;
 		this.mb_id = mb_id;
@@ -89,13 +119,17 @@ public class ReservationDto {
 		this.res_checkin_date = res_checkin_date;
 		this.res_checkout_date = res_checkout_date;
 		this.res_confirm = res_confirm;
+		this.acm_title = acm_title;
+		this.acm_address = acm_address;
+		this.acm_add_detail = acm_add_detail;
+		this.card_name = card_name;
 	}
 	public ReservationDto() {
 		super();
 	}
-	
 	public ReservationDto(String res_code, String mb_id, int acm_code, String res_pay_method, int res_amount,
-			 int res_guest_num, String res_checkin_date, String res_checkout_date) {
+			int res_guest_num, String res_checkin_date, String res_checkout_date, String acm_title, String acm_address,
+			String acm_add_detail, String card_name) {
 		super();
 		this.res_code = res_code;
 		this.mb_id = mb_id;
@@ -105,5 +139,11 @@ public class ReservationDto {
 		this.res_guest_num = res_guest_num;
 		this.res_checkin_date = res_checkin_date;
 		this.res_checkout_date = res_checkout_date;
+		this.acm_title = acm_title;
+		this.acm_address = acm_address;
+		this.acm_add_detail = acm_add_detail;
+		this.card_name = card_name;
 	}
+	
+	
 }
