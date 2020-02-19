@@ -130,7 +130,7 @@ app.controller("myCtrl", function($scope) {
       localStorage.setItem("cartKey",JSON.stringify($scope.products));//로컬스토리에 새로 저장.(value값은 이제 다시 문자열로 products 배열이 들어감)
      }
    $scope.info = function(x) {
-	   location.href='https://localhost:8443/stay/acmInfo?acm_code=' + x;
+	   location.href='../acmInfo?acm_code=' + x;
    }
 });
 </script>

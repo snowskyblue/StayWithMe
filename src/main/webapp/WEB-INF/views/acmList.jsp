@@ -394,9 +394,8 @@ $(document).ready(function() {
 	//console.log('${jsonList}');
 	var json = JSON.parse('${jsonList}');
 	//console.log(json.length);
-	 console.log("title" + json[0].acm_title);
 	 var cartKey;
-	var obj = [];
+	var obj = [];	//jason array 담을
 	 
 	 $(".heart").on("click",function(){
 		    var target = $(this).parent().parent().parent().find('input[type=hidden]').val();
@@ -409,14 +408,14 @@ $(document).ready(function() {
 		        $(this).parent().find('input[type=hidden]').val(target);
 		        $(this).find("i").removeClass("far fa-heart").addClass("fas fa-heart");
 				$(this).css({"color": "#FC4C4E"});
-				 console.log(json[ix].acm_title);
-				 console.log(json[ix]);
+				 //console.log(json[ix].acm_title);
+				 console.log("json[ix]    :     " + json[ix]);	//[object Object]
 				 
 				 if(localStorage.getItem("cartKey") == null) {
-						//alert("xxx");	
 						obj[0] = json[ix];
 						var y = JSON.stringify(obj);
 						//alert(obj.length);
+						console.log("obj   " + obj);	//[object Object]
 						localStorage.setItem("cartKey",y);
 						//alert(localStorage.getItem("cartKey"));
 					
@@ -424,7 +423,7 @@ $(document).ready(function() {
 					
 					else{
 						var z= localStorage.getItem("cartKey"); //json string
-						obj = JSON.parse(z); //array
+						obj = JSON.parse(z); //jason array
 						leng = obj.length;//배열의 원소개수
 						obj[leng] = json[ix];
 						var a = JSON.stringify(obj);
