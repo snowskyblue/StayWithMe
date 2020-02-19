@@ -26,7 +26,6 @@
 #board {
 	padding-top: 150px;
 }
-
 #border {
 	border: 3px solid #000000;
 	/*border-collapse: collapse;*/
@@ -41,7 +40,7 @@
 	font-size: 40px;
 }
 .hostBoard {
-	margin-top: 100px;
+	/*margin-top: 10px;*/
 	margin-bottom: 200px;
 }
 
@@ -104,8 +103,9 @@ a{
 					<span class="d-flex justify-content-end">
 						<span>정렬 개수 : </span>
 						<select name="contentnum" id="contentnum">
+							<option value="3" selected>3</option>
 							<option value="5">5</option>
-							<option value="10" selected>10</option>
+							<option value="10">10</option>
 							<option value="15">15</option>
 							<option value="20">20</option>
 						</select>
@@ -137,7 +137,7 @@ a{
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${list}" var="list">
-								<tr style="height : 49.3px;">
+								<tr style="height : 90px;">
 									<td id="acmTitle">
 										<a href="acmContent?acm_code=${list.acm_code}">
 											${list.acm_title}

@@ -51,7 +51,7 @@ footer {
 <script>
 $(document).ready(function(){
 	//이벤트를 받기 위한 이벤트소스 객체 생성
-	var eventSource = new EventSource("event"); //서버요청경로가 eventEx
+	var eventSource = new EventSource("../event"); //서버요청경로가 eventEx
 	eventSource.addEventListener("up_visit",function(event){
         $("#visitN").text(event.data);
      },false);

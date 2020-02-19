@@ -205,7 +205,7 @@ nav, figure, footer, header {
 			<nav class="navbar col-md-6" id="top-nav-bar">
 				<div class="top-navbar row">
 					<div class="search-box">
-						<a href="acmList">지역별 숙소찾기</a>
+						<a id="acmList" href="acmList">지역별 숙소찾기</a>
 					</div>
 					<div class="link-box">
 						<ul class="list-unstyled">
@@ -216,7 +216,7 @@ nav, figure, footer, header {
 					<div class="link-box">
 						<ul class="list-unstyled">
 							<sec:authorize access="hasAnyRole('ROLE_GUEST','ROLE_HOST', 'ROLE_ADMIN')">
-								<li class="login-btn-li"><a href="logout" id="nav-login">로그아웃</a></li>
+								<li class="login-btn-li"><a href="logout" id="nav-logout">로그아웃</a></li>
 							</sec:authorize>
 							<sec:authorize access="isAnonymous()">
 								<li class="login-btn-li"><a href="login?log=start" id="nav-login">로그인</a></li>
@@ -235,7 +235,7 @@ nav, figure, footer, header {
 				</div>
 				<div id="main-nav-bar" class="main-navbar row">
 					<ul class="list-unstyled">
-						<li class="wish-btn-li"><a href="html/wishList.html">위시리스트</a></li>
+						<li class="wish-btn-li"><a href="html/wishList.html" id="wish">위시리스트</a></li>
 						<sec:authorize access="isAnonymous()">
 							<li class="confirm-btn-li"><a href="login">예약확인</a></li>
 						</sec:authorize>
@@ -249,7 +249,7 @@ nav, figure, footer, header {
 							<li class="host-btn-li"><a href="hostJoin" id="host">호스트</a></li>
 						</sec:authorize>
 						<sec:authorize access="hasAnyRole('ROLE_HOST')">
-							<li class="host-btn-li"><a href="hostBoard?pagenum=1&contentnum=10" id="host">호스트</a></li>
+							<li class="host-btn-li"><a href="hostBoard?pagenum=1&contentnum=3" id="hostB">호스트</a></li>
 						</sec:authorize>
 						<!-- <li class="host-btn-li"><a href="#" id="host">호스트</a></li> -->
 						<li class="event-btn-li"><a href="#">이벤트</a></li>
@@ -279,6 +279,7 @@ function toggle() {
 		x.style.display = "block";
 	}
 }
+/*
 $(document).ready(function() {
 	$("#nav-login").click(function() {
 		event.preventDefault();
@@ -291,7 +292,7 @@ $(document).ready(function() {
 	
 });
 
-
+*/
 </script>
 <script>
 /*$(document).ready(function(){
