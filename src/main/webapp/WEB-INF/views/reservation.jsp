@@ -541,6 +541,8 @@ $(document).ready(function() {
 					msg += '카드 승인번호 : ' + rsp.apply_num;
 					
 					$.ajax({
+						url : "res",
+						type : "post",
 						data : {
 							checkIn : $("#checkInDate").val(),
 							checkOut : $("#checkOutDate").val(),
@@ -554,8 +556,6 @@ $(document).ready(function() {
 							acm_add_detail : "${rdto.acm_add_detail}",
 							card_name : rsp.card_name
 						},
-						url : "reser",
-						type : "post",
 						success : function() {
 							location.href = "index?reservation";
 						},

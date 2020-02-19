@@ -64,7 +64,7 @@ public class ReservationController {
 		return "reservation";
 	}
 	
-	@RequestMapping("/reser")
+	@RequestMapping("/res")
 	public void res(HttpServletRequest request, Model model) {
 		
 		String checkIn = request.getParameter("checkIn");
@@ -100,7 +100,6 @@ public class ReservationController {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		return;
 	}
 	
 	@RequestMapping("reservationCheck")
@@ -118,15 +117,18 @@ public class ReservationController {
 	}
 	
 	@RequestMapping("resReceipt")
-	@ResponseBody
-	public ReservationDto resReeceipt(HttpServletRequest request, Model model) throws Exception {
+	public String resReeceipt(HttpServletRequest request, Model model) throws Exception {
 		
 		String res_code = request.getParameter("res_code");
 		System.out.println(res_code);
-
+		
 		ReservationDto dto = dao.resReceipt(res_code);
 		
-		return dto;
+		model.addAttribute("dto",dto);
+		
+		System.out.println(dto);
+		
+		return "resReceipt";
 	}
 	
 }

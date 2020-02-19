@@ -22,7 +22,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet" />
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-<title>예약 확인 페이지</title>
+<title>예약 상세 페이지</title>
 <style>
 .main1 {
 	margin-top: 100px;
@@ -54,31 +54,23 @@
 </style>
 </head>
 <body>
-<jsp:include page="common/header.jsp" flush = "flase"></jsp:include>
-	<div class="container main" id="board">
-		<h3>예약 확인</h3>
+	<div class="container" id="board">
+		<h3>예약 상세 페이지</h3>
 		<div id="border"></div>
-		<div class = "resCheck mx-auto" style = "max-width : 100%">
-			<table class="resCheck_list mx-auto text-center m-0" style = "width : 100%; max-width : 1000px;">
+		<div class = "resCheck mx-auto" style = "max-width : 100%; border : 1px solid black">
+			<table class="resCheck_list mx-auto text-center m-0" style = "width : 100%;">
 				<colgroup>
-					<col style = "width : 10%;">
-					<col style = "width : 30%;">
-					<col style = "width : 15%;">
-					<col style = "width : 15%;">
-					<col style = "width : 35%;">
+					<col style = "width : 50%;">
+					<col style = "width : 50%;">
 				</colgroup>
 				<thead>
 					<tr>
-						<th scope="col">예약 번호</th>
-						<th scope="col">숙소 명</th>
-						<th scope="col">체크인</th>
-						<th scope="col">체크아웃</th>
-						<th scope="col">주소</th>
+						<th colspan="2" scope="col"> 숙소 예약 정보</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:choose>
-						<c:when test="${empty list}">
+						<c:when test="${empty dto}">
 							<tr>
 								<td colspan="5" style="height:400px;">
 									<h4 class="board_notice text-center">
@@ -89,25 +81,25 @@
 							</tr>
 						</c:when>
 						<c:otherwise>
-							<c:forEach items = "${list}" var = "list">
-								<tr style = "height : 90px;">
-									<td><a href = "resReceipt?res_code=${list.res_code}" id = "res_code">${list.res_code}</a></td>
-									<td>${list.acm_title}</td><!-- 숙소 명 -->
-									<td>${list.res_checkin_date}</td><!-- checkIn -->
-									<td>${list.res_checkout_date}</td><!-- checkOut -->
-									<td>${list.acm_address} ${list.acm_add_detail}</td><!-- 주소 -->
-								</tr>
-							</c:forEach>
+							<tr>
+								<td colspan = "2" style = "padding : 0">${dto.acm_title}</td><!-- 숙소 명 -->
+							</tr>
+							<tr>
+								<td colspan = "2">${dto.acm_address} / ${dto.acm_add_detail}</td><!-- 주소 -->
+							</tr>
+							<tr>
+								<td>${dto.res_checkin_date}</td><!-- checkIn -->
+								<td>${dto.res_checkout_date}</td><!-- checkOut -->
+							</tr>
 						</c:otherwise>
-					</c:choose>
+					</c:choose>		
 				</tbody>
 				<tfoot>
-					
+								
 				</tfoot>
 			</table>
 		</div>
 	</div>
-<jsp:include page="common/footer.jsp" flush = "flase"></jsp:include>
 <!--jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!--popper -->
@@ -116,13 +108,5 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <!-- datepicker -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
-<script>
-$(document).ready(function() {
-	$(".menu-toggle").click(function() {
-		$("nav").toggleClass("active");
-		$(".main").toggleClass("main1");
-	});
-});
-</script>
 </body>
 </html>
