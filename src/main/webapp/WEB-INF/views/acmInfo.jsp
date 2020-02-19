@@ -81,17 +81,18 @@ a{
 }
 
 #sideSticker {
-	position :absolute;
-	top: 0px;
+	position :fixed;
+	top: 250px;
 	border : 1px solid gray;
-	width : 100%;
+	width : 25%;
 	margin-left : 10px;
 	margin-right : 10px;
 	height : auto;
 }
 /*스크롤 footer까지 넘어가지 않게 하는 부분*/
 #sideSticker.on {
-	top: 980px!important;
+	position: absolute!important;
+	width: 100%!important;
 }
 
 .sideSub {
@@ -191,11 +192,11 @@ a{
 						</span>
 					</div>
 					<h3 id="title">${acmInfo[0].acm_title}</h3>
-					<div>
+					<div class="infoContent">
 						${acmInfo[0].acm_info}
 					</div>
 					<div style="border-top: 3px solid #000000; padding: 15px 0px;">
-						<div>
+						<div class="amenityTitle">
 							<h4 style="border-bottom:1px solid lightgrey;padding-bottom:5px;">편의시설</h4>
 						</div>
 						<div>
@@ -438,29 +439,6 @@ $(document).ready(function() {
 		language: 'en'
 	});
 	
-	//기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
-	var floatPosition = parseInt($("#sideSticker").css("top")); 
-	//parseInt( 값)은 px를 삭제하고 가져옴
-	$(window).scroll(function(){ //브라우져 제공 scroll이벤트 처리
-		//현재 스크롤 위치를 가져온다.
-		var scrollTop = $(window).scrollTop();	
-	
-		//원래의 위치에서 스크롤해준것을 가져옴
-		var newPosition= scrollTop + floatPosition +"px"; //이때는 다시px를 붙여줘야함
-		$("#sideSticker").stop().animate({
-			"top" : newPosition
-		},100,"swing");
-		
-		/*스크롤 footer까지 넘어가지 않게 하는 부분*/
-		if(scrollTop >= 980) {
-			$("#sideSticker").addClass("on");
-		}
-		else {
-			$("#sideSticker").removeClass("on");
-		}
-	}).scroll();
-	//$('#datepicker').datepicker("update", "17/02/2020", "18/02/2020");
-	
 	var srcArray = [];
 	
 	$(".ck-widget img").each(function() {
@@ -474,6 +452,44 @@ $(document).ready(function() {
 	if($(".rule").text() == "") {
 		$("#rule").remove();
 	}
+	
+	//기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
+	var floatPosition = parseInt($("#sideSticker").css("top")); 
+	//parseInt( 값)은 px를 삭제하고 가져옴
+	$(window).scroll(function(){ //브라우져 제공 scroll이벤트 처리
+		//현재 스크롤 위치를 가져온다.
+		var scrollTop = $(window).scrollTop();
+		var windowHeight = $(window).height();
+		var sideSticker = $("#sideSticker").outerHeight();
+		
+		if(400 > windowHeight - sideSticker - scrollTop - 400) {
+			console.log("in");
+			$("#sideSticker").addClass("on");
+		}
+		else {
+			$("#sideSticker").removeClass("on");
+		}
+		//원래의 위치에서 스크롤해준것을 가져옴
+		var newPosition= scrollTop + floatPosition +"px"; //이때는 다시px를 붙여줘야함
+
+		/*$("#sideSticker").stop().animate({
+			"top" : newPosition
+		},100,"swing");
+		
+		
+		/*스크롤 footer까지 넘어가지 않게 하는 부분*/
+		
+		console.log(sideSticker);
+		console.log(windowHeight);
+		console.log("scroll: " +scrollTop);
+		/*if(scrollTop >= 1000) {
+			$("#sideSticker").addClass("on");
+			
+		} else {
+			$("#sideSticker").removeClass("on");
+			
+		}*/
+	}).scroll();
 });
 </script>
 

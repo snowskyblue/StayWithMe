@@ -88,6 +88,10 @@
 	height : 85%;
 }
 
+.section {
+	cursor: pointer;
+}
+
 .lsImgDiv {
 	display: inline-block;
 	float: right;
@@ -235,7 +239,7 @@ a{
 						<div id="border"></div>
 					</div>
 					<c:forEach items="${list}" var="list">
-						<div class="section mx-auto d-flex flex-wrap align-content-center container-fluid" value="${list.acm_address}">
+						<div class="section mx-auto d-flex flex-wrap align-content-center container-fluid" value="${list.acm_address}" onClick="location.href='acmInfo?acm_code=${list.acm_code}'">
 							<div class="listForm">
 								<div class="lsImgDiv">
 									<img src="/stay/resources/upImg/${list.acm_thumbnail}" class="lsImg">

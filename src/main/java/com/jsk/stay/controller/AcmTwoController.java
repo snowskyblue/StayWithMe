@@ -44,8 +44,8 @@ public class AcmTwoController {
 	
 	@RequestMapping("/acmInfo")
 	public String acmInfo(Model model, HttpServletRequest request) {
-		//String acm_code = request.getParameter("acm_code");
-		String acm_code = "9";
+		String acm_code = request.getParameter("acm_code");
+		System.out.println("acmInfo: " + acm_code);
 		model.addAttribute("acmInfo", com.accommodation(Integer.parseInt(acm_code)));
 		model.addAttribute("amenity", com.amenity(Integer.parseInt(acm_code)));
 		model.addAttribute("rule", com.rule(Integer.parseInt(acm_code)));

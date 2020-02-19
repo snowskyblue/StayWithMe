@@ -56,6 +56,9 @@
     	<intercept-url pattern="/csAdModify" access="hasAnyRole('ROLE_ADMIN')" />
     	<intercept-url pattern="/csAdModifyPro" access="hasAnyRole('ROLE_ADMIN')" />
     	<intercept-url pattern="/csAdDelete" access="hasAnyRole('ROLE_ADMIN')" />
+    	<intercept-url pattern="/adminMain" access="hasAnyRole('ROLE_ADMIN')" />
+    	<intercept-url pattern="/navbar" access="hasAnyRole('ROLE_ADMIN')" />
+    	<intercept-url pattern="/csAdmin" access="hasAnyRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/memberjoin" access="isAnonymous()" />
 		<intercept-url pattern="/memberjoinpro" access="isAnonymous()" />
 		<intercept-url pattern="/nlogin" access="isAnonymous()" />

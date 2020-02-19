@@ -225,10 +225,10 @@ nav, figure, footer, header {
 								<li class="signup-btn-li"><a href="memberjoin" id = "nav-memberjoin">회원가입</a></li>
 							</sec:authorize>
 							<sec:authorize access="hasAnyRole('ROLE_GUEST','ROLE_HOST')">
-								<li class="signup-btn-li"><a href="myPageProfile" id = "nav-memberjoin" style="padding-top:3px;"><i class="fas fa-user-circle" style="font-size:20px;"></i></a></li>
+								<li class="signup-btn-li"><a href="myPageProfile" id = "nav-myPageProfile" style="padding-top:3px;"><i class="fas fa-user-circle" style="font-size:20px;"></i></a></li>
 							</sec:authorize>
 							<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
-								<li class="signup-btn-li"><a href="#" id = "nav-memberjoin">관리자</a></li>
+								<li class="signup-btn-li"><a href="adminMain" id = "nav-adminMain">관리자</a></li>
 							</sec:authorize>
 						</ul>
 					</div>
