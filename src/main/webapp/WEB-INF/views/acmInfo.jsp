@@ -84,15 +84,22 @@ a{
 	position :fixed;
 	top: 250px;
 	border : 1px solid gray;
-	width : 25%;
+	width : 300px;
 	margin-left : 10px;
 	margin-right : 10px;
 	height : auto;
 }
 /*스크롤 footer까지 넘어가지 않게 하는 부분*/
 #sideSticker.on {
-	position: absolute!important;
-	width: 100%!important;
+	position: static!important;
+	/*width: 100%!important;*/
+	top:0px!important;
+}
+
+#sideSticker.on2 {
+	position: static!important;
+	/*width: 100%!important;*/
+	/*top:800px!important;*/
 }
 
 .sideSub {
@@ -117,7 +124,9 @@ a{
 
 @media screen and (max-width: 991px) {
 	#sideSticker {
-		position: static;
+		position: static!important;
+		margin-top: 30px;
+		width: 250px;
 	}
 }
 </style>
@@ -390,6 +399,7 @@ a{
 								</div>
 							</div>
 						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -455,40 +465,47 @@ $(document).ready(function() {
 	
 	//기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
 	var floatPosition = parseInt($("#sideSticker").css("top")); 
-	//parseInt( 값)은 px를 삭제하고 가져옴
+	
+	var windowHei = $(window).height();
+	var docuHei = $(document).height();
+	var side = $("#sideSticker");
+	var footHei = $("footer").outerHeight();
+	var sideHeiSize = side.outerHeight();
+	var mainHei = $(".mainDiv").outerHeight();
+	
+	
+	console.log("docuHei: " + docuHei);
+	console.log("windowHei: " + windowHei);
+	console.log("sideHeiSize: " + sideHeiSize);
+	console.log("mainHei: " + mainHei);
+
 	$(window).scroll(function(){ //브라우져 제공 scroll이벤트 처리
 		//현재 스크롤 위치를 가져온다.
 		var scrollTop = $(window).scrollTop();
-		var windowHeight = $(window).height();
-		var sideSticker = $("#sideSticker").outerHeight();
-		
-		if(400 > windowHeight - sideSticker - scrollTop - 400) {
-			console.log("in");
-			$("#sideSticker").addClass("on");
-		}
-		else {
-			$("#sideSticker").removeClass("on");
-		}
-		//원래의 위치에서 스크롤해준것을 가져옴
-		var newPosition= scrollTop + floatPosition +"px"; //이때는 다시px를 붙여줘야함
-
-		/*$("#sideSticker").stop().animate({
-			"top" : newPosition
-		},100,"swing");
-		
-		
-		/*스크롤 footer까지 넘어가지 않게 하는 부분*/
-		
-		console.log(sideSticker);
-		console.log(windowHeight);
 		console.log("scroll: " +scrollTop);
-		/*if(scrollTop >= 1000) {
-			$("#sideSticker").addClass("on");
+		var sideHei = side.offset().top;
+		console.log("sideHei: " + sideHei);
+	
+		var val = docuHei - windowHei;
+		var val2 = mainHei - sideHeiSize + "px";
+		
+		if(docuHei / 2 > val) {
+			console.log("in");
+			side.addClass("on");
 			
-		} else {
-			$("#sideSticker").removeClass("on");
-			
-		}*/
+		}
+		
+		else if(mainHei <= (scrollTop + sideHeiSize)) {
+			$("#sideSticker").attr("style", "position:absolute;top:" + val2);
+			//$("#sideSticker").attr("style", "top:2175px");
+		}
+		
+		else {
+			$("#sideSticker").attr("style", "position:fixed;top:250px");
+			side.removeClass("on");
+			side.removeClass("on2");
+		}
+		
 	}).scroll();
 });
 </script>
