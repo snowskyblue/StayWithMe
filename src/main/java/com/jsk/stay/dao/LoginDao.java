@@ -70,10 +70,9 @@ public class LoginDao implements IDao {
 		HostDto dto = sqlSession.selectOne("information1",mb_id);
 		return dto;
 	}
-	TransactionDefinition definition = new DefaultTransactionDefinition();
 	
 	@Override
-	public void socialLogin(MemberDto dto) {
+	public void socialLogin(MemberDto dto) throws Exception {
 		System.out.println("dao + dto" + dto.toString());
 		sqlSession.insert("socialLogin",dto);
 	}

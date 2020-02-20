@@ -29,11 +29,10 @@
 
 <div class="logout" style="display: none;">
 	<form action="logout" method="post" id="logout">
-		<input type="submit" class="btn btn-success" value="Logout" /> 
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		<input type="submit" class="btn btn-success" value="Logout" /> 
 	</form>
 </div>
-
 
 <!--jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

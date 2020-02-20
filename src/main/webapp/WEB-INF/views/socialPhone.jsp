@@ -304,6 +304,12 @@ function sendSms() {
 </script>
 <script>
 $(document).ready(function() {
+	var id = "${id}";
+	var name = "${name}";
+	var pwd = "${pwd}";
+	var birthday = "${birthday}";
+	var gender = "${gender}";
+	var email = "${email}";
 	$("#loginBtn").click(function() {
 		event.preventDefault;
 		if(phoneCheck) {
@@ -311,7 +317,13 @@ $(document).ready(function() {
 				url : "socialLogin",
 				type : "post",
 				data : {mb_phone : $("#loginId_phone").val(),
-					apiResult : ${apiResult}},
+					mb_id : id,
+					mb_pwd : pwd,
+					mb_name : name,
+					mb_birthday : birthday,
+					mb_gender : gender,
+					mb_email : email
+				},
 				success : function() {
 					location.href = "index";
 				},

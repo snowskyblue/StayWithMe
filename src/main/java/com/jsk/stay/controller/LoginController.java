@@ -130,6 +130,7 @@ public class LoginController {
         oauthToken = naverLoginBO.getAccessToken(session, code, state);
        //로그인 사용자 정보를 읽어온다.
 	    apiResult = naverLoginBO.getUserProfile(oauthToken);
+	    System.out.println(apiResult);
 	    
 	    JSONParser parser = new JSONParser();
 	    
@@ -148,7 +149,7 @@ public class LoginController {
 	    		
 	    String name = (String) parse_response3.get("name");
 	    
-	    String pwd = (String) parse_response3.get("name"); 
+	    String pwd = (String) parse_response3.get("id"); 
 	    
 	    String email = (String) parse_response3.get("email");
 	    
@@ -158,15 +159,18 @@ public class LoginController {
 	    
 	    String birthday = (String) parse_response3.get("birthday");
 	    
-	    MemberDto dto = new MemberDto(id,pwd,name,birthday,gender,email);
-	    
 	    MemberDto dto1 = dao.information(id);
 	    System.out.println(dto1);
 	    
 	    if(dto1 != null) {
 	    	return "index";
 	    }
-	    model.addAttribute("apiResult",apiResult);
+	    model.addAttribute("id",id);
+	    model.addAttribute("pwd",pwd);
+	    model.addAttribute("name",name);
+	    model.addAttribute("birthday",birthday);
+	    model.addAttribute("gender",gender);
+	    model.addAttribute("email",email);
 
 		return "socialPhone";
 	}
@@ -187,46 +191,27 @@ public class LoginController {
 	public void socialLogin(Model model, HttpServletRequest request) throws Exception {
 		System.out.println("소환");
 		
-		String apiResult = request.getParameter("apiResult");
 		
-		JSONParser parser = new JSONParser();
-	    
-	    JSONObject object = (JSONObject)parser.parse(apiResult);
-	    System.out.println("1" + object);
-	    
-	    String parse_response1 = (String)object.get("resultcode");
-	    String parse_response2 = (String)object.get("message");
-	    JSONObject parse_response3 = (JSONObject)object.get("response");
-	    
-	    System.out.println("2" + parse_response3);
-	    System.out.println("3" + parse_response2);
-	    System.out.println("4" + parse_response1);
-	    
-	    String id = (String) parse_response3.get("id");
-	    		
-	    String name = (String) parse_response3.get("name");
-	    
-	    String pwd = (String) parse_response3.get("name"); 
-	    
-	    String email = (String) parse_response3.get("email");
-	    
-	    String gender1 = (String) parse_response3.get("gender");
-	    char[] gender2 = gender1.toCharArray();
-	    char gender = gender2[0];
-	    
-	    String birthday = (String) parse_response3.get("birthday");
-	    
-	    MemberDto dto = new MemberDto(id,pwd,name,birthday,gender,email);
-		
+		String mb_id = request.getParameter("mb_id");
+		String mb_pwd = request.getParameter("mb_pwd");
+		String mb_name = request.getParameter("mb_name");
+		String mb_birthday = request.getParameter("mb_birthday");
+		String mb_gender1 = request.getParameter("mb_gender");
+		char mb_gender = mb_gender1.charAt(0); 
+		String mb_email = request.getParameter("mb_email");
 		String mb_phone = request.getParameter("mb_phone");
 		System.out.println(mb_phone);
 		
-		System.out.println(dto.getMb_birthdate());
+		MemberDto dto = new MemberDto(mb_id,mb_pwd,mb_name,mb_birthday,mb_gender,mb_email,mb_phone);
 		
-		dto.setMb_phone(mb_phone);
 		System.out.println(dto);
+		try {
+			dao.socialLogin(dto);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 		
-		dao.socialLogin(dto);
 		
 	}
 	
