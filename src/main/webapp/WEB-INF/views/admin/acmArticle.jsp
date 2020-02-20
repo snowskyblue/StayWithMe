@@ -22,7 +22,7 @@
   margin-left: 300px;
 }
 
-#csA-header {
+#acmArti-header {
 	padding-top: 100px;
 }
 
@@ -35,27 +35,23 @@
 	font-family: 'S-CoreDream-2ExtraLight';
 	font-weight: bold;
 }
-
-.cs_notice .fas {
-	font-size: 40px;
-}
-.csBoard {
+.acmBoard {
 	margin-top: 100px;
 	margin-bottom: 200px;
 }
 
-.csBoard_list tr {
+.acmBoard_list tr {
 	border-collapse: collapse;
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;
 }
 
-.csBoard_list th {
+.acmBoard_list th {
 	background-color: #f3f3f3;
 	padding: 0.5%;
 }
 
-.csBoard_list td.csTitle {
+.acmBoard_list td.acmTitle {
 	text-align: left;
 	padding-left: 10px;
 	font-weight: bold;
@@ -79,104 +75,102 @@
 	border-color: #cccccc!important;
 }
 
-.csBoard_list a, .pagination a {
+.acmBoard_list a, .pagination a {
 	color: black!important;
 }
-
 </style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/admin/navbar.jsp" flush="false"/>
 
 <div class="main">
-	<div class="container" id="csA-header">
-		<h3>1:1 문의</h3>
+	<div class="container" id="acmArti-header">
+		<h3>숙소 목록</h3>
 		<div id="border"></div>
 		
-		<div class="csBoard mx-auto">
+		<div class="acmBoard mx-auto">
 			
-			<table class="csBoard_list mx-auto text-center">
+			<table class="acmBoard_list mx-auto text-center">
 				<colgroup>
-					<col style="width:500px;">
-					<col style="width:100px;">
-					<col style="width:100px;">
-					<col style="width:90px;">
+					<col style="width:50px;"><!-- 숙소번호 -->
+					<col style="width:300px;"><!-- 제목 -->
+					<col style="width:300px;"><!-- 주소 -->
+					<col style="width:200px;"><!-- 상세주소 -->
+					<col style="width:60px;"><!-- 집유형 -->
+					<col style="width:100px;"><!-- 아이디 -->
+					<col style="width:50px;"><!-- 체크 -->
 				</colgroup>
 				<thead>
 					<tr>
+						<th scope="col">숙소번호</th>
 						<th scope="col">제목</th>
-						<th scope="col">작성자</th>
-						<th scope="col">작성일</th>
-						<th scope="col">답변유무</th>
+						<th scope="col">주소</th>
+						<th scope="col">상세주소</th>
+						<th scope="col">집유형</th>
+						<th scope="col">아이디</th>
+						<th scope="col"><input type="checkbox"></th>
 					</tr>
 				</thead>
 				<tbody>
-				<c:choose>
-					<c:when test="${empty list}">
+					<c:forEach items="${list}" var="list">
 						<tr>
-							<td colspan="4" style="height:400px;">
-								<h4 class="cs_notice text-center">
-									<i class="fas fa-exclamation-circle"></i><br/><br/>
-									1:1 문의 내역이 존재하지 않습니다.
-								</h4>
-							</td>
-						</tr>
-					</c:when>
-					<c:otherwise>
-						<c:forEach items="${list}" var="list">
-							<sec:authentication property="principal.username" var="mb_id"/>
-							<sec:authentication property="principal.authorities" var="mb_grade"/>
+							<td>${list.mb_id}</td>
+							<td>${list.mb_name}</td>
 							<c:choose>
-								<c:when test="${mb_grade eq '[ROLE_ADMIN]' && list.mb_id ne mb_id }">
-									<tr>
-										<td class="csTitle">
-											<a href="csAdContent?cs_code=${list.cs_code}&mb_id=${list.mb_id}">
-												${list.cs_title}
-											</a>
-										</td>
-										<td>${list.mb_id}</td>
-										<td>${list.cs_date}</td>
-										<c:choose>
-											<c:when test="${list.cs_complete eq 'N'.charAt(0)}">
-												<td class="text-danger" style="font-weight:bold;">답변대기</td>
-											</c:when>
-											<c:otherwise>
-												<td class="text-primary" style="font-weight:bold;">답변완료</td>
-											</c:otherwise>
-										</c:choose>
-									</tr>
+								<c:when test="${list.mb_sex eq 'F'.charAt(0)}">
+									<td>여</td>
 								</c:when>
-								<c:otherwise>
-								</c:otherwise>
+								<c:when test="${list.mb_sex eq 'M'.charAt(0)}">
+									<td>남</td>
+								</c:when>
 							</c:choose>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
+							<td>${list.mb_birthdate}</td>
+							<td>${list.mb_email}</td>
+							<td>${list.mb_phone}</td>
+							<td>${list.mb_join_date}</td>
+							<c:choose>
+								<c:when test="${empty list.mb_delete_date}">
+									<td>-</td>
+								</c:when>
+								<c:when test="${not empty list.mb_delete_date}">
+									<td>${list.mb_delete_date}</td>
+								</c:when>
+							</c:choose>
+							<c:choose>
+								<c:when test="${list.mb_grade eq 'ROLE_ADMIN'}">
+									<td>관리자</td>
+								</c:when>
+								<c:when test="${list.mb_grade eq 'ROLE_HOST'}">
+									<td>호스트</td>
+								</c:when>
+								<c:when test="${list.mb_grade eq 'ROLE_GUEST'}">
+									<td>게스트</td>
+								</c:when>
+							</c:choose>
+							<td><input type="checkbox"></td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
-			<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
-				<div>
-					<div class="paging" align="center">
-						<ul class="pagination">
-							<c:if test="${pageMaker.prev}">
-								<li class="page-item"><a class="page-link" href="csAdmin${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
-							</c:if> 
-						
-							<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-								<li class="page-item pageNumber"><a class="page-link pageNum" href="csAdmin${pageMaker.makeQuery(idx)}" num="${idx}">${idx}</a></li>
-							</c:forEach>
-						
-							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-								<li class="page-item"><a class="page-link" href="csAdmin${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
-							</c:if> 
-						</ul>
-					</div>
-				</div>					
-			</sec:authorize>
-			
+			<div>
+				<div class="paging" align="center">
+					<ul class="pagination">
+						<c:if test="${pageMaker.prev}">
+							<li class="page-item"><a class="page-link" href="acmArticle${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+						</c:if> 
+					
+						<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+							<li class="page-item pageNumber"><a class="page-link pageNum" href="acmArticle${pageMaker.makeQuery(idx)}" num="${idx}">${idx}</a></li>
+						</c:forEach>
+					
+						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+							<li class="page-item"><a class="page-link" href="acmArticle${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+						</c:if> 
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
-
 </div>
 
 
@@ -188,7 +182,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script>
-
 $(document).ready(function() {
 	var x;
 	var endPage = window.location.search.substr(6,1);

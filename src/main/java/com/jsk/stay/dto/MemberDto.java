@@ -43,7 +43,7 @@ public class MemberDto {
 	public void setMb_birthdate(String mb_birthdate) {
 		this.mb_birthdate = mb_birthdate;
 	}
-	public char isMb_sex() {
+	public char getMb_sex() {
 		return mb_sex;
 	}
 	public void setMb_sex(char mb_sex) {

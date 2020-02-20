@@ -31,4 +31,36 @@
 	<select id="phoneCheck" parameterType="com.jsk.stay.dto.MemberDto" resultType="String">
 		select mb_phone from member where mb_phone = #{mb_phone}
 	</select>
+	
+	<select id="memberList" resultType="com.jsk.stay.dto.MemberDto" parameterType="com.jsk.stay.dto.MemberDto">
+		select	mb_id,
+				mb_name,
+				mb_birthdate,
+				mb_sex,
+				mb_email,
+				mb_phone,
+				mb_join_date,
+				mb_delete_date,
+				mb_grade
+		from (
+				select	mb_id,
+						mb_name,
+						mb_birthdate,
+						mb_sex,
+						mb_email,
+						mb_phone,
+						mb_join_date,
+						mb_delete_date,
+						mb_grade,
+						row_number() over(order by mb_join_date desc) as rNum
+				from member
+				) mp
+		where rNum between #{rowStart} and #{rowEnd}
+		order by mb_join_date desc
+	</select>
+
+	<select id="listCount" resultType="int" parameterType="com.jsk.stay.dto.MemberDto">
+		select count(mb_id)
+		from member
+	</select>
 </mapper>

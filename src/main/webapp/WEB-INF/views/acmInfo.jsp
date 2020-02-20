@@ -472,25 +472,18 @@ $(document).ready(function() {
 	var footHei = $("footer").outerHeight();
 	var sideHeiSize = side.outerHeight();
 	var mainHei = $(".mainDiv").outerHeight();
-	
-	
-	console.log("docuHei: " + docuHei);
-	console.log("windowHei: " + windowHei);
-	console.log("sideHeiSize: " + sideHeiSize);
-	console.log("mainHei: " + mainHei);
+
 
 	$(window).scroll(function(){ //브라우져 제공 scroll이벤트 처리
 		//현재 스크롤 위치를 가져온다.
 		var scrollTop = $(window).scrollTop();
-		console.log("scroll: " +scrollTop);
+
 		var sideHei = side.offset().top;
-		console.log("sideHei: " + sideHei);
-	
+
 		var val = docuHei - windowHei;
 		var val2 = mainHei - sideHeiSize + "px";
 		
 		if(docuHei / 2 > val) {
-			console.log("in");
 			side.addClass("on");
 			
 		}

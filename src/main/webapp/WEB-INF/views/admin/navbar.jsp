@@ -61,6 +61,17 @@
 	color: #f1f1f1;
 }
 
+#coll a {
+	font-size:20px;
+}
+
+.postToggle {
+	text-decoration: underline!important;
+	text-underline-position: under;
+	color: white!important;
+}
+
+
 @media screen and (max-height: 450px) {
 	.sidenav {padding-top: 15px;}
 	.sidenav a {font-size: 18px;}
@@ -78,8 +89,12 @@
 	<p align="right">${mb_id}님 접속중</p>
 	<a href="adminMain">관리자 메인페이지</a>
 	<a href="csAdmin">1:1 문의 관리</a>
-	<a href="#">회원관리</a>
-	<a href="#">Contact</a>
+	<a href="memberList">회원 관리</a>
+	<a href="#" id="post">회원글 관리&nbsp;&nbsp;&nbsp;</a>
+	<div id="coll" class="collapse">
+		<a id="acmArti" href="acmArticle">&nbsp;숙소 목록</a>
+		<a id="reviewArti" href="reviewArticle">&nbsp;리뷰 목록</a>
+	</div>
 </div>
 
 
@@ -91,6 +106,34 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script>
+$(document).ready(function() {
+	$("#post").click(function() {
+		$(this).toggleClass("postToggle");
+		$(".collapse").collapse("toggle");
+		
+	});
+	
+	var location = window.location.pathname.substr(6);
+	
+	$("a").each(function() {
+		var a = $(this).attr("href");
+		if(a == location) {
+			$(this).attr("style", "color:white");
+		}
+	});
+	
+	var ac = $("#acmArti").attr("href");
+	console.log(location);
+	if($("#acmArti").attr("href") == location) {
+		$("#post").attr("style", "color:white!important");
+	}
+	if($("#reviewArti").attr("href") == location) {
+		$("#post").attr("style", "color:white!important");
+	}
+	
+	
+	
+});
 </script>
 </body>
 </html>
