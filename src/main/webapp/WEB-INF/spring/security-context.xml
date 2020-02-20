@@ -19,7 +19,8 @@
     
     <http pattern="/ckedit" security ="none"/>
     <http pattern="/write" security ="none"/>
-    <http pattern="/event" security ="none"/>
+    <http pattern="/event" security ="none"/>    
+    
     <http auto-config='true' use-expressions = "true">
     	<headers>  <!-- X-Frame-Options : deny 해결(iframe사용시) -->
         	<frame-options disabled="true"></frame-options>
@@ -38,10 +39,12 @@
 		<intercept-url pattern="/payments/complete/" access="permitAll" />
 		<intercept-url pattern="/js/**" access="permitAll" />
 		<intercept-url pattern="/img/**" access="permitAll" />
+		<intercept-url pattern="/upImg/**" access="permitAll" />
 		<intercept-url pattern="/icheck-1.x/**" access="permitAll" />
 		<intercept-url pattern="/acmList" access="permitAll" />
 		<intercept-url pattern="/acmInfo" access="permitAll" />
 		<intercept-url pattern="/header" access="permitAll" />
+		<intercept-url pattern="/wishList" access="permitAll" />
 		<intercept-url pattern="/footer" access="permitAll" />
     	<intercept-url pattern="/editUpload/**" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
     	<intercept-url pattern="/csMember" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
