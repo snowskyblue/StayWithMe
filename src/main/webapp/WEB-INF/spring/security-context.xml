@@ -32,6 +32,7 @@
 		<intercept-url pattern="/phoneCheck" access="permitAll" />
 		<intercept-url pattern="/login" access="permitAll" />
 		<intercept-url pattern="/sendSms" access="permitAll" />
+		<intercept-url pattern="/socialLogin" access="permitAll" />
 		<intercept-url pattern="/login_duplicate" access="permitAll" />
 		<intercept-url pattern="/index" access="permitAll" />
 		<intercept-url pattern="/html/**" access="permitAll" />

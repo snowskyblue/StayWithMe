@@ -17,5 +17,8 @@
 	<select id = "information1" parameterType = "String" resultType = "com.jsk.stay.dto.HostDto">
 		SELECT * FROM HOST WHERE mb_id = #{mb_id}
 	</select>
-	
+	<insert id="socialLogin" parameterType = "com.jsk.stay.dto.MemberDto">
+		insert into member (mb_id,mb_pwd, mb_name, mb_birthdate,mb_phone, mb_sex, mb_email, mb_join_date, mb_grade)
+		values(#{mb_id},#{mb_pwd},#{mb_name},#{mb_birthdate},#{mb_phone},#{mb_sex},#{mb_email},SYSDATE,'ROLE_GUEST')
+	</insert>
 </mapper>

@@ -147,8 +147,8 @@
 						<div class="form-group">
 							<label for="loginId_phone">휴대폰 번호</label><br/>
 							<div class="form_center">
-								<input type="tel" class="form-control-inline col-8 col-sm-8" id="mb_phone" name="mb_phone" maxlength="11" placeholder='"-"없이 번호만 입력'>
-								<button type="button" onclick="namePhoneCheck(); phoneCertify();" id="phone_certify" class="btn btn-dark">인증</button>
+								<input type="tel" class="form-control-inline col-8 col-sm-8" id="loginId_phone" name="mb_phone" maxlength="11" placeholder='"-"없이 번호만 입력'>
+								<button type="button" onclick="namePhoneCheck();" id="phone_certify" class="btn btn-dark">인증</button>
 								<div class="check_font" id="phone_check"></div>
 							</div>
 						</div>
@@ -160,7 +160,7 @@
 							</div>
 						</div><br/><br/>
 						<div class="form-group text-center">
-							<button type="button" id="loginBtn" class="btn btn-dark form-control" style="border: none;">아이디 찾기</button>
+							<button type="button" id="loginBtn" class="btn btn-dark form-control" style="border: none;">소셜 로그인 확인</button>
 						</div>
 					</form>
 				</div>
@@ -212,7 +212,7 @@ $(function () {
 var phoneJ = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;
 
 function namePhoneCheck() {
-	var loginId_phone = document.getElementById("mb_phone");
+	var loginId_phone = document.getElementById("loginId_phone");
 	
 	if(loginId_phone.value == "") {
 		$("#loginModal").modal("show");
@@ -227,11 +227,12 @@ function namePhoneCheck() {
 	else {
 		$.ajax({
 			url : "phoneCheck",
-			data : {mb_phone : $("#mb_phone").val()},
+			data : {mb_phone : $("#loginId_phone").val()},
 			type : "post",
 			success : function(data) {
 				if(data == "0") {
 					$("#loginModal").modal("show");
+					phoneCertify();
 					loginModal_body.innerHTML = "입력 가능한 전화번호 입니다.";
 				}
 				else {
@@ -248,28 +249,27 @@ function namePhoneCheck() {
 
 //인증문자 발송
 function phoneCertify() {
-	if(findId_name.value != "" && phoneJ.test(findId_phone.value) == true){
-		var mb_name = findId_name.value;
-		var mb_phone = findId_phone.value;
+	if(phoneJ.test(loginId_phone.value) == true){
+		var mb_phone = loginId_phone.value;
 		
 		$.ajax({
-			url: "findIdCheck",
-			data: {mb_name : mb_name, mb_phone : mb_phone},
+			url: "loginIdCheck",
+			data: {mb_phone : mb_phone},
 			type:"POST",
 			success: function(data) {
 				console.log(data);
-				if(data != "notFoundId") {
-					$("#findModal").modal("show");
-					findModal_body.innerHTML = "인증번호가 발송되었습니다.";
+				if(data != "notLoginId") {
+					$("#loginModal").modal("show");
+					loginModal_body.innerHTML = "인증번호가 발송되었습니다.";
 					sendSms();
-					foundId = data;
+					loginId = data;
 				}
 				else {
-					$("#findModal").modal("show");
-					findModal_body.innerHTML = "입력하신 정보가 회원정보와<br/>일치하지 않습니다.<br/> 다시 확인해주세요.";	
-					foundId = data;
+					$("#loginModal").modal("show");
+					loginModal_body.innerHTML = "입력하신 정보가 회원정보와<br/>일치하지 않습니다.<br/> 다시 확인해주세요.";	
+					loginId = data;
 				}
-				return foundId;
+				return loginId;
 			}
 		});
 
@@ -281,15 +281,16 @@ function sendSms() {
 	$.ajax({
 		url: "sendSms",
 		data : {
-	    	   mb_phone : $("#findId_phone").val()
+	    	   mb_phone : $("#loginId_phone").val()
 	       },
 	       success : function(result){
 	    	   console.log(result);
 	    	   if(result != null) {
 	    		   $("#sms_confirm").on("click", function() {
-	    			 if(JSON.parse(result) == ($("#findId_sms").val())) {
+	    			 if(JSON.parse(result) == ($("#loginId_sms").val())) {
 	    				 $("#phone_check2").text("인증되었습니다.");
 	    				 $("#phone_check2").css("color", "blue");
+	    				 phoneCheck = true;
 	    			 }
 	    			 else {
 	    				 $("#phone_check2").text("인증실패. 다시 입력하세요.");
@@ -300,9 +301,31 @@ function sendSms() {
 	       }
 	});
 }
-
-
-
+</script>
+<script>
+$(document).ready(function() {
+	$("#loginBtn").click(function() {
+		event.preventDefault;
+		if(phoneCheck) {
+			$.ajax({
+				url : "socialLogin",
+				type : "post",
+				data : {mb_phone : $("#loginId_phone").val(),
+					apiResult : ${apiResult}},
+				success : function() {
+					location.href = "index";
+				},
+				error : function() {
+					alert("에러");
+				}
+			});
+		}
+		else {
+			$("#loginModal").modal("show");
+			loginModal_body.innerHTML = "실패했습니다.";
+		}
+	});
+});
 </script>
 </body>
 </html>

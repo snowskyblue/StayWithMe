@@ -118,6 +118,16 @@ public class MemberDto {
 		this.mb_email = mb_email;
 		this.mb_phone = mb_phone;
 	}
+	public MemberDto(String mb_id, String mb_pwd, String mb_name, String mb_birthdate, char mb_sex, String mb_email) {
+		super();
+		this.mb_id = mb_id;
+		this.mb_pwd = mb_pwd;
+		this.mb_name = mb_name;
+		this.mb_birthdate = mb_birthdate;
+		this.mb_sex = mb_sex;
+		this.mb_email = mb_email;
+		this.mb_join_date = mb_join_date;
+	}
 	
 	
 	
