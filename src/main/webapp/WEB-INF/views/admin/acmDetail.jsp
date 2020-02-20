@@ -25,15 +25,16 @@
 <!-- multi date picker 추가 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
 
-<title>숙소 정보</title>
+<title>Insert title here</title>
 <style>
-.main1 {
-	margin-top: 100px;
+.main {
+  margin-left: 300px;
 }
 
-#acmInfo-header {
-	padding-top: 150px;
+#acmDetail-header {
+	padding-top: 100px;
 }
 
 #border {
@@ -44,10 +45,6 @@
 .form-group label, .container h3, .container h4 {
 	font-family: 'S-CoreDream-2ExtraLight';
 	font-weight: bold;
-}
-
-a{
-	color: black!important;
 }
 
 .mainDiv {
@@ -82,7 +79,7 @@ a{
 
 #sideSticker {
 	position :fixed;
-	top: 250px;
+	top: 200px;
 	border : 1px solid gray;
 	width : 300px;
 	margin-left : 10px;
@@ -132,9 +129,10 @@ a{
 </style>
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/common/header.jsp" flush="false"/>
+<jsp:include page="/WEB-INF/views/admin/navbar.jsp" flush="false"/>
+
 <div class="main">
-	<div class="container" id="acmInfo-header">
+	<div class="container" id="acmDetail-header">
 		<h3>숙소 정보</h3>
 		<div id="border"></div>
 		
@@ -170,7 +168,7 @@ a{
 							<c:when test="${acmInfo[0].acm_room_type eq 'wholeH'}">
 								<span class="contHead">&nbsp;전체</span>
 								<br/>
-								<span style="font-weight:normal;">게스트가 숙소 전체를 다른 사람과 공유하지 않고 단독으로 이용합니다. 일반적으로 침실, 욕실, 부엌이 포함됩니다.</span>
+								<span style="font-weight:normal;">게스트가 숙소 전체를 다른 사람과 공유하지 않고 단독으로 이용합니다. <br/>일반적으로 침실, 욕실, 부엌이 포함됩니다.</span>
 							</c:when>
 							<c:when test="${acmInfo[0].acm_room_type eq 'exclusiveR'}">
 								<span class="contHead">&nbsp;개인실</span>
@@ -391,10 +389,7 @@ a{
 										</c:choose>
 									</c:forEach>
 									<div style="margin:20px;">		
-										<form method = "Get" action = "reservation">
-											<input type = "hidden" value = "${acmInfo[0].acm_code}" name = "acm_code">
-											<button type="submit" class="btn btn-dark" style="width:70%;">예약하기</button>
-										</form>							
+										<button type="button" onClick="location.href='acmArticle'" class="btn btn-dark" style="width:70%;">목록으로</button>					
 									</div>
 								</div>
 							</div>
@@ -406,7 +401,6 @@ a{
 		</div>
 	</div>
 </div>
-<jsp:include page="/WEB-INF/views/common/footer.jsp" flush="false"/>
 
 <!--jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -416,29 +410,9 @@ a{
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <!-- datepicker -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
-<script>
-$(function () {
-    var token = $("meta[name='_csrf']").attr("content");
-    var header = $("meta[name='_csrf_header']").attr("content");
-    $(document).ajaxSend(function (e, xhr, options) {
-        xhr.setRequestHeader(header, token);
-    });
-});
-</script>
+
 <script>
 $(document).ready(function() {
-
-	$(".menu-toggle").click(function() {
-		$("nav").toggleClass("active");
-		$(".main").toggleClass("main1");
-	});
-	
-	var select = ["17/02/2020", "18/02/2020"];
-	
-	var s = "${acmInfo[0].acm_availdate}";
-	var s3 = s.split(",");
-	//console.log(s3);
-	
 	
 	$('#datepicker').datepicker({
 		format: "dd/mm/yyyy",
@@ -482,14 +456,13 @@ $(document).ready(function() {
 		var val = docuHei - windowHei;
 		var val2 = mainHei - sideHeiSize + "px";
 		
-		if(docuHei / 2 > val) {
+		if(docuHei / 3 > val) {
 			side.addClass("on");
 			
 		}
 		
 		else if(mainHei <= (scrollTop + sideHeiSize)) {
 			$("#sideSticker").attr("style", "position:absolute;top:" + val2);
-			//$("#sideSticker").attr("style", "top:2175px");
 		}
 		
 		else {
@@ -501,6 +474,5 @@ $(document).ready(function() {
 	}).scroll();
 });
 </script>
-
 </body>
 </html>

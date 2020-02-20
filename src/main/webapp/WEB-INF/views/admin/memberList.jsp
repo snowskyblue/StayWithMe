@@ -195,6 +195,7 @@
 <!--javascript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <!-- fileConvert -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.2.11/jspdf.plugin.autotable.min.js"></script>
 <script src="js/tableHTMLExport.js"></script>
@@ -228,14 +229,18 @@ $(document).ready(function() {
 			type: "csv",
 			filename: "memberList.csv"
 		});
-	})
+	});
 	
 	$("#pdf").on("click", function() {
-		$("#memberList").tableHTMLExport({
-			type: "pdf",
-			filename: "memberList.pdf"
+		html2canvas(document.getElementById("memberList"), {
+			onrendered: function(canvas) {
+				var imgData = canvas.toDataURL("images/png");
+				var doc = new jsPDF("p", "mm", [297,210]);
+				doc.addImage(imgData, "PNG", 5, 5, 55, 20);
+				doc.save("memberList.pdf");
+			}	
 		});
-	})
+	});
 });
 </script>
 </body>
