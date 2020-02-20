@@ -22,11 +22,6 @@ public class AdminCSController {
 	@Autowired
 	private CSCommandImp com;
 	
-	@RequestMapping("/adminMain")
-	public String main() {
-		return "admin/main";
-	}
-	
 	@RequestMapping("/csAdmin")
 	public String csMember(Model model, Criteria cri) throws Exception {
 	

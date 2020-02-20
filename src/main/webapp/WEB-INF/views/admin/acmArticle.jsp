@@ -93,7 +93,7 @@
 			<table class="acmBoard_list mx-auto text-center">
 				<colgroup>
 					<col style="width:50px;"><!-- 숙소번호 -->
-					<col style="width:300px;"><!-- 제목 -->
+					<col style="width:350px;"><!-- 제목 -->
 					<col style="width:300px;"><!-- 주소 -->
 					<col style="width:200px;"><!-- 상세주소 -->
 					<col style="width:60px;"><!-- 집유형 -->
@@ -116,7 +116,7 @@
 						<tr>
 							<td>${list.acm_code}</td>
 							<td>
-								<a href="acmArtiContent?acm_code=${list.acm_code}">
+								<a href="acmDetail?acm_code=${list.acm_code}">
 									${list.acm_title}
 								</a>
 							</td>

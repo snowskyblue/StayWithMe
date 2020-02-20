@@ -46,19 +46,19 @@
 		<div class="row" align="center" style="margin:0px 100px;">
 			<div class="col-4">
 				<div class="topCount">
-					<h1 class="topCountTitle">2500</h1>
+					<h1 class="topCountTitle">${totalMember}</h1>
 					<span>전체 회원수</span>
 				</div>
 			</div>
 			<div class="col-4">
 				<div class="topCount">
-					<h1 class="topCountTitle">2500</h1>
+					<h1 class="topCountTitle">${totalACM}</h1>
 					<span>전체 숙소 현황</span>
 				</div>
 			</div>
 			<div class="col-4">
 				<div class="topCount">
-					<h1 class="topCountTitle">2500</h1>
+					<h1 class="topCountTitle">${month[0].count}</h1>
 					<span>전체 리뷰</span>
 				</div>
 			</div>
@@ -102,11 +102,26 @@
 
 <script>
 $(document).ready(function() {
-	var chartLabels = ["1월", 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-	var chartData = ["200", "300", "230", "400", "500", "300", "600", "230", "400", "500", "300", "600"];
+	var month = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
+	var chartData = [
+		"${month[0].count}",
+		"${month[1].count}",
+		"${month[2].count}",
+		"${month[3].count}",
+		"${month[4].count}",
+		"${month[5].count}",
+		"${month[6].count}",
+		"${month[7].count}",
+		"${month[8].count}",
+		"${month[9].count}",
+		"${month[10].count}",
+		"${month[11].count}"];
+
+	var location = ["서울", "경기", "인천", "강원", "충북", "세종", "충남", "대전", "경북", "대구", "울산", "부산", "경남", "전북", "전남", "광주", "제주"]
+	var localChart = ["200", "300", "230", "400", "500", "300", "600", "230", "400", "500", "300", "600", "233", "676", "324", "544", "8870"];
 	
 	var lineChartData = {
-						labels: chartLabels,
+						labels: month,
 						datasets: [{
 							label: "",
 							data: chartData,
@@ -140,7 +155,7 @@ $(document).ready(function() {
 			labels: ["남", "녀"],
 			datasets: [{
 				label: "남녀 비율",
-				data: ["400", "600"],
+				data: ["${manCount}", "${womanCount}"],
 				fillColor: "rgba(220,220,220,2)",
 				strokeColor: "rgba(220,220,220,1)",
 				pointColor: "rgba(220,220,220,1)",
@@ -165,10 +180,10 @@ $(document).ready(function() {
 	createPie();
 	
 	var pieChartData2 = {
-			labels: ["게스트", "호스트"],
+			labels: ["호스트", "게스트"],
 			datasets: [{
 				label: "호스트-게스트 비율",
-				data: ["400", "600"],
+				data: ["${hostCount}", "${guestCount}"],
 				fillColor: "rgba(220,220,220,2)",
 				strokeColor: "rgba(220,220,220,1)",
 				pointColor: "rgba(220,220,220,1)",
@@ -196,10 +211,10 @@ $(document).ready(function() {
 	createPie2();
 	
 	var barChartData = {
-			labels: chartLabels,
+			labels: location,
 			datasets: [{
 				label: "",
-				data: chartData,
+				data: localChart,
 				fill: false,
 				strokeColor: "rgba(220,220,220,1)",
 				pointColor: "rgba(220,220,220,1)",
