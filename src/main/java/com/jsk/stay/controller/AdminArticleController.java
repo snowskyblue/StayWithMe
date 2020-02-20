@@ -17,11 +17,11 @@ public class AdminArticleController {
 	
 	@RequestMapping("/acmArticle")
 	public String acmArticle(Criteria cri, Model model) {
-		//model.addAttribute("list", com.acmArticle(cri));
+		model.addAttribute("list", com.acmArticle(cri));
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		//pageMaker.setTotalCount(com.acmCount());
+		pageMaker.setTotalCount(com.acmCount());
 		
 		model.addAttribute("pageMaker", pageMaker);
 		return "admin/acmArticle";

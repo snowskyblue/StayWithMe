@@ -102,7 +102,7 @@
 
 <script>
 $(document).ready(function() {
-	var chartLabels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+	var chartLabels = ["1월", 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 	var chartData = ["200", "300", "230", "400", "500", "300", "600", "230", "400", "500", "300", "600"];
 	
 	var lineChartData = {

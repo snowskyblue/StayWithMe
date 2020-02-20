@@ -57,6 +57,11 @@
 	font-weight: bold;
 }
 
+.caption {
+	caption-side:top;
+	text-align: -webkit-right;
+}
+
 .paging {
 	/*align: center;*/
 	margin-top: 10px;
@@ -90,7 +95,7 @@
 		
 		<div class="memBoard mx-auto">
 			
-			<table class="memBoard_list mx-auto text-center">
+			<table class="memBoard_list mx-auto text-center" id="memberList">
 				<colgroup>
 					<col style="width:100px;"><!-- 아이디 -->
 					<col style="width:50px;"><!-- 이름 -->
@@ -117,6 +122,10 @@
 						<th scope="col"><input type="checkbox"></th>
 					</tr>
 				</thead>
+				<caption class="caption">
+					<button id="csv" type="button" class="btn btn-dark">CSV</button>
+					<button id="pdf" type="button" class="btn btn-dark">PDF</button>
+				</caption>
 				<tbody>
 					<c:forEach items="${list}" var="list">
 						<tr>
@@ -185,6 +194,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <!--javascript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- fileConvert -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.2.11/jspdf.plugin.autotable.min.js"></script>
+<script src="js/tableHTMLExport.js"></script>
 
 <script>
 $(document).ready(function() {
@@ -209,6 +222,20 @@ $(document).ready(function() {
 	else if(endPage == $(".pageNum").eq(4).attr("num")) {
 		$(".pageNumber").eq(4).addClass("active");
 	}
+	
+	$("#csv").on("click", function() {
+		$("#memberList").tableHTMLExport({
+			type: "csv",
+			filename: "memberList.csv"
+		});
+	})
+	
+	$("#pdf").on("click", function() {
+		$("#memberList").tableHTMLExport({
+			type: "pdf",
+			filename: "memberList.pdf"
+		});
+	})
 });
 </script>
 </body>

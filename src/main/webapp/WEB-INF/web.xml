@@ -41,6 +41,10 @@
 			<param-name>encoding</param-name>
 			<param-value>UTF-8</param-value>
 		</init-param>
+		<init-param> <!-- json내의 한글 처리 -->
+			<param-name>forceEncoding</param-name> <!-- json한글 -->
+			<param-value>true</param-value>
+		</init-param>
 	</filter>
 	
 	<filter-mapping>

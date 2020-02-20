@@ -114,39 +114,16 @@
 				<tbody>
 					<c:forEach items="${list}" var="list">
 						<tr>
+							<td>${list.acm_code}</td>
+							<td>
+								<a href="acmArtiContent?acm_code=${list.acm_code}">
+									${list.acm_title}
+								</a>
+							</td>
+							<td>${list.acm_address}</td>
+							<td>${list.acm_add_detail}</td>
+							<td>${list.acm_type}</td>
 							<td>${list.mb_id}</td>
-							<td>${list.mb_name}</td>
-							<c:choose>
-								<c:when test="${list.mb_sex eq 'F'.charAt(0)}">
-									<td>여</td>
-								</c:when>
-								<c:when test="${list.mb_sex eq 'M'.charAt(0)}">
-									<td>남</td>
-								</c:when>
-							</c:choose>
-							<td>${list.mb_birthdate}</td>
-							<td>${list.mb_email}</td>
-							<td>${list.mb_phone}</td>
-							<td>${list.mb_join_date}</td>
-							<c:choose>
-								<c:when test="${empty list.mb_delete_date}">
-									<td>-</td>
-								</c:when>
-								<c:when test="${not empty list.mb_delete_date}">
-									<td>${list.mb_delete_date}</td>
-								</c:when>
-							</c:choose>
-							<c:choose>
-								<c:when test="${list.mb_grade eq 'ROLE_ADMIN'}">
-									<td>관리자</td>
-								</c:when>
-								<c:when test="${list.mb_grade eq 'ROLE_HOST'}">
-									<td>호스트</td>
-								</c:when>
-								<c:when test="${list.mb_grade eq 'ROLE_GUEST'}">
-									<td>게스트</td>
-								</c:when>
-							</c:choose>
 							<td><input type="checkbox"></td>
 						</tr>
 					</c:forEach>
