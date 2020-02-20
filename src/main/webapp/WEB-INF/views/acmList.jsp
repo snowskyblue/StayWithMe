@@ -231,7 +231,7 @@ a{
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" flush="false"/>
-<div class="main">
+<div id="ctrlDiv" ng-app="myWishList" ng-cloak ng-controller="myCtrl" class="main">
 	<div class="container-fluid" id="acmList-header">
 		
 		
@@ -346,7 +346,8 @@ a{
 									<h4 style="margin-top:10px; word-break: keep-all;">${list.acm_title}</h4>
 								</div><!-- lsConDivMobile -->
 								<div style="height:100%;" class="heartDiv">
-									<input type="hidden"/>
+									<input type="hidden" class="tg"/>
+									<input type="hidden" class="hiddenCode" value="${list.acm_code}">
 									<span class="heart" style="font-size: 1.5em;"><!-- onclick="wish()"  -->
 									  <i class="far fa-heart"></i>
 									</span>
@@ -384,28 +385,88 @@ a{
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <!--javascript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- n g -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <!-- geocoding -->
 <script async defer src="https://maps.googleapis.com/maps/api/js?&key=AIzaSyB_AJKPN0Wc4MHuwPgdbLdzCeqRk4hGDV8&callback=initMap"></script>
 
 
 <script>
-$(document).ready(function() {
-	
-	//console.log('${jsonList}');
-	var json = JSON.parse('${jsonList}');
-	//console.log(json.length);
-	 var cartKey;
-	var obj = [];	//jason array 담을
-	 
-	 $(".heart").on("click",function(){
-		    var target = $(this).parent().parent().parent().find('input[type=hidden]').val();
+//var lite = angular.element(".heart").css({"color": "#FC4C4E"});
+//var lite = angular.element(".heart").css("color");
+//console.log("lite : " + lite);
+//console.log('${jsonList}');
+//console.log(json.length);
+//alert("ssss" + json[2].acm_title);
 
+var json = JSON.parse('${jsonList}');
+var obj = [];	//jason array 담을
+var app = angular.module("myWishList", []);
+
+var wishCode = new Array;
+app.controller("myCtrl", function($scope) {
+	$scope.products = JSON.parse(localStorage.getItem("cartKey"));
+	$scope.removeItem = function (x) {	//products는 로컬스토리지, json은 acmList
+		$scope.products = JSON.parse(localStorage.getItem("cartKey"));	/*로컬스토리지를 객체로 하기*/
+		//console.log("$scope.products[i].acm_code ; " + $scope.products[1].acm_code);
+		//console.log("json[x].acm_title : " + json[2].acm_code);
+		for (var i = 0; i < $scope.products.length; i++){
+			if($scope.products[i].acm_code == json[x].acm_code){
+				//alert("로컬스토리지에 저장된 순서" + i);
+				$scope.products.splice(i, 1); //ng-click의index와 splice의 번호로 같이 삭제됨
+			    localStorage.removeItem("cartKey"); //하트 클릭해서 하나가 삭제되면 로컬스토리지 cartKey배열이 다 사라짐 
+			    localStorage.setItem("cartKey",JSON.stringify($scope.products));//로컬스토리에 새로 저장.(value값은 이제 다시 문자열로 products 배열이 들어감)
+			    return;
+			}
+		}
+		//console.log("333" + json[x].acm_code);
+		//console.log($scope.products[0].acm_code); 로컬스토리지 저장된 위시숙소
+		/*angular.forEach($scope.products, function(value) {
+			  console.log(value.acm_code);
+			});*/
+		/*for (var i = 0; i < 3; i++) {
+			if($scope.products[i].acm_thumbnail == x){	//x는 클릭한 곳의 파일명
+				//alert(i); i는 스토리지에 저장된 색인번호
+			}
+			}*/
+		//alert("heart의 ix : " + x);
+	}
+	$scope.getWishCode = function(){
+		$scope.products = JSON.parse(localStorage.getItem("cartKey"));	/*로컬스토리지를 객체로 하기*/
+		
+		if ($scope.products != null){
+			for (var i = 0; i < $scope.products.length; i++){
+				wishCode.push($scope.products[i].acm_code);
+			}
+			
+		}
+	}
+});
+
+$(document).ready(function() {
+	angular.element(document.getElementById('ctrlDiv')).scope().getWishCode();
+	//console.log("wishCode : "  + wishCode + "  && wishCode.length : " + wishCode.length);
+	
+	 $(".heart").each(function(index,item){
+		 var hC = $(this).parent().parent().parent().find(".hiddenCode").val();
+		 $.each(wishCode, function(idex, it){
+			 if (it == hC){
+				 $(item).find("i").removeClass("far fa-heart").addClass("fas fa-heart");
+				 $(item).css({"color": "#FC4C4E"});
+				 $(item).parent().parent().parent().find('input[type=hidden]').val(1);
+			 }
+		 });
+		 //$(item).addClass('li_0' + index);
+	 });
+	
+	
+	 $(".heart").on("click",function(){
+		    var target = $(this).parent().parent().parent().find(".tg").val();
 			var ix = $(".heart").index(this);
-			 
 		    if(target == 0)
 		    {
 		        target = 1;
-		        $(this).parent().find('input[type=hidden]').val(target);
+		        $(this).parent().find(".tg").val(target);
 		        $(this).find("i").removeClass("far fa-heart").addClass("fas fa-heart");
 				$(this).css({"color": "#FC4C4E"});
 				 //console.log(json[ix].acm_title);
@@ -433,11 +494,12 @@ $(document).ready(function() {
 		    else
 		    {
 		        target = 0;
-		        $(this).parent().find('input[type=hidden]').val(target);
+		        $(this).parent().find(".tg").val(target);
 		        $(this).find("i").removeClass("fas fa-heart").addClass("far fa-heart");
 		        $(this).css({"color": "black"});
+		        angular.element(document.getElementById('ctrlDiv')).scope().removeItem(ix);
 		    }
-		    $(this).parent().find('input[type=hidden]').val(target);
+		    $(this).parent().find(".tg").val(target);
 		});
 	
 
