@@ -24,8 +24,10 @@ public class AcmTwoController {
 	private AcmTwoCommand com;
 
 	@RequestMapping("/acmList")
-	public String acmList(Model model, CriteriaAcm cri) {
+	public String acmList(Model model, CriteriaAcm cri, HttpServletRequest request) {
 		
+		//String location = request.getParameter("location");
+		//System.out.println(location);
 		List<AccommodationDto> acmList = new ArrayList<AccommodationDto>();
 		acmList = com.acmList(cri);
 		model.addAttribute("list", acmList);

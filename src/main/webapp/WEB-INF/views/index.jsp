@@ -283,7 +283,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 		<div class="container mt-3 mb-3">
 			<div class="row">
 				<div class="col-lg-4 col-md-6 col-sm-6 banner">
-					<a href="#">
+					<a href="acmList?location=서울">
 						<div class="centered">서울</div> <img alt="seoul"
 						src="img/seoul.jpg">
 					</a>

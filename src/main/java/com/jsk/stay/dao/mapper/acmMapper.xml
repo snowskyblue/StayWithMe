@@ -47,13 +47,16 @@
 						acm_thumbnail,
 						row_number() over(order by acm_code desc) as rNum
 				from accommodation
+				
 			) mp
-		where rNum between ${rowStart} and #{rowEnd}
+		where rNum between #{rowStart} and #{rowEnd}
 		order by acm_code desc
 	</select>
 	
-	<select id="acmListCount" resultType="int">
-		select count(acm_code) from accommodation order by acm_code desc
+	<select id="acmListCount" resultType="int" parameterType="String">
+		select count(acm_code)
+		from accommodation
+		order by acm_code desc
 	</select>
 	
 	<select id="accommodation" resultType="com.jsk.stay.dto.AccommodationDto" parameterType="int">

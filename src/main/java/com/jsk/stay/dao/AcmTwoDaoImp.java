@@ -1,5 +1,6 @@
 package com.jsk.stay.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -16,6 +17,12 @@ public class AcmTwoDaoImp implements AcmTwoDao {
 	private SqlSession sql;
 	
 	public List<AccommodationDto> acmList(CriteriaAcm cri) {
+		//HashMap map = new HashMap<CriteriaAcm, String>();
+		//map.put("cri", cri);
+		//map.put("location", location);
+		//System.out.println("cri:" + cri.getRowStart());
+		//System.out.println("loca"+ location);
+		//System.out.println("lo: " + map.get(location));
 		return sql.selectList("acm.acmList", cri);
 	}
 	
