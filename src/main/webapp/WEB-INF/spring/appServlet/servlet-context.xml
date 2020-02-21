@@ -86,7 +86,4 @@
 	<beans:bean name="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>	
 	<context:component-scan base-package="com.jsk.stay" />
 	
-	<beans:bean id = "naverLoginBO" class = "com.jsk.stay.naver.NaverLoginBO"/>
-	<!-- naverLoginBO bean만들어 주기 -->
-	
 </beans:beans>
