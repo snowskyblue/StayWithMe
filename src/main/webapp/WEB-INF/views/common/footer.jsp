@@ -23,22 +23,25 @@
 <title>Insert title here</title>
 <style>
 footer {
-    height:300px;
+    max-height:300px;
     width:100%;	
+}
+div {
+	word-break : keep-all;
 }
 </style>
 <body>
 <footer class="bg-dark">
-	<div class="text-center text-secondary">
+	<div class="text-center text-secondary pt-4 pb-4">
 		<div>방문자수 : <span id="visitN"></span></div>
 		<div>회원 방문수 : <span id="visitMN"></span></div>
-		<div>- 상호 : (주)스테이윗미 - 대표자 : 이상묵</div>
-		<div>- 사업장소재지 : 서울특별시 종로구 자하문로9길 24, 2층(통인동) - TEL : 1670-4123</div>
-		<div>- 사업자등록번호: 676-87-00055 - 통신판매업신고 : 제2015-서울종로-0499호 </div>
-		<div>- 관광사업자등록 : 일반여행업 2018-000049호(종로구청)</div>
 		<div>&nbsp;</div>
+		<div>- 상호 : (주)스테이윗미</div> 
+		<div>- 대표자 : 이지은, 김가영, 김성현</div>
+		<div>- 깃허브 주소 : </div>
+		<!-- 
 		<div>* 스테이윗미의 모든 거래에 대한 책임과 환불, 민원 등의 처리는 스테이윗미에서 진행합니다.</div>
-		<div>* 자세한 문의는 웹사이트의 Contact 또는 유선(1670-4123)으로 가능합니다.</div>
+		<div>* 자세한 문의는 웹사이트의 Contact 또는 유선(1234-5678)으로 가능합니다.</div> -->
 	</div>
 </footer>
 
