@@ -20,4 +20,7 @@
 	<select id="resReceipt" parameterType = "String" resultType = "com.jsk.stay.dto.ReservationDto">
 		SELECT * FROM RESERVATION WHERE RES_CODE = #{res_code}
 	</select>
+	<select id = "resAcmDate" parameterType = "int" resultType = "String">
+		SELECT ACM_AVAILDATE FROM ACCOMMODATION WHERE ACM_CODE = #{acm_code}
+	</select>
 </mapper>

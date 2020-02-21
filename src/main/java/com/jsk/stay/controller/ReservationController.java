@@ -1,15 +1,9 @@
 package com.jsk.stay.controller;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,13 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jsk.stay.command.Command;
-import com.jsk.stay.command.ReservationCommand;
 import com.jsk.stay.dao.LoginDao;
 import com.jsk.stay.dao.ReservationDaoImp;
 import com.jsk.stay.dto.AccommodationDto;
 import com.jsk.stay.dto.MemberDto;
 import com.jsk.stay.dto.ReservationDto;
-import com.jsk.stay.util.Constant;
 
 @Controller
 public class ReservationController {
@@ -35,7 +27,6 @@ public class ReservationController {
 	@Autowired
 	LoginDao dao1;
 	
-	Command com;
 	
 	
 	@RequestMapping("/reservation")
@@ -65,15 +56,22 @@ public class ReservationController {
 	}
 	
 	@RequestMapping("/res")
-	public void res(HttpServletRequest request, Model model) {
+	public String res(HttpServletRequest request, Model model) {
 		
+		String listDate = request.getParameter("listDate");
+		System.out.println(listDate);
 		String checkIn = request.getParameter("checkIn");
-		System.out.println(checkIn);
+		System.out.println("checkIn : " + checkIn);
 		String checkOut = request.getParameter("checkOut");
-		System.out.println(checkOut);
+		System.out.println("checkOut ; " + checkOut);
 		String acm_code_w = request.getParameter("acm_code");
-		int acm_code = Integer.parseInt(acm_code_w);
-		System.out.println(acm_code);
+		int acm_code = 0;
+		if ( acm_code_w == null ) {
+			System.out.println("null point" + acm_code_w);
+		} else {
+			acm_code = Integer.parseInt(acm_code_w);
+			System.out.println(acm_code);
+		}
 		String amount_w = request.getParameter("amount");
 		int amount = Integer.parseInt(amount_w);
 		System.out.println(amount);
@@ -96,9 +94,14 @@ public class ReservationController {
 		System.out.println("dto" + dto);
 		try {
 			dao.reservationIn(dto);
+			String date = dao.resAcmDate(acm_code);
+			System.out.println(date);
+			
+			return "index";
 		} 
 		catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
 	}
 	
@@ -110,7 +113,7 @@ public class ReservationController {
 		List<ReservationDto> dto =  dao.reservationList(mb_id);
 		
 		System.out.println(dto);
-		
+
 		model.addAttribute("list",dto);
 		
 		return "reservationCheck";

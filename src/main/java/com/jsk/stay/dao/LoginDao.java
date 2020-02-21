@@ -71,10 +71,5 @@ public class LoginDao implements IDao {
 		return dto;
 	}
 	
-	@Override
-	public void socialLogin(MemberDto dto) throws Exception {
-		System.out.println("dao + dto" + dto.toString());
-		sqlSession.insert("socialLogin",dto);
-	}
 
 }

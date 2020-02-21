@@ -220,6 +220,7 @@
 							</div>
 							<div class = "col-sm-12">
 								<input type = "text" class = "form-control checkIncheckOut" disabled/>
+								<input type = "hidden" id = "listDate" disabled/>
 							</div>
 						</div>
 						<br/>
@@ -253,7 +254,7 @@
 	</div>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="failModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="guestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -263,7 +264,7 @@
 				</button>
 			</div>
 			<div class="modal-body text-center" style="font-weight:bold;">
-				 결제에 실패하셨습니다.
+				게스트 명수가 너무 많습니다.
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
@@ -335,7 +336,7 @@ $(document).ready(function(){
         $('#datepicker').datepicker({
         	startDate: date,
             language: "en",
-            format: 'yyyy-mm-dd',
+            format: 'dd/mm/yyyy',
             daysOfWeekHighlighted: "6,0",
             beforeShowDay: function (date) {
             	//선택할수 있는 날짜를 지정하는 것
@@ -360,7 +361,7 @@ $(document).ready(function(){
         $('#datepicker1').datepicker({
         	startDate: date,
             language: "en",
-            format: 'yyyy-mm-dd',
+            format: 'dd/mm/yyyy',
             daysOfWeekHighlighted: "6,0",
            	beforeShowDay: function (date) {
                	//선택할수 있는 날짜를 지정하는 것
@@ -411,14 +412,18 @@ $(document).ready(function() {
 				console.log(sdd);
 			    var edd = $("#checkOutDate").val();
 			    console.log(edd);
-			    var ar1 = sdd.split('-');
+			    var listDate = [];
+			    getDateRange($("#checkInDate").val(), $("#checkOutDate").val(), listDate);
+			    console.log(listDate);
+			    $("#listDate").val(listDate);
+			    var ar1 = sdd.split('/');
 			    console.log(ar1.toString());
-			    var ar2 = edd.split('-');
+			    var ar2 = edd.split('/');
 			    console.log(ar2.toString());
-			    var da1 = new Date(ar1[0], ar1[1]-1, ar1[2]);
-			    console.log(new Date(ar1[0], ar1[1]-1, ar1[2]));
-			    var da2 = new Date(ar2[0], ar2[1]-1, ar2[2]);
-			    console.log(new Date(ar2[0], ar2[1]-1, ar2[2]));
+			    var da1 = new Date(ar1[2], ar1[1]-1, ar1[0]);
+			    console.log(new Date(ar1[2], ar1[1]-1, ar1[0]));
+			    var da2 = new Date(ar2[2], ar2[1]-1, ar2[0]);
+			    console.log(new Date(ar2[2], ar2[1]-1, ar2[0]));
 			    var dif = da2 - da1;
 			    var cDay = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
 			    var x = parseInt(dif/cDay);
@@ -438,7 +443,7 @@ $(document).ready(function() {
 				console.log("total" + $("#total").val());
 			}
 			else {
-			/*채워 넣어야 함*/	
+				$("#guestModal").modal("show");
 			}
 		}
 	});
@@ -527,9 +532,7 @@ $(document).ready(function() {
 			    language : 'ko',
 			    buyer_email : '${dto.mb_email}',
 			    buyer_name : '${dto.mb_name}',
-			    buyer_tel : '${dto.mb_phone}',
-			    custom_data: "",
-			    bank_name: ""
+			    buyer_tel : '${dto.mb_phone}'
 			}, 
 			function (rsp) {
 				console.log(rsp);
@@ -544,6 +547,7 @@ $(document).ready(function() {
 						url : "res",
 						type : "post",
 						data : {
+							listDate : $("#listDate").val(),
 							checkIn : $("#checkInDate").val(),
 							checkOut : $("#checkOutDate").val(),
 							acm_code : "${rdto.acm_code}",
@@ -556,26 +560,25 @@ $(document).ready(function() {
 							acm_add_detail : "${rdto.acm_add_detail}",
 							card_name : rsp.card_name
 						},
-						success : function() {
-							location.href = "index?reservation";
+						success : function(data) {
+							alert("성공");
 						},
-						error : function() {
-							alert("에러");
-						}
+						error : function(request,status,error){
+						    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						   }
 					});
 				} else {
 				var msg = '결제에 실패하였습니다.';
 				msg += '에러내용 : ' + rsp.error_msg;
 				}
-				alert(msg);
+				//alert(msg);
 			});
 		}
 	});
 });
 </script>
 <!-- 아임포트 결제 관련 script -->
-<!-- 아임포트 관련 개발할때 보고 한것
-https://github.com/iamport/iamport-manual/blob/master/인증결제/README.md -->
+<!-- 아임포트 관련 개발할때 보고 한것 https://github.com/iamport/iamport-manual/blob/master/인증결제/README.md -->
 <script>
 $(document).ready(function() {
 	<c:choose>
@@ -584,6 +587,29 @@ $(document).ready(function() {
 	</c:when>
 	</c:choose>
 });
+</script>
+<script>
+function getDateRange(startDate, endDate, listDate) {
+    var dateMove = new Date(startDate);
+    var strDate = startDate;
+    console.log(strDate);
+    if (startDate == endDate) {
+        var strDate = dateMove.toISOString().slice(0,10);
+        listDate.push(strDate);
+    }
+
+    else {
+        while (strDate < endDate) {
+            var strDate = dateMove.toISOString().slice(0, 10);
+            listDate.push(strDate);
+            dateMove.setDate(dateMove.getDate() + 1);
+        }
+        
+        listDate.pop();
+        listDate.shift();
+    }
+    return listDate;
+};
 </script>
 </body>
 </html>

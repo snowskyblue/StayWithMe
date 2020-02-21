@@ -8,5 +8,4 @@ public interface IDao {
 	public String check(String mb_id);
 	public MemberDto information(String mb_id);
 	public HostDto information1(String mb_id);
-	public void socialLogin(MemberDto dto) throws Exception;
 }

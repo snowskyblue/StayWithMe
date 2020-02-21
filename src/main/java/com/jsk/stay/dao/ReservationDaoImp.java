@@ -20,9 +20,14 @@ public class ReservationDaoImp implements ReservationDao{
 	}
 	
 	@Override
-	public void reservationIn(ReservationDto dto) throws Exception {
+	public void reservationIn(ReservationDto dto) {
 		System.out.println(dto);
-		sqlSession.insert("reservationIn",dto);
+		try {
+			sqlSession.insert("reservationIn",dto);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
@@ -35,6 +40,12 @@ public class ReservationDaoImp implements ReservationDao{
 	public ReservationDto resReceipt(String res_code) throws Exception {
 		System.out.println(res_code);
 		return sqlSession.selectOne("resReceipt",res_code);
+	}
+	
+	@Override
+	public String resAcmDate(int acm_code) throws Exception{
+		System.out.println(acm_code);
+		return sqlSession.selectOne("resAcmDate",acm_code);
 	}
 	
 	
