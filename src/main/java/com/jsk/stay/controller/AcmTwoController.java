@@ -27,15 +27,20 @@ public class AcmTwoController {
 	@RequestMapping("/acmList")
 	public String acmList(Model model, CriteriaAcm cri, HttpServletRequest request) {
 		
-		//String location = request.getParameter("location");
-		//System.out.println(location);
-		List<AccommodationDto> acmList = new ArrayList<AccommodationDto>();
-		acmList = com.acmList(cri);
-		model.addAttribute("list", acmList);
+		String loc = request.getParameter("location");
+		String location = loc.substring(0, 2);
+		System.out.println(location);
 		
+		List<AccommodationDto> acmList = new ArrayList<AccommodationDto>();
+		acmList = com.acmList(cri, location);
+		model.addAttribute("list", acmList);
+		System.out.println("controller cri:" + cri);
+		model.addAttribute("location", location);
 		PageMakerAcm pageMaker = new PageMakerAcm();
+		pageMaker.setLocation(location);
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(com.acmListCount());
+		pageMaker.setTotalCount(com.acmListCount(location));
+		System.out.println("StartPage: " + pageMaker.getStartPage());
 		
 		model.addAttribute("pageMaker", pageMaker);
 		

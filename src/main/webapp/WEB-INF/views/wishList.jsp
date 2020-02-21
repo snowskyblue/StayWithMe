@@ -17,6 +17,14 @@
 <!--font-awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
+@font-face { font-family: 'Eoe_Zno_L'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/Eoe_Zno_L.woff') format('woff'); font-weight: normal; font-style: normal; }
+@font-face { font-family: 'S-CoreDream-2ExtraLight'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-2ExtraLight.woff') format('woff'); font-weight: normal; font-style: normal; }
+@font-face { font-family: 'KBIZHanmaumGothic'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KBIZHanmaumGothic.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+.main1 {
+	margin-top: 100px;
+}
+
 #top-container {
 	padding-top: 150px;
 }
@@ -41,12 +49,17 @@
 	top: 5px;
 	right : 10px;
 }
+
 .tImgDiv {
     overflow : hidden;
 	display: inline-block;
+	height : 230px;
+	max-height: 230px;
 }
 .tImg {
 	border-radius: 5px;
+	width: 100%;
+	height : 100%;
 }
 #address {
 	height : 22px;
@@ -63,6 +76,39 @@
 	margin-top:10px; 
 	margin-bottom:10px;
 }
+#noneDivIn {
+	border-style: dashed;;
+	border-width: 3px;
+	border-color: #343a40;
+}
+#noneDiv {
+	width : 90%;
+	border-style: solid;
+	border-width: 3px;
+	border-color: #343a40;
+}
+.mx-auto h2 {
+	background-color: #343a40;
+	max-width : 600px;
+	margin : auto; 
+	color: white;
+	padding: 5px;
+	word-break : keep-all;
+}
+#howTo {
+	max-width : 600px;
+	margin : auto; 
+	word-break : keep-all;
+}
+@media screen and (max-width: 576px) {
+	#noneDiv {
+		width: 300px;
+	}
+	
+	.mx-auto h2 {
+		font-size: 20px;
+	}
+}
 </style>
 </head>
 <body>
@@ -73,13 +119,25 @@
 			<h3>위시리스트</h3>
 			<div id="border"></div>
 			<div ng-if="products.length == 0">
-				
+				<div id="noneDiv" class="mx-auto p-1 mt-5 mb-5">
+					<div id="noneDivIn" class="p-5">
+						<div class="mx-auto text-center">
+							<img ng-src="img/logo.jpg" class="img-fluid">
+						</div>
+						<h2 class="text-center">관심 있는 숙소를 저장해보세요.</h2>
+						<div id="howTo"  class="text-center">
+							<span class="heart" style="font-size: 1.5em;"><!-- onclick="wish()"  -->
+								<i class="far fa-heart"></i>
+							</span> 버튼을 누르시면 위시리스트에서 다시 보실 수 있습니다
+						</div>
+					</div>
+				</div>
 			</div>
 			<div class="row">
 				<div class="col-12 col-sm-6 col-lg-4" ng-repeat ="x in products track by $index">
 					<div class="card">
-						<div class="timgDiv" ng-click="info(x.acm_code)" >
-							<img ng-src="upImg/{{x.acm_thumbnail}}" class="tImg img-fluid">
+						<div class="tImgDiv" ng-click="info(x.acm_code)" >
+							<img ng-src="upImg/{{x.acm_thumbnail}}" class="tImg">
 						</div>
 						<div class="lsConDiv my-auto" ng-click="info(x.acm_code)">
 							<div id="address" class="mx-auto">{{x.acm_address}}</div>
@@ -115,31 +173,31 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <!-- n g -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-
-<!--<script>
-jQuery.noConflict();//angular와 방지를 위함
-jQuery(document).ready(function($){
-	$(".menu-toggle").click(function() {
-		$("nav").toggleClass("active");
-		$(".main").toggleClass("main1");
+<!-- 
+<script>
+$.noConflict();
+	jQuery(".menu-toggle").click(function() {
+		jQuery("nav").toggleClass("active");
+		jQuery(".main").toggleClass("main1");
 	});
-});
+    
+}); -->
 
-</script> -->
+</script>
 
 <script>
 angular.element(".heart").css({"color": "#FC4C4E"});
 var app = angular.module("myWishList", []);
 app.controller("myCtrl", function($scope) {
     //$scope.products = ["Milk", "Bread", "Cheese"]; 
-    $scope.products = JSON.parse(localStorage.getItem("cartKey"));	/*로컬스토리지를 객체로 하기*/
+    $scope.products = JSON.parse(localStorage.getItem("wishKey"));	/*로컬스토리지를 객체로 하기*/
     //console.log($scope.products); //value(array)
     
     //상품 (행) 삭제
    $scope.removeItem = function (x) {
       $scope.products.splice(x, 1); //ng-click의index와 splice의 번호로 같이 삭제됨
-      localStorage.removeItem("cartKey"); //하트 클릭해서 하나가 삭제되면 로컬스토리지 cartKey배열이 다 사라짐 
-      localStorage.setItem("cartKey",JSON.stringify($scope.products));//로컬스토리에 새로 저장.(value값은 이제 다시 문자열로 products 배열이 들어감)
+      localStorage.removeItem("wishKey"); //하트 클릭해서 하나가 삭제되면 로컬스토리지 wishKey배열이 다 사라짐 
+      localStorage.setItem("wishKey",JSON.stringify($scope.products));//로컬스토리에 새로 저장.(value값은 이제 다시 문자열로 products 배열이 들어감)
      }
    $scope.info = function(x) {
 	   location.href='acmInfo?acm_code=' + x;

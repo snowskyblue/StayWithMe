@@ -16,18 +16,19 @@ public class AcmTwoDaoImp implements AcmTwoDao {
 	@Autowired
 	private SqlSession sql;
 	
-	public List<AccommodationDto> acmList(CriteriaAcm cri) {
-		//HashMap map = new HashMap<CriteriaAcm, String>();
-		//map.put("cri", cri);
-		//map.put("location", location);
-		//System.out.println("cri:" + cri.getRowStart());
-		//System.out.println("loca"+ location);
-		//System.out.println("lo: " + map.get(location));
-		return sql.selectList("acm.acmList", cri);
+	public List<AccommodationDto> acmList(CriteriaAcm cri, String location) {
+		HashMap map = new HashMap<CriteriaAcm, String>();
+		map.put("cri", cri);
+		//String loc = location.substring(0, 2);
+		map.put("location", location);
+		System.out.println("cri:" + cri.getRowStart());
+		System.out.println("loca"+ location);
+		return sql.selectList("acm.acmList", map);
 	}
 	
-	public int acmListCount() {
-		return sql.selectOne("acm.acmListCount");
+	public int acmListCount(String location) {
+		//String loc = location.substring(0, 2);
+		return sql.selectOne("acm.acmListCount", location);
 	}
 	
 	public List<AccommodationDto> accommodation(int acm_code) {

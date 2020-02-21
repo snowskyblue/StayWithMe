@@ -1,6 +1,7 @@
 package com.jsk.stay.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,16 +22,21 @@ public class AdminMainController {
 	public String main(Model model) {
 
 		try {
-			List<Map<String,Integer>> list = com.month();
-			//System.out.println("list: " + list);
+			List<Map<String,Integer>> month = com.month();
+			List<Map<String, Integer>> local = com.local();
+			Map<String, Integer> map = new HashMap<String, Integer>();
+			//map.put("count=0", local=а╕аж);
+			//local.add(map);
+			System.out.println("local: " + local);
 			
-			model.addAttribute("month", list);
+			model.addAttribute("month", month);
 			model.addAttribute("totalMember", com.totalMember());
 			model.addAttribute("totalACM", com.totalACM());
 			model.addAttribute("womanCount", com.womanCount());
 			model.addAttribute("manCount", com.manCount());
 			model.addAttribute("guestCount", com.guestCount());
 			model.addAttribute("hostCount", com.hostCount());
+			model.addAttribute("local", local);
 			
 		}
 		catch(NumberFormatException e) {
