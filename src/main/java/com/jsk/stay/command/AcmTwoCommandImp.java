@@ -17,12 +17,12 @@ public class AcmTwoCommandImp implements AcmTwoCommand {
 	@Autowired
 	private AcmTwoDao dao;
 	
-	public List<AccommodationDto> acmList(CriteriaAcm cri) {
-		return dao.acmList(cri);
+	public List<AccommodationDto> acmList(CriteriaAcm cri, String location) {
+		return dao.acmList(cri, location);
 	}
 	
-	public int acmListCount() {
-		return dao.acmListCount();
+	public int acmListCount(String location) {
+		return dao.acmListCount(location);
 	}
 	
 	public List<AccommodationDto> accommodation(int acm_code) {

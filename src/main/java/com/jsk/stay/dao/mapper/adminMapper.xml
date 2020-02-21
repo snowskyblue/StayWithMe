@@ -75,4 +75,14 @@
 		where mb_join_date &gt; '19/12/31' and mb_join_date &lt; '21/01/01'
 		GROUP BY to_char(mb_join_date, 'YY/MM')
 	</select>
+	
+	<resultMap type="HashMap" id="localMap">
+		<id column="local" property="local"/>
+		<id column="count" property="count"/>
+	</resultMap>
+	<select id="local" resultType="hashMap">
+		select substr(acm_address, 1, 2) as local, count(*) as count
+		from accommodation
+		group by(substr(acm_address, 1, 2))
+	</select>
 </mapper>

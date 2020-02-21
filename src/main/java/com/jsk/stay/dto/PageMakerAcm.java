@@ -11,7 +11,12 @@ public class PageMakerAcm {
 	private boolean next;
 	private int displayPageNum = 5;
 	private CriteriaAcm cri;
-
+	private String location;
+	
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	
 	public void setCri(CriteriaAcm cri) {
 		this.cri = cri;
 	}
@@ -63,6 +68,7 @@ public class PageMakerAcm {
 	
 	public String makeQuery(int page) {
 		UriComponents uriComponents = UriComponentsBuilder.newInstance()
+				.queryParam("location", location)
 				.queryParam("page", page)
 				.queryParam("perPageNum", cri.getPerPageNum())
 				.build();

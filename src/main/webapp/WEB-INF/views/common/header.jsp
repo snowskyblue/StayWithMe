@@ -205,7 +205,7 @@ nav, figure, footer, header {
 			<nav class="navbar col-md-6" id="top-nav-bar">
 				<div class="top-navbar row">
 					<div class="search-box">
-						<a id="acmList" href="acmList">지역별 숙소찾기</a>
+						<a id="acmList" href="acmList?location=전체">지역별 숙소찾기</a>
 					</div>
 					<div class="link-box">
 						<ul class="list-unstyled">

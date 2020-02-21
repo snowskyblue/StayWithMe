@@ -42,4 +42,8 @@ public class AdminMainCommandImp implements AdminMainCommand {
 	public List<Map<String, Integer>> month() {
 		return dao.month();
 	}
+	
+	public List<Map<String, Integer>> local() {
+		return dao.local();
+	}
 }

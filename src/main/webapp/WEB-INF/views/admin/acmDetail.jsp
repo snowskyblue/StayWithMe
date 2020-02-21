@@ -466,7 +466,7 @@ $(document).ready(function() {
 		}
 		
 		else {
-			$("#sideSticker").attr("style", "position:fixed;top:250px");
+			$("#sideSticker").attr("style", "position:fixed;top:200px");
 			side.removeClass("on");
 			side.removeClass("on2");
 		}

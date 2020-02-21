@@ -289,99 +289,99 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 					</a>
 				</div>
 				<div class="col-lg-4 col-md-6 col-sm-6 banner">
-					<a href="#">
+					<a href="acmList?location=제주">
 						<div class="centered">제주</div> <img alt="jongno"
 						src="img/jeju.jpg">
 					</a>
 				</div>
 				<div class="col-lg-4 col-md-6 col-sm-6 banner">
-					<a href="#">
+					<a href="acmList?location=인천">
 						<div class="centered">인천</div> <img alt="incheon"
 						src="img/incheon.jpg">
 					</a>
 				</div>
 	
 				<div class="col-lg-4 col-md-6 col-sm-6 banner">
-					<a href="#">
+					<a href="acmList?location=대구">
 						<div class="centered">대구</div> <img alt="daegu"
 						src="img/daegu.jpg">
 					</a>
 				</div>
 				<div class="col-lg-4 col-md-6 col-sm-6 banner">
-					<a href="#">
+					<a href="acmList?location=경기">
 						<div class="centered">경기</div> <img alt="gyeonggi"
 						src="img/Gyeonggi.jpg">
 					</a>
 				</div>
 				<div class="col-lg-4 col-md-6 col-sm-6 banner">
-					<a href="#">
+					<a href="acmList?location=강원">
 						<div class="centered">강원</div> <img alt="gangwon"
 						src="img/gangwon.jpg">
 					</a>
 				</div>
 	
 				<div class="col-lg-4 col-md-6 col-sm-6 banner">
-					<a href="#">
+					<a href="acmList?location=경남">
 						<div class="centered">경남</div> <img alt="gyeongnam"
 						src="img/Gyeongsangnam-do.jpg">
 					</a>
 				</div>
 				<div class="col-lg-4 col-md-6 col-sm-6 banner">
-					<a href="#">
+					<a href="acmList?location=경북">
 						<div class="centered">경북</div> <img alt="gyeongbuk"
 						src="img/Gyeongbuk.jpg">
 					</a>
 				</div>
 				<div class="col-lg-4 col-md-6 col-sm-6 banner">
-					<a href="#">
+					<a href="acmList?location=충남">
 						<div class="centered">충남</div> <img alt="chungnam"
 						src="img/chungnam.jpg">
 					</a>
 				</div>
 	
 				<div class="col-lg-4 col-md-6 col-sm-6 banner">
-					<a href="#">
+					<a href="acmList?location=충북">
 						<div class="centered">충북</div> <img alt="chungbuk"
 						src="img/chungbuk.jpg">
 					</a>
 				</div>
 				<div class="col-lg-4 col-md-6 col-sm-6 banner">
-					<a href="#">
+					<a href="acmList?location=전북">
 						<div class="centered">전북</div> <img alt="jeonbuk"
 						src="img/jeonbuk.jpg">
 					</a>
 				</div>
 				<div class="col-lg-4 col-md-6 col-sm-6 banner">
-					<a href="#">
+					<a href="acmList?location=전남">
 						<div class="centered">전남</div> <img alt="jeonnam"
 						src="img/jeonnam.jpg">
 					</a>
 				</div>
 	
 				<div class="col-lg-4 col-md-6 col-sm-6 banner">
-					<a href="#">
+					<a href="acmList?location=부산">
 						<div class="centered">부산</div> <img alt="Busan"
 						src="img/busan.jpg">
 					</a>
 				</div>
 				<div class="col-lg-4 col-md-6 col-sm-6 banner">
-					<a href="#">
+					<a href="acmList?location=대전">
 						<div class="centered">대전</div> <img alt="#" src="img/daejeon.jpg">
 					</a>
 				</div>
 				<div class="col-lg-4 col-md-6 col-sm-6 banner">
-					<a href="#">
+					<a href="acmList?location=세종">
 						<div class="centered">세종</div> <img alt="#" src="img/sejong.jpg">
 					</a>
 				</div>
 				<div class="col-lg-4 col-md-6 col-sm-6 banner">
-					<a href="#">
+					<a href="acmList?location=울산">
 						<div class="centered">울산</div> <img alt="Busan"
 						src="img/ulsan.jpg">
 					</a>
 				</div>
 				<div class="col-lg-4 col-md-6 col-sm-6 banner">
-					<a href="#">
+					<a href="acmList?location=광주">
 						<div class="centered">광주</div> <img alt="#" src="img/gwangju.jpg">
 					</a>
 				</div>

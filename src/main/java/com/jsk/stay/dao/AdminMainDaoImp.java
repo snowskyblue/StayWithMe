@@ -39,4 +39,8 @@ public class AdminMainDaoImp implements AdminMainDao {
 	public List<Map<String, Integer>> month() {
 		return sql.selectList("admin.month");
 	}
+	
+	public List<Map<String, Integer>> local() {
+		return sql.selectList("admin.local");
+	}
 }

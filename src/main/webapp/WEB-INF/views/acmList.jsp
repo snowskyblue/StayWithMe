@@ -12,6 +12,9 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- csrf정보  -->
+<meta name="_csrf" content="${_csrf.token}"/>
+<meta name="_csrf_header" content="${_csrf.headerName}"/>
 <!--bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <!--font-awesome -->
@@ -33,8 +36,22 @@
 
 #border {
 	border: 3px solid #000000;
-	margin-bottom: 30px;
+	margin-bottom: 20px;
 	/*border-collapse: collapse;*/
+}
+
+#selectDiv {
+	text-align: right;
+    margin-bottom: 20px;
+}
+
+.select-grp {
+	display: inline;
+}
+
+.acm-select {
+	width: 90px;
+    height: 38px;
 }
 
 .form-group label, .container-fluid h3, .container-fluid h4 {
@@ -57,6 +74,13 @@
     overflow: hidden;
     height: 100%;
     width: 100%;
+}
+
+.emptyList {
+	font-size: 25px;
+	padding-top: 100px;
+    text-align: center;
+    font-weight: bold;
 }
 
 .acmList {
@@ -242,9 +266,51 @@ a{
 				</section>
 				<section class="acmList">
 					<div style="margin-top:40px; width: 90%;" class="mx-auto">
-						<h3>숙소 리스트</h3>
+						<h3>
+							숙소 리스트
+							<c:if test="${!empty location}">
+								<i class="fas fa-angle-right"></i> ${location}
+							</c:if>
+						</h3>
 						<div id="border"></div>
+						
+						<form action="acmList" method="post">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+							<div id="selectDiv">
+								<div class="select-grp">
+									<select class="acm-select" name="location">
+										<option value="전체">&nbsp;&nbsp;지역&nbsp;&nbsp;</option>
+										<option value="강원">&nbsp;&nbsp;강원&nbsp;&nbsp;</option>
+										<option value="경기">&nbsp;&nbsp;경기&nbsp;&nbsp;</option>
+										<option value="경남">&nbsp;&nbsp;경남&nbsp;&nbsp;</option>
+										<option value="경북">&nbsp;&nbsp;경북&nbsp;&nbsp;</option>
+										<option value="대구">&nbsp;&nbsp;대구&nbsp;&nbsp;</option>
+										<option value="부산">&nbsp;&nbsp;부산&nbsp;&nbsp;</option>
+										<option value="서울">&nbsp;&nbsp;서울&nbsp;&nbsp;</option>
+										<option value="인천">&nbsp;&nbsp;인천&nbsp;&nbsp;</option>
+										<option value="전남">&nbsp;&nbsp;전남&nbsp;&nbsp;</option>
+										<option value="전북">&nbsp;&nbsp;전북&nbsp;&nbsp;</option>
+										<option value="제주">&nbsp;&nbsp;제주&nbsp;&nbsp;</option>
+										<option value="충남">&nbsp;&nbsp;충남&nbsp;&nbsp;</option>
+										<option value="충북">&nbsp;&nbsp;충북&nbsp;&nbsp;</option>
+										<option value="대전">&nbsp;&nbsp;대전&nbsp;&nbsp;</option>
+										<option value="세종">&nbsp;&nbsp;세종&nbsp;&nbsp;</option>
+										<option value="울산">&nbsp;&nbsp;울산&nbsp;&nbsp;</option>
+										<option value="광주">&nbsp;&nbsp;광주&nbsp;&nbsp;</option>
+									</select>
+								</div>
+								<button type="submit" class="btn btn-dark" style="margin-bottom: 5px;">검색</button>
+							</div>
+						</form>
 					</div>
+					<c:if test="${empty list}">
+						<div class="section mx-auto d-flex flex-wrap align-content-center container-fluid">
+							<div class="emptyList mx-auto">
+								<i class="fas fa-exclamation-circle" style="font-size:40px;"></i><br/>
+								<p style="padding-top:10px;">이 지역에 등록된 숙소가 없습니다.</p>
+							</div>
+						</div>
+					</c:if>
 					<c:forEach items="${list}" var="list">
 						<div class="section mx-auto d-flex flex-wrap align-content-center container-fluid" value="${list.acm_address}">
 							<div class="listForm">
@@ -398,6 +464,13 @@ a{
 //console.log('${jsonList}');
 //console.log(json.length);
 //alert("ssss" + json[2].acm_title);
+$(function () {
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    $(document).ajaxSend(function (e, xhr, options) {
+        xhr.setRequestHeader(header, token);
+    });
+});
 
 var json = JSON.parse('${jsonList}');
 var obj = [];	//jason array 담을
@@ -513,7 +586,7 @@ $(document).ready(function() {
 	});
 	
 	var x;
-	var endPage = window.location.search.substr(6,1);
+	var endPage = window.location.search.substr(34,1);
 	console.log(endPage);
 	var d = window.location.pathname;
 	if(endPage == "") {

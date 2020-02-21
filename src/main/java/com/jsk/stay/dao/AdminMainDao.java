@@ -11,4 +11,5 @@ public interface AdminMainDao {
 	public int guestCount();
 	public int hostCount();
 	public List<Map<String, Integer>> month();
+	public List<Map<String, Integer>> local();
 }

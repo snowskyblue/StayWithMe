@@ -5,7 +5,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="acm">
-	<select id="acmList" resultType="com.jsk.stay.dto.AccommodationDto">
+	<select id="acmList" resultType="com.jsk.stay.dto.AccommodationDto" parameterType="hashMap">
 		select	mb_id,
 				acm_code,
 				acm_info,
@@ -46,16 +46,31 @@
 						acm_title,
 						acm_thumbnail,
 						row_number() over(order by acm_code desc) as rNum
-				from accommodation
-				
+						from accommodation
+				<choose>
+					<when test='location != "전체"'>
+						where substr(acm_address, 1, 2) = #{location}
+					</when>
+					<when test='location == "전체"'>
+						where mb_id is not null
+					</when>
+				</choose>
 			) mp
-		where rNum between #{rowStart} and #{rowEnd}
+		where rNum between #{cri.rowStart} and #{cri.rowEnd}
 		order by acm_code desc
 	</select>
 	
 	<select id="acmListCount" resultType="int" parameterType="String">
 		select count(acm_code)
 		from accommodation
+		<choose>
+			<when test='!_parameter.equals("전체")'>
+				where substr(acm_address, 1, 2) = #{location}
+			</when>
+			<when test='_parameter.equals("전체")'>
+				where mb_id is not null
+			</when>
+		</choose>
 		order by acm_code desc
 	</select>
 	

@@ -32,9 +32,12 @@ public class CSController {
 			model.addAttribute("list", com.list(cri));
 			
 			String mb_id = null;
+			System.out.println("csController cri: " + cri);
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setCri(cri);
 			pageMaker.setTotalCount(com.listCount(mb_id));
+			System.out.println("totalCount: " + com.listCount(mb_id));
+			System.out.println("StartPage: " + pageMaker.getStartPage());
 			
 			model.addAttribute("pageMaker", pageMaker);
 		}
