@@ -478,17 +478,17 @@ var app = angular.module("myWishList", []);
 
 var wishCode = new Array;
 app.controller("myCtrl", function($scope) {
-	$scope.products = JSON.parse(localStorage.getItem("cartKey"));
+	$scope.products = JSON.parse(localStorage.getItem("wishKey"));
 	$scope.removeItem = function (x) {	//products는 로컬스토리지, json은 acmList
-		$scope.products = JSON.parse(localStorage.getItem("cartKey"));	/*로컬스토리지를 객체로 하기*/
+		$scope.products = JSON.parse(localStorage.getItem("wishKey"));	/*로컬스토리지를 객체로 하기*/
 		//console.log("$scope.products[i].acm_code ; " + $scope.products[1].acm_code);
 		//console.log("json[x].acm_title : " + json[2].acm_code);
 		for (var i = 0; i < $scope.products.length; i++){
 			if($scope.products[i].acm_code == json[x].acm_code){
 				//alert("로컬스토리지에 저장된 순서" + i);
 				$scope.products.splice(i, 1); //ng-click의index와 splice의 번호로 같이 삭제됨
-			    localStorage.removeItem("cartKey"); //하트 클릭해서 하나가 삭제되면 로컬스토리지 cartKey배열이 다 사라짐 
-			    localStorage.setItem("cartKey",JSON.stringify($scope.products));//로컬스토리에 새로 저장.(value값은 이제 다시 문자열로 products 배열이 들어감)
+			    localStorage.removeItem("wishKey"); //하트 클릭해서 하나가 삭제되면 로컬스토리지 wishKey배열이 다 사라짐 
+			    localStorage.setItem("wishKey",JSON.stringify($scope.products));//로컬스토리에 새로 저장.(value값은 이제 다시 문자열로 products 배열이 들어감)
 			    return;
 			}
 		}
@@ -505,7 +505,7 @@ app.controller("myCtrl", function($scope) {
 		//alert("heart의 ix : " + x);
 	}
 	$scope.getWishCode = function(){
-		$scope.products = JSON.parse(localStorage.getItem("cartKey"));	/*로컬스토리지를 객체로 하기*/
+		$scope.products = JSON.parse(localStorage.getItem("wishKey"));	/*로컬스토리지를 객체로 하기*/
 		
 		if ($scope.products != null){
 			for (var i = 0; i < $scope.products.length; i++){
@@ -545,23 +545,23 @@ $(document).ready(function() {
 				 //console.log(json[ix].acm_title);
 				 console.log("json[ix]    :     " + json[ix]);	//[object Object]
 				 
-				 if(localStorage.getItem("cartKey") == null) {
+				 if(localStorage.getItem("wishKey") == null) {
 						obj[0] = json[ix];
 						var y = JSON.stringify(obj);
 						//alert(obj.length);
 						console.log("obj   " + obj);	//[object Object]
-						localStorage.setItem("cartKey",y);
-						//alert(localStorage.getItem("cartKey"));
+						localStorage.setItem("wishKey",y);
+						//alert(localStorage.getItem("wishKey"));
 					
 					}
 					
 					else{
-						var z= localStorage.getItem("cartKey"); //json string
+						var z= localStorage.getItem("wishKey"); //json string
 						obj = JSON.parse(z); //jason array
 						leng = obj.length;//배열의 원소개수
 						obj[leng] = json[ix];
 						var a = JSON.stringify(obj);
-						localStorage.setItem("cartKey",a);
+						localStorage.setItem("wishKey",a);
 					}
 		    }
 		    else
