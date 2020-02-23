@@ -368,7 +368,7 @@ form {
 								<input class="form-control" type="text" name="detailAddress" value="${dto.acm_add_detail}"   id="detailAddress">
 							</div>
 							<div class="col-sm-3 d-flex justify-content-end">
-								<input class="form-control" type="text" name="postcode" value="${dto.acm_zip }" id="postcode" placeholder="우편번호">
+								<input class="form-control" type="text" name="postcode" id="postcode" placeholder="우편번호">
 							</div>
 							<div class="col-sm-9">
 								<div id="detailAddress_check"></div>
@@ -658,6 +658,8 @@ form {
     var result = null;
     
     $(document).ready(function() {
+    	$('#postcode').val(pad(${dto.acm_zip}, 5));
+    	
         $('#datepicker').datepicker({
             startDate: new Date(),
             multidate: true,
@@ -705,6 +707,13 @@ form {
         
         //$("#mb_id").val(sessionStorage.getItem("user"));
     });
+    
+
+    function pad(n, width) {
+    	  n = n + '';
+    	  return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
+    }
+    
     
     function postcode() {
     	if($("#postcode").val() == "") {

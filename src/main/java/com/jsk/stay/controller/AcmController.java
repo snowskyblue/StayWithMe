@@ -87,7 +87,7 @@ public class AcmController {
 		command.execute(model);
 		System.out.println("컨트롤러에서 커맨드클래스의 엑스큐트메서드 호출 완료");
 		model.addAttribute("addAcm", "success");
-		return "redirect:hostBoard?addS=1";
+		return "redirect:hostBoard?addS=1&pagenum=1&contentnum=3";
 		
 	}
 
@@ -181,7 +181,7 @@ public class AcmController {
 		command.execute(model);
 		System.out.println("컨트롤러acmModify에서 커맨드클래스의 엑스큐트메서드 호출 완료");
 		model.addAttribute("hostModify", "success");
-		return "redirect:hostBoard";
+		return "redirect:hostBoard?pagenum=1&contentnum=3";
 	}
 	
 	@RequestMapping("acmDelete")
@@ -189,7 +189,7 @@ public class AcmController {
 		model.addAttribute("request", request);
 		command = new AcmDeleteCommand();
 		command.execute(model);
-		return "redirect:hostBoard";
+		return "redirect:hostBoard?pagenum=1&contentnum=3";
 	}
 	/*
 	@RequestMapping("/write") //다중 파일 업로드 처리d

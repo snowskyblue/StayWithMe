@@ -118,7 +118,7 @@
 		<div class="container" id="top-container">
 			<h3>위시리스트</h3>
 			<div id="border"></div>
-			<div ng-if="products.length == 0">
+			<div ng-if="products.length == 0 || !products">
 				<div id="noneDiv" class="mx-auto p-1 mt-5 mb-5">
 					<div id="noneDivIn" class="p-5">
 						<div class="mx-auto text-center">
@@ -181,9 +181,9 @@ $.noConflict();
 		jQuery(".main").toggleClass("main1");
 	});
     
-}); -->
+}); 
 
-</script>
+</script>-->
 
 <script>
 angular.element(".heart").css({"color": "#FC4C4E"});
@@ -191,7 +191,7 @@ var app = angular.module("myWishList", []);
 app.controller("myCtrl", function($scope) {
     //$scope.products = ["Milk", "Bread", "Cheese"]; 
     $scope.products = JSON.parse(localStorage.getItem("wishKey"));	/*로컬스토리지를 객체로 하기*/
-    //console.log($scope.products); //value(array)
+    console.log("products : " + $scope.products); //value(array)
     
     //상품 (행) 삭제
    $scope.removeItem = function (x) {

@@ -287,7 +287,7 @@ form {
 						</div>
 						<div class="row">
 							<div class="col-sm-6" style="height: 63px;">
-								<input class="form-control" type="text" name="address" value="abc"  id="address" placeholder="주소 찾기를 클릭해 주소를 검색해주세요"><br>
+								<input class="form-control" type="text" name="address" id="address" placeholder="주소 찾기를 클릭해 주소를 검색해주세요"><br>
 							</div>
 							<div class="col-sm-6" style="height: 63px;">
 								<input class="form-control" type="text" name="extraAddress"  id="extraAddress" placeholder="참고주소">
@@ -298,19 +298,22 @@ form {
 						</div>
 						<div class="row">
 							<div class="col-sm-9">
-								<input class="form-control" type="text" name="detailAddress" value="abc"   id="detailAddress" placeholder="상세주소를 입력해주세요">
-							</div>
-							<div class="col-sm-3 d-flex justify-content-end">
-								<input class="form-control" type="text" name="postcode" value="00000" id="postcode" placeholder="우편번호">
-							</div>
-							<div class="col-sm-9">
-								<div id="detailAddress_check"></div>
+								<div>
+									<input class="form-control" type="text" name="detailAddress" id="detailAddress" placeholder="상세주소를 입력해주세요">
+								</div>
+								<div class="col-sm-9">
+									<div id="detailAddress_check"></div>
+								</div>
 							</div>
 							<div class="col-sm-3">
-								<div id="postcode_check"></div>
+								<div class="d-flex justify-content-end">
+									<input class="form-control" type="text" name="postcode" id="postcode" placeholder="우편번호">
+								</div>
+								<div class="col-sm-3">
+									<div id="postcode_check"></div>
+								</div>
 							</div>
 						</div>
-						
 						<div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
 							<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
 						</div>

@@ -12,12 +12,16 @@ public class PagingMaker {
 	private int lastblock; //마지막 페이지 블록
 	
 	public void prevnet(int pagenum) {
-		if (pagenum > 0 && pagenum<6) {
+		if (getLastblock() != getCurrentblock() && getCurrentblock() == 1 ) {
 			setPrev(false);
 			setNext(true);
 		}
-		else if(getLastblock() == getCurrentblock()) {
+		else if(getLastblock() == getCurrentblock() && getCurrentblock() != 1 ) {
 			setPrev(true);
+			setNext(false);
+		}
+		else if(getLastblock() == getCurrentblock() && getCurrentblock() == 1 ) {
+			setPrev(false);
 			setNext(false);
 		}
 		else {
