@@ -47,6 +47,15 @@ public class ReservationDaoImp implements ReservationDao{
 		System.out.println(acm_code);
 		return sqlSession.selectOne("resAcmDate",acm_code);
 	}
+
+	@Override
+	public void reservationAcm(AccommodationDto dto) {
+		System.out.println(dto);
+		sqlSession.update("reservationAcm",dto);
+		
+	}
+	
+	
 	
 	
 	

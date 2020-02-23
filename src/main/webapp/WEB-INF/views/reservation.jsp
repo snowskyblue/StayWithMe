@@ -412,10 +412,6 @@ $(document).ready(function() {
 				console.log(sdd);
 			    var edd = $("#checkOutDate").val();
 			    console.log(edd);
-			    var listDate = [];
-			    getDateRange($("#checkInDate").val(), $("#checkOutDate").val(), listDate);
-			    console.log(listDate);
-			    $("#listDate").val(listDate);
 			    var ar1 = sdd.split('/');
 			    console.log(ar1.toString());
 			    var ar2 = edd.split('/');
@@ -424,6 +420,10 @@ $(document).ready(function() {
 			    console.log(new Date(ar1[2], ar1[1]-1, ar1[0]));
 			    var da2 = new Date(ar2[2], ar2[1]-1, ar2[0]);
 			    console.log(new Date(ar2[2], ar2[1]-1, ar2[0]));
+			    var listDate = [];
+			    getDateRange(da1, da2, listDate);
+			    console.log(listDate);
+			    $("#listDate").val(listDate);
 			    var dif = da2 - da1;
 			    var cDay = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
 			    var x = parseInt(dif/cDay);
@@ -561,7 +561,7 @@ $(document).ready(function() {
 							card_name : rsp.card_name
 						},
 						success : function(data) {
-							alert("성공");
+							location.href = "reservationCheck";
 						},
 						error : function(request,status,error){
 						    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -593,20 +593,11 @@ function getDateRange(startDate, endDate, listDate) {
     var dateMove = new Date(startDate);
     var strDate = startDate;
     console.log(strDate);
-    if (startDate == endDate) {
-        var strDate = dateMove.toISOString().slice(0,10);
-        listDate.push(strDate);
-    }
-
-    else {
-        while (strDate < endDate) {
-            var strDate = dateMove.toISOString().slice(0, 10);
-            listDate.push(strDate);
-            dateMove.setDate(dateMove.getDate() + 1);
-        }
-        
-        listDate.pop();
-        listDate.shift();
+	while (strDate <= endDate) {
+	    var strDate = dateMove;
+	    console.log("strDate : " + strDate);
+	    listDate.push(strDate.toLocaleString('en-GB').slice(0, 10));
+	    dateMove.setDate(dateMove.getDate() + 1);
     }
     return listDate;
 };

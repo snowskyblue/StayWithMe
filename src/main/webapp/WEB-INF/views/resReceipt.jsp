@@ -57,7 +57,7 @@
 	<div class="container" id="board">
 		<h3>예약 상세 페이지</h3>
 		<div id="border"></div>
-		<div class = "resCheck mx-auto" style = "max-width : 100%; border : 1px solid black">
+		<div class = "resCheck mx-auto" style = "max-width : 50%; border : 1px solid black">
 			<table class="resCheck_list mx-auto text-center m-0" style = "width : 100%;">
 				<colgroup>
 					<col style = "width : 50%;">
@@ -65,7 +65,7 @@
 				</colgroup>
 				<thead>
 					<tr>
-						<th colspan="2" scope="col"> 숙소 예약 정보</th>
+						<th colspan="2" scope="col"><img src = "upload/logo.jpg"/></th>
 					</tr>
 				</thead>
 				<tbody>

@@ -1,5 +1,7 @@
 package com.jsk.stay.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,6 +58,7 @@ public class ReservationController {
 	}
 	
 	@RequestMapping("/res")
+	@ResponseBody
 	public String res(HttpServletRequest request, Model model) {
 		
 		String listDate = request.getParameter("listDate");
@@ -65,13 +68,9 @@ public class ReservationController {
 		String checkOut = request.getParameter("checkOut");
 		System.out.println("checkOut ; " + checkOut);
 		String acm_code_w = request.getParameter("acm_code");
-		int acm_code = 0;
-		if ( acm_code_w == null ) {
-			System.out.println("null point" + acm_code_w);
-		} else {
-			acm_code = Integer.parseInt(acm_code_w);
-			System.out.println(acm_code);
-		}
+		System.out.println("null point" + acm_code_w);
+		int acm_code = Integer.parseInt(acm_code_w);
+		System.out.println(acm_code);
 		String amount_w = request.getParameter("amount");
 		int amount = Integer.parseInt(amount_w);
 		System.out.println(amount);
@@ -91,11 +90,42 @@ public class ReservationController {
 		
 		ReservationDto dto = new ReservationDto(imp_uid, mb_id,acm_code,pay_method,amount,guest_num,checkIn,checkOut,acm_title,acm_address,acm_add_detail,card_name);
 		
+		String date2 = "";
 		System.out.println("dto" + dto);
 		try {
 			dao.reservationIn(dto);
 			String date = dao.resAcmDate(acm_code);
 			System.out.println(date);
+			System.out.println(listDate);
+			
+			String[] list = listDate.split(",");
+			System.out.println(list);
+			String[] date1 = date.split(",");
+			
+			List<String> date3 = new ArrayList<String>();
+			for(int i = 0; i < list.length ; i++) {
+				date3.add(list[i]);
+				System.out.println("list" + list[i]);
+			}
+			
+			List<String> date4 = new ArrayList<String>();
+			for(int j = 0; j < date1.length ; j++) {
+				date4.add(date1[j]);
+				System.out.println("date1" + date1[j]);
+			}
+			
+			 date4.removeAll(date3);
+			 
+			 String date5 = "";
+			 for(int i = 0 ; i < date4.size() ; i++) {
+				 date5 += date4.get(i) + ",";
+			 }
+			
+			AccommodationDto dto1 = new AccommodationDto();
+			dto1.setAcm_availdate(date5);
+			dto1.setAcm_code(acm_code);
+			
+			dao.reservationAcm(dto1);
 			
 			return "index";
 		} 

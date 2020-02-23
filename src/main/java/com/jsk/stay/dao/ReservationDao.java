@@ -12,4 +12,5 @@ public interface ReservationDao {
 	public List<ReservationDto> reservationList(String mb_id) throws Exception;
 	public ReservationDto resReceipt(String res_code) throws Exception;
 	public String resAcmDate(int acm_code) throws Exception;
+	public void reservationAcm(AccommodationDto dto);
 }

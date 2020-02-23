@@ -91,7 +91,7 @@
 						<c:otherwise>
 							<c:forEach items = "${list}" var = "list">
 								<tr style = "height : 90px;">
-									<td><a href = "resReceipt?res_code=${list.res_code}" id = "res_code">${list.res_code}</a></td>
+									<td>${list.res_code}</td>
 									<td>${list.acm_title}</td><!-- 숙소 명 -->
 									<td>${list.res_checkin_date}</td><!-- checkIn -->
 									<td>${list.res_checkout_date}</td><!-- checkOut -->
@@ -123,6 +123,17 @@ $(document).ready(function() {
 		$(".main").toggleClass("main1");
 	});
 });
+</script>
+<script>
+function parse(str) {
+    var y = str.substr(0, 4);
+    var m = str.substr(4, 2);
+    var d = str.substr(6, 2);
+    return new Date(y,m-1,d);
+}
+</script>
+<script>
+
 </script>
 </body>
 </html>
