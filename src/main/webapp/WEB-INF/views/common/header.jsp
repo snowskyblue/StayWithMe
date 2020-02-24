@@ -209,7 +209,7 @@ nav, figure, footer, header {
 					</div>
 					<div class="link-box">
 						<ul class="list-unstyled">
-							<li class="qna-btn-li"><a href="acmInfo">Q&A</a></li>
+							<li class="qna-btn-li"><a href="#">Q&A</a></li>
 							<li class="cs-btn-li"><a href="csMember" id="nav-cs">∞Ì∞¥ºæ≈Õ</a></li>
 						</ul>
 					</div>

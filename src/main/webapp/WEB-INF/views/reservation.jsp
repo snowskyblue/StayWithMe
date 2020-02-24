@@ -23,7 +23,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet" />
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-<title>예약 페이지</title>
+<title>Stay_예약 페이지</title>
 <style>
 #accInformation {
 	position :absolute;
@@ -365,14 +365,14 @@ $(document).ready(function(){
             daysOfWeekHighlighted: "6,0",
            	beforeShowDay: function (date) {
                	//선택할수 있는 날짜를 지정하는 것
-                   var allDates = ( '0' + date.getDate() ).slice( -2 ) + "/" + ( '0' + (date.getMonth()+1) ).slice( -2 ) + "/" + date.getFullYear();
+                var allDates = ( '0' + date.getDate() ).slice( -2 ) + "/" + ( '0' + (date.getMonth()+1) ).slice( -2 ) + "/" + date.getFullYear();
                	//date에 년,월,일을 가져옴 (포맷같은 느낌) slice()는 문자를 가져오는것 -2는 맨뒤에서 두글자를 뜻함
-                   if(datesEnabled.indexOf(allDates) != -1)
-                   	//인덱스 번호를 가져온다.
-                       return true;
+                if(datesEnabled.indexOf(allDates) != -1)
+                //인덱스 번호를 가져온다.
+                	return true;
                    
            		else
-                       return false;
+                	return false;
                }
         })
         .on("changeDate", function(e) {
@@ -585,6 +585,7 @@ function getDateRange(startDate, endDate, listDate) {
 	    listDate.push(strDate.toLocaleString('en-GB').slice(0, 10));
 	    dateMove.setDate(dateMove.getDate() + 1);
     }
+	listDate.pop();
     return listDate;
 };
 </script>

@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.min.css">
 
-<title>숙소 정보</title>
+<title>Stay_숙소 정보</title>
 <style>
 .main1 {
 	margin-top: 100px;

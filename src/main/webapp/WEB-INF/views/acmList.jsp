@@ -20,7 +20,7 @@
 <!--font-awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<title>Insert title here</title>
+<title>Stay_숙소 리스트</title>
 <style>
 .main1 {
 	margin-top: 100px;

@@ -27,7 +27,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
 
-<title>Insert title here</title>
+<title>Stay_숙소 정보</title>
 <style>
 .main {
   margin-left: 300px;

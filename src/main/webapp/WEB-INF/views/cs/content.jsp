@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <!--font-awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<title>Insert title here</title>
+<title>Stay_고객센터 글정보</title>
 <style>
 .main1 {
 	margin-top: 100px;

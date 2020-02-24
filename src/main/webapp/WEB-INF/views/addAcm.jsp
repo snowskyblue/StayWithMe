@@ -28,7 +28,7 @@
 <!-- iCheck(라디오버튼) -->
 <link rel="stylesheet" href="icheck-1.x/skins/flat/flat.css">
 
-<title>Insert title here</title>
+<title>Stay_숙소 등록</title>
 <style>
 @font-face { font-family: 'Eoe_Zno_L'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/Eoe_Zno_L.woff') format('woff'); font-weight: normal; font-style: normal; }
 @font-face { font-family: 'S-CoreDream-2ExtraLight'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-2ExtraLight.woff') format('woff'); font-weight: normal; font-style: normal; }

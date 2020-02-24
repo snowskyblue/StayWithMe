@@ -18,7 +18,7 @@
 <!--font-awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<title>Insert title here</title>
+<title>Stay_결제 정보 수정</title>
 <style>
 @font-face { font-family: 'Eoe_Zno_L'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/Eoe_Zno_L.woff') format('woff'); font-weight: normal; font-style: normal; }
 @font-face { font-family: 'S-CoreDream-2ExtraLight'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-2ExtraLight.woff') format('woff'); font-weight: normal; font-style: normal; }
@@ -72,9 +72,11 @@
 					<div class="mb-5"> <!-- form안에서 이전,다음버튼과 컨텐츠과의 거리 -->
 						<div class="row">
 							<div class="col-sm-3">
-								<select class="form-control" ng-model="selectedBank" ng-options="x for x in banks">
+								<select class="form-control" name = "ho_account">
+									<option id = "option1">국민</option>
+									<option id = "option2">신한</option>
+									<option id = "option3">농협</option>
 								</select>
-								<input type="hidden" value="{{selectedBank}}" name="ho_account"  id="ho_account">
 							</div>
 							<div class="col-sm-9">
 								<input class="form-control" type="text" name="ho_acc_num"  id="ho_acc_num" value = "${dto.ho_acc_num}">
@@ -85,7 +87,7 @@
 			    
 			    <div id="complete-btn" class="d-flex flex-row-reverse">
 				    <div class="text-center">
-						<button type="submit" class="form-control btn btn-dark" style="border: none;">호스트 등록 하기</button>
+						<button type="submit" class="form-control btn btn-dark" style="border: none;">계좌변경완료</button>
 					</div>
 				</div>
 			</form>
@@ -104,18 +106,28 @@
 <!-- ng -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <script>
-var app = angular.module('Account', []);
-app.controller('AccountCtrl', function($scope) {
-    $scope.banks = ["국민", "신한", "농협"];
-});
-</script>
-<script>
 $(document).ready(function(){
 	$(".menu-toggle").click(function() {
  		$("nav").toggleClass("active"); 
  		$(".main").toggleClass("main1");
  	});
 });	
+</script>
+<script>
+$(document).ready(function() {
+	var selected = "${dto.ho_account}";
+	if($("#option1").val() == selected) {
+		$("#option1").attr("selected", "selected");
+	}
+	else if($("#option2").val() == selected) {
+		$("#option2").attr("selected", "selected");
+	}
+	else if($("#option3").val() == selected) {
+		$("#option3").attr("selected", "selected");
+	}
+	
+	
+});
 </script>
 </body>
 </html>

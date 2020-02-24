@@ -21,7 +21,7 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
 
-<title>Insert title here</title>
+<title>Stay</title>
 <style>
 #index_header {
 	padding-top: 100px;
@@ -377,7 +377,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 				<div class="col-lg-4 col-md-6 col-sm-6 banner">
 					<a href="acmList?location=울산">
 						<div class="centered">울산</div> <img alt="Busan"
-						src="img/ulsan.jpg">
+						src="img/ulsan1.jpg">
 					</a>
 				</div>
 				<div class="col-lg-4 col-md-6 col-sm-6 banner">

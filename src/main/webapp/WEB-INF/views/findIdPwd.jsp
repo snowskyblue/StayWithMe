@@ -6,7 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- iCheck(라디오버튼) -->
 <link rel="stylesheet" href="icheck-1.x/skins/flat/flat.css">
-<title>아이디/비밀번호 찾기</title>
+<title>Stay_아이디/비밀번호 찾기</title>
 <style>
 #find-header {
 	padding-top: 150px;
