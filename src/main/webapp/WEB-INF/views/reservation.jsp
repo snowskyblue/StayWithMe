@@ -171,7 +171,7 @@
 							<div id = "checkInform" class = "col-sm-6">
 								<div class="input-group date form-group d-flex justify-content-between" id="datepicker" style = "font-weight : bold">
 									<div>
-										<label class="mb-3 text-center" for="checkInDate">CheckIn</label>
+										<label class="mb-3 text-center" for="checkInDate">Check In</label>
 									</div>
 									<div>
 								    	<input type="text" id="checkInDate" class = "form-control" name="checkInDate" placeholder="Select days" required/>
@@ -182,7 +182,7 @@
 							<div id = "checkOutform" class = "col-sm-6">
 								<div class="input-group date form-group d-flex justify-content-between" id="datepicker1" style = "font-weight : bold">
 									<div>
-										<label class="mb-3 text-center" for="checkOutDate">CheckOut</label>
+										<label class="mb-3 text-center" for="checkOutDate">Check Out</label>
 									</div>
 									<div>
 								    	<input type="text" id="checkOutDate" class = "form-control" name="checkOutDate" placeholder="Select days" required />
@@ -394,7 +394,8 @@ $(document).ready(function() {
 
 function number() {
 	var Adult = $("#adult").val();
-	$("#child").attr('max',Number(guest_num) - Number(Adult));
+	$("#adult").attr('max',Number(guest_num)-Number($("#child").val()));
+	$("#child").attr('max',Number(guest_num)-Number($("#adult").val()));
 }
 peopleNumber = Number($("#adult").val()) + Number($("#child").val());
 </script>
@@ -451,22 +452,7 @@ $(document).ready(function() {
 
 </script>
 
-<script>
-$(document).ready(function(){
-	//기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
-	var floatPosition = parseInt($("#accInformation").css("top")); 
-	//parseInt( 값)은 px를 삭제하고 가져옴
-	$(window).scroll(function(){ //브라우져 제공 scroll이벤트 처리
-		//현재 스크롤 위치를 가져온다.
-		var scrollTop = $(window).scrollTop();
-		//원래의 위치에서 스크롤해준것을 가져옴
-		var newPosition= scrollTop + floatPosition +"px"; //이때는 다시px를 붙여줘야함
-		$("#accInformation").stop().animate({
-			"top" : newPosition
-		},100,"swing");
-	}).scroll();
-});
-</script>
+
 
 <script>
 function CheckIn() {
