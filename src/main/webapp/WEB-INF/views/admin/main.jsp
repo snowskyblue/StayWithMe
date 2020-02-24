@@ -58,7 +58,7 @@
 			</div>
 			<div class="col-4">
 				<div class="topCount">
-					<h1 class="topCountTitle">${month[0].count}</h1>
+					<h1 class="topCountTitle">-</h1>
 					<span>전체 리뷰</span>
 				</div>
 			</div>
@@ -71,12 +71,12 @@
 				<canvas id="canvas" class="container-fluid" style="min-width:900px!important;min-height:400px!important;"></canvas>
 			</div>
 		</div>
-		<div class="row container" style="margin:0 100px;padding-top:50px;">
+		<div class="row container-fluid mx-auto" style="margin:0 100px;padding-top:50px;">
 			<div class="col-6">
-				<canvas id="canvas2" class="container-fluid" style="min-width:800px!important;min-height:350px!important;"></canvas>
+				<canvas id="canvas2" class="container-fluid" style="min-width:400px!important;min-height:250px!important;"></canvas>
 			</div>
 			<div class="col-6">
-				<canvas id="canvas3" class="container-fluid" style="min-width:800px!important;min-height:350px!important;"></canvas>
+				<canvas id="canvas3" class="container-fluid" style="min-width:400px!important;min-height:250px!important;"></canvas>
 			</div>
 		</div>
 		<div class="container">
@@ -104,21 +104,21 @@
 $(document).ready(function() {
 	var month = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
 	var chartData = [
-		"${month[0].count}",
-		"${month[1].count}",
-		"${month[2].count}",
-		"${month[3].count}",
-		"${month[4].count}",
-		"${month[5].count}",
-		"${month[6].count}",
-		"${month[7].count}",
-		"${month[8].count}",
-		"${month[9].count}",
-		"${month[10].count}",
-		"${month[11].count}"];
+		"${month[0].COUNT}",
+		"${month[1].COUNT}",
+		"${month[2].COUNT}",
+		"${month[3].COUNT}",
+		"${month[4].COUNT}",
+		"${month[5].COUNT}",
+		"${month[6].COUNT}",
+		"${month[7].COUNT}",
+		"${month[8].COUNT}",
+		"${month[9].COUNT}",
+		"${month[10].COUNT}",
+		"${month[11].COUNT}"];
 
 	var location = ["서울", "경기", "인천", "강원", "충북", "세종", "충남", "대전", "경북", "대구", "울산", "부산", "경남", "전북", "전남", "광주", "제주"]
-	var localChart = ["${local[0].count}", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"];
+	var localChart = ["200", "335", "434", "775", "355", "345", "564", "757", "343", "533", "434", "564", "677", "454", "634", "534", "543"];
 	
 	var lineChartData = {
 						labels: month,

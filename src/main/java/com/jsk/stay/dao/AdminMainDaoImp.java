@@ -36,11 +36,11 @@ public class AdminMainDaoImp implements AdminMainDao {
 		return sql.selectOne("admin.hostCount");
 	}
 	
-	public List<Map<String, Integer>> month() {
+	public List<Map<String, String>> month() {
 		return sql.selectList("admin.month");
 	}
 	
-	public List<Map<String, Integer>> local() {
+	public List<Map<String, String>> local() {
 		return sql.selectList("admin.local");
 	}
 }

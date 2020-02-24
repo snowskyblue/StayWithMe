@@ -22,11 +22,12 @@ public class AdminMainController {
 	public String main(Model model) {
 
 		try {
-			List<Map<String,Integer>> month = com.month();
-			List<Map<String, Integer>> local = com.local();
-			Map<String, Integer> map = new HashMap<String, Integer>();
-			//map.put("count=0", local=力林);
-			//local.add(map);
+			List<Map<String, String>> month = com.month();
+			List<Map<String, String>> local = com.local();
+			//Map<String, Integer> map = new HashMap<String, Integer>();
+			//map.put("力林", 0);
+			//map.put("堡林", 0);
+			//map.put("措备", 0);
 			System.out.println("local: " + local);
 			
 			model.addAttribute("month", month);

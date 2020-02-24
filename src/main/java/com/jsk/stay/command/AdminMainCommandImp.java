@@ -39,11 +39,11 @@ public class AdminMainCommandImp implements AdminMainCommand {
 		return dao.hostCount();
 	}
 	
-	public List<Map<String, Integer>> month() {
+	public List<Map<String, String>> month() {
 		return dao.month();
 	}
 	
-	public List<Map<String, Integer>> local() {
+	public List<Map<String, String>> local() {
 		return dao.local();
 	}
 }

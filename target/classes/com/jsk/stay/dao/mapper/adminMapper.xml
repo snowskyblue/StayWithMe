@@ -69,7 +69,7 @@
 		<id column="month" property="month"/>
 		<id column="count" property="count"/>
 	</resultMap>
-	<select id="month" resultMap="monthMap">
+	<select id="month" resultType="hashMap">
 		select to_char(mb_join_date, 'YY/MM') as month, count(*) as count
 		from member
 		where mb_join_date &gt; '19/12/31' and mb_join_date &lt; '21/01/01'
