@@ -71,8 +71,8 @@ public class AcmController {
 		//저장할 파일은 이름을 바꾸어 저장(동일한 이름의 파일이 왔을때 중복을 피함,시간을 앞에 붙여 중복 피함)
 		//String safeFile = path + System.currentTimeMillis() + orginFileName; //pathname
 		String dfile = System.currentTimeMillis() + orginFileName;
-		String safeFile ="D:/webSpring_workspace/stay/src/main/webapp/resources/upImg/" + dfile;
-		String safeFile1 ="D:/tomcat/apache-tomcat-8.5.47/wtpwebapps/stay/resources/upImg/" + dfile;	
+		String safeFile ="D:/work-spring/team/src/main/webapp/resources/upImg/" + dfile;
+		String safeFile1 ="D:/apache-tomcat-8.5.47/apache-tomcat-8.5.47/wtpwebapps/stay/resources/upImg/" + dfile;	
 		
 		try {
 			mf.transferTo(new File(safeFile));
@@ -104,8 +104,8 @@ public class AcmController {
 		long fileSize = mf.getSize(); 
 		System.out.println("originFileName : " + originFileName);
 		System.out.println("fileSize of the MultipartFile : " + fileSize);
-		String safeFile ="D:/webSpring_workspace/stay/src/main/webapp/resources/upImg/" + originFileName;
-		String safeFile1 ="D:/tomcat/apache-tomcat-8.5.47/wtpwebapps/stay/resources/upImg/" + originFileName;	
+		String safeFile ="D:/work-spring/team/src/main/webapp/resources/upImg/" + originFileName;
+		String safeFile1 ="D:/apache-tomcat-8.5.47/apache-tomcat-8.5.47/wtpwebapps/stay/resources/upImg/" + originFileName;	
 		System.out.println("safeFile : " + safeFile);
 		try {
 			mf.transferTo(new File(safeFile));
