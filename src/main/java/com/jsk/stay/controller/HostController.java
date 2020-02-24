@@ -26,19 +26,6 @@ public class HostController {
 	public String hostWrite(HostDto dto, Model model,HttpServletRequest request) {
 		dao.writeDao(dto);
 		return "logout";
-		/*
-		 * HttpSession session = request.getSession();
-		 * session.setAttribute("authority","[ROLE_HOST]");
-		 */
-		//return "redirect:hostBoard";
-		//return "hostBoard";
-		//return "preHostGrade";
 	}
 	
-	/*
-	@RequestMapping("/hostBoard")
-	public String hostBoard(Model model) {
-		return "hostBoard";
-	}
-	*/
 }
