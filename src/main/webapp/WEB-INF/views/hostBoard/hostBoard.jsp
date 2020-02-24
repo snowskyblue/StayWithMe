@@ -127,7 +127,7 @@ a{
 					<c:choose>
 						<c:when test="${empty list}">
 							<tr>
-								<td colspan="4" style="height:400px;">
+								<td colspan="4" style="height:250px;">
 									<h4 class="board_notice text-center">
 										<i class="fas fa-exclamation-circle"></i><br/><br/>
 										등록된 숙소가 없습니다. 숙소를 등록해주세요
@@ -154,37 +154,47 @@ a{
 						</c:otherwise>
 					</c:choose>
 				</tbody>
-				<tfoot>
-					<tr style="border:0;">
-						<td colspan="4">
-							<div align="right" id="addBtnDiv">
-								<button type="button" onClick="location.href='addAcm'" id="cs_write" class="btn btn-dark" style="margin-top:10px;">숙소 추가하기</button>
-							</div>
-							<div class="paging mx-auto col-6 col-lg-2">
-								<ul class="pagination">
-									<c:if test="${page.prev }">
-										<li class="page-item"><a class="page-link" href="javascript:page(${page.getStartPage()-1});">&laquo;</a></li>
-									</c:if>
-									<c:forEach begin="${page.getStartPage()}" end="${page.getEndPage()}" var="idx">
-										<li class="page-item pageNumber" id="${idx}">
-											<a class="page-link pageNum" href="javascript:page(${idx});">${idx}</a>
-										</li>
-									</c:forEach>
-									<c:if test="${page.next }" >
-										<li class="page-item">
-											<a class="page-link" href="javascript:page(${page.getEndPage()+1});">&raquo;</a>
-										</li>
-									</c:if>
-								</ul>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						
-							
-						
-					</tr>
-				</tfoot>
+				<c:choose>
+					<c:when test="${empty list}">
+						<tfoot>
+							<tr style="border:0;">
+								<td colspan="4">
+									<div align="right" id="addBtnDiv">
+										<button type="button" onClick="location.href='addAcm'" id="cs_write" class="btn btn-dark" style="margin-top:10px;">숙소 추가하기</button>
+									</div>
+								</td>
+							</tr>
+						</tfoot>
+					</c:when>
+					<c:otherwise>
+						<tfoot>
+							<tr style="border:0;">
+								<td colspan="4">
+									<div align="right" id="addBtnDiv">
+										<button type="button" onClick="location.href='addAcm'" id="cs_write" class="btn btn-dark" style="margin-top:10px;">숙소 추가하기</button>
+									</div>
+									<div class="paging mx-auto col-6 col-lg-2">
+										<ul class="pagination">
+											<c:if test="${page.prev }">
+												<li class="page-item"><a class="page-link" href="javascript:page(${page.getStartPage()-1});">&laquo;</a></li>
+											</c:if>
+											<c:forEach begin="${page.getStartPage()}" end="${page.getEndPage()}" var="idx">
+												<li class="page-item pageNumber" id="${idx}">
+													<a class="page-link pageNum" href="javascript:page(${idx});">${idx}</a>
+												</li>
+											</c:forEach>
+											<c:if test="${page.next }" >
+												<li class="page-item">
+													<a class="page-link" href="javascript:page(${page.getEndPage()+1});">&raquo;</a>
+												</li>
+											</c:if>
+										</ul>
+									</div>
+								</td>
+							</tr>
+						</tfoot>
+					</c:otherwise>
+				</c:choose>
 			</table>
 		</div>
 	</div>
