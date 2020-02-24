@@ -317,6 +317,19 @@ public class AcmDao {
 		//transaction 상태
 		TransactionStatus status = transactionManager.getTransaction(definition);
 		try {
+
+			template.update(new PreparedStatementCreator() {
+
+				@Override
+				public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+					String query = "delete from acm_sub where acm_code = ?";
+					
+					PreparedStatement pstmt = con.prepareStatement(query);
+					pstmt.setInt(1, acm_code);
+					return pstmt;
+				}
+			});
+			
 			template.update(new PreparedStatementCreator() {
 				
 				@Override
@@ -331,17 +344,6 @@ public class AcmDao {
 				}
 			});
 			
-			template.update(new PreparedStatementCreator() {
-
-				@Override
-				public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
-					String query = "delete from acm_sub where acm_code = ?";
-					
-					PreparedStatement pstmt = con.prepareStatement(query);
-					pstmt.setInt(1, acm_code);
-					return pstmt;
-				}
-			});
 			
 			transactionManager.commit(status); //정상처리시(DB에 commit)
 			System.out.println("트랜젝션 성공(커밋)");
