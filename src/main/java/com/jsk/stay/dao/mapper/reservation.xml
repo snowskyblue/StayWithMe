@@ -23,4 +23,8 @@
 	<select id = "resAcmDate" parameterType = "int" resultType = "String">
 		SELECT ACM_AVAILDATE FROM ACCOMMODATION WHERE ACM_CODE = #{acm_code}
 	</select>
+	
+	<update id = "reservationAcm" parameterType = "com.jsk.stay.dto.AccommodationDto">
+		UPDATE ACCOMMODATION SET ACM_AVAILDATE = #{acm_availdate} WHERE acm_code = #{acm_code}
+	</update>
 </mapper>
