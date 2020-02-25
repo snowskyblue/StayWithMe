@@ -46,6 +46,7 @@
 		<intercept-url pattern="/header" access="permitAll" />
 		<intercept-url pattern="/wishList" access="permitAll" />
 		<intercept-url pattern="/footer" access="permitAll" />
+		<intercept-url pattern="/event" access="permitAll" />
     	<intercept-url pattern="/editUpload/**" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
     	<intercept-url pattern="/csMember" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
     	<intercept-url pattern="/csMbWrite" access="hasAnyRole('ROLE_GUEST','ROLE_HOST','ROLE_ADMIN')" />
